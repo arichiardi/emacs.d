@@ -39,7 +39,3 @@
     (live-set-default-font font-string))))
 
 (live-set-default-darwin-font "Menlo-12")
-
-;; make fringe smaller
-(if (fboundp 'fringe-mode)
-    (fringe-mode 4))
