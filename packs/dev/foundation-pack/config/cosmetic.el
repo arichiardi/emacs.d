@@ -16,7 +16,7 @@
 ;remove bells
 (setq ring-bell-function 'ignore)
 
-;; font setitng functions
+;; font setting functions
 (require 'cl)
 
 (defun live-set-default-font (font-string)
