@@ -53,7 +53,7 @@ CMAKEABLE_DIRS=(
 function compile {
     # Magit needs these, see here:
     # https://magit.vc/manual/magit/Installing-from-the-Git-repository.html#Installing-from-the-Git-repository
-    echo -e "LOAD_PATH = -L $PACKS_DIR/dev/git-pack/vendor/submodules/magit/lisp\nLOAD_PATH += -L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash\nLOAD_PATH += -L $PACKS_DIR/dev/git-pack/vendor/submodules/with-editor" > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk"
+    echo -e "LOAD_PATH = -L $PACKS_DIR/dev/git-pack/vendor/submodules/magit/lisp\nLOAD_PATH += -L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash\nLOAD_PATH += -L $PACKS_DIR/dev/git-pack/vendor/submodules/with-editor\nLOAD_PATH += -L /home/arichiardi/.emacs.d/packs/dev/foundation-pack/vendor/submodules/emacs-async" > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk"
     # We extend this to git-modes
     echo -e "LOAD_PATH = -L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" > "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk"
 
