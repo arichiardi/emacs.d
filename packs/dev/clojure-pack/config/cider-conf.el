@@ -9,6 +9,7 @@
 (require 'cider-classpath)
 (require 'cider-grimoire)
 (require 'cider-test)
+(require 'cider-browse-spec)
 
 (defun live-windows-hide-eol ()
  "Do not show ^M in files containing mixed UNIX and DOS line endings."
