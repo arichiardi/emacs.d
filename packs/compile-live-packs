@@ -36,6 +36,7 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/auto-compile"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/popwin"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/flx"
+    "$PACKS_DIR/dev/foundation-pack/vendor/submodules/emacs-async"
 )
 
 CMAKEABLE_DIRS=(
