@@ -28,7 +28,7 @@
                                nil))))))
 
 (eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns "*.clj"))
+  '(add-to-list 'ffip-patterns '("*.clj" "*.cljs" "*.cljc" "*.edn")))
 
 (require 'clojure-mode)
 
