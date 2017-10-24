@@ -37,6 +37,7 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/popwin"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/flx"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/emacs-async"
+    "$PACKS_DIR/dev/foundation-pack/vendor/submodules/company-mode"
 )
 
 CMAKEABLE_DIRS=(
@@ -63,7 +64,11 @@ function compile {
     LOADPATH+="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/packed"
 
     for dir in ${MAKEABLE_DIRS[@]}; do
-        $MAKE -C $dir
+        if [[ "$dir" =~ "company-mode" ]]; then
+            $MAKE -C dir compile
+        else
+            $MAKE -C $dir
+        fi
     done
 
     for dir in ${CMAKEABLE_DIRS[@]}; do
