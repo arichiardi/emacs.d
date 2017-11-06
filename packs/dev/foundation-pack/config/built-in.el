@@ -66,7 +66,8 @@
       ediff-window-setup-function 'ediff-setup-windows-plain)
 
 ;; make emacs use the clipboard
-(setq x-select-enable-clipboard t)
+(setq select-enable-clipboard t)
+(setq select-enable-primary t)
 
 ;;remove all trailing whitespace and trailing blank lines before
 ;;saving the file
