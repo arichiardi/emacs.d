@@ -5,10 +5,12 @@
 # At the moment this has been very quickly (manually) probed by considering and
 # checking all the submodules that have either Makefile or a CMakeLists.txt
 
-usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean]\n" 1>&2; exit 1; }
+set -euo pipefail
+
+usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean --magit]\n" 1>&2; exit 1; }
 pause() { read -n1 -r -p "Press any key to continue..." key; }
 
-if [[ "$1" == "-h" || "$1" == "--help" || $# -gt 1 ]] ; then
+if [[ "$@" =~ "-h" || "$@" =~ "--help" ]] ; then
     usage;
 fi
 
@@ -17,10 +19,14 @@ CMAKE=$(which cmake)
 
 PACKS_DIR="$HOME/.emacs.d/packs"
 
-MAKEABLE_DIRS=(
+MAGIT_MAKEABLE_DIRS=(
+    "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
     "$PACKS_DIR/dev/git-pack/vendor/submodules/with-editor"
     "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes"
     "$PACKS_DIR/dev/git-pack/vendor/submodules/magit"
+)
+
+MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/org-pack/vendor/submodules/org-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
@@ -52,12 +58,35 @@ CMAKEABLE_DIRS=(
 # $PACKS_DIR/dev/power-pack/vendor/submodules/ht # only tests and elpa
 # $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
 
-function compile {
+function compile_magit {
+    # We setup config.mk for dependencies
+    echo "LOAD_PATH=-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" \
+         > "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk"
+
+    echo "LOAD_PATH=-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" \
+         > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk"
+
     # Magit needs these, see here:
     # https://magit.vc/manual/magit/Installing-from-the-Git-repository.html#Installing-from-the-Git-repository
-    echo -e "LOAD_PATH = -L $PACKS_DIR/dev/git-pack/vendor/submodules/magit/lisp\nLOAD_PATH += -L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash\nLOAD_PATH += -L $PACKS_DIR/dev/git-pack/vendor/submodules/with-editor\nLOAD_PATH += -L /home/arichiardi/.emacs.d/packs/dev/foundation-pack/vendor/submodules/emacs-async" > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk"
-    # We extend this to git-modes
-    echo -e "LOAD_PATH = -L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" > "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk"
+    # We setup config.mk for magit
+    export DASH_DIR="$PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
+    export MAGIT_POPUP_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
+    export GHUB_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/ghub"
+    export WITH_EDITOR_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/with-editor"
+
+    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
+        $MAKE -C $dir
+    done
+
+    unset LOAD_PATH
+    unset DASH_DIR
+    unset MAGIT_POPUP_DIR
+    unset GHUB_DIR
+    unset WITH_EDITOR_DIR
+}
+
+function compile {
+    compile_magit
 
     # For auto-compile
     LOADPATH="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
@@ -81,9 +110,19 @@ function compile {
     unset LOADPATH
 }
 
-function clean {
-    rm -fv	$PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk
+function clean_magit {
+    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk
     rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk
+    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk
+    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/ghub/config.mk
+    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
+        $MAKE -C $dir clean
+    done
+}
+
+function clean {
+    clean_magit
+
     for dir in ${MAKEABLE_DIRS[@]}; do
         $MAKE -C $dir clean
     done
@@ -99,11 +138,17 @@ function clean {
     done
 }
 
+if [[ "$@" =~ "--clean" ]] ; then
+    clean
+fi
+
+set -x
+
 if [[ $# -eq 0 ]] ; then
     compile
 else
-    if [[ "$1" == "--clean" ]] ; then
-        clean
+    if [[ "$@" =~ "--magit" ]] ; then
+        compile_magit
     else
         usage
     fi
