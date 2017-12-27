@@ -273,3 +273,14 @@ children of DIRECTORY."
     (with-current-buffer buf
       (write-file fname)
       (auto-save-mode 1))))
+
+(defun live-compilation-warning (&optional hint)
+  "Print out a message asking to compile Emacs Live.
+
+The HINT string is printed before it."
+  (message (concat "\n"
+                   (when hint
+                     (concat hint "\n\n"))
+                   "Compilation might be necessary, kill emacs and try to run:\n"
+                   "  $ ./packs/compile-live-packs\n"
+                   "  $ ./packs/update-live-packs")))

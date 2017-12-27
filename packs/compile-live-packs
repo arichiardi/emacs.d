@@ -78,6 +78,9 @@ function compile_magit {
         $MAKE -C $dir
     done
 
+    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk
+    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk
+
     unset LOAD_PATH
     unset DASH_DIR
     unset MAGIT_POPUP_DIR
@@ -111,10 +114,6 @@ function compile {
 }
 
 function clean_magit {
-    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit/config.mk
-    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk
-    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk
-    rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/ghub/config.mk
     for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
         $MAKE -C $dir clean
     done
