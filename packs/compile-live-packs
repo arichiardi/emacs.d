@@ -32,7 +32,6 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/haskell"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
-    "$PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/auto-complete"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
     "$PACKS_DIR/dev/power-pack/vendor/submodules/marshal"
@@ -57,6 +56,7 @@ CMAKEABLE_DIRS=(
 # $PACKS_DIR/dev/power-pack/vendor/submodules/gh # the config.mk trick does not work, maybe PR to the project?
 # $PACKS_DIR/dev/power-pack/vendor/submodules/ht # only tests and elpa
 # $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
+# $PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode # does not compile
 
 function compile_magit {
     # We setup config.mk for dependencies
