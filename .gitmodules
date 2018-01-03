@@ -194,7 +194,7 @@
 	url = https://github.com/Sterlingg/json-snatcher
 [submodule "packs/dev/foundation-pack/vendor/submodules/emacs-async"]
 	path = packs/dev/foundation-pack/vendor/submodules/emacs-async
-	url = git@github.com:jwiegley/emacs-async.git
+	url = https://github.com/jwiegley/emacs-async.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/company-shell"]
 	path = packs/dev/foundation-pack/vendor/submodules/company-shell
 	url = https://github.com/Alexander-Miller/company-shell
