@@ -1,5 +1,10 @@
 (live-add-pack-lib "clojure-mode")
 
+;; Workaround https://github.com/clojure-emacs/clojure-mode/issues/467
+(eval-after-load 'clojure-mode
+  '(unless (keymap-parent clojure-mode-map)
+     (set-keymap-parent clojure-mode-map prog-mode-map)))
+
 ;; tell clj-refactor not to eagerly eval namespaces
 ;; on connection (this totally conflicts with Overtone
 ;; namespaces that have ready-to-sound side-effecting
