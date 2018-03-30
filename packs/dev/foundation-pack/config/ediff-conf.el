@@ -16,3 +16,6 @@ calling ediff"
     (winner-undo)))
 
 (add-hook 'ediff-quit-hook 'live-ediff-quit)
+
+(eval-after-load "vc-hooks"
+  '(define-key vc-prefix-map "e" 'vc-ediff))
