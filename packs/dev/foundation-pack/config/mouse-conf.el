@@ -1,8 +1,7 @@
 ;; Mouse in terminal
 (require 'mouse)
 
-;; mouse mode must be initialised for each new terminal
-;; see http://stackoverflow.com/a/6798279/27782
+
 (defun initialise-mouse-mode (&optional frame)
   "Initialise mouse mode for the current terminal."
   (if (not frame) ;; The initial call.
@@ -14,7 +13,11 @@
 
 ;; Evaluate both now (for non-daemon emacs) and upon frame creation
 ;; (for new terminals via emacsclient).
-(initialise-mouse-mode)
+
+;; mouse mode must be initialised for each new terminal
+;; see http://stackoverflow.com/a/6798279/27782
+;; (initialise-mouse-mode)
+
 (add-hook 'after-make-frame-functions 'initialise-mouse-mode)
 
 (setq mouse-yank-at-point t)
