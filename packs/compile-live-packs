@@ -32,14 +32,12 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/haskell"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
-    "$PACKS_DIR/dev/clojure-pack/vendor/submodules/auto-complete"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
     "$PACKS_DIR/dev/power-pack/vendor/submodules/marshal"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/epl"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/pkg-info"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/auto-compile"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/popwin"
-    "$PACKS_DIR/dev/foundation-pack/vendor/submodules/flx"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/emacs-async"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/company-mode"
 )
@@ -91,13 +89,16 @@ function compile {
     compile_magit
 
     # For auto-compile
-    LOADPATH="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
-    LOADPATH+="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/packed"
+    export LOADPATH="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
+    export LOADPATH+="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/packed"
 
+    # The make target could be included in the list above
     for dir in ${MAKEABLE_DIRS[@]}; do
         if [[ "$dir" =~ "company-mode" ]]; then
-            $MAKE -C dir compile
-        else
+            $MAKE -C $dir compile
+        elif [[ "$dir" =~ "cider" ]]; then
+            $MAKE -C $dir build
+	else
             $MAKE -C $dir
         fi
     done
@@ -138,11 +139,7 @@ function clean {
 
 if [[ "$@" =~ "--clean" ]] ; then
     clean
-fi
-
-set -x
-
-if [[ $# -eq 0 ]] ; then
+elif [[ $# -eq 0 ]] ; then
     compile
 else
     if [[ "$@" =~ "--magit" ]] ; then
