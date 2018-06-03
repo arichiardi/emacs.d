@@ -97,7 +97,11 @@ function compile {
         if [[ "$dir" =~ "company-mode" ]]; then
             $MAKE -C $dir compile
         elif [[ "$dir" =~ "cider" ]]; then
-            $MAKE -C $dir build
+	    old_dir=$(pwd)
+            cd "$dir"
+            cask install
+            $MAKE build
+            cd "$old_dir"
 	else
             $MAKE -C $dir
         fi
