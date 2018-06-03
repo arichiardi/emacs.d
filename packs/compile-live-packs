@@ -30,7 +30,7 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/org-pack/vendor/submodules/org-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
-    "$PACKS_DIR/dev/lang-pack/vendor/submodules/haskell"
+# compilation error    "$PACKS_DIR/dev/lang-pack/vendor/submodules/haskell"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
     "$PACKS_DIR/dev/power-pack/vendor/submodules/marshal"
