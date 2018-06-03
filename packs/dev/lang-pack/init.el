@@ -3,6 +3,7 @@
 
 (require 'apache-mode)
 
+(live-load-config-file "flycheck-conf.el")
 (live-load-config-file "yaml-conf.el")
 (live-load-config-file "ioke-conf.el")
 (live-load-config-file "auto-modes.el")
