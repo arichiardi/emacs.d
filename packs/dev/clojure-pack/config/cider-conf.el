@@ -1,3 +1,4 @@
+(live-add-pack-lib "sesman")
 (live-add-pack-lib "cider")
 (live-add-pack-lib "spinner-el")
 (live-add-pack-lib "seq-el")

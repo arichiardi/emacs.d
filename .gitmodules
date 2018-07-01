@@ -219,3 +219,6 @@
 [submodule "packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip"]
 	path = packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip
 	url = git@github.com:flycheck/flycheck-pos-tip.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/sesman"]
+	path = packs/dev/clojure-pack/vendor/submodules/sesman
+	url = git@github.com:vspinu/sesman.git
