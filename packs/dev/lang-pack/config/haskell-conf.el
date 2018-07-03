@@ -1,10 +1,8 @@
 (live-add-pack-lib "haskell-mode")
-(live-add-pack-lib "intero/elisp")
 
 (require 'haskell-font-lock)
 (require 'haskell-simple-indent)
 (require 'haskell-mode)
-(require 'intero)
 
 (add-to-list 'auto-mode-alist        '("\\.\\(?:[gh]s\\|hi\\)\\'" . haskell-mode))
 (add-to-list 'auto-mode-alist        '("\\.l[gh]s\\'" . literate-haskell-mode))
@@ -29,7 +27,6 @@
 
 (add-hook 'haskell-mode-hook 'haskell-hook)
 (add-hook 'haskell-cabal-mode-hook 'haskell-cabal-hook)
-(add-hook 'haskell-cabal-mode-hook 'intero-mode)
 
 ;; Haskell main editing mode key bindings.
 (defun haskell-hook ()
