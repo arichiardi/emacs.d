@@ -3,14 +3,7 @@
 (live-add-pack-lib "spinner-el")
 (live-add-pack-lib "seq-el")
 
-(require 'cider)
-(require 'cider-apropos)
-(require 'cider-macroexpansion)
-(require 'cider-browse-ns)
-(require 'cider-classpath)
-(require 'cider-grimoire)
-(require 'cider-test)
-(require 'cider-browse-spec)
+(require 'cider-autoloads)
 
 (defun live-windows-hide-eol ()
  "Do not show ^M in files containing mixed UNIX and DOS line endings."
