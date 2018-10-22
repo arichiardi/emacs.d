@@ -1,48 +1,16 @@
-<img src="http://github.com/downloads/overtone/emacs-live/emacs-live.png" />
-
-<!--
-           MM""""""""`M
-           MM  mmmmmmmM
-           M`      MMMM 88d8b.d8b. .d8888b. .d8888b. .d8888b.
-           MM  MMMMMMMM 88''88'`88 88'  `88 88'  `"" Y8ooooo.
-           MM  MMMMMMMM 88  88  88 88.  .88 88.  ...       88
-           MM        .M dP  dP  dP `88888P8 '88888P' '88888P'
-           MMMMMMMMMMMM
-
-               M""MMMMMMMM M""M M""MMMMM""M MM""""""""`M
-               M  MMMMMMMM M  M M  MMMMM  M MM  mmmmmmmM
-               M  MMMMMMMM M  M M  MMMMP  M M`      MMMM
-               M  MMMMMMMM M  M M  MMMM' .M MM  MMMMMMMM
-               M  MMMMMMMM M  M M  MMP' .MM MM  MMMMMMMM
-               M         M M  M M     .dMMM MM        .M
-               MMMMMMMMMMM MMMM MMMMMMMMMMM MMMMMMMMMMMM
--->
-
-    Energy starts surging through your fingertips. Sparks fly, making
-    the shadows grow and flicker ominously around you. You arch your
-    back and open your eyes as if for the first time. The text appears
-    more vibrant and colourful than you remember. Your fingers dance on
-    the keyboard commanding the cursor with a joyful precision and
-    control.
-
-    You lean back and marvel as a shimmering swirl of syntactic and
-    semantic structures project out of the screen and intertwine with a
-    fractal beauty. You watch as meaning recursively unfolds into deeper
-    meaning live in front of your eyes. You feel a deep and lasting
-    synchronicity form as the boundaries between you and your Emacs
-    wash away. You and your Emacs Live.
-
-    M-x start-hacking.
-
-# Emacs Live
+# Clojure Live
 
 ------------------------------------------------------------------------
-This fork tries to keep things up-to-date as much as possible (especially
-the `clojure-pack` and `cider`, which is the one I use the most). I also
-avoid committing here the `packs/stable` folder so every time you make
-a change to `packs/dev` be sure you execute: `packs/update-live-packs`.
+This is a Clojure-only fork of [Emacs Live](https://github.com/overtone/emacs-live).
 
+It tries to keep things up-to-date as much as possible (especially the
+`clojure-pack` and `cider`, which is the one I use the most) without breaking
+Emacs. I also avoid committing here the `packs/stable` folder so every time you
+make a change to `packs/dev` be sure you execute: `packs/update-live-packs`.
 ------------------------------------------------------------------------
+
+
+### Original Emacs Live Disclaimer
 
 An opinionated set of defaults for getting started with a specific focus
 on live coding with [Overtone](http://overtone.github.io) and
@@ -72,7 +40,7 @@ executing random scripts from the interwebs, then the easiest way to
 install Emacs Live is to run the following which will safely preserve
 any Emacs configs you already have:
 
-    bash <(curl -fksSL https://raw.github.com/overtone/emacs-live/master/installer/install-emacs-live.sh)
+    bash <(curl -fksSL https://raw.github.com/arichiardi/clojure-live/master/installer/install-emacs-live.sh)
 
 Note: you should always read through random scripts before executing
 them!
@@ -91,26 +59,16 @@ these steps:
 
 ### Clojure Hacking
 
-If you wish to hack with Clojure projects such as
-[Overtone](http://github.com/overtone/overtone) and
-[Quil](http://github.com/quil/quil) you'll need to install
-[Leiningen 2](https://github.com/technomancy/leiningen/wiki/Upgrading)
-and you're ready to roll.
+You will probably need to install one of the following, depending on your code
+base:
 
-Make sure you create a profile in `~/.lein/profiles.clj`. It should
-contain the following:
+ * [Leiningen](https://github.com/technomancy/leiningen)
+ * [Clojure Deps CLI](https://clojure.org/guides/deps_and_cli)
 
-```
-{:user {
- :plugins [[cider/cider-nrepl "0.9.1"]
-           [refactor-nrepl "1.1.0"]]
- :dependencies [[org.clojure/tools.nrepl "0.2.7"]]
- }}
-```
+Clojure Live comes with Cider installed, check their doc because it is really
+good:
 
-Now you're ready to start a repl in a Clojure project with `lein repl`
-and connect to it from Emacs with `M-x cider-connect` (supplying the
-host and the correct port) for full Emacs REPL/autocompletion joy.
+  * [Cider](http://docs.cider.mx/en/latest/)
 
 ### Screenshots
 
@@ -209,7 +167,7 @@ By default, Emacs live will load the packs in the following order:
 6. `org-pack`
 7. `clojure-pack`
 8. `bindings-pack`
- 
+
 However, you may create a `~/.emacs-live.el` file to override this
 behaviour. Simply set the var live-packs to a list of symbols
 representing the packs you'd like to load up (the order will be
