@@ -2,7 +2,6 @@
 
 ------------------------------------------------------------------------
 This is a Clojure-only fork of [Emacs Live](https://github.com/overtone/emacs-live).
-
 It tries to keep things up-to-date as much as possible (especially the
 `clojure-pack` and `cider`, which is the one I use the most) without breaking
 Emacs. I also avoid committing here the `packs/stable` folder so every time you
