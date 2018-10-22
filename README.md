@@ -1,12 +1,11 @@
 # Clojure Live
 
-------------------------------------------------------------------------
-This is a Clojure-only fork of [Emacs Live](https://github.com/overtone/emacs-live).
-It tries to keep things up-to-date as much as possible (especially the
-`clojure-pack` and `cider`, which is the one I use the most) without breaking
-Emacs. I also avoid committing here the `packs/stable` folder so every time you
-make a change to `packs/dev` be sure you execute: `packs/update-live-packs`.
-------------------------------------------------------------------------
+This is a Clojure-only fork of
+[Emacs Live](https://github.com/overtone/emacs-live).  It tries to keep things
+up-to-date as much as possible (especially the `clojure-pack` and `cider`,
+which is the one I use the most) without breaking Emacs. I also avoid
+committing here the `packs/stable` folder so every time you make a change to
+`packs/dev` be sure you execute: `packs/update-live-packs`.
 
 
 ### Original Emacs Live Disclaimer
@@ -30,24 +29,12 @@ in battle against the evil friction of poor text editor workflows.
 
 ### Requires Emacs 24.3
 
-Emacs Live is only compatible with Emacs 24.3 and above.
-
-### Easy Install
-
-If you're the kind of shoot-from-the-hip brogrammer that doesn't mind
-executing random scripts from the interwebs, then the easiest way to
-install Emacs Live is to run the following which will safely preserve
-any Emacs configs you already have:
-
-    bash <(curl -fksSL https://raw.github.com/arichiardi/clojure-live/master/installer/install-emacs-live.sh)
-
-Note: you should always read through random scripts before executing
-them!
+It is only compatible with Emacs 24.3 and above but haven't been tested on it
+thoroughly.
 
 ### Getting Started
 
-The (only ever-so-slightly) more involved way to install is to follow
-these steps:
+The only way to install is to follow these steps:
 
 1. Move aside `~/.emacs`, `~/.emacs.el` or `~/.emacs.d` if they
    currently exist.
