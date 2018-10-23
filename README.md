@@ -122,11 +122,7 @@ A number of extra language modes for your joy. Languages include:
 
 * Markdown
 * Yaml
-* Ruby
-* SuperCollider
 * JavaScript
-* Extempore
-* GLSL Shaders
 
 #### Power
 
