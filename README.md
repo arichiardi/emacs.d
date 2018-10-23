@@ -56,18 +56,6 @@ good:
 
   * [Cider](http://docs.cider.mx/en/latest/)
 
-### Screenshots
-
-<img src="https://github.com/downloads/overtone/live-coding-emacs/live-coding-config-in-use.png" alt="Screenshot 1" title="Live Coding Config Screenshot 1" />
-
-<img src="https://github.com/downloads/overtone/live-coding-emacs/live-coding-config-in-use-2.png" alt="Screenshot 2" title="Live Coding Config Screenshot 2" />
-
-### Video
-
-Here's a video showing the config in use:
-[Quick Intro to Live Programming with Overtone](http://vimeo.com/22798433)
-
-
 ## Live Packs
 
 Emacs Live is powered by a number of special packs. Packs are
@@ -165,6 +153,14 @@ simply use `live-add-packs`:
 Packs are expected to reside in `~/.emacs.d/packs/` unless you specify
 them with absolute paths in which case the absolute path with be
 honoured.
+
+### Compiling dev packs
+
+```shell
+cd .emacs.d
+./packs/compile-live-packs # this also accepts --magit, --cider and --clean
+./packs/update-live-packs
+```
 
 ### Creating your own Packs
 
