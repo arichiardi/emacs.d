@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean --magit]\n" 1>&2; exit 1; }
+usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean --magit --cider]\n" 1>&2; exit 1; }
 pause() { read -n1 -r -p "Press any key to continue..." key; }
 
 if [[ "$@" =~ "-h" || "$@" =~ "--help" ]] ; then
@@ -26,11 +26,12 @@ MAGIT_MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/git-pack/vendor/submodules/magit"
 )
 
+CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
+
 MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/org-pack/vendor/submodules/org-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
-# compilation error    "$PACKS_DIR/dev/lang-pack/vendor/submodules/haskell"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
     "$PACKS_DIR/dev/power-pack/vendor/submodules/marshal"
@@ -43,7 +44,6 @@ MAKEABLE_DIRS=(
 )
 
 CMAKEABLE_DIRS=(
-    "$PACKS_DIR/dev/lang-pack/vendor/checkouts/scel-git-0425a8d"
 )
 
 # $PACKS_DIR/dev/clojure-pack/vendor/submodules/popup-el # only tests and elpa
@@ -85,7 +85,28 @@ function compile_magit {
     unset WITH_EDITOR_DIR
 }
 
+function clean_magit {
+    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
+        $MAKE -C $dir clean
+    done
+}
+
+function compile_cider {
+    cd $CIDER_MAKEABLE_DIR
+    cask install
+    cd -
+
+    $MAKE -C $CIDER_MAKEABLE_DIR build
+    $MAKE -C $CIDER_MAKEABLE_DIR autoloads
+}
+
+function clean_cider {
+    $MAKE -C $CIDER_MAKEABLE_DIR clean
+}
+
 function compile {
+    compile_cider
+
     compile_magit
 
     # For auto-compile
@@ -117,13 +138,8 @@ function compile {
     unset LOADPATH
 }
 
-function clean_magit {
-    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
-        $MAKE -C $dir clean
-    done
-}
-
 function clean {
+    clean_cider
     clean_magit
 
     for dir in ${MAKEABLE_DIRS[@]}; do
@@ -148,6 +164,8 @@ elif [[ $# -eq 0 ]] ; then
 else
     if [[ "$@" =~ "--magit" ]] ; then
         compile_magit
+    elif [[ "$@" =~ "--cider" ]] ; then
+	compile_cider
     else
         usage
     fi
