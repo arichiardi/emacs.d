@@ -6,18 +6,6 @@
              M  MMM  MMM  M        dP'  `dP
              MMMMMMMMMMMMMM
 
-Energy starts surging through your fingertips. Sparks fly, making
-the shadows grow and flicker ominously around you. You arch your
-back and open your eyes as if for the first time. The text appears
-more vibrant and colourful than you remember. Your fingers dance on
-the keyboard commanding the cursor with a joyful precision and
-control.
-
-You lean back and marvel as a shimmering swirl of syntactic and
-semantic structures project out of the screen and intertwine with a
-fractal beauty. You watch as meaning recursively unfolds into deeper
-meaning live in front of your eyes. You feel a deep and lasting
-synchronicity form as the boundaries between you and your Emacs
-wash away. You and your Emacs Live.
+Thank you for you patience.
 
 M-x start-hacking.

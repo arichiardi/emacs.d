@@ -1,8 +1,12 @@
 #!/bin/bash
 
-# Emacs Live Installer
-# Written by Sam Aaron samaaron@gmail.com
+# Clojure Live Installer
+
+# Originally written by Sam Aaron samaaron@gmail.com
 # May, 2012
+
+# Currently maintained by Andrea Richiardi https://andrearichiardi.com
+# Oct, 2018
 
 # Note:
 # Run at your own risk!
@@ -10,7 +14,7 @@
 
 # Directory to preserve any Emacs configs found
 old_config=~/emacs-live-old-config
-tmp_dir=~/.emacs-live-installer-tmp
+tmp_dir=$(mktemp --tmpdir -d clojure-live.XXXXXXXX)
 username=$(whoami)
 
 # Check for the presence of git
@@ -27,23 +31,18 @@ if type -p curl >/dev/null 2>&1; then
 fi
 
 if [[ -e $old_config ]]; then
+    echo $(tput setaf 1)"Clojure Live Installer Warning"$(tput sgr0)
 
-  echo $(tput setaf 1)"Emacs Live Installer Warning"$(tput sgr0)
-
-  echo "It looks like I've already stored an Emacs configuration in: "
-  echo $(tput setaf 3)$old_config$(tput sgr0)
-  echo "Please mv or rm it before running me again."
-  echo "I don't want to clobber over valuable files."
-  exit 0
+    echo "It looks like I've already stored an Emacs configuration in: "
+    echo $(tput setaf 3)$old_config$(tput sgr0)
+    echo "Please mv or rm it before running me again."
+    echo "I don't want to clobber over valuable files."
+    exit 0
 fi
 
-# Create temporary directory for working within
-rm -rf $tmp_dir
-mkdir $tmp_dir
-
 # Download intro and outro text
-$HTTP_CLIENT $tmp_dir/intro.txt https://raw.github.com/arichiardi/emacs-live/master/installer/intro.txt
-$HTTP_CLIENT $tmp_dir/outro.txt https://raw.github.com/arichiardi/emacs-live/master/installer/outro.txt
+$HTTP_CLIENT $tmp_dir/intro.txt https://raw.github.com/arichiardi/clojure-live/master/installer/intro.txt
+$HTTP_CLIENT $tmp_dir/outro.txt https://raw.github.com/arichiardi/clojure-live/master/installer/outro.txt
 
 # Print outro and ask for user confirmation to continue
 echo ""
@@ -56,27 +55,27 @@ echo ""
 read -p $(tput setaf 3)"Are you sure you would like to continue? (y/N) "$(tput sgr0)
 
 function download_tarball {
-     echo ""
-     echo $(tput setaf 2)"--> Downloading Emacs Live..."$(tput sgr0)
-     echo ""
-     $HTTP_CLIENT $tmp_dir/live.zip https://github.com/arichiardi/emacs-live/zipball/master
+    echo ""
+    echo $(tput setaf 2)"--> Downloading..."$(tput sgr0)
+    echo ""
+    $HTTP_CLIENT $tmp_dir/live.zip https://github.com/arichiardi/clojure-live/zipball/master
 
-     # Unzip zipball
-     unzip $tmp_dir/live.zip -d $tmp_dir/
+    # Unzip zipball
+    unzip $tmp_dir/live.zip -d $tmp_dir/
 }
 
 function git_clone {
-     echo ""
-     echo $(tput setaf 2)"--> Cloning Emacs Live..."$(tput sgr0)
-     echo ""
-    git clone https://github.com/arichiardi/emacs-live.git $tmp_dir/emacs-live
+    echo ""
+    echo $(tput setaf 2)"--> Cloning..."$(tput sgr0)
+    echo ""
+    git clone https://github.com/arichiardi/clojure-live.git $tmp_dir/clojure-live
 }
 
 if [[ $REPLY =~ ^[Yy]$ ]]; then
 
-     # User wishes to install
+    # User wishes to install
 
-     # Download Emacs Live with git (or as a tarball if git isn't on the system)
+    # Download with git (or as a tarball if git isn't on the system)
 
     if [ $GIT_IS_AVAILABLE -eq 0 ]; then
         git_clone
@@ -101,7 +100,7 @@ if [[ $REPLY =~ ^[Yy]$ ]]; then
             echo "# Your Old Emacs Config Files
 
 This directory contains any Emacs configuration files that had existed prior
-to installing Emacs Live.
+to installing Clojure Live.
 
 To see which files have been preserved:
 
@@ -154,22 +153,22 @@ To revert back to your old Emacs configs simply:
     fi
 
     mkdir ~/.emacs.d
-    cp -R $tmp_dir/emacs-live/. ~/.emacs.d
+    cp -R $tmp_dir/clojure-live/. ~/.emacs.d
     echo $(tput setaf 4)"Personal Pack"
     echo "-------------"$(tput sgr0)
     echo ""
-    echo "If you wish to personalise Emacs Live, it is recommended that you place your
+    echo "If you wish to personalise Clojure Live, it is recommended that you place your
 modifications in a personal pack which I can create for you now."
     echo ""
     echo $(tput setaf 2)"What will happen:"
     echo "* Your pack will be created and placed in ~/.live-packs/$username-pack"
-    echo "* An Emacs Live config file will be created for you in ~/.emacs-live.el "$(tput sgr0)
+    echo "* An Clojure Live config file will be created for you in ~/.clojure-live.el "$(tput sgr0)
     echo ""
     read -p $(tput setaf 3)"Would you like to create a personal pack? (Y/n) "$(tput sgr0)
 
     if [[ $REPLY =~ ^[^nN]*$ ]]; then
         mkdir -p ~/.live-packs/
-        echo "(live-add-packs '(~/.live-packs/$username-pack))" >> ~/.emacs-live.el
+        echo "(live-add-packs '(~/.live-packs/$username-pack))" >> ~/.clojure-live.el
         cp -R ~/.emacs.d/packs/template/user-template-pack/ ~/.live-packs/$username-pack
         echo ""
         echo $(tput setaf 2)"--> Personal Pack created"$(tput sgr0)
@@ -184,5 +183,5 @@ modifications in a personal pack which I can create for you now."
     rm -rf $tmp_dir
 
 else
-  echo "--> Installation aborted."
+    echo "--> Installation aborted."
 fi
