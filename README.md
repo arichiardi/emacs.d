@@ -36,12 +36,15 @@ thoroughly.
 
 The only way to install is to follow these steps:
 
-1. Move aside `~/.emacs`, `~/.emacs.el` or `~/.emacs.d` if they
-   currently exist.
-2. Download the zip bundle (or clone the repository with git) and move
-   and rename to `~/.emacs.d`
-3. Launch Emacs version 24+
-4. Live code your hat off!
+```shell
+curl -O https://raw.githubusercontent.com/arichiardi/clojure-live/master/installer/install-emacs-live.sh
+chmod + install-emacs-live.sh
+./install-emacs-live.sh # follow the installer
+...
+cd .emacs.d
+./packs/compile-live-packs
+./packs/update-live-packs
+```
 
 ### Clojure Hacking
 
@@ -154,13 +157,19 @@ Packs are expected to reside in `~/.emacs.d/packs/` unless you specify
 them with absolute paths in which case the absolute path with be
 honoured.
 
-### Compiling dev packs
+### Compiling dev packs and debug
 
 ```shell
 cd .emacs.d
 ./packs/compile-live-packs # this also accepts --magit, --cider and --clean
 ./packs/update-live-packs
 ```
+
+The above can be done multiple times and the `echo $?` should tell you if
+everything was alright.
+
+If something goes wrong, run `emacs --debug-init` and paste in an issue the
+relevant `*Messages*` buffer output.
 
 ### Creating your own Packs
 
