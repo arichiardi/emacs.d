@@ -19,11 +19,13 @@ CMAKE=$(which cmake)
 
 PACKS_DIR="$HOME/.emacs.d/packs"
 
+MAGIT_PACK_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/magit"
+
 MAGIT_MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
     "$PACKS_DIR/dev/git-pack/vendor/submodules/with-editor"
     "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes"
-    "$PACKS_DIR/dev/git-pack/vendor/submodules/magit"
+    $MAGIT_PACK_DIR
 )
 
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
@@ -70,6 +72,8 @@ function compile_magit {
     export MAGIT_POPUP_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
     export GHUB_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/ghub"
     export WITH_EDITOR_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/with-editor"
+
+    $MAKE -C $MAGIT_PACK_DIR versionlib
 
     for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
         $MAKE -C $dir

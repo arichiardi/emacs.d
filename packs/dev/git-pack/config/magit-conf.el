@@ -16,9 +16,10 @@
 (when (not (file-exists-p live-magit-autoloads))
   (live-compilation-warning (concat "Cannot find: " live-magit-autoloads)))
 
-(load (concat live-magit-lisp-dir "/magit-autoloads.el"))
+(load live-magit-autoloads)
+(require 'magit-version)
 
-(message (concat "Magit loaded: " (magit-version)))
+;; (message (concat "Magit version: " (magit-version)))
 
 (with-eval-after-load 'info
   (info-initialize)
