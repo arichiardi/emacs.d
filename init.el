@@ -1,4 +1,8 @@
-;; Emacs LIVE
+;;; init.el --- user-init-file                    -*- lexical-binding: t -*-
+
+;;; Commentary
+;;
+;; Clojure LIVE
 ;;
 ;; This is where everything starts. Do you remember this place?
 ;; It remembers you...
@@ -160,6 +164,43 @@
 (make-directory live-backups-dir t)
 (make-directory live-custom-dir t)
 (make-directory live-pscratch-dir t)
+
+;; Borg early birds
+(progn
+  (defvar before-user-init-time (current-time)
+    "Value of `current-time' when Emacs begins loading `user-init-file'.")
+
+  (message "Loading Emacs...done (%.3fs)"
+           (float-time (time-subtract before-user-init-time
+                                      before-init-time)))
+
+  (setq user-init-file (or load-file-name buffer-file-name))
+  (setq user-emacs-directory (file-name-directory user-init-file))
+  ;; (message "Loading %s..." user-init-file)
+  (setq package-enable-at-startup nil)
+  ;; (package-initialize)
+  (setq inhibit-startup-buffer-menu t)
+  (setq inhibit-startup-screen t)
+  ;; (setq inhibit-startup-echo-area-message "locutus")
+  ;; (setq initial-buffer-choice t)
+  (setq load-prefer-newer t)
+  (scroll-bar-mode 0)
+  (tool-bar-mode 0)
+  (menu-bar-mode 0))
+
+(progn
+  (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+  (require  'borg)
+  (borg-initialize))
+
+(progn
+  (require  'use-package)
+  (setq use-package-verbose t))
+
+(progn
+  (message "Loading early birds...done (%.3fs)"
+           (float-time (time-subtract (current-time)
+                                      before-user-init-time))))
 
 ;; Load manifest
 (load-file (concat live-root-dir "manifest.el"))
