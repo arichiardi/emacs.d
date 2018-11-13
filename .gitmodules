@@ -1,179 +1,172 @@
-[submodule "packs/dev/foundation-pack/vendor/submodules/ibuffer-git"]
-        path = packs/dev/foundation-pack/vendor/submodules/ibuffer-git
-        url = git://github.com/jrockway/ibuffer-git.git
-        ignore = untracked
-[submodule "packs/dev/foundation-pack/vendor/submodules/smex"]
-        path = packs/dev/foundation-pack/vendor/submodules/smex
-        url = git://github.com/nonsequitur/smex.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/volatile-highlights"]
-        path = packs/dev/power-pack/vendor/submodules/volatile-highlights
-        url = git://github.com/k-talo/volatile-highlights.el.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/refheap"]
-        path = packs/dev/power-pack/vendor/submodules/refheap
-        url = git://github.com/Raynes/refheap.el.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/undo-tree"]
-        path = packs/dev/power-pack/vendor/submodules/undo-tree
-        url = git://github.com/emacsmirror/undo-tree.git
-        ignore = untracked
-[submodule "packs/dev/lang-pack/vendor/submodules/yaml-mode"]
-        path = packs/dev/lang-pack/vendor/submodules/yaml-mode
-        url = git://github.com/yoshiki/yaml-mode.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/scratch"]
-        path = packs/dev/power-pack/vendor/submodules/scratch
-        url = git://github.com/samaaron/scratch-el.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/yasnippet"]
-        path = packs/dev/power-pack/vendor/submodules/yasnippet
-        url = git://github.com/capitaomorte/yasnippet.git
-        ignore = untracked
+[submodule "borg"]
+	path = lib/borg
+	url = git@github.com:emacscollective/borg.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/cider"]
+	path = packs/dev/clojure-pack/vendor/submodules/cider
+	url = git://github.com/clojure-emacs/cider.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu"]
+	path = packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu
+	url = git://github.com/clojure-emacs/cider-eval-sexp-fu.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/clj-refactor"]
+	path = packs/dev/clojure-pack/vendor/submodules/clj-refactor
+	url = git://github.com/magnars/clj-refactor.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/clojure-mode"]
+        path = packs/dev/clojure-pack/vendor/submodules/clojure-mode
+        url = git://github.com/clojure-emacs/clojure-mode.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
+	path = packs/dev/clojure-pack/vendor/submodules/edn
+	url = git://github.com/expez/edn.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu"]
+	path = packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu
+	url = git://github.com/hchbaw/eval-sexp-fu.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/fuzzy-el"]
+        path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
+        url = git://github.com/auto-complete/fuzzy-el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/hydra"]
+	path = packs/dev/clojure-pack/vendor/submodules/hydra
+	url = git://github.com/abo-abo/hydra.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/jump-el"]
+	path = packs/dev/clojure-pack/vendor/submodules/jump-el
+	url = git@github.com:eschulte/jump.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/peg"]
+	path = packs/dev/clojure-pack/vendor/submodules/peg
+	url = git@github.com:emacsmirror/peg.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/popup-el"]
+        path = packs/dev/clojure-pack/vendor/submodules/popup-el
+        url = git://github.com/auto-complete/popup-el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters"]
+	path = packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters
+	url = https://github.com/Fanael/rainbow-delimiters
+[submodule "packs/dev/clojure-pack/vendor/submodules/seq-el"]
+	path = packs/dev/clojure-pack/vendor/submodules/seq-el
+	url = git@github.com:NicolasPetton/seq.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/sesman"]
+	path = packs/dev/clojure-pack/vendor/submodules/sesman
+	url = git@github.com:vspinu/sesman.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/spinner-el"]
+	path = packs/dev/clojure-pack/vendor/submodules/spinner-el
+	url = git@github.com:Malabarba/spinner.el.git
+[submodule "packs/dev/colour-pack/vendor/submodules/zenburn-emacs"]
+	path = packs/dev/colour-pack/vendor/submodules/zenburn-emacs
+	url = git@github.com:bbatsov/zenburn-emacs.git
+[submodule "packs/dev/colour-pack/vendor/zenburn-pack"]
+	path = packs/dev/colour-pack/vendor/zenburn-pack
+	url = git@github.com:siancu/zenburn-pack.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/auto-compile"]
+        path = packs/dev/foundation-pack/vendor/submodules/auto-compile
+        url = git://github.com/tarsius/auto-compile.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/company-mode"]
+	path = packs/dev/foundation-pack/vendor/submodules/company-mode
+	url = https://github.com/company-mode/company-mode.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/company-quickhelp"]
+	path = packs/dev/foundation-pack/vendor/submodules/company-quickhelp
+	url = https://github.com/expez/company-quickhelp.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/company-shell"]
+	path = packs/dev/foundation-pack/vendor/submodules/company-shell
+	url = https://github.com/Alexander-Miller/company-shell
+[submodule "packs/dev/foundation-pack/vendor/submodules/dash"]
+	path = packs/dev/foundation-pack/vendor/submodules/dash
+	url = git://github.com/magnars/dash.el.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/elisp-slime-nav"]
         path = packs/dev/foundation-pack/vendor/submodules/elisp-slime-nav
         url = git://github.com/purcell/elisp-slime-nav.git
         ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/gist"]
-        path = packs/dev/power-pack/vendor/submodules/gist
-        url = git://github.com/defunkt/gist.el.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/emacs-async"]
+	path = packs/dev/foundation-pack/vendor/submodules/emacs-async
+	url = https://github.com/jwiegley/emacs-async.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/epl"]
+        path = packs/dev/foundation-pack/vendor/submodules/epl
+        url = git://github.com/cask/epl.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell"]
+        path = packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell
+        url = git://github.com/purcell/exec-path-from-shell.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/find-file-in-project"]
+	path = packs/dev/foundation-pack/vendor/submodules/find-file-in-project
+	url = https://github.com/technomancy/find-file-in-project
+[submodule "packs/dev/foundation-pack/vendor/submodules/ibuffer-git"]
+        path = packs/dev/foundation-pack/vendor/submodules/ibuffer-git
+        url = git://github.com/jrockway/ibuffer-git.git
         ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/gh"]
-        path = packs/dev/power-pack/vendor/submodules/gh
-        url = git://github.com/sigma/gh.el.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/pcache"]
-        path = packs/dev/power-pack/vendor/submodules/pcache
-        url = git://github.com/sigma/pcache.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/logito"]
-        path = packs/dev/power-pack/vendor/submodules/logito
-        url = git://github.com/sigma/logito.git
-        ignore = untracked
+[submodule "packs/dev/foundation-pack/vendor/submodules/packed"]
+        path = packs/dev/foundation-pack/vendor/submodules/packed
+        url = git://github.com/tarsius/packed.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/pkg-info"]
+	path = packs/dev/foundation-pack/vendor/submodules/pkg-info
+	url = git://github.com/lunaryorn/pkg-info.el.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/popwin"]
         path = packs/dev/foundation-pack/vendor/submodules/popwin
         url = git://github.com/m2ym/popwin-el.git
         ignore = untracked
-[submodule "packs/dev/clojure-pack/vendor/submodules/clojure-mode"]
-        path = packs/dev/clojure-pack/vendor/submodules/clojure-mode
-        url = git://github.com/clojure-emacs/clojure-mode.git
-[submodule "packs/dev/git-pack/vendor/submodules/magit"]
-        path = packs/dev/git-pack/vendor/submodules/magit
-        url = git://github.com/magit/magit.git
-[submodule "packs/dev/lang-pack/vendor/submodules/js2"]
-        path = packs/dev/lang-pack/vendor/submodules/js2
-        url = git://github.com/mooz/js2-mode.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/popup-el"]
-        path = packs/dev/clojure-pack/vendor/submodules/popup-el
-        url = git://github.com/auto-complete/popup-el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/fuzzy-el"]
-        path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
-        url = git://github.com/auto-complete/fuzzy-el.git
-[submodule "packs/dev/power-pack/vendor/submodules/browse-kill-ring"]
-        path = packs/dev/power-pack/vendor/submodules/browse-kill-ring
-        url = git://github.com/samaaron/browse-kill-ring.git
-[submodule "packs/dev/power-pack/vendor/submodules/expand-region"]
-        path = packs/dev/power-pack/vendor/submodules/expand-region
-        url = git://github.com/magnars/expand-region.el.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell"]
-        path = packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell
-        url = git://github.com/purcell/exec-path-from-shell.git
-[submodule "packs/dev/power-pack/vendor/submodules/ace-jump-mode"]
-        path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
-        url = git://github.com/winterTTr/ace-jump-mode.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/auto-compile"]
-        path = packs/dev/foundation-pack/vendor/submodules/auto-compile
-        url = git://github.com/tarsius/auto-compile.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/packed"]
-        path = packs/dev/foundation-pack/vendor/submodules/packed
-        url = git://github.com/tarsius/packed.git
-[submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
-        path = packs/dev/power-pack/vendor/submodules/multiple-cursors
-        url = git://github.com/magnars/multiple-cursors.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/emacs-git-gutter"]
-	path = packs/dev/power-pack/vendor/submodules/emacs-git-gutter
-	url = git://github.com/syohex/emacs-git-gutter.git
-[submodule "packs/dev/org-pack/vendor/submodules/org-mode"]
-	path = packs/dev/org-pack/vendor/submodules/org-mode
-	url = https://code.orgmode.org/bzg/org-mode.git
-[submodule "packs/dev/git-pack/vendor/submodules/git-modes"]
-	path = packs/dev/git-pack/vendor/submodules/git-modes
-	url = git://github.com/magit/git-modes.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/dash"]
-	path = packs/dev/foundation-pack/vendor/submodules/dash
-	url = git://github.com/magnars/dash.el.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/pkg-info"]
-	path = packs/dev/foundation-pack/vendor/submodules/pkg-info
-	url = git://github.com/lunaryorn/pkg-info.el.git
+[submodule "packs/dev/foundation-pack/vendor/submodules/pos-tip"]
+	path = packs/dev/foundation-pack/vendor/submodules/pos-tip
+	url = https://github.com/syohex/pos-tip.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/s"]
 	path = packs/dev/foundation-pack/vendor/submodules/s
 	url = git://github.com/magnars/s.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
-	path = packs/dev/power-pack/vendor/submodules/wc-mode
-	url = git://github.com/bnbeckwith/wc-mode.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/cider"]
-	path = packs/dev/clojure-pack/vendor/submodules/cider
-	url = git://github.com/clojure-emacs/cider.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu"]
-	path = packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu
-	url = git://github.com/hchbaw/eval-sexp-fu.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/clj-refactor"]
-	path = packs/dev/clojure-pack/vendor/submodules/clj-refactor
-	url = git://github.com/magnars/clj-refactor.el.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/epl"]
-        path = packs/dev/foundation-pack/vendor/submodules/epl
-        url = git://github.com/cask/epl.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/find-file-in-project"]
-	path = packs/dev/foundation-pack/vendor/submodules/find-file-in-project
-	url = https://github.com/technomancy/find-file-in-project
-[submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
-	path = packs/dev/clojure-pack/vendor/submodules/edn
-	url = git://github.com/expez/edn.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu"]
-	path = packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu
-	url = git://github.com/clojure-emacs/cider-eval-sexp-fu.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters"]
-	path = packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters
-	url = https://github.com/Fanael/rainbow-delimiters
+[submodule "packs/dev/foundation-pack/vendor/submodules/smex"]
+        path = packs/dev/foundation-pack/vendor/submodules/smex
+        url = git://github.com/nonsequitur/smex.git
+        ignore = untracked
 [submodule "packs/dev/foundation-pack/vendor/submodules/swiper"]
 	path = packs/dev/foundation-pack/vendor/submodules/swiper
 	url = git://github.com/abo-abo/swiper.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/with-editor"]
 	path = packs/dev/foundation-pack/vendor/submodules/with-editor
 	url = git@github.com:magit/with-editor.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/jump-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/jump-el
-	url = git@github.com:eschulte/jump.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/spinner-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/spinner-el
-	url = git@github.com:Malabarba/spinner.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/seq-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/seq-el
-	url = git@github.com:NicolasPetton/seq.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/peg"]
-	path = packs/dev/clojure-pack/vendor/submodules/peg
-	url = git@github.com:emacsmirror/peg.git
-[submodule "packs/dev/power-pack/vendor/submodules/marshal"]
-	path = packs/dev/power-pack/vendor/submodules/marshal
-	url = git@github.com:sigma/marshal.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/ht"]
-	path = packs/dev/power-pack/vendor/submodules/ht
-	url = git@github.com:Wilfred/ht.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/hydra"]
-	path = packs/dev/clojure-pack/vendor/submodules/hydra
-	url = git://github.com/abo-abo/hydra.git
+[submodule "packs/dev/git-pack/vendor/submodules/ghub"]
+	path = packs/dev/git-pack/vendor/submodules/ghub
+	url = git@github.com:magit/ghub.git
+[submodule "packs/dev/git-pack/vendor/submodules/git-modes"]
+	path = packs/dev/git-pack/vendor/submodules/git-modes
+	url = git://github.com/magit/git-modes.git
+[submodule "packs/dev/git-pack/vendor/submodules/magit"]
+        path = packs/dev/git-pack/vendor/submodules/magit
+        url = git://github.com/magit/magit.git
+[submodule "packs/dev/git-pack/vendor/submodules/magit-popup"]
+	path = packs/dev/git-pack/vendor/submodules/magit-popup
+	url = git@github.com:magit/magit-popup.git
 [submodule "packs/dev/git-pack/vendor/submodules/with-editor"]
 	path = packs/dev/git-pack/vendor/submodules/with-editor
 	url = git@github.com:magit/with-editor.git
-[submodule "packs/dev/colour-pack/vendor/zenburn-pack"]
-	path = packs/dev/colour-pack/vendor/zenburn-pack
-	url = git@github.com:siancu/zenburn-pack.git
-[submodule "packs/dev/colour-pack/vendor/submodules/zenburn-emacs"]
-	path = packs/dev/colour-pack/vendor/submodules/zenburn-emacs
-	url = git@github.com:bbatsov/zenburn-emacs.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/company-mode"]
-	path = packs/dev/foundation-pack/vendor/submodules/company-mode
-	url = https://github.com/company-mode/company-mode.git
+[submodule "packs/dev/lang-pack/vendor/submodules/flycheck"]
+	path = packs/dev/lang-pack/vendor/submodules/flycheck
+	url = git@github.com:flycheck/flycheck.git
+[submodule "packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip"]
+	path = packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip
+	url = git@github.com:flycheck/flycheck-pos-tip.git
+[submodule "packs/dev/lang-pack/vendor/submodules/js2"]
+        path = packs/dev/lang-pack/vendor/submodules/js2
+        url = git://github.com/mooz/js2-mode.git
+[submodule "packs/dev/lang-pack/vendor/submodules/yaml-mode"]
+        path = packs/dev/lang-pack/vendor/submodules/yaml-mode
+        url = git://github.com/yoshiki/yaml-mode.git
+        ignore = untracked
+[submodule "packs/dev/org-pack/vendor/submodules/org-mode"]
+	path = packs/dev/org-pack/vendor/submodules/org-mode
+	url = https://code.orgmode.org/bzg/org-mode.git
+[submodule "packs/dev/power-pack/vendor/submodules/ace-jump-mode"]
+        path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
+        url = git://github.com/winterTTr/ace-jump-mode.git
+[submodule "packs/dev/power-pack/vendor/submodules/browse-kill-ring"]
+        path = packs/dev/power-pack/vendor/submodules/browse-kill-ring
+        url = git://github.com/samaaron/browse-kill-ring.git
+[submodule "packs/dev/power-pack/vendor/submodules/emacs-git-gutter"]
+	path = packs/dev/power-pack/vendor/submodules/emacs-git-gutter
+	url = git://github.com/syohex/emacs-git-gutter.git
+[submodule "packs/dev/power-pack/vendor/submodules/expand-region"]
+        path = packs/dev/power-pack/vendor/submodules/expand-region
+        url = git://github.com/magnars/expand-region.el.git
+[submodule "packs/dev/power-pack/vendor/submodules/gh"]
+        path = packs/dev/power-pack/vendor/submodules/gh
+        url = git://github.com/sigma/gh.el.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/gist"]
+        path = packs/dev/power-pack/vendor/submodules/gist
+        url = git://github.com/defunkt/gist.el.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/ht"]
+	path = packs/dev/power-pack/vendor/submodules/ht
+	url = git@github.com:Wilfred/ht.el.git
 [submodule "packs/dev/power-pack/vendor/submodules/json-mode"]
 	path = packs/dev/power-pack/vendor/submodules/json-mode
 	url = https://github.com/joshwnj/json-mode
@@ -183,30 +176,43 @@
 [submodule "packs/dev/power-pack/vendor/submodules/json-snatcher"]
 	path = packs/dev/power-pack/vendor/submodules/json-snatcher
 	url = https://github.com/Sterlingg/json-snatcher
-[submodule "packs/dev/foundation-pack/vendor/submodules/emacs-async"]
-	path = packs/dev/foundation-pack/vendor/submodules/emacs-async
-	url = https://github.com/jwiegley/emacs-async.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/company-shell"]
-	path = packs/dev/foundation-pack/vendor/submodules/company-shell
-	url = https://github.com/Alexander-Miller/company-shell
-[submodule "packs/dev/git-pack/vendor/submodules/magit-popup"]
-	path = packs/dev/git-pack/vendor/submodules/magit-popup
-	url = git@github.com:magit/magit-popup.git
-[submodule "packs/dev/git-pack/vendor/submodules/ghub"]
-	path = packs/dev/git-pack/vendor/submodules/ghub
-	url = git@github.com:magit/ghub.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/company-quickhelp"]
-	path = packs/dev/foundation-pack/vendor/submodules/company-quickhelp
-	url = https://github.com/expez/company-quickhelp.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/pos-tip"]
-	path = packs/dev/foundation-pack/vendor/submodules/pos-tip
-	url = https://github.com/syohex/pos-tip.git
-[submodule "packs/dev/lang-pack/vendor/submodules/flycheck"]
-	path = packs/dev/lang-pack/vendor/submodules/flycheck
-	url = git@github.com:flycheck/flycheck.git
-[submodule "packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip"]
-	path = packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip
-	url = git@github.com:flycheck/flycheck-pos-tip.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/sesman"]
-	path = packs/dev/clojure-pack/vendor/submodules/sesman
-	url = git@github.com:vspinu/sesman.git
+[submodule "packs/dev/power-pack/vendor/submodules/logito"]
+        path = packs/dev/power-pack/vendor/submodules/logito
+        url = git://github.com/sigma/logito.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/marshal"]
+	path = packs/dev/power-pack/vendor/submodules/marshal
+	url = git@github.com:sigma/marshal.el.git
+[submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
+        path = packs/dev/power-pack/vendor/submodules/multiple-cursors
+        url = git://github.com/magnars/multiple-cursors.el.git
+[submodule "packs/dev/power-pack/vendor/submodules/pcache"]
+        path = packs/dev/power-pack/vendor/submodules/pcache
+        url = git://github.com/sigma/pcache.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/refheap"]
+        path = packs/dev/power-pack/vendor/submodules/refheap
+        url = git://github.com/Raynes/refheap.el.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/scratch"]
+        path = packs/dev/power-pack/vendor/submodules/scratch
+        url = git://github.com/samaaron/scratch-el.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/undo-tree"]
+        path = packs/dev/power-pack/vendor/submodules/undo-tree
+        url = git://github.com/emacsmirror/undo-tree.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/volatile-highlights"]
+        path = packs/dev/power-pack/vendor/submodules/volatile-highlights
+        url = git://github.com/k-talo/volatile-highlights.el.git
+        ignore = untracked
+[submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
+	path = packs/dev/power-pack/vendor/submodules/wc-mode
+	url = git://github.com/bnbeckwith/wc-mode.git
+[submodule "packs/dev/power-pack/vendor/submodules/yasnippet"]
+        path = packs/dev/power-pack/vendor/submodules/yasnippet
+        url = git://github.com/capitaomorte/yasnippet.git
+        ignore = untracked
+[submodule "use-package"]
+	path = lib/use-package
+	url = git@github.com:jwiegley/use-package.git
