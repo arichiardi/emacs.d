@@ -17,9 +17,11 @@ fi
 MAKE=$(which make)
 CMAKE=$(which cmake)
 
+BORG_LIB_DIR="$HOME/.emacs.d/lib"
 PACKS_DIR="$HOME/.emacs.d/packs"
 
 MAGIT_PACK_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/magit"
+DASH_DIR="$BORG_LIB_DIR/dash"
 
 MAGIT_MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
@@ -59,16 +61,14 @@ CMAKEABLE_DIRS=(
 
 function compile_magit {
     # We setup config.mk for dependencies
-    echo "LOAD_PATH=-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" \
-         > "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk"
+    echo "LOAD_PATH=-L $DASH_DIR" > "$PACKS_DIR/dev/git-pack/vendor/submodules/git-modes/config.mk"
 
-    echo "LOAD_PATH=-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash" \
-         > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk"
+    echo "LOAD_PATH=-L $DASH_DIR" > "$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk"
 
     # Magit needs these, see here:
     # https://magit.vc/manual/magit/Installing-from-the-Git-repository.html#Installing-from-the-Git-repository
     # We setup config.mk for magit
-    export DASH_DIR="$PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
+    export DASH_DIR="$DASH_DIR"
     export MAGIT_POPUP_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup"
     export GHUB_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/ghub"
     export WITH_EDITOR_DIR="$PACKS_DIR/dev/git-pack/vendor/submodules/with-editor"
@@ -83,7 +83,7 @@ function compile_magit {
     rm -fv $PACKS_DIR/dev/git-pack/vendor/submodules/magit-popup/config.mk
 
     unset LOAD_PATH
-    unset DASH_DIR
+    # unset DASH_DIR # if I unset here nobody can see it anymore
     unset MAGIT_POPUP_DIR
     unset GHUB_DIR
     unset WITH_EDITOR_DIR
@@ -114,7 +114,7 @@ function compile {
     compile_magit
 
     # For auto-compile
-    export LOADPATH="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/dash"
+    export LOADPATH="-L $DASH_DIR"
     export LOADPATH+="-L $PACKS_DIR/dev/foundation-pack/vendor/submodules/packed"
 
     # The make target could be included in the list above
