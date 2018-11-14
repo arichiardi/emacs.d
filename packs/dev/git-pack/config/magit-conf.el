@@ -17,8 +17,8 @@
   (live-compilation-warning (concat "Cannot find: " live-magit-autoloads)))
 
 (load live-magit-autoloads)
-(require 'magit-version)
 
+;; (require 'magit-version)
 ;; (message (concat "Magit version: " (magit-version)))
 
 (with-eval-after-load 'info
