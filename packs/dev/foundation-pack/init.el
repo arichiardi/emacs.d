@@ -1,5 +1,5 @@
-(live-add-pack-lib "dash")
-(require 'dash)
+(use-package dash
+  :config (dash-enable-font-lock))
 
 (require 'dircolors)
 (require 'smooth-scrolling)
@@ -21,7 +21,6 @@
 (live-load-config-file "smex-conf.el")
 (live-load-config-file "tramp-conf.el")
 (live-load-config-file "mouse-conf.el")
-(live-load-config-file "ibuffer-git-conf.el")
 (live-load-config-file "key-chord-conf.el")
 (live-load-config-file "window-number-conf.el")
 (live-load-config-file "recentf-conf.el")
@@ -36,7 +35,6 @@
 (live-load-config-file "completion-conf.el")
 (live-load-config-file "ediff-conf.el")
 (live-load-config-file "live.el")
-
 
 (when (eq system-type 'darwin)
   (live-load-config-file "osx.el"))
