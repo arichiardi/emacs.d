@@ -25,9 +25,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu"]
 	path = packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu
 	url = git://github.com/clojure-emacs/cider-eval-sexp-fu.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/clj-refactor"]
-	path = packs/dev/clojure-pack/vendor/submodules/clj-refactor
-	url = git://github.com/magnars/clj-refactor.el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/clojure-mode"]
         path = packs/dev/clojure-pack/vendor/submodules/clojure-mode
         url = git://github.com/clojure-emacs/clojure-mode.git
