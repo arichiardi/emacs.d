@@ -199,10 +199,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
 	path = packs/dev/power-pack/vendor/submodules/wc-mode
 	url = git://github.com/bnbeckwith/wc-mode.git
-[submodule "packs/dev/power-pack/vendor/submodules/yasnippet"]
-        path = packs/dev/power-pack/vendor/submodules/yasnippet
-        url = git://github.com/capitaomorte/yasnippet.git
-        ignore = untracked
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
