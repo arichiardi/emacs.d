@@ -24,16 +24,3 @@
   (add-hook 'cider-mode-hook 'paredit-mode)
   (add-hook 'cider-repl-mode-hook 'paredit-mode)
   (add-hook 'cider-repl-mode-hook 'eldoc-mode))
-
-
-;; Pull in the awesome clj-refactor lib by magnars
-(live-add-pack-lib "jump-el")
-(live-add-pack-lib "hydra")
-(live-add-pack-lib "clj-refactor")
-
-(use-package clj-refactor
-  :config
-  (add-hook 'cider-mode-hook
-            (lambda ()
-              (clj-refactor-mode 1)
-              (cljr-add-keybindings-with-prefix "C-c C-m"))))
