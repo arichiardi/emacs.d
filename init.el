@@ -1,13 +1,15 @@
 ;;; init.el --- user-init-file                    -*- lexical-binding: t -*-
 
-;;; Commentary
+;;; Commentary:
 ;;
 ;; Clojure LIVE
 ;;
-;; This is where everything starts. Do you remember this place?
+;; This is where everything starts.  Do you remember this place?
 ;; It remembers you...
 
-(setq live-ascii-art-logo ";;
+;;; Code:
+
+(defvar live-ascii-art-logo ";;
 ;;                       @@@@@@@@@@@@@@@
 ;;                  @@@@@@@@@@((/((/@@@@@@@@@@
 ;;               @@@@@@////////////////////(@@@@@
@@ -45,12 +47,12 @@
                    (lambda (switch)
                      nil)))
 
-(setq live-safe-modep
+(defvar live-safe-modep
       (if (member "--live-safe-mode" command-line-args)
           "debug-mode-on"
         nil))
 
-(setq initial-scratch-message "
+(defvar initial-scratch-message "
 ;; I'm sorry, Emacs Live failed to start correctly.
 ;; Hopefully the issue will be simple to resolve.
 ;;
@@ -93,7 +95,7 @@
 ;;                from the ashes
 ")
 
-(setq live-supported-emacsp t)
+(defvar live-supported-emacsp t)
 
 (when (version< emacs-version "24.3")
   (setq live-supported-emacsp nil)
@@ -135,9 +137,9 @@
     (setq user-emacs-directory emacs-live-directory)))
 
 (when live-supported-emacsp
-;; Store live base dirs, but respect user's choice of `live-root-dir'
-;; when provided.
-(setq live-root-dir (if (boundp 'live-root-dir)
+  ;; Store live base dirs, but respect user's choice of `live-root-dir'
+  ;; when provided.
+  (setq live-root-dir (if (boundp 'live-root-dir)
                           (file-name-as-directory live-root-dir)
                         (if (file-exists-p (expand-file-name "manifest.el" user-emacs-directory))
                             user-emacs-directory)
