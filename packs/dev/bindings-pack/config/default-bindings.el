@@ -47,9 +47,6 @@
 (global-set-key (kbd "C-c m n") 'eval-print-last-sexp)
 (global-set-key (kbd "C-c m r") 'eval-region)
 
-(global-set-key (kbd "C-c n e b") 'cider-eval-buffer)
-
-
 ;;funky characters
 (global-set-key (kbd "C-c i l") (lambda () (interactive) (insert "λ")))
 (global-set-key (kbd "C-c i n") (lambda () (interactive) (insert "ℕ")))
@@ -215,9 +212,6 @@
 ;; If you want to be able to M-x without meta
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
-;; Magit
-(global-set-key (kbd "C-x g") 'magit-status)
-
 ;; Activate occur easily inside isearch
 (define-key isearch-mode-map (kbd "C-o")
   (lambda () (interactive)
@@ -229,8 +223,6 @@
 
 ;; Show documentation/information with M-RET
 (define-key lisp-mode-shared-map (kbd "M-RET") 'live-lisp-describe-thing-at-point)
-(define-key cider-repl-mode-map (kbd "M-RET") 'cider-doc)
-(define-key cider-mode-map (kbd "M-RET") 'cider-doc)
 
 (global-set-key (kbd "C-x o") 'win-switch-dispatch)
 

@@ -5,10 +5,11 @@
 
 (use-package cider
   :defer t
-  :commands (cider-connect-clj
-             cider-connect-cljs
-             cider-jack-in-clj
-             cider-jack-in-cljs)
+  :commands (cider-connect-clj cider-connect-cljs cider-jack-in-clj cider-jack-in-cljs)
+
+  :bind
+  (:map cider-repl-mode-map ("M-RET" . cider-doc)
+   :map cider-mode-map ("M-RET" . cider-doc))
 
   :init
   (setq cider-popup-stacktraces t
