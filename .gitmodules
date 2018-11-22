@@ -16,6 +16,21 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "ghub"]
+	path = lib/ghub
+	url = git@github.com:magit/ghub.git
+[submodule "git-modes"]
+	path = lib/git-modes
+	url = git@github.com:magit/git-modes.git
+[submodule "graphql"]
+	path = lib/graphql
+	url = git@github.com:vermiculus/graphql.el.git
+[submodule "magit"]
+	path = lib/magit
+	url = git@github.com:magit/magit.git
+[submodule "magit-popup"]
+	path = lib/magit-popup
+	url = git@github.com:magit/magit-popup.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
@@ -96,8 +111,8 @@
 	path = packs/dev/foundation-pack/vendor/submodules/pkg-info
 	url = git://github.com/lunaryorn/pkg-info.el.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/popwin"]
-        path = packs/dev/foundation-pack/vendor/submodules/popwin
-        url = git://github.com/m2ym/popwin-el.git
+	path = packs/dev/foundation-pack/vendor/submodules/popwin
+	url = git@github.com:m2ym/popwin-el.git
         ignore = untracked
 [submodule "packs/dev/foundation-pack/vendor/submodules/pos-tip"]
 	path = packs/dev/foundation-pack/vendor/submodules/pos-tip
@@ -132,25 +147,14 @@
 	path = packs/dev/org-pack/vendor/submodules/org-mode
 	url = https://code.orgmode.org/bzg/org-mode.git
 [submodule "packs/dev/power-pack/vendor/submodules/ace-jump-mode"]
-        path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
-        url = git://github.com/winterTTr/ace-jump-mode.git
-[submodule "packs/dev/power-pack/vendor/submodules/browse-kill-ring"]
-        path = packs/dev/power-pack/vendor/submodules/browse-kill-ring
-        url = git://github.com/samaaron/browse-kill-ring.git
+	path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
+	url = git@github.com:winterTTr/ace-jump-mode.git
 [submodule "packs/dev/power-pack/vendor/submodules/emacs-git-gutter"]
 	path = packs/dev/power-pack/vendor/submodules/emacs-git-gutter
-	url = git://github.com/syohex/emacs-git-gutter.git
+	url = git@github.com:syohex/emacs-git-gutter.git
 [submodule "packs/dev/power-pack/vendor/submodules/expand-region"]
-        path = packs/dev/power-pack/vendor/submodules/expand-region
-        url = git://github.com/magnars/expand-region.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/gh"]
-        path = packs/dev/power-pack/vendor/submodules/gh
-        url = git://github.com/sigma/gh.el.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/gist"]
-        path = packs/dev/power-pack/vendor/submodules/gist
-        url = git://github.com/defunkt/gist.el.git
-        ignore = untracked
+	path = packs/dev/power-pack/vendor/submodules/expand-region
+	url = git@github.com:magnars/expand-region.el.git
 [submodule "packs/dev/power-pack/vendor/submodules/ht"]
 	path = packs/dev/power-pack/vendor/submodules/ht
 	url = git@github.com:Wilfred/ht.el.git
@@ -163,20 +167,9 @@
 [submodule "packs/dev/power-pack/vendor/submodules/json-snatcher"]
 	path = packs/dev/power-pack/vendor/submodules/json-snatcher
 	url = https://github.com/Sterlingg/json-snatcher
-[submodule "packs/dev/power-pack/vendor/submodules/logito"]
-        path = packs/dev/power-pack/vendor/submodules/logito
-        url = git://github.com/sigma/logito.git
-        ignore = untracked
-[submodule "packs/dev/power-pack/vendor/submodules/marshal"]
-	path = packs/dev/power-pack/vendor/submodules/marshal
-	url = git@github.com:sigma/marshal.el.git
 [submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
         path = packs/dev/power-pack/vendor/submodules/multiple-cursors
         url = git://github.com/magnars/multiple-cursors.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/pcache"]
-        path = packs/dev/power-pack/vendor/submodules/pcache
-        url = git://github.com/sigma/pcache.git
-        ignore = untracked
 [submodule "packs/dev/power-pack/vendor/submodules/refheap"]
         path = packs/dev/power-pack/vendor/submodules/refheap
         url = git://github.com/Raynes/refheap.el.git
@@ -196,27 +189,12 @@
 [submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
 	path = packs/dev/power-pack/vendor/submodules/wc-mode
 	url = git://github.com/bnbeckwith/wc-mode.git
-[submodule "use-package"]
-	path = lib/use-package
-	url = git@github.com:jwiegley/use-package.git
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
-[submodule "graphql"]
-	path = lib/graphql
-	url = git@github.com:vermiculus/graphql.el.git
-[submodule "ghub"]
-	path = lib/ghub
-	url = git@github.com:magit/ghub.git
-[submodule "git-modes"]
-	path = lib/git-modes
-	url = git@github.com:magit/git-modes.git
-[submodule "magit-popup"]
-	path = lib/magit-popup
-	url = git@github.com:magit/magit-popup.git
+[submodule "use-package"]
+	path = lib/use-package
+	url = git@github.com:jwiegley/use-package.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
-[submodule "magit"]
-	path = lib/magit
-	url = git@github.com:magit/magit.git
