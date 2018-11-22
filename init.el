@@ -222,6 +222,9 @@
            (float-time (time-subtract (current-time)
                                       before-user-init-time))))
 
+;; Borg all packages
+
+
 ;; Emacs live
 
 (load-file (concat live-root-dir "manifest.el"))
