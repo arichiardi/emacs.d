@@ -170,10 +170,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
         path = packs/dev/power-pack/vendor/submodules/multiple-cursors
         url = git://github.com/magnars/multiple-cursors.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/refheap"]
-        path = packs/dev/power-pack/vendor/submodules/refheap
-        url = git://github.com/Raynes/refheap.el.git
-        ignore = untracked
 [submodule "packs/dev/power-pack/vendor/submodules/scratch"]
         path = packs/dev/power-pack/vendor/submodules/scratch
         url = git://github.com/samaaron/scratch-el.git
