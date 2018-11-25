@@ -33,7 +33,6 @@ MAGIT_MAKEABLE_DIRS=(
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
 
 MAKEABLE_DIRS=(
-    "$PACKS_DIR/dev/org-pack/vendor/submodules/org-mode"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"

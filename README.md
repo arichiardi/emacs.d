@@ -137,7 +137,6 @@ By default, Emacs live will load the packs in the following order:
 3. `lang-pack`
 4. `power-pack`
 5. `git-pack`
-6. `org-pack`
 7. `clojure-pack`
 8. `bindings-pack`
 

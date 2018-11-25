@@ -117,15 +117,6 @@
 (define-key paredit-mode-map (kbd "M-T")     'transpose-sexps)
 (define-key paredit-mode-map (kbd "C-M-k")   'live-paredit-copy-sexp-at-point)
 
-;; org-mode
-(define-key org-mode-map (kbd "C-M-f")    'org-metadown)
-(define-key org-mode-map (kbd "C-M-b")    'org-metaup)
-(define-key org-mode-map (kbd "C-M-l")    'org-shiftright)
-(define-key org-mode-map (kbd "C-M-j")    'org-shiftleft)
-(define-key org-mode-map (kbd "C-M-i")    'org-shiftup)
-(define-key org-mode-map (kbd "C-M-k")    'org-shiftdown)
-(define-key org-mode-map (kbd "C-M-_")    'live-decrement-number-at-point)
-
 ;;increment and decrement number at point
 (global-set-key (kbd "C-M-_")  'live-decrement-number-at-point)
 (global-set-key (kbd "M-=")    'live-increment-number-at-point)
@@ -152,10 +143,6 @@
 ;;make ^h delete rather than help
 (global-set-key (kbd "C-h") 'delete-backward-char)
 (define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete)
-
-;;redefine help shortcut
-(global-set-key (kbd "M-h") 'help-command)
-(define-key org-mode-map (kbd "M-h") 'help-command)
 
 ;;allow the deletion of words:
 ;;backward kill word (forward kill word is M-d)
