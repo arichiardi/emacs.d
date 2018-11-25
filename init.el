@@ -222,8 +222,11 @@
            (float-time (time-subtract (current-time)
                                       before-user-init-time))))
 
-;; Borg all packages
+;; Borg other packages
 
+(use-package volatile-highlights
+  :config
+  (volatile-highlights-mode t))
 
 ;; Emacs live
 
@@ -236,7 +239,6 @@
                      "lang-pack"
                      "power-pack"
                      "git-pack"
-                     "org-pack"
                      "clojure-pack"
                      "bindings-pack"))
        (live-dir (file-name-as-directory "stable"))
