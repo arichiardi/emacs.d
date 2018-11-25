@@ -37,7 +37,6 @@ MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
     "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
-    "$PACKS_DIR/dev/power-pack/vendor/submodules/marshal"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/epl"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/pkg-info"
     "$BORG_LIB_DIR/auto-compile"
