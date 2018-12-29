@@ -4,12 +4,9 @@
 (live-add-pack-lib "seq-el")
 
 (use-package cider
+  ;; This seems enough for cider, see also:
+  ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
   :defer t
-  :commands (cider-connect-clj cider-connect-cljs cider-jack-in-clj cider-jack-in-cljs)
-
-  :bind
-  (:map cider-repl-mode-map ("M-RET" . cider-doc)
-   :map cider-mode-map ("M-RET" . cider-doc))
 
   :init
   (setq cider-popup-stacktraces t
