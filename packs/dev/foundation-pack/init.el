@@ -5,8 +5,6 @@
 (require 'smooth-scrolling)
 (require 'buffer-move)
 
-(live-add-pack-lib "find-file-in-project")
-(require 'find-file-in-project)
 (live-add-pack-lib "s")
 (require 's)
 (live-add-pack-lib "epl")
