@@ -26,9 +26,6 @@
                                                (match-end 1) "∈")
                                nil))))))
 
-(eval-after-load 'find-file-in-project
-  '(add-to-list 'ffip-patterns '("*.clj" "*.cljs" "*.cljc" "*.edn")))
-
 (require 'clojure-mode)
 
 (add-hook 'clojure-mode-hook

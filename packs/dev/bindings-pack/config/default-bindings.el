@@ -188,7 +188,6 @@
 (global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
 
 ;; File
-(global-set-key (kbd "C-x C-M-f") 'find-file-in-project)
 (global-set-key (kbd "M-`")       'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b")   'ibuffer)
 
