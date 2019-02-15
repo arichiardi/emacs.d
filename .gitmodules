@@ -37,18 +37,12 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/cider"]
 	path = packs/dev/clojure-pack/vendor/submodules/cider
 	url = git://github.com/clojure-emacs/cider.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu"]
-	path = packs/dev/clojure-pack/vendor/submodules/cider-eval-sexp-fu
-	url = git://github.com/clojure-emacs/cider-eval-sexp-fu.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/clojure-mode"]
         path = packs/dev/clojure-pack/vendor/submodules/clojure-mode
         url = git://github.com/clojure-emacs/clojure-mode.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
 	path = packs/dev/clojure-pack/vendor/submodules/edn
 	url = git://github.com/expez/edn.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu"]
-	path = packs/dev/clojure-pack/vendor/submodules/eval-sexp-fu
-	url = git://github.com/hchbaw/eval-sexp-fu.el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/fuzzy-el"]
         path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
         url = git://github.com/auto-complete/fuzzy-el.git
