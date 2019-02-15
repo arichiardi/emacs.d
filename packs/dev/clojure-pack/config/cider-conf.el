@@ -3,6 +3,8 @@
 (live-add-pack-lib "spinner-el")
 (live-add-pack-lib "seq-el")
 
+(load "cider-autoloads" t t)
+
 (use-package cider
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
