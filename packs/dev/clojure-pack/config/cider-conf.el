@@ -24,7 +24,7 @@
         cider-show-error-buffer 'only-in-repl
         cider-offer-to-open-cljs-app-in-browser nil
         cider-invert-insert-eval-p t
-        cider-switch-to-repl-after-insert-p nil
+        cider-switch-to-repl-on-insert nil
         cider-print-fn 'zprint)
 
   :config
