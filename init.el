@@ -228,6 +228,12 @@
   :config
   (volatile-highlights-mode t))
 
+(use-package markdown-mode
+  :mode (("README\\.md\\'" . gfm-mode)
+         ("\\.md\\'" . markdown-mode)
+         ("\\.markdown\\'" . markdown-mode))
+  :init (setq markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md"))
+
 ;; Emacs live
 
 (load-file (concat live-root-dir "manifest.el"))
