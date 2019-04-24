@@ -25,7 +25,7 @@
         cider-offer-to-open-cljs-app-in-browser nil
         cider-invert-insert-eval-p t
         cider-switch-to-repl-on-insert nil
-        cider-print-fn 'zprint)
+ )
 
   :config
   (add-hook 'cider-mode-hook #'eldoc-mode)
