@@ -32,6 +32,7 @@
 (live-load-config-file "monkey-patch.el")
 (live-load-config-file "completion-conf.el")
 (live-load-config-file "ediff-conf.el")
+(live-load-config-file "lsp-conf.el")
 (live-load-config-file "live.el")
 
 (when (eq system-type 'darwin)

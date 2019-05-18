@@ -7,6 +7,9 @@
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
+[submodule "company-lsp"]
+	path = lib/company-lsp
+	url = git@github.com:tigersoldier/company-lsp.git
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
@@ -16,6 +19,12 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "f"]
+	path = lib/f
+	url = git@github.com:rejeep/f.el.git
+[submodule "flycheck"]
+	path = lib/flycheck
+	url = git@github.com:flycheck/flycheck.git
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
@@ -25,6 +34,18 @@
 [submodule "graphql"]
 	path = lib/graphql
 	url = git@github.com:vermiculus/graphql.el.git
+[submodule "ht"]
+	path = lib/ht
+	url = git@github.com:Wilfred/ht.el.git
+[submodule "lsp-java"]
+	path = lib/lsp-java
+	url = git@github.com:emacs-lsp/lsp-java.git
+[submodule "lsp-mode"]
+	path = lib/lsp-mode
+	url = git@github.com:emacs-lsp/lsp-mode.git
+[submodule "lsp-ui"]
+	path = lib/lsp-ui
+	url = git@github.com:emacs-lsp/lsp-ui.git
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
@@ -124,9 +145,6 @@
 [submodule "packs/dev/foundation-pack/vendor/submodules/with-editor"]
 	path = packs/dev/foundation-pack/vendor/submodules/with-editor
 	url = git@github.com:magit/with-editor.git
-[submodule "packs/dev/lang-pack/vendor/submodules/flycheck"]
-	path = packs/dev/lang-pack/vendor/submodules/flycheck
-	url = git@github.com:flycheck/flycheck.git
 [submodule "packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip"]
 	path = packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip
 	url = git@github.com:flycheck/flycheck-pos-tip.git
@@ -175,6 +193,15 @@
 [submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
 	path = packs/dev/power-pack/vendor/submodules/wc-mode
 	url = git://github.com/bnbeckwith/wc-mode.git
+[submodule "request"]
+	path = lib/request
+	url = git@github.com:tkf/emacs-request.git
+[submodule "s"]
+	path = lib/s
+	url = git@github.com:magnars/s.el.git
+[submodule "spinner"]
+	path = lib/spinner
+	url = git@github.com:Malabarba/spinner.el.git
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
