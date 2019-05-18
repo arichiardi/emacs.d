@@ -196,7 +196,7 @@
   (borg-initialize))
 
 (progn
-  (require  'use-package)
+  (require 'use-package)
   (setq use-package-verbose t))
 
 (use-package auto-compile
@@ -221,18 +221,6 @@
   (message "Loading early birds...done (%.3fs)"
            (float-time (time-subtract (current-time)
                                       before-user-init-time))))
-
-;; Borg other packages
-
-(use-package volatile-highlights
-  :config
-  (volatile-highlights-mode t))
-
-(use-package markdown-mode
-  :mode (("README\\.md\\'" . gfm-mode)
-         ("\\.md\\'" . markdown-mode)
-         ("\\.markdown\\'" . markdown-mode))
-  :init (setq markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md"))
 
 ;; Emacs live
 
