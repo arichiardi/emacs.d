@@ -2,6 +2,7 @@
 (live-add-pack-lib "cider")
 (live-add-pack-lib "spinner-el")
 (live-add-pack-lib "seq-el")
+(live-add-pack-lib "parseedn")
 
 (load "cider-autoloads" t t)
 
