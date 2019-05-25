@@ -1,3 +1,6 @@
+[submodule "a"]
+	path = lib/a
+	url = git@github.com:plexus/a.el.git
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
@@ -79,6 +82,9 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/jump-el"]
 	path = packs/dev/clojure-pack/vendor/submodules/jump-el
 	url = git@github.com:eschulte/jump.el.git
+[submodule "packs/dev/clojure-pack/vendor/submodules/parseedn"]
+	path = packs/dev/clojure-pack/vendor/submodules/parseedn
+	url = git@github.com:clojure-emacs/parseedn.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/peg"]
 	path = packs/dev/clojure-pack/vendor/submodules/peg
 	url = git@github.com:emacsmirror/peg.git
@@ -196,6 +202,9 @@
 [submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
 	path = packs/dev/power-pack/vendor/submodules/wc-mode
 	url = git://github.com/bnbeckwith/wc-mode.git
+[submodule "parseclj"]
+	path = lib/parseclj
+	url = git@github.com:clojure-emacs/parseclj.git
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
