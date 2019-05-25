@@ -16,6 +16,9 @@
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
+[submodule "emojify"]
+	path = lib/emojify
+	url = git@github.com:iqbalansari/emacs-emojify.git
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
