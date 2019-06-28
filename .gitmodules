@@ -31,6 +31,9 @@
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
+[submodule "geiser"]
+	path = lib/geiser
+	url = git@gitlab.com:jaor/geiser.git
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
