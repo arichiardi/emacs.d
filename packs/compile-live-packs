@@ -7,7 +7,7 @@
 
 set -euo pipefail
 
-usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean --magit --cider]\n" 1>&2; exit 1; }
+usage() { echo -e "Compile the submodules in the Emacs Live packs.\n\nUsage: $0 [--clean --cider]\n" 1>&2; exit 1; }
 pause() { read -n1 -r -p "Press any key to continue..." key; }
 
 if [[ "$@" =~ "-h" || "$@" =~ "--help" ]] ; then
@@ -20,15 +20,7 @@ CMAKE=$(which cmake)
 BORG_LIB_DIR="$HOME/.emacs.d/lib"
 PACKS_DIR="$HOME/.emacs.d/packs"
 
-MAGIT_PACK_DIR="$BORG_LIB_DIR/magit"
 DASH_DIR="$BORG_LIB_DIR/dash"
-
-MAGIT_MAKEABLE_DIRS=(
-    "$BORG_LIB_DIR/magit-popup"
-    "$BORG_LIB_DIR/with-editor"
-    "$BORG_LIB_DIR/git-modes"
-    $MAGIT_PACK_DIR
-)
 
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
 
@@ -57,41 +49,6 @@ CMAKEABLE_DIRS=(
 # $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
 # $PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode # does not compile
 
-function compile_magit {
-    # We setup config.mk for dependencies
-    echo "LOAD_PATH=-L $DASH_DIR" > "$BORG_LIB_DIR/git-modes/config.mk"
-    echo "LOAD_PATH=-L $DASH_DIR" > "$BORG_LIB_DIR/magit-popup/config.mk"
-
-    # Magit needs these, see here:
-    # https://magit.vc/manual/magit/Installing-from-the-Git-repository.html#Installing-from-the-Git-repository
-    # We setup config.mk for magit
-    export DASH_DIR="$DASH_DIR"
-    export MAGIT_POPUP_DIR="$BORG_LIB_DIR/magit-popup"
-    export GHUB_DIR="$BORG_LIB_DIR/ghub"
-    export WITH_EDITOR_DIR="$BORG_LIB_DIR/with-editor"
-
-    $MAKE -C $MAGIT_PACK_DIR versionlib
-
-    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
-        $MAKE -C $dir
-    done
-
-    rm -fv "$BORG_LIB_DIR/magit-popup/config.mk"
-    rm -fv "$BORG_LIB_DIR/git-modes/config.mk"
-
-    unset LOAD_PATH
-    # unset DASH_DIR # if I unset here nobody can see it anymore
-    unset MAGIT_POPUP_DIR
-    unset GHUB_DIR
-    unset WITH_EDITOR_DIR
-}
-
-function clean_magit {
-    for dir in ${MAGIT_MAKEABLE_DIRS[@]}; do
-        $MAKE -C $dir clean
-    done
-}
-
 function compile_cider {
     cd $CIDER_MAKEABLE_DIR
     cask install
@@ -106,8 +63,6 @@ function clean_cider {
 
 function compile {
     compile_cider
-
-    compile_magit
 
     # For auto-compile
     export LOADPATH="-L $DASH_DIR"
@@ -140,7 +95,6 @@ function compile {
 
 function clean {
     clean_cider
-    clean_magit
 
     for dir in ${MAKEABLE_DIRS[@]}; do
         $MAKE -C $dir clean
@@ -162,9 +116,7 @@ if [[ "$@" =~ "--clean" ]] ; then
 elif [[ $# -eq 0 ]] ; then
     compile
 else
-    if [[ "$@" =~ "--magit" ]] ; then
-        compile_magit
-    elif [[ "$@" =~ "--cider" ]] ; then
+    if [[ "$@" =~ "--cider" ]] ; then
 	compile_cider
     else
         usage
