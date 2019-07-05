@@ -6,7 +6,7 @@ loaddefs.el*
 backups/*
 auto-save-list
 custom.el
-*elc
+*.elc
 places
 url/cookies
 thumbs/*
@@ -28,3 +28,4 @@ stable/
 ido.last
 .cask/*
 etc/*
+*-autoloads.el
