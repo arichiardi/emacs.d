@@ -23,6 +23,7 @@ PACKS_DIR="$HOME/.emacs.d/packs"
 DASH_DIR="$BORG_LIB_DIR/dash"
 
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
+GEISER_MAKEABLE_DIR="$BORG_LIB_DIR/geiser"
 
 MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
@@ -49,19 +50,43 @@ CMAKEABLE_DIRS=(
 # $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
 # $PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode # does not compile
 
-function compile_cider {
-    cd $CIDER_MAKEABLE_DIR
-    cask install
-    cd -
+function compile_geiser {
+    pushd "$GEISER_MAKEABLE_DIR"
 
-    $MAKE -C $CIDER_MAKEABLE_DIR
+    if [ ! -x "$GEISER_MAKEABLE_DIR/configure" ]; then
+        ./autogen.sh
+    fi
+
+    if [ ! -d "$GEISER_MAKEABLE_DIR/build" ]; then
+        mkdir "$GEISER_MAKEABLE_DIR/build"
+        pushd "$GEISER_MAKEABLE_DIR/build"
+        ../configure
+        popd
+    fi
+
+    $MAKE -C "$GEISER_MAKEABLE_DIR/build"
+
+    popd
+}
+
+function clean_geiser {
+    $MAKE -C "$GEISER_MAKEABLE_DIR/build" clean
+}
+
+function compile_cider {
+    pushd "$CIDER_MAKEABLE_DIR"
+    cask install
+    popd
+
+    $MAKE -C "$CIDER_MAKEABLE_DIR"
 }
 
 function clean_cider {
-    $MAKE -C $CIDER_MAKEABLE_DIR clean
+    $MAKE -C "$CIDER_MAKEABLE_DIR" clean
 }
 
 function compile {
+    compile_geiser
     compile_cider
 
     # For auto-compile
@@ -71,43 +96,41 @@ function compile {
     # The make target could be included in the list above
     for dir in ${MAKEABLE_DIRS[@]}; do
         if [[ "$dir" =~ "company-mode" ]]; then
-            $MAKE -C $dir compile
+            $MAKE -C "$dir" compile
         elif [[ "$dir" =~ "cider" ]]; then
-	    old_dir=$(pwd)
-            cd "$dir"
+            pushd "$dir"
             cask install
             $MAKE build
-            cd "$old_dir"
+            popd
 	else
-            $MAKE -C $dir
+            $MAKE -C "$dir"
         fi
     done
 
-    for dir in ${CMAKEABLE_DIRS[@]}; do
-        pwd=$(pwd)
-        cd $dir
+    for dir in "${CMAKEABLE_DIRS[@]}"; do
+        pushd "$dir"
         $CMAKE .
         $MAKE
-        cd $pwd
+        popd
     done
     unset LOADPATH
 }
 
 function clean {
+    clean_geiser
     clean_cider
 
-    for dir in ${MAKEABLE_DIRS[@]}; do
-        $MAKE -C $dir clean
+    for dir in "${MAKEABLE_DIRS[@]}"; do
+        $MAKE -C "$dir" clean
     done
 
     # Better clean for cmake?
     for dir in ${CMAKEABLE_DIRS[@]}; do
-        pwd=$(pwd)
-        cd $dir
+        pushd "$dir"
         rm -vf Makefile cmake_install.cmake CMakeCache.txt
         rm -Rvf CMakeFiles
         rm -vf *.elc
-        cd $pwd
+        popd
     done
 }
 
@@ -117,7 +140,9 @@ elif [[ $# -eq 0 ]] ; then
     compile
 else
     if [[ "$@" =~ "--cider" ]] ; then
-	compile_cider
+	    compile_cider
+    elif [[ "$@" =~ "--geiser" ]]; then
+        compile_geiser
     else
         usage
     fi
