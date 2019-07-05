@@ -1,12 +1,14 @@
-# Clojure Live
+# Emacs
 
-This is a Clojure-only fork of
-[Emacs Live](https://github.com/overtone/emacs-live).  It tries to keep things
-up-to-date as much as possible (especially the `clojure-pack` and `cider`,
-which is the one I use the most) without breaking Emacs. I also avoid
-committing here the `packs/stable` folder so every time you make a change to
-`packs/dev` be sure you execute: `packs/update-live-packs`.
+This repo started as a fork of [Emacs Live](https://github.com/overtone/emacs-live) but has slowly drifted away from it, mainly cause moving a bit faster than the original.
 
+One of the things this fork does is that it avoids committing the `packs/stable` folder so every time you make a change to `packs/dev` be sure you execute: `packs/update-live-packs`.
+
+The philosophy here is to have a stable but rolling, contributor friendly, setup (especially regarding `clojure-pack` and `cider`, which is the one I use the most) and will slowly move to [borg](https://github.com/emacscollective/borg) for package management.
+
+---
+Please do not use
+---
 
 ### Original Emacs Live Disclaimer
 
@@ -46,19 +48,6 @@ cd .emacs.d
 ./packs/update-live-packs
 ```
 
-### Clojure Hacking
-
-You will probably need to install one of the following, depending on your code
-base:
-
- * [Leiningen](https://github.com/technomancy/leiningen)
- * [Clojure Deps CLI](https://clojure.org/guides/deps_and_cli)
-
-Clojure Live comes with Cider installed, check their doc because it is really
-good:
-
-  * [Cider](http://docs.cider.mx/en/latest/)
-
 ## Live Packs
 
 Emacs Live is powered by a number of special packs. Packs are
@@ -75,58 +64,6 @@ your pack by placing library code in the lib dir and individual config
 files in the config dir. Emacs Live provides helper fns to make it easy
 for you to load config files and for you to add lib dirs to your load
 path. See the section on helper fns below.
-
-### Shipped Packs
-
-Emacs live ships with a few packs:
-
-#### Foundation
-
-A set of defaults to create a clutter free, friendly and more dynamic
-Emacs foundation. Also adds fuzzy matching autocomplete functionality
-for most of the Emacs minibuffer actions - such as finding files, calling
-functions and switching buffers.
-
-#### Colour
-
-Colour highlighting includes cyberpunkd and gandalf Sam Aaron approved themes
-plus zenburn-emacs. Use `color-theme-YOURCHOICE` to switch between
-them. Currently cyberpunk has seen more love - patch requests accepted for
-appropriate improvements to Gandalf.
-
-#### Clojure
-
-A set of goodies to get you hacking Clojure like a pro.
-
-* Clojure Mode (with fancy `(λ [a] (+ a 5))` and `ƒ(+ % 5)` prettifications)
-* cider (for communicating with nREPL servers)
-* Auto completion (configured to work with nREPL for inline auto
-  completion of documentation)
-* Tailor-made colour theme
-* Fancy highlighting of sexps on eval
-* Rainbow parens and delimiters (to allow you to easily navigate a sea
-  of parens)
-
-#### Lang
-
-A number of extra language modes for your joy. Languages include:
-
-* Markdown
-* Yaml
-* JavaScript
-
-#### Power
-
-A boost of fantastic functionality for your live-coding
-fingertips. Highlights include:
-
-* The amazing undo-tree (live-code with confidence!)
-* Textmate-like snippets
-* Refheap mode for pasting snippets to refheap.com
-* Github Gist support
-* Quick jump mode for accessing previous locations
-* Ace jump mode for jumping directly to any symbol on the screen with 2
-  or three keystrokes.
 
 ### Loading Packs
 
