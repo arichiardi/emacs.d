@@ -10,6 +10,22 @@ The philosophy here is to have a stable but rolling, contributor friendly, setup
 Please do not use
 ---
 
+## First time
+
+After cloning the project, you need to sync the submodules and run a couple of scripts for compiling (and therefore have faster startup):
+
+```
+git submodule update --init --recursive
+```
+
+If you get lost in submodule mess, your last resort can be something like: 
+
+```
+git submodule update --recursive --checkout --force
+```
+
+This will force the checkout of the submodules at the SHA stored in this parent repository.
+
 ### Original Emacs Live Disclaimer
 
 An opinionated set of defaults for getting started with a specific focus
