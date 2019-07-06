@@ -281,8 +281,6 @@
                                                                   "
 ;;"
                                                                   ) "
-;;           http://github.com/arichiardi/clojure-live
-;;
 ;; "                                                      (live-welcome-message) "
 
 ")))
