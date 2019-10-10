@@ -19,6 +19,9 @@
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
+[submodule "docker-tramp"]
+	path = lib/docker-tramp
+	url = git@github.com:emacs-pe/docker-tramp.el.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
