@@ -22,3 +22,4 @@
 (live-load-config-file "auto-modes.el")
 (live-load-config-file "js2-conf.el")
 (live-load-config-file "scheme-conf.el")
+(live-load-config-file "plantuml-conf.el")

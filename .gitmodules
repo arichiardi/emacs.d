@@ -40,6 +40,9 @@
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
+[submodule "flycheck-plantuml"]
+	path = lib/flycheck-plantuml
+	url = git@github.com:alexmurray/flycheck-plantuml.git
 [submodule "geiser"]
 	path = lib/geiser
 	url = git@gitlab.com:jaor/geiser.git
@@ -220,6 +223,9 @@
 [submodule "parseclj"]
 	path = lib/parseclj
 	url = git@github.com:clojure-emacs/parseclj.git
+[submodule "plantuml-mode"]
+	path = lib/plantuml-mode
+	url = git@github.com:skuro/plantuml-mode.git
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
