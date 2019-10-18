@@ -5,7 +5,6 @@
 (require 'lively)
 
 (live-load-config-file "undo-tree-conf.el")
-(live-load-config-file "scratch-conf.el")
 (live-load-config-file "highlight-tail-conf.el")
 (live-load-config-file "expand-region-conf.el")
 (live-load-config-file "ace-jump-mode-conf.el")
