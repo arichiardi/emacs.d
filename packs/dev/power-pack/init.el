@@ -13,3 +13,4 @@
 (live-load-config-file "git-gutter-conf.el")
 (live-load-config-file "wc-mode-conf.el")
 (live-load-config-file "json-conf.el")
+(live-load-config-file "zeal-at-point-conf.el")
