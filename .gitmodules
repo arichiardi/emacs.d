@@ -209,10 +209,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
         path = packs/dev/power-pack/vendor/submodules/multiple-cursors
         url = git://github.com/magnars/multiple-cursors.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/scratch"]
-        path = packs/dev/power-pack/vendor/submodules/scratch
-        url = git://github.com/samaaron/scratch-el.git
-        ignore = untracked
 [submodule "packs/dev/power-pack/vendor/submodules/undo-tree"]
         path = packs/dev/power-pack/vendor/submodules/undo-tree
         url = git://github.com/emacsmirror/undo-tree.git
