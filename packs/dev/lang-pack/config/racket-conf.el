@@ -10,6 +10,7 @@
 (use-package racket-mode
   :mode "\\.rkt\\'"
   :bind (("C-c M-j" . racket-run)
+         :map racket-mode-map
          ("C-c C-c" . racket-send-last-sexp)
          ("C-c C-z" . racket-run-and-switch-to-repl))
   :init
