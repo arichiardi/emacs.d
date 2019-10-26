@@ -21,6 +21,5 @@
 (live-load-config-file "yaml-conf.el")
 (live-load-config-file "auto-modes.el")
 (live-load-config-file "js2-conf.el")
-(live-load-config-file "racket-conf.el")
 (live-load-config-file "plantuml-conf.el")
 (live-load-config-file "elisp-conf.el")
