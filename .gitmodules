@@ -215,9 +215,6 @@
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
-[submodule "racket-mode"]
-	path = lib/racket-mode
-	url = git@github.com:greghendershott/racket-mode.git
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
