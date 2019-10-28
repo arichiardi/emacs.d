@@ -55,6 +55,18 @@
 [submodule "ht"]
 	path = lib/ht
 	url = git@github.com:Wilfred/ht.el.git
+[submodule "js2-mode"]
+	path = lib/js2-mode
+	url = git@github.com:mooz/js2-mode.git
+[submodule "json-mode"]
+	path = lib/json-mode
+	url = git@github.com:joshwnj/json-mode.git
+[submodule "json-reformat"]
+	path = lib/json-reformat
+	url = git@github.com:gongo/json-reformat.git
+[submodule "json-snatcher"]
+	path = lib/json-snatcher
+	url = git@github.com:Sterlingg/json-snatcher.git
 [submodule "lsp-java"]
 	path = lib/lsp-java
 	url = git@github.com:emacs-lsp/lsp-java.git
@@ -165,13 +177,10 @@
 [submodule "packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip"]
 	path = packs/dev/lang-pack/vendor/submodules/flycheck-pos-tip
 	url = git@github.com:flycheck/flycheck-pos-tip.git
-[submodule "packs/dev/lang-pack/vendor/submodules/js2"]
-        path = packs/dev/lang-pack/vendor/submodules/js2
-        url = git://github.com/mooz/js2-mode.git
 [submodule "packs/dev/lang-pack/vendor/submodules/yaml-mode"]
-        path = packs/dev/lang-pack/vendor/submodules/yaml-mode
-        url = git://github.com/yoshiki/yaml-mode.git
-        ignore = untracked
+    path = packs/dev/lang-pack/vendor/submodules/yaml-mode
+    url = git://github.com/yoshiki/yaml-mode.git
+    ignore = untracked
 [submodule "packs/dev/org-pack/vendor/submodules/org-mode"]
 	path = packs/dev/org-pack/vendor/submodules/org-mode
 	url = https://code.orgmode.org/bzg/org-mode.git
@@ -187,15 +196,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/ht"]
 	path = packs/dev/power-pack/vendor/submodules/ht
 	url = git@github.com:Wilfred/ht.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/json-mode"]
-	path = packs/dev/power-pack/vendor/submodules/json-mode
-	url = https://github.com/joshwnj/json-mode
-[submodule "packs/dev/power-pack/vendor/submodules/json-reformat"]
-	path = packs/dev/power-pack/vendor/submodules/json-reformat
-	url = https://github.com/gongo/json-reformat
-[submodule "packs/dev/power-pack/vendor/submodules/json-snatcher"]
-	path = packs/dev/power-pack/vendor/submodules/json-snatcher
-	url = https://github.com/Sterlingg/json-snatcher
 [submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
         path = packs/dev/power-pack/vendor/submodules/multiple-cursors
         url = git://github.com/magnars/multiple-cursors.el.git
