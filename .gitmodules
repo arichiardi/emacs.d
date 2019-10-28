@@ -218,6 +218,9 @@
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
+[submodule "sly"]
+	path = lib/sly
+	url = git@github.com:joaotavora/sly.git
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
