@@ -221,6 +221,9 @@
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
+[submodule "sly-quicklisp"]
+	path = lib/sly-quicklisp
+	url = git@github.com:joaotavora/sly-quicklisp.git
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
