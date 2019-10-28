@@ -67,9 +67,6 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
-[submodule "magit-popup"]
-	path = lib/magit-popup
-	url = git@github.com:magit/magit-popup.git
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
@@ -224,6 +221,9 @@
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
+[submodule "transient"]
+	path = lib/transient
+	url = git@github.com:magit/transient.git
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
