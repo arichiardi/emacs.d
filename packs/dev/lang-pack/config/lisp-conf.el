@@ -33,9 +33,18 @@
   :after (sly))
 
 (use-package sly-asdf
-  :defer t
+  :demand t
+  :after (sly)
+  ;; sly already does this for us
+  ;; :config
+  ;; (push 'sly-asdf sly-contribs)
+  )
+
+(use-package sly-repl-ansi-color
+  :demand t
   :after (sly)
   :config
-  (add-to-list 'sly-contribs 'sly-asdf 'append))
+  (push 'sly-repl-ansi-color sly-contribs))
+
 
 ;;; lisp-conf.el ends here
