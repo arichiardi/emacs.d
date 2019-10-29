@@ -221,6 +221,9 @@
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
+[submodule "sly-asdf"]
+	path = lib/sly-asdf
+	url = git@github.com:mmgeorge/sly-asdf.git
 [submodule "sly-quicklisp"]
 	path = lib/sly-quicklisp
 	url = git@github.com:joaotavora/sly-quicklisp.git

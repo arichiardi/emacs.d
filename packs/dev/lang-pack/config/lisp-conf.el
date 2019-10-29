@@ -18,6 +18,13 @@
   (push '(sbcl  ("sbcl") :coding-system utf-8-unix) sly-lisp-implementations))
 
 (use-package sly-quicklisp
-  :defer t)
+  :defer t
+  :after (sly))
+
+(use-package sly-asdf
+  :defer t
+  :after (sly)
+  :config
+  (add-to-list 'sly-contribs 'sly-asdf 'append))
 
 ;;; lisp-conf.el ends here
