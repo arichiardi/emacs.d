@@ -1,51 +1,46 @@
-;;; magit-conf.el --- user-init-file                    -*- lexical-binding: t -*-
+;;; magit-conf.el --- Magit config
 ;;; Commentary:
 ;;
 ;; Configure the magit package
 
 ;;; Code:
 
-;; (live-add-pack-lib "with-editor")
-;; (live-add-pack-lib "magit-popup")
-;; (live-add-pack-lib "ghub")
-;; (live-add-pack-lib "magit/lisp")
+(defvar live-magit-dir (expand-file-name "magit" borg-drone-directory))
+(defvar live-magit-lisp-dir (expand-file-name "lisp" live-magit-dir))
+(defvar live-magit-documentation-dir (expand-file-name "Documentation" live-magit-dir))
+;; (defvar live-magit-autoloads (concat live-magit-lisp-dir "/magit-autoloads.el"))
 
 (use-package magit
   :defer t
-  :bind (("C-x g"   . magit-status)
+  :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup))
   :init
   (setq magit-view-git-manual-method 'woman)
+
   :config
   (magit-add-section-hook 'magit-status-sections-hook
                           'magit-insert-modules
                           'magit-insert-stashes
-                          'append))
+                          'append)
 
+  :hook
+  ((magit-log-edit-mode . (lambda ()
+                              (set-fill-column 72)
+                              (auto-fill-mode 1)))))
 
-;; (defvar live-magit-lisp-dir (expand-file-name (concat (live-pack-lib-dir) "magit/lisp")))
-;; (defvar live-magit-documentation-dir (expand-file-name (concat (live-pack-lib-dir) "magit/Documentation/")))
-;; (defvar live-magit-autoloads (concat live-magit-lisp-dir "/magit-autoloads.el"))
+(with-eval-after-load 'info
+  (info-initialize)
+  (push live-magit-documentation-dir Info-directory-list))
 
-(add-hook 'magit-log-edit-mode-hook
-          (lambda ()
-             (set-fill-column 72)
-             (auto-fill-mode 1)))
+(use-package git-commit
+  :custom
+  (git-commit-check-style-conventions t "Check for style in commit messages.")
+  (git-commit-style-convention-checks '(non-empty-second-line overlong-summary-line) "Set the commit the style we want to enforce")
 
-;; (when (not (file-exists-p live-magit-autoloads))
-  ;; (live-compilation-warning (concat "Cannot find: " live-magit-autoloads)))
-
-;; (load live-magit-autoloads)
-
-;; (require 'magit-version)
-;; (message (concat "Magit version: " (magit-version)))
-
-;; (with-eval-after-load 'info
-  ;; (info-initialize)
-  ;; (add-to-list 'Info-directory-list live-magit-documentation-dir))
-
-;; Local Variables:
-;; indent-tabs-mode: nil
+  :hook
+  ((git-commit-setup . git-commit-turn-on-auto-fill)
+   (git-commit-setup . git-commit-turn-on-flyspell)
+   (git-commit-setup . with-editor-usage-message)))
 
 ;; End:
 ;;; magit-conf.el ends here
