@@ -18,15 +18,25 @@
 
 (use-package sly
   :bind (("C-c M-j" . sly)
-         :map sly-mode-map
-         ("C-c M-j" . sly)
-         ("C-c C-e" . sly-eval-last-expression))
+         :map sly-editing-mode-map
+         ("C-M-x" . sly-compile-defun)
+         ("C-c C-c" . sly-eval-last-expression))
   :hook (sly-mode . ar-emacs--configure-common-lisp)
   :custom
+  (sly-net-coding-system 'utf-8-unix "Default coding system utf8")
   (sly-kill-without-query-p t "Do not ask before killing")
-  (sly-default-lisp 'sbcl "Set default implementation to Steel Bank Common Lisp")
-  :config
-  (push '(sbcl  ("sbcl" "--noinform") :coding-system utf-8-unix) sly-lisp-implementations))
+  (sly-lisp-implementations `((sbcl ("sbcl" "--noinform")
+                                    :coding-system utf-8-unix
+                                    :env (,(concat "SBCL_HOME=" (expand-file-name ".local/lib/sbcl" "~")))))
+                            "Set sly lisp implementations")
+  (sly-default-lisp 'sbcl "Set default implementation to Steel Bank Common Lisp"))
+
+(use-package sly-mrepl
+  :bind (:map sly-mrepl-mode-map
+         ("C-<up>" . sly-mrepl-previous-input-or-button)
+         ("C-<down>" . sly-mrepl-next-input-or-button)
+         ("C-r" . comint-history-isearch-backward)
+         ("C-M-r" . comint-history-isearch-backward-regexp)))
 
 (use-package sly-quicklisp
   :defer t
