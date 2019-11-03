@@ -1,3 +1,10 @@
+;;; paredit-conf.el --- Paredit config
+;;; Commentary:
+;;
+;; Configure paredit
+
+;;; Code:
+
 (eval-after-load 'paredit
   ;; need a binding that works in the terminal
   '(define-key paredit-mode-map (kbd "M-)") 'paredit-forward-slurp-sexp))
@@ -141,3 +148,6 @@
 (defun live-paredit-copy-sexp-at-point ()
   (interactive)
     (kill-new (thing-at-point 'sexp)))
+
+;; End:
+;;; paredit-conf.el ends here
