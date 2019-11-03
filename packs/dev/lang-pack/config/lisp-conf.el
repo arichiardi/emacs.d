@@ -4,7 +4,7 @@
 
 ;;; Code:
 
-(defun ar-emacs--configure-common-lisp ()
+(defun ar-emacs--configure-lisp ()
   "Racket mode hook."
   (enable-paredit-mode)
   (company-mode-on)
@@ -13,15 +13,15 @@
   (flyspell-prog-mode)
   (rainbow-delimiters-mode-enable))
 
-(use-package common-lisp-mode
-  :mode "\\.lisp\\'")
+(use-package lisp-mode
+  :mode ("\\.lisp\\'" "\\.asd\\'")
+  :hook (lisp-mode . ar-emacs--configure-lisp))
 
 (use-package sly
   :bind (("C-c M-j" . sly)
          :map sly-editing-mode-map
          ("C-M-x" . sly-compile-defun)
          ("C-c C-c" . sly-eval-last-expression))
-  :hook (sly-mode . ar-emacs--configure-common-lisp)
   :custom
   (sly-net-coding-system 'utf-8-unix "Default coding system utf8")
   (sly-kill-without-query-p t "Do not ask before killing")
