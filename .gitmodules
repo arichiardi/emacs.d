@@ -82,6 +82,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "mic-paren"]
+	path = lib/mic-paren
+	url = git@github.com:emacsattic/mic-paren.git
 [submodule "org-jira"]
 	path = lib/org-jira
 	url = git@github.com:ahungry/org-jira.git

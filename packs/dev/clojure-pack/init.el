@@ -10,6 +10,5 @@
 (require 'edn)
 
 (live-load-config-file "paredit-conf.el")
-(live-load-config-file "mic-paren-conf.el")
 (live-load-config-file "clojure-conf.el")
 (live-load-config-file "cider-conf.el")
