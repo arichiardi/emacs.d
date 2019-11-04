@@ -33,6 +33,7 @@
   (push live-magit-documentation-dir Info-directory-list))
 
 (use-package git-commit
+  :demand t
   :custom
   (git-commit-check-style-conventions t "Check for style in commit messages.")
   (git-commit-style-convention-checks '(non-empty-second-line overlong-summary-line) "Set the commit the style we want to enforce")
