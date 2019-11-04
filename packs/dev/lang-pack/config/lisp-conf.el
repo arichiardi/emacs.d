@@ -36,7 +36,8 @@
          ("C-<up>" . sly-mrepl-previous-input-or-button)
          ("C-<down>" . sly-mrepl-next-input-or-button)
          ("C-r" . comint-history-isearch-backward)
-         ("C-M-r" . comint-history-isearch-backward-regexp)))
+         ("C-M-r" . comint-history-isearch-backward-regexp))
+  :hook (sly-mrepl-mode . ar-emacs--configure-lisp))
 
 (use-package sly-quicklisp
   :defer t
