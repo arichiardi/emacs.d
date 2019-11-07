@@ -4,9 +4,6 @@
 (require 'iy-go-to-char)
 (require 'lively)
 
-(use-package jq-mode
-  :hook company-mode)
-
 (live-load-config-file "undo-tree-conf.el")
 (live-load-config-file "highlight-tail-conf.el")
 (live-load-config-file "expand-region-conf.el")
