@@ -10,4 +10,5 @@
   (add-hook 'lsp-mode-hook #'lsp-ui-mode))
 
 (use-package company-lsp
-  :requires company)
+  :defer t
+  :after company)
