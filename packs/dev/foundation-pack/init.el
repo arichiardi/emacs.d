@@ -1,6 +1,11 @@
 (use-package dash
   :config (dash-enable-font-lock))
 
+(use-package sh-mode
+  :mode ("\\.bats\\'" "\\.[a-zA-Z]+rc\\'")
+  :hook ((sh-mode . company-mode)
+         (sh-mode . rainbow-delimiters-mode)))
+
 (require 'dircolors)
 (require 'smooth-scrolling)
 (require 'buffer-move)
