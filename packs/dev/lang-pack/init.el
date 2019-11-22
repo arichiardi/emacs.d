@@ -39,3 +39,4 @@
 (live-load-config-file "plantuml-conf.el")
 (live-load-config-file "elisp-conf.el")
 (live-load-config-file "lisp-conf.el")
+(live-load-config-file "python-conf.el")
