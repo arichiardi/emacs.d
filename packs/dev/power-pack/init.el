@@ -12,4 +12,5 @@
 (live-load-config-file "paren-conf.el")
 (live-load-config-file "git-gutter-conf.el")
 (live-load-config-file "wc-mode-conf.el")
+(live-load-config-file "eval-in-repl-conf.el")
 (live-load-config-file "zeal-at-point-conf.el")
