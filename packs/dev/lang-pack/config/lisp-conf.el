@@ -57,5 +57,10 @@
   :config
   (push 'sly-repl-ansi-color sly-contribs))
 
+;; TODO for emacs lisp!
+;; for .el files
+;; (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eir-eval-in-ielm)
+;; for *scratch*
+;; (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eir-eval-in-ielm)
 
 ;;; lisp-conf.el ends here
