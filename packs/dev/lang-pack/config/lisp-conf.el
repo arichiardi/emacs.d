@@ -59,8 +59,10 @@
 
 ;; TODO for emacs lisp!
 ;; for .el files
-;; (define-key emacs-lisp-mode-map (kbd "C-c C-e") 'eir-eval-in-ielm)
-;; for *scratch*
-;; (define-key lisp-interaction-mode-map (kbd "C-c C-e") 'eir-eval-in-ielm)
+
+(use-package emacs-lisp-mode
+  :mode "\\.el\\'"
+  :bind (:map emacs-lisp-mode-map
+         ("C-c C-c" . eir-eval-in-ielm)))
 
 ;;; lisp-conf.el ends here
