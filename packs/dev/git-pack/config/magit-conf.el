@@ -23,6 +23,11 @@
                           'magit-insert-stashes
                           'append)
 
+  :custom
+  (magit-prefer-remote-upstream t "Favor remote branches when reading upstreams.")
+  ;; https://emacs.stackexchange.com/questions/54787/magit-set-upstream-to-origin-master-automatically
+  (magit-branch-adjust-remote-upstream-alist '(("origin/master")) "Set upstream of new branches to origin/master")
+
   :hook
   ((magit-log-edit-mode . (lambda ()
                               (set-fill-column 72)
