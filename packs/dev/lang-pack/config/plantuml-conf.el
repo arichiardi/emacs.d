@@ -1,3 +1,9 @@
+;;; plantuml-conf.el --- Plantuml Config
+
+;;; Commentary:
+
+;;; Code:
+
 (use-package flycheck-plantuml
   :no-require t
   :after (:all flycheck plantuml-mode)
@@ -10,3 +16,5 @@
   ;; Enable plantuml-mode for PlantUML files
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
   (add-to-list 'auto-mode-alist '("\\.plantuml\\'" . plantuml-mode)))
+
+;;; plantuml-conf.el ends here
