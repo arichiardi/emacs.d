@@ -1,4 +1,4 @@
-;;; python-conf.el --- Lisp Config
+;;; python-conf.el --- Python Config
 
 ;;; Commentary:
 
