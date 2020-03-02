@@ -130,10 +130,6 @@
 (global-set-key (kbd "C-]") 'kill-region)
 (global-set-key (kbd "M-]") 'kill-ring-save)
 
-;; undo
-(global-set-key (kbd "C-M-_") 'undo-tree-undo)
-(global-set-key (kbd "C-_")   'undo-tree-undo)
-
 ;;mark current function
 (global-set-key (kbd "C-x C-p") 'mark-defun)
 
