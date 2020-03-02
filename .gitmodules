@@ -109,6 +109,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "merlin"]
+	path = lib/merlin
+	url = git@github.com:emacsmirror/merlin.git
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
@@ -262,9 +265,15 @@
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
+[submodule "tuareg"]
+	path = lib/tuareg
+	url = git@github.com:ocaml/tuareg.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
+[submodule "utop"]
+	path = lib/utop
+	url = git@github.com:emacsmirror/utop.git
 [submodule "volatile-highlights"]
 	path = lib/volatile-highlights
 	url = git@github.com:k-talo/volatile-highlights.el.git
