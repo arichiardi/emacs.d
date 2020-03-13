@@ -53,7 +53,6 @@ It switches to the REPL in `insert state'."
   :config
   ;; (setq merlin-command (shell-cmd "which ocamlmerlin"))
   (setq merlin-completion-with-doc t)
-  (add-to-list 'company-backends 'merlin-company-backend)
 
   :hook
   (tuareg-mode . merlin-mode)
