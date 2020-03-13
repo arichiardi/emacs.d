@@ -14,6 +14,10 @@
 (live-load-config-file "eval-in-repl-conf.el")
 (live-load-config-file "zeal-at-point-conf.el")
 
+(use-package docker
+  :commands (docker)
+  :bind ("C-c x d" . docker))
+
 (use-package synosaurus
   :bind (:map text-mode-map
          ("C-c s l" . synosaurus-lookup)
