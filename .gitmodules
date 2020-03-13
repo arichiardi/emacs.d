@@ -40,6 +40,9 @@
 [submodule "diminish"]
 	path = lib/diminish
 	url = git@github.com:myrjola/diminish.el.git
+[submodule "docker"]
+	path = lib/docker
+	url = git@github.com:Silex/docker.el.git
 [submodule "docker-tramp"]
 	path = lib/docker-tramp
 	url = git@github.com:emacs-pe/docker-tramp.el.git
@@ -255,6 +258,9 @@
 [submodule "synosaurus"]
 	path = lib/synosaurus
 	url = git@github.com:hpdeifel/synosaurus.git
+[submodule "tablist"]
+	path = lib/tablist
+	url = git@github.com:politza/tablist.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
