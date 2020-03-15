@@ -8,10 +8,6 @@
   :type 'directory
   :group 'eshell)
 
-;;make sure ansi colour character escapes are honoured
-(require 'ansi-color)
-(ansi-color-for-comint-mode-on)
-
 ;; kill buffer when terminal process is killed
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
   (if (memq (process-status proc) '(signal exit))
@@ -37,71 +33,32 @@
 
 (add-hook 'term-mode-hook 'live-term-hook)
 
-;; rotational ansi-terms
+;; From https://github.com/atomontage/xterm-color
 
-(setq live-current-ansi-term nil)
-(setq live-ansi-terminal-path "/usr/local/bin/zsh")
+(setq comint-output-filter-functions
+      (remove 'ansi-color-process-output comint-output-filter-functions))
 
-(defun live-ansi-term (program &optional new-buffer-name)
-  "Start a terminal-emulator in a new buffer but don't switch to
-it. Returns the buffer name of the newly created terminal."
-  (interactive (list (read-from-minibuffer "Run program: "
-                                           (or explicit-shell-file-name
-                                               (getenv "ESHELL")
-                                               (getenv "SHELL")
-                                               "/bin/sh"))))
+(add-hook 'shell-mode-hook
+          (lambda ()
+            ;; Disable font-locking in this buffer to improve performance
+            (font-lock-mode -1)
+            ;; Prevent font-locking from being re-enabled in this buffer
+            (make-local-variable 'font-lock-function)
+            (setq font-lock-function (lambda (_) nil))
+            (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
 
-  ;; Pick the name of the new buffer.
-  (setq term-ansi-buffer-name
-        (if new-buffer-name
-            new-buffer-name
-          (if term-ansi-buffer-base-name
-              (if (eq term-ansi-buffer-base-name t)
-                  (file-name-nondirectory program)
-                term-ansi-buffer-base-name)
-            "ansi-term")))
+;; Also set TERM accordingly (xterm-256color) in the shell itself.
 
-  (setq term-ansi-buffer-name (concat "*" term-ansi-buffer-name "*"))
+;; You can also use it with eshell (and thus get color output from system ls):
 
-  ;; In order to have more than one term active at a time
-  ;; I'd like to have the term names have the *term-ansi-term<?>* form,
-  ;; for now they have the *term-ansi-term*<?> form but we'll see...
 
-  (setq term-ansi-buffer-name (generate-new-buffer-name term-ansi-buffer-name))
-  (setq term-ansi-buffer-name (term-ansi-make-term term-ansi-buffer-name program))
+;; Fix (void eshell-preoutput-filter-functions)
+;; from https://github.com/atomontage/xterm-color/issues/4
+(with-eval-after-load 'esh-mode
+  (add-hook 'eshell-before-prompt-hook
+            (lambda ()
+              (setq xterm-color-preserve-properties t)))
 
-  (set-buffer term-ansi-buffer-name)
-  (term-mode)
-  (term-char-mode)
-
-  ;; I wanna have find-file on C-x C-f -mm
-  ;; your mileage may definitely vary, maybe it's better to put this in your
-  ;; .emacs ...
-
-  (term-set-escape-char ?\C-x)
-  term-ansi-buffer-name)
-
-(defun live-ansi-terminal-buffer-names ()
-  (live-filter (lambda (el) (string-match "\\*ansi-term\\.*" el)) (live-list-buffer-names)))
-
-(defun live-show-ansi-terminal ()
-  (interactive)
-  (when (live-empty-p (live-ansi-terminal-buffer-names))
-    (live-ansi-term live-ansi-terminal-path))
-
-  (when (not live-current-ansi-term)
-    (setq live-current-ansi-term (car (live-ansi-terminal-buffer-names))))
-
-  (popwin:display-buffer live-current-ansi-term))
-
-(defun live-new-ansi-terminal ()
-  (interactive)
-  (let* ((term-name (buffer-name (live-ansi-term live-ansi-terminal-path))))
-    (setq live-current-ansi-term term-name)
-    (popwin:display-buffer live-current-ansi-term)))
-
-;; next need to sort buffer names
-;; create a ring of the names
-;; find the current terminal in the ring
-;; swap the current terminal with the next terminal in the ring
-;; popwin display the next terminal
+  (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+  (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+  (setenv "TERM" "xterm-256color"))
