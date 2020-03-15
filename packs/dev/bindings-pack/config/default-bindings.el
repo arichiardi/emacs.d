@@ -68,9 +68,6 @@
 ;;diff shortcuts
 (global-set-key (kbd "C-c d f") 'diff-buffer-with-file)
 
-
-(global-set-key (kbd "C-c s t") 'live-show-ansi-terminal)
-(global-set-key (kbd "C-c s n") 'live-new-ansi-terminal)
 (global-set-key (kbd "C-c s m") 'live-show-messages)
 
 ;;window and buffer movement
