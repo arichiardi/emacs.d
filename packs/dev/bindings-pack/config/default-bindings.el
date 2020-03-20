@@ -166,9 +166,6 @@
 (global-set-key  (kbd "M-p") 'outline-previous-visible-heading)
 (global-set-key  (kbd "M-n") 'outline-next-visible-heading)
 
-;;requires cua-mode for rectangle selection
-(global-set-key (kbd "§") 'cua-set-rectangle-mark)
-
 ;; Align your code in a pretty way.
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
