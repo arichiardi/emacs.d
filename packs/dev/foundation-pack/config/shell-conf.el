@@ -79,7 +79,8 @@ eshell windows easier."
 ;; from https://github.com/atomontage/xterm-color/issues/4
 
 (use-package eshell
-  :init
+  :defines eshell-preoutput-filter-functions
+  :config
   (add-hook 'eshell-before-prompt-hook
             (lambda ()
               (setq xterm-color-preserve-properties t)))
