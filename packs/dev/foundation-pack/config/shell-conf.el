@@ -8,7 +8,8 @@
   :type 'directory
   :group 'eshell)
 
-;; kill buffer when terminal process is killed
+;; from http://emacs-journey.blogspot.com.au/2012/06/improving-ansi-term.html
+;; kill the buffer when terminal is exited
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
   (if (memq (process-status proc) '(signal exit))
       (let ((buffer (process-buffer proc)))
@@ -33,21 +34,6 @@
 
 (add-hook 'term-mode-hook 'live-term-hook)
 
-;; From https://github.com/atomontage/xterm-color
-
-(setq comint-output-filter-functions
-      (remove 'ansi-color-process-output comint-output-filter-functions))
-
-(add-hook 'shell-mode-hook
-          (lambda ()
-            ;; Disable font-locking in this buffer to improve performance
-            (font-lock-mode -1)
-            ;; Prevent font-locking from being re-enabled in this buffer
-            (make-local-variable 'font-lock-function)
-            (setq font-lock-function (lambda (_) nil))
-xf            (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter nil t)))
-
-
 ;; From https://github.com/howardabrams/dot-files/blob/master/emacs-eshell.org
 
 (defun ar-emacs--eshell-here ()
@@ -69,24 +55,35 @@ eshell windows easier."
     (insert (concat "ls"))
     (eshell-send-input)))
 
-;; From https://github.com/atomontage/xterm-color
-
-;; Also set TERM accordingly (xterm-256color) in the shell itself.
-
-;; You can also use it with eshell (and thus get color output from system ls):
-
-;; Fix (void eshell-preoutput-filter-functions)
-;; from https://github.com/atomontage/xterm-color/issues/4
-
-(use-package eshell
-  :defines eshell-preoutput-filter-functions
-  :config
-  (add-hook 'eshell-before-prompt-hook
-            (lambda ()
-              (setq xterm-color-preserve-properties t)))
-
-  (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
-  (setq eshell-output-filter-functions (remove 'eshell-handle-ansi-color eshell-output-filter-functions))
+;; https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-shell.el
+(use-package xterm-color
+  :defines (compilation-environment
+            eshell-preoutput-filter-functions
+            eshell-output-filter-functions)
+  :init
+  ;; For shell and interpreters
   (setenv "TERM" "xterm-256color")
+  (setq comint-output-filter-functions
+        (remove 'ansi-color-process-output comint-output-filter-functions))
+  (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
+  (add-hook 'shell-mode-hook
+            (lambda ()
+              ;; Disable font-locking to improve performance
+              (font-lock-mode -1)
+              ;; Prevent font-locking from being re-enabled
+              (make-local-variable 'font-lock-function)
+              (setq font-lock-function #'ignore)))
+
+  ;; For eshell
+  (with-eval-after-load 'esh-mode
+    (add-hook 'eshell-before-prompt-hook
+              (lambda ()
+                (setq xterm-color-preserve-properties t)))
+    (add-to-list 'eshell-preoutput-filter-functions 'xterm-color-filter)
+    (setq eshell-output-filter-functions
+          (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
+
+  ;; For compilation buffers
+  (setq compilation-environment '("TERM=xterm-256color"))
 
   :bind (("C-c x e" . ar-emacs--eshell-here)))
