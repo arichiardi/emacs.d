@@ -34,6 +34,12 @@
   (add-hook 'java-mode-hook #'company-mode)
   (add-hook 'java-mode-hook #'flycheck-mode))
 
+(use-package gradle-mode
+  :mode "\\.gradle\\'")
+
+(use-package groovy-mode
+  :mode ("\\.groovy\\'" "\\.gradle\\'"))
+
 (live-load-config-file "flycheck-conf.el")
 (live-load-config-file "yaml-conf.el")
 (live-load-config-file "plantuml-conf.el")
