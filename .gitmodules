@@ -28,6 +28,9 @@
 [submodule "company-quickhelp"]
 	path = lib/company-quickhelp
 	url = git@github.com:expez/company-quickhelp.git
+[submodule "company-restclient"]
+	path = lib/company-restclient
+	url = git@github.com:iquiw/company-restclient.git
 [submodule "company-shell"]
 	path = lib/company-shell
 	url = git@github.com:Alexander-Miller/company-shell.git
@@ -103,6 +106,9 @@
 [submodule "json-snatcher"]
 	path = lib/json-snatcher
 	url = git@github.com:Sterlingg/json-snatcher.git
+[submodule "know-your-http-well"]
+	path = lib/know-your-http-well
+	url = git@github.com:for-GET/know-your-http-well.git
 [submodule "lsp-java"]
 	path = lib/lsp-java
 	url = git@github.com:emacs-lsp/lsp-java.git
@@ -124,6 +130,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "ob-restclient"]
+	path = lib/ob-restclient
+	url = git@github.com:alf/ob-restclient.el.git
 [submodule "org-jira"]
 	path = lib/org-jira
 	url = git@github.com:ahungry/org-jira.git
@@ -240,6 +249,9 @@
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
+[submodule "restclient"]
+	path = lib/restclient
+	url = git@github.com:pashky/restclient.el.git
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
