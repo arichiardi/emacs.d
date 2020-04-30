@@ -47,3 +47,4 @@
 (live-load-config-file "lisp-conf.el")
 (live-load-config-file "python-conf.el")
 (live-load-config-file "ocaml-conf.el")
+(live-load-config-file "lua-conf.el")
