@@ -249,6 +249,9 @@
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
+[submodule "popup"]
+	path = lib/popup
+	url = git@github.com:auto-complete/popup-el.git
 [submodule "pos-tip"]
 	path = lib/pos-tip
 	url = git@github.com:pitkali/pos-tip.git
