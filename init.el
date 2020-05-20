@@ -287,7 +287,7 @@
 )
 
 (if (not live-disable-zone)
-    (add-hook 'term-setup-hook 'zone))
+    (add-hook 'emacs-startup-hook 'zone))
 
 (if (not custom-file)
     (setq custom-file (concat live-custom-dir "custom-configuration.el")))
