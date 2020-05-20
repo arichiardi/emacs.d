@@ -15,6 +15,12 @@
   (setq lsp-session-file (expand-file-name ".lsp-session-v1" live-etc-dir))
   (setq lsp-server-install-dir (expand-file-name "lsp" live-tmp-dir))
 
+  ;; From lsp-mode:
+  ;; To defer LSP server startup (and DidOpen notifications) until the buffer
+  ;; is visible you can use lsp-deferred instead of lsp
+  :hook
+  (java-mode . lsp-deferred)
+
   :custom
   (lsp-enable-snippet t "Enable snippet support")
 
