@@ -24,8 +24,12 @@
 (use-package lsp-ui
   :after lsp-mode
   :commands lsp-ui-mode
+
   :config
-  (add-hook 'lsp-mode-hook #'lsp-ui-mode))
+  (add-hook 'lsp-mode-hook #'lsp-ui-mode)
+
+  :custom
+  (lsp-ui-sideline-show-code-actions nil "Disable sideline action display"))
 
 ;; https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names
 (defun ar-emacs--add-yas-backend (backend)
