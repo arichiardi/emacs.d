@@ -21,6 +21,8 @@
 (use-package lsp-java
   :after lsp)
 
+(use-package java-snippets)
+
 (use-package gradle-mode
   :mode "\\.gradle\\'")
 
