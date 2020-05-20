@@ -41,3 +41,8 @@
 
 (when (eq system-type 'darwin)
   (live-load-config-file "osx.el"))
+
+(use-package transient
+  :config
+  (setq transient-history-file (expand-file-name (expand-file-name "history.el" "transient")
+                                                 live-tmp-dir)))
