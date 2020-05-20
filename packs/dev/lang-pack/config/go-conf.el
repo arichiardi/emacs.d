@@ -5,7 +5,7 @@
 ;;; Code:
 
 (defun ar-emacs--configure-go ()
-  "Racket mode hook."
+  "Go mode hook."
   (company-mode-on)
   (eldoc-mode t)
   (flycheck-mode 1)
