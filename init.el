@@ -44,8 +44,8 @@
 
 (add-to-list 'command-switch-alist
              (cons "--live-safe-mode"
-                   (lambda (switch)
-                     nil)))
+                   (lambda (_)
+                     (message "Running in safe mode..."))))
 
 (defvar live-safe-modep
       (if (member "--live-safe-mode" command-line-args)
