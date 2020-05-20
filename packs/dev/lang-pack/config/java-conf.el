@@ -12,7 +12,9 @@
     (yas-reload-all)
     (subword-mode 1)
     (smartparens-strict-mode)
-    (define-key (current-global-map) [remap ggtags-visit-project-root] 'lsp)))
+    ;; Remapping a couple of commands
+    (define-key (current-global-map) [remap ggtags-visit-project-root] #'lsp)
+    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)))
 
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
 

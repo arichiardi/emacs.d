@@ -4,15 +4,22 @@
 
 ;;; Code:
 
-(setq lsp-keymap-prefix "C-l")
-
 (use-package lsp-mode
-  :commands (lsp lsp-deferred)
+  :commands (lsp)
+
+  :config
+  (setq lsp-keymap-prefix "C-c l")
+  (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+
   :custom
   (lsp-enable-snippet t "Enable snippet support"))
 
 (use-package helm-lsp
-  :commands (helm-lsp-workspace-symbol helm-lsp-code-actions))
+    :defer t
+    :after helm lsp-mode
+    :commands (helm-lsp-workspace-symbol helm-lsp-code-actions)
+    :bind (([remap lsp-execute-code-action] . helm-lsp-code-actions)
+           ([remap lsp-ui-peek-find-workspace-symbol] . helm-lsp-workspace-symbol)))
 
 (use-package lsp-ui
   :after lsp-mode
