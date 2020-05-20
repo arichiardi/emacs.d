@@ -296,6 +296,3 @@
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
 (put 'downcase-region 'disabled nil)
-
-;; we enable safe variables to be set in .dir-locals.el
-(setq enable-local-variables :safe)
