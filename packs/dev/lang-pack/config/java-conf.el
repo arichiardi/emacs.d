@@ -19,7 +19,12 @@
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
 
 (use-package lsp-java
-  :after lsp)
+  :after lsp-mode
+  :config
+  ;; (put 'lsp-java-workspace-dir 'safe-local-variable #'stringp)
+  (setq lsp-java-workspace-dir (expand-file-name "workspace" live-etc-dir))
+  (setq lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir))
+  (setq lsp-java-server-install-dir (expand-file-name "eclipse.jdt.ls/" lsp-server-install-dir)))
 
 (use-package java-snippets)
 

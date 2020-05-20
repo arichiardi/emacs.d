@@ -10,6 +10,8 @@
   :config
   (setq lsp-keymap-prefix "C-c l")
   (define-key lsp-mode-map (kbd "C-c l") lsp-command-map)
+  (setq lsp-session-file (expand-file-name ".lsp-session-v1" live-etc-dir))
+  (setq lsp-server-install-dir (expand-file-name "lsp" live-tmp-dir))
 
   :custom
   (lsp-enable-snippet t "Enable snippet support"))
