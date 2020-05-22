@@ -37,6 +37,7 @@
 (live-load-config-file "ediff-conf.el")
 (live-load-config-file "lsp-conf.el")
 (live-load-config-file "paredit-conf.el")
+(live-load-config-file "helm-conf.el")
 (live-load-config-file "live.el")
 
 (when (eq system-type 'darwin)

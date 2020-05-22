@@ -94,6 +94,9 @@
 [submodule "groovy-mode"]
 	path = lib/groovy-mode
 	url = git@github.com:Groovy-Emacs-Modes/groovy-emacs-modes.git
+[submodule "helm-ag"]
+	path = lib/helm-ag
+	url = git@github.com:emacsorphanage/helm-ag.git
 [submodule "helm-lsp"]
 	path = lib/helm-lsp
 	url = git@github.com:emacs-lsp/helm-lsp.git
