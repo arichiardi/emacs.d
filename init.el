@@ -296,5 +296,3 @@
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
 (put 'downcase-region 'disabled nil)
-
-(setq history-delete-duplicates t)
