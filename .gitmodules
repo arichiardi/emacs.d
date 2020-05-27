@@ -52,6 +52,9 @@
 [submodule "docker-tramp"]
 	path = lib/docker-tramp
 	url = git@github.com:emacs-pe/docker-tramp.el.git
+[submodule "editorconfig"]
+	path = lib/editorconfig
+	url = git@github.com:editorconfig/editorconfig-emacs.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
@@ -318,6 +321,9 @@
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
+[submodule "ws-butler"]
+	path = lib/ws-butler
+	url = git@github.com:lewang/ws-butler.git
 [submodule "xterm-color"]
 	path = lib/xterm-color
 	url = git@github.com:atomontage/xterm-color.git
