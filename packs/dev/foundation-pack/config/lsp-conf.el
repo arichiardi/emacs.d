@@ -43,7 +43,9 @@
 
   :custom
   (lsp-ui-doc-delay 0.7 "Increase popup delay")
-  (lsp-ui-sideline-show-code-actions nil "Disable sideline action display"))
+  (lsp-ui-sideline-show-code-actions nil "Disable sideline action display")
+  (lsp-ui-doc-position 'top)
+  (lsp-ui-doc-max-width 120))
 
 ;; https://emacs.stackexchange.com/questions/10431/get-company-to-show-suggestions-for-yasnippet-names
 (defun ar-emacs--add-yas-backend (backend)
