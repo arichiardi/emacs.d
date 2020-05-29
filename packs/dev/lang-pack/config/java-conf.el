@@ -36,7 +36,10 @@
 
   ;; This is global, I don't like it
   (setq lsp-java-import-gradle-jvm-arguments
-        `["-Xmx1G" ,(concat "-javaagent:" ar-emacs--project-lombok-jar)]))
+        `["-Xmx1G" ,(concat "-javaagent:" ar-emacs--project-lombok-jar)])
+
+  :custom
+  (lsp-java-code-generation-generate-comments t "Generate methods with comments"))
 
 (use-package java-snippets)
 
