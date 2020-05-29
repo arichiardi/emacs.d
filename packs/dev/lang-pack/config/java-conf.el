@@ -15,7 +15,8 @@
     (editorconfig-mode 1)
     ;; Remapping a couple of commands
     (define-key (current-global-map) [remap ggtags-visit-project-root] #'lsp)
-    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)))
+    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
+    (define-key smartparens-mode-map [remap sp-forward-slurp-sexp] #'sp-slurp-hybrid-sexp)))
 
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
 
