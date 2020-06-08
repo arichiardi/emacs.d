@@ -151,6 +151,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "ob-mongo"]
+	path = lib/ob-mongo
+	url = git@github.com:krisajenkins/ob-mongo.git
 [submodule "ob-restclient"]
 	path = lib/ob-restclient
 	url = git@github.com:alf/ob-restclient.el.git
