@@ -48,9 +48,8 @@
   (setq transient-history-file (expand-file-name (expand-file-name "history.el" "transient")
                                                  live-tmp-dir)))
 
+(ws-butler-global-mode)
+
 (use-package editorconfig
-  :ensure t
-  :config
-  (editorconfig-mode 1)
   :custom
-  (editorconfig-trim-whitespaces-mode ws-butler-mode "Only trim touched lines"))
+  (editorconfig-trim-whitespaces-mode 'ws-butler-mode "Only trim touched lines"))
