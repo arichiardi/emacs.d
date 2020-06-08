@@ -58,12 +58,8 @@ It switches to the REPL in `insert state'."
   (tuareg-mode . merlin-mode)
   (caml-mode-hook . merlin-mode)
 
-  ;; Make company aware of merlin
-  ;; (with-eval-after-load 'company
-    ;; (add-hook 'merlin-mode-hook 'company-mode)
-    ;; )
-
   :bind (:map merlin-mode-map
+         ("C-c M-j" . utop)
 	     ("M-." . merlin-locate)
 	     ("M-," . merlin-pop-stack)
 	     ("M-m" . merlin-error-next)
@@ -79,8 +75,7 @@ It switches to the REPL in `insert state'."
   :hook (tuareg-mode . utop-minor-mode)
   :config
   (setq utop-command "opam config exec -- utop -emacs")
-  :bind (("C-c M-j" . utop)
-         :map utop-minor-mode-map
+  :bind (:map utop-minor-mode-map
          ("C-c C-c" . ar-emacs--utop-eval-phrase-and-go)
          ("C-c C-r" . ar-emacs--utop-eval-region-and-go)
          ("C-c C-b" . ar-emacs--utop-eval-buffer-and-go)
