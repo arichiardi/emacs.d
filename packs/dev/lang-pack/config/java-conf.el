@@ -10,9 +10,6 @@
     (flycheck-mode 1)
     (yas-minor-mode)
     (yas-reload-all)
-    (subword-mode 1)
-    (smartparens-strict-mode)
-    (editorconfig-mode 1)
     ;; Remapping a couple of commands
     (define-key (current-global-map) [remap ggtags-visit-project-root] #'lsp)
     ;; (define-key (current-global-map) [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
@@ -21,6 +18,9 @@
     (define-key smartparens-mode-map [remap sp-forward-slurp-sexp] #'sp-slurp-hybrid-sexp)))
 
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
+(add-hook 'java-mode-hook #'editorconfig-mode)
+(add-hook 'java-mode-hook #'subword-mode)
+(add-hook 'java-mode-hook #'smartparens-strict-mode)
 
 (setq ar-emacs--project-lombok-jar
       (expand-file-name "~/.m2/repository/org/projectlombok/lombok/1.18.12/lombok-1.18.12.jar"))
