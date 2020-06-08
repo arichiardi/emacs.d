@@ -15,11 +15,11 @@
 
 (use-package lisp-mode
   :mode ("\\.lisp\\'" "\\.asd\\'")
-  :hook (lisp-mode . ar-emacs--configure-lisp))
+  :hook (lisp-mode . ar-emacs--configure-lisp)
+  :bind (("C-c M-j" . sly)))
 
 (use-package sly
-  :bind (("C-c M-j" . sly)
-         :map sly-editing-mode-map
+  :bind (:map sly-editing-mode-map
          ("C-M-x" . sly-compile-defun)
          ("C-c C-c" . sly-eval-last-expression))
   :custom
