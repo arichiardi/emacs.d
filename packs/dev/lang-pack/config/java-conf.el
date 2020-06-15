@@ -14,8 +14,15 @@
     (define-key (current-global-map) [remap ggtags-visit-project-root] #'lsp)
     ;; (define-key (current-global-map) [remap xref-find-definitions] #'lsp-ui-peek-find-definitions)
     ;; (define-key (current-global-map) [remap xref-find-references] #'lsp-ui-peek-find-references)
-    (define-key lsp-mode-map [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
-    (define-key smartparens-mode-map [remap sp-forward-slurp-sexp] #'sp-slurp-hybrid-sexp)))
+    (define-key (current-global-map) [remap xref-find-apropos] #'helm-lsp-workspace-symbol)
+    (define-key smartparens-mode-map [remap sp-forward-slurp-sexp] #'sp-slurp-hybrid-sexp)
+
+    ;; We want to use Test as test suffix
+    (setq projectile-project-types (assq-delete-all 'gradlew projectile-project-types))
+    (projectile-register-project-type 'gradlew '("gradlew")
+                                      :compile "./gradlew build"
+                                      :test "./gradlew test"
+                                      :test-suffix "Test")))
 
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
 (add-hook 'java-mode-hook #'editorconfig-mode)
@@ -33,12 +40,9 @@
   (setq lsp-java-workspace-cache-dir (expand-file-name ".cache/" lsp-java-workspace-dir))
   (setq lsp-java-server-install-dir (expand-file-name "eclipse.jdt.ls/" lsp-server-install-dir))
 
-  (setq lsp-java-vmargs
-        (append lsp-java-vmargs (list (concat "-javaagent:" ar-emacs--project-lombok-jar))))
-
-  ;; This is global, I don't like it
-  (setq lsp-java-import-gradle-jvm-arguments
-        `["-Xmx1G" ,(concat "-javaagent:" ar-emacs--project-lombok-jar)])
+  ;; This is global, and I don't like it that much
+  (setq lsp-java-vmargs (append lsp-java-vmargs (list (concat "-javaagent:" ar-emacs--project-lombok-jar))))
+  (setq lsp-java-import-gradle-jvm-arguments `["-Xmx1G" ,(concat "-javaagent:" ar-emacs--project-lombok-jar)])
 
   :custom
   (lsp-java-code-generation-generate-comments t "Generate methods with comments"))
