@@ -70,6 +70,9 @@
 [submodule "f"]
 	path = lib/f
 	url = git@github.com:rejeep/f.el.git
+[submodule "feature-mode"]
+	path = lib/feature-mode
+	url = git@github.com:michaelklishin/cucumber.el.git
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
