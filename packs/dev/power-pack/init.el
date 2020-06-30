@@ -17,6 +17,7 @@
 (live-load-config-file "wc-mode-conf.el")
 (live-load-config-file "eval-in-repl-conf.el")
 (live-load-config-file "zeal-at-point-conf.el")
+(live-load-config-file "treemacs-conf.el")
 
 (use-package docker
   :commands (docker)
@@ -55,5 +56,16 @@
   :hook (cucumber-mode . yas-minor-mode)
   :custom
   (feature-default-language "en" "Set the default language"))
+
+(use-package perspective
+  :after projectile
+  :config
+  (persp-mode))
+
+(use-package dap-mode
+  :after lsp-mode)
+
+(use-package dap-java
+  :after (dap-mode lsp-java))
 
 ;;; init.el ends here
