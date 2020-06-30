@@ -16,6 +16,9 @@
 [submodule "browse-at-remote"]
 	path = lib/browse-at-remote
 	url = git@github.com:rmuslimov/browse-at-remote.git
+[submodule "bui"]
+	path = lib/bui
+	url = git@github.com:alezost/bui.el.git
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
@@ -40,6 +43,9 @@
 [submodule "copy-as-format"]
 	path = lib/copy-as-format
 	url = git@github.com:sshaw/copy-as-format.git
+[submodule "dap-mode"]
+	path = lib/dap-mode
+	url = git@github.com:emacs-lsp/dap-mode.git
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
@@ -255,6 +261,9 @@
 [submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
         path = packs/dev/power-pack/vendor/submodules/multiple-cursors
         url = git://github.com/magnars/multiple-cursors.el.git
+[submodule "packs/dev/power-pack/vendor/submodules/treemacs"]
+	path = packs/dev/power-pack/vendor/submodules/treemacs
+	url = git@github.com:Alexander-Miller/treemacs.git
 [submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
 	path = packs/dev/power-pack/vendor/submodules/wc-mode
 	url = git://github.com/bnbeckwith/wc-mode.git
@@ -264,6 +273,12 @@
 [submodule "parseclj"]
 	path = lib/parseclj
 	url = git@github.com:clojure-emacs/parseclj.git
+[submodule "perspective"]
+	path = lib/perspective
+	url = git@github.com:nex3/perspective-el.git
+[submodule "pfuture"]
+	path = lib/pfuture
+	url = git@github.com:Alexander-Miller/pfuture.git
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
