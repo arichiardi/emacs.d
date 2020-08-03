@@ -26,6 +26,7 @@
   (cider-offer-to-open-cljs-app-in-browser nil "Ask before opening up the browser")
   (cider-invert-insert-eval-p t "Enable insert-into-REPL eval behavior")
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
+  (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
 
   :config
   (add-hook 'cider-mode-hook #'eldoc-mode)
