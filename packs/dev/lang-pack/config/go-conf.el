@@ -14,6 +14,8 @@
 
 (use-package go-mode
   :mode "\\.go\\'"
-  :hook (go-mode . ar-emacs--configure-go))
+  :hook (go-mode . ar-emacs--configure-go)
+  :bind (:map go-mode-map
+         ("C-c C-f d" . godoc-at-point)))
 
 ;;; go-conf.el ends here
