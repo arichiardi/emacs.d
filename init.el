@@ -195,7 +195,7 @@
   (require 'borg)
   (borg-initialize))
 
-(progn
+(eval-when-compile
   (require 'use-package)
   (setq use-package-verbose t))
 
