@@ -16,12 +16,6 @@
   :custom
   (markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md" "Render markdown using pandoc."))
 
-(use-package js2-mode
-  :mode "\\.js\\'"
-  :interpreter "node"
-  :custom
-  (js2-basic-offset 2 "Set offset to 2"))
-
 (use-package json-mode
   :mode "\\.json\\'"
   :custom
@@ -37,3 +31,6 @@
 (live-load-config-file "ocaml-conf.el")
 (live-load-config-file "lua-conf.el")
 (live-load-config-file "java-conf.el")
+(live-load-config-file "javascript-conf.el")
+
+;;; init.el ends here
