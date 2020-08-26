@@ -16,7 +16,8 @@
 (use-package lisp-mode
   :mode ("\\.lisp\\'" "\\.asd\\'")
   :hook (lisp-mode . ar-emacs--configure-lisp)
-  :bind (("C-c M-j" . sly)))
+  :bind (:map lisp-mode-map
+         ("C-c M-j" . sly)))
 
 (use-package sly
   :bind (:map sly-editing-mode-map
