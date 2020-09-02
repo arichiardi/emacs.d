@@ -4,16 +4,22 @@
 
 ;;; Code:
 
+(defun ar-emacs--apply-if-not-editorconfig ()
+  "JavaScript comint configuration hook."
+  (unless (file-exists-p (expand-file-name (projectile-project-root) ".editorconfig"))
+    (setq js2-basic-offset 2)))
+
 (use-package js2-mode
   :mode "\\.js\\'"
   :interpreter "node"
   :bind (:map js2-mode-map
          ("C-c M-j" . js-comint-repl))
-  :custom
-  (js2-basic-offset 2 "Set offset to 2")
+  :config
+  (ar-emacs--apply-if-not-editorconfig)
   :hook
   ((js2-mode . company-mode)
-   (js2-mode . smartparens-strict-mode)))
+   (js2-mode . smartparens-strict-mode)
+   (js2-mode . editorconfig-mode)))
 
 (defun ar-emacs--configure-js-comint ()
   "JavaScript comint configuration hook."
