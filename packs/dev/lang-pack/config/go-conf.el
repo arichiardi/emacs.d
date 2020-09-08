@@ -4,18 +4,23 @@
 
 ;;; Code:
 
+(use-package go-eldoc)
+
 (defun ar-emacs--configure-go ()
   "Go mode hook."
-  (company-mode-on)
-  (eldoc-mode t)
+  (company-mode 1)
   (flycheck-mode 1)
   (ggtags-mode 1)
-  (subword-mode 1))
+  (subword-mode 1)
+  (go-eldoc-setup)
+  (smartparens-strict-mode))
 
 (use-package go-mode
   :mode "\\.go\\'"
   :hook (go-mode . ar-emacs--configure-go)
   :bind (:map go-mode-map
-         ("C-c C-f d" . godoc-at-point)))
+         ("C-c C-f g" . godoc-at-point))
+  :custom
+  (godoc-at-point-function 'godoc-gogetdoc "Use gogetdoc for documentation at point"))
 
 ;;; go-conf.el ends here
