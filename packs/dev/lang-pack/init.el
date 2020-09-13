@@ -32,5 +32,6 @@
 (live-load-config-file "lua-conf.el")
 (live-load-config-file "java-conf.el")
 (live-load-config-file "javascript-conf.el")
+(live-load-config-file "go-conf.el")
 
 ;;; init.el ends here
