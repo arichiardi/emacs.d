@@ -4,20 +4,19 @@
 
 ;;; Code:
 
-(use-package go-eldoc)
-
-(defun ar-emacs--configure-go ()
-  "Go mode hook."
-  (company-mode 1)
-  (flycheck-mode 1)
-  (ggtags-mode 1)
-  (subword-mode 1)
-  (go-eldoc-setup)
-  (smartparens-strict-mode))
-
 (use-package go-mode
   :mode "\\.go\\'"
-  :hook (go-mode . ar-emacs--configure-go)
+
+  :hook
+  (go-mode . smartparens-strict-mode)
+  (go-mode . editorconfig-mode)
+  (go-mode . subword-mode)
+  (go-mode . flycheck-mode)
+  (go-mode . company-mode-on)
+
+  :config
+  (go-eldoc-setup)
+
   :bind (:map go-mode-map
          ("C-c C-f g" . godoc-at-point))
   :custom
@@ -27,4 +26,8 @@
   :after go-mode
   :config
   (add-hook 'completion-at-point-functions 'go-complete-at-point))
+
+(use-package go-eldoc
+  :after go-mode)
+
 ;;; go-conf.el ends here
