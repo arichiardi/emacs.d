@@ -23,4 +23,8 @@
   :custom
   (godoc-at-point-function 'godoc-gogetdoc "Use gogetdoc for documentation at point"))
 
+(use-package go-complete
+  :after go-mode
+  :config
+  (add-hook 'completion-at-point-functions 'go-complete-at-point))
 ;;; go-conf.el ends here

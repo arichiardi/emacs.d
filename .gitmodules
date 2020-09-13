@@ -94,6 +94,9 @@
 [submodule "git-modes"]
 	path = lib/git-modes
 	url = git@github.com:magit/git-modes.git
+[submodule "go-complete"]
+	path = lib/go-complete
+	url = git@github.com:vibhavp/go-complete.git
 [submodule "go-eldoc"]
 	path = lib/go-eldoc
 	url = git@github.com:emacsorphanage/go-eldoc.git
