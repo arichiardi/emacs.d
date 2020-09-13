@@ -4,13 +4,11 @@
 
 ;;; Code:
 
-(defun ar-emacs--configure-lua ()
-  (company-mode-on)
-  (eldoc-mode t)
-  (subword-mode 1))
-
 (use-package lua-mode
   :mode "\\.lua\\'"
-  :hook (lua-mode . ar-emacs--configure-lua))
+  :hook
+  ((lua-mode . subword-mode)
+   (lua-mode . eldoc-mode)
+   (lua-mode . company-mode-on)))
 
-;;; go-conf.el ends here
+;;; lua-conf.el ends here
