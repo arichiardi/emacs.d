@@ -145,6 +145,9 @@
 [submodule "know-your-http-well"]
 	path = lib/know-your-http-well
 	url = git@github.com:for-GET/know-your-http-well.git
+[submodule "logstash-conf"]
+	path = lib/logstash-conf
+	url = git@github.com:Wilfred/logstash-conf.el.git
 [submodule "lsp-java"]
 	path = lib/lsp-java
 	url = git@github.com:emacs-lsp/lsp-java.git
