@@ -11,7 +11,7 @@
   (flycheck-plantuml-setup))
 
 (use-package plantuml-mode
-  :mode ("\\.plantuml\\'")
+  :mode ("\\.plantuml\\'" "\\.puml\\'")
   :commands (org-src-lang-modes)
 
   :config
