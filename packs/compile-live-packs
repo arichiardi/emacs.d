@@ -23,7 +23,6 @@ PACKS_DIR="$HOME/.emacs.d/packs"
 DASH_DIR="$BORG_LIB_DIR/dash"
 
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
-GEISER_MAKEABLE_DIR="$BORG_LIB_DIR/geiser"
 
 MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
@@ -50,29 +49,6 @@ CMAKEABLE_DIRS=(
 # $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
 # $PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode # does not compile
 
-function compile_geiser {
-    pushd "$GEISER_MAKEABLE_DIR"
-
-    if [ ! -x "$GEISER_MAKEABLE_DIR/configure" ]; then
-        ./autogen.sh
-    fi
-
-    if [ ! -d "$GEISER_MAKEABLE_DIR/build" ]; then
-        mkdir "$GEISER_MAKEABLE_DIR/build"
-        pushd "$GEISER_MAKEABLE_DIR/build"
-        ../configure
-        popd
-    fi
-
-    $MAKE -C "$GEISER_MAKEABLE_DIR/build"
-
-    popd
-}
-
-function clean_geiser {
-    $MAKE -C "$GEISER_MAKEABLE_DIR/build" clean
-}
-
 function compile_cider {
     pushd "$CIDER_MAKEABLE_DIR"
     cask install
@@ -86,7 +62,6 @@ function clean_cider {
 }
 
 function compile {
-    compile_geiser
     compile_cider
 
     # For auto-compile
@@ -117,7 +92,6 @@ function compile {
 }
 
 function clean {
-    clean_geiser
     clean_cider
 
     for dir in "${MAKEABLE_DIRS[@]}"; do
@@ -141,8 +115,6 @@ elif [[ $# -eq 0 ]] ; then
 else
     if [[ "$@" =~ "--cider" ]] ; then
 	    compile_cider
-    elif [[ "$@" =~ "--geiser" ]]; then
-        compile_geiser
     else
         usage
     fi
