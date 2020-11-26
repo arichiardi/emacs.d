@@ -51,14 +51,15 @@ CMAKEABLE_DIRS=(
 
 function compile_cider {
     pushd "$CIDER_MAKEABLE_DIR"
-    cask install
+    eldev compile && eldev build :autoloads
     popd
 
-    $MAKE -C "$CIDER_MAKEABLE_DIR"
 }
 
 function clean_cider {
-    $MAKE -C "$CIDER_MAKEABLE_DIR" clean
+    pushd "$CIDER_MAKEABLE_DIR"
+    eldev clean
+    popd
 }
 
 function compile {
