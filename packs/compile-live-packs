@@ -25,29 +25,15 @@ DASH_DIR="$BORG_LIB_DIR/dash"
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
 
 MAKEABLE_DIRS=(
-    "$PACKS_DIR/dev/lang-pack/vendor/submodules/js2"
-    "$PACKS_DIR/dev/lang-pack/vendor/submodules/yaml-mode"
-    "$PACKS_DIR/dev/clojure-pack/vendor/submodules/hydra"
-    "$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/epl"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/pkg-info"
     "$BORG_LIB_DIR/auto-compile"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/popwin"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/emacs-async"
-    "$PACKS_DIR/dev/foundation-pack/vendor/submodules/company-mode"
 )
 
 CMAKEABLE_DIRS=(
 )
-
-# $PACKS_DIR/dev/clojure-pack/vendor/submodules/popup-el # only tests and elpa
-# $PACKS_DIR/dev/clojure-pack/vendor/submodules/edn # only tests and elpa
-# $PACKS_DIR/dev/colour-pack/vendor/checkouts/color-theme-6.6.0 # themes/color-theme-library.el:31:13:Error: Cannot open load file: no such file or directory, color-theme
-# $PACKS_DIR/dev/power-pack/vendor/submodules/emacs-git-gutter # only tests and elpa
-# $PACKS_DIR/dev/power-pack/vendor/submodules/gh # the config.mk trick does not work, maybe PR to the project?
-# $PACKS_DIR/dev/power-pack/vendor/submodules/ht # only tests and elpa
-# $PACKS_DIR/dev/power-pack/vendor/submodules/scratch # only tests and elpa
-# $PACKS_DIR/dev/clojure-pack/vendor/submodules/clojure-mode # does not compile
 
 function compile_cider {
     pushd "$CIDER_MAKEABLE_DIR"
