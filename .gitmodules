@@ -175,6 +175,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "modus-vivendi-theme"]
+	path = lib/modus-vivendi-theme
+	url = git@github.com:emacsmirror/modus-vivendi-theme.git
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
@@ -226,9 +229,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/spinner-el"]
 	path = packs/dev/clojure-pack/vendor/submodules/spinner-el
 	url = git@github.com:Malabarba/spinner.el.git
-[submodule "packs/dev/colour-pack/vendor/submodules/zenburn-emacs"]
-	path = packs/dev/colour-pack/vendor/submodules/zenburn-emacs
-	url = git@github.com:bbatsov/zenburn-emacs.git
 [submodule "packs/dev/colour-pack/vendor/zenburn-pack"]
 	path = packs/dev/colour-pack/vendor/zenburn-pack
 	url = git@github.com:siancu/zenburn-pack.git
