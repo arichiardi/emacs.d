@@ -6,16 +6,15 @@ One of the things this fork does is that it avoids committing the `packs/stable`
 
 The philosophy here is to have a stable but rolling, contributor friendly, setup (especially regarding `clojure-pack` and `cider`, which is the one I use the most) and will slowly move to [borg](https://github.com/emacscollective/borg) for package management.
 
----
-Please do not use
----
-
 ## First time
 
 After cloning the project, you need to sync the submodules and run a couple of scripts for compiling (and therefore have faster startup):
 
 ```
 git submodule update --init --recursive
+make
+./packs/compile-live-packs
+./packs/update-live-packs
 ```
 
 If you get lost in submodule mess, your last resort can be something like: 
