@@ -25,7 +25,6 @@
 (live-load-config-file "tramp-conf.el")
 (live-load-config-file "mouse-conf.el")
 (live-load-config-file "key-chord-conf.el")
-(live-load-config-file "window-number-conf.el")
 (live-load-config-file "recentf-conf.el")
 (live-load-config-file "popwin-conf.el")
 (live-load-config-file "shell-conf.el")

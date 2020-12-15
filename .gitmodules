@@ -357,6 +357,9 @@
 [submodule "volatile-highlights"]
 	path = lib/volatile-highlights
 	url = git@github.com:k-talo/volatile-highlights.el.git
+[submodule "win-switch"]
+	path = lib/win-switch
+	url = git@github.com:genovese/win-switch.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
