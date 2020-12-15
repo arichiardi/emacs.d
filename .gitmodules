@@ -360,6 +360,7 @@
 [submodule "win-switch"]
 	path = lib/win-switch
 	url = git@github.com:genovese/win-switch.git
+	build-step = nil
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
