@@ -175,9 +175,6 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
-[submodule "modus-vivendi-theme"]
-	path = lib/modus-vivendi-theme
-	url = git@github.com:emacsmirror/modus-vivendi-theme.git
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
@@ -382,3 +379,5 @@
 [submodule "zeal-at-point"]
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
+[submodule "lib/modus-vivendi-theme"]
+	url = git@github.com:emacsmirror/modus-themes.git
