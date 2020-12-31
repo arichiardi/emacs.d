@@ -30,13 +30,6 @@
   (projectile-completion-system 'helm)
   (projectile-tags-backend 'ggtags))
 
-;; until we assimilate helm this is not going to work
-(use-package helm-projectile
-  :after (projectile helm))
-
-(use-package persp-projectile
-  :after (projectile perspective))
-
 (projectile-global-mode)
 
 ;;; projectile-conf.el ends here
