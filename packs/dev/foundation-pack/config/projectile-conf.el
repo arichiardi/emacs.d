@@ -23,12 +23,16 @@
         (append '("node_modules") projectile-globally-ignored-directories))
 
   :custom
+  (projectile-completion-system 'helm)
   (projectile-enable-caching t)
   (projectile-switch-project-action 'projectile-find-file-dwim)
   (projectile-idle-timer-seconds 60)
   (projectile-create-missing-test-files t)
   (projectile-completion-system 'helm)
   (projectile-tags-backend 'ggtags))
+
+(use-package persp-projectile
+  :after (projectile perspective))
 
 (projectile-global-mode)
 

@@ -4,6 +4,9 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = git@github.com:abo-abo/ace-window.git
+[submodule "async"]
+	path = lib/async
+	url = git@github.com:jwiegley/emacs-async.git
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
@@ -112,12 +115,27 @@
 [submodule "groovy-mode"]
 	path = lib/groovy-mode
 	url = git@github.com:Groovy-Emacs-Modes/groovy-emacs-modes.git
+[submodule "helm"]
+	path = lib/helm
+	url = git@github.com:emacs-helm/helm.git
 [submodule "helm-ag"]
 	path = lib/helm-ag
 	url = git@github.com:emacsorphanage/helm-ag.git
+[submodule "helm-cider"]
+	path = lib/helm-cider
+	url = git@github.com:clojure-emacs/helm-cider.git
+[submodule "helm-descbinds"]
+	path = lib/helm-descbinds
+	url = git@github.com:emacs-helm/helm-descbinds.git
 [submodule "helm-lsp"]
 	path = lib/helm-lsp
 	url = git@github.com:emacs-lsp/helm-lsp.git
+[submodule "helm-org"]
+	path = lib/helm-org
+	url = git@github.com:emacs-helm/helm-org.git
+[submodule "helm-projectile"]
+	path = lib/helm-projectile
+	url = git@github.com:bbatsov/helm-projectile.git
 [submodule "ht"]
 	path = lib/ht
 	url = git@github.com:Wilfred/ht.el.git
@@ -145,6 +163,8 @@
 [submodule "know-your-http-well"]
 	path = lib/know-your-http-well
 	url = git@github.com:for-GET/know-your-http-well.git
+[submodule "lib/modus-vivendi-theme"]
+	url = git@github.com:emacsmirror/modus-themes.git
 [submodule "logstash-conf"]
 	path = lib/logstash-conf
 	url = git@github.com:Wilfred/logstash-conf.el.git
@@ -285,6 +305,9 @@
 [submodule "parseclj"]
 	path = lib/parseclj
 	url = git@github.com:clojure-emacs/parseclj.git
+[submodule "persp-projectile"]
+	path = lib/persp-projectile
+	url = git@github.com:bbatsov/persp-projectile.git
 [submodule "perspective"]
 	path = lib/perspective
 	url = git@github.com:nex3/perspective-el.git
@@ -379,5 +402,3 @@
 [submodule "zeal-at-point"]
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
-[submodule "lib/modus-vivendi-theme"]
-	url = git@github.com:emacsmirror/modus-themes.git
