@@ -9,11 +9,11 @@
 (live-add-pack-lib "persp-projectile")
 
 (use-package projectile
- :init
- (setq projectile-cache-file (concat live-tmp-dir "projectile-cache"))
- (setq projectile-known-projects-file (concat live-tmp-dir "projectile-known-projects.eld"))
+  :init
+  (setq projectile-cache-file (concat live-tmp-dir "projectile-cache"))
+  (setq projectile-known-projects-file (concat live-tmp-dir "projectile-known-projects.eld"))
 
- :config
+  :config
   (setq projectile-mode-line '(:eval (format " Prj[%s]" (projectile-project-name))))
   (projectile-register-project-type 'yarn '("package.json")
                                     :compile "yarn install"
