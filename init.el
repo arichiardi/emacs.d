@@ -196,6 +196,7 @@
   (borg-initialize))
 
 (eval-when-compile
+  (add-to-list 'load-path (expand-file-name "lib/use-package" user-emacs-directory))
   (require 'use-package)
   (setq use-package-verbose t)
   (setq use-package-check-before-init t))
