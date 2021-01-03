@@ -197,7 +197,8 @@
 
 (eval-when-compile
   (require 'use-package)
-  (setq use-package-verbose t))
+  (setq use-package-verbose t)
+  (setq use-package-check-before-init t))
 
 (use-package auto-compile
   :demand t
