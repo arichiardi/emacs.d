@@ -5,8 +5,6 @@
 ;;; Code:
 
 (live-add-pack-lib "projectile")
-(live-add-pack-lib "helm-projectile")
-(live-add-pack-lib "persp-projectile")
 
 (use-package projectile
   :init
@@ -23,7 +21,6 @@
         (append '("node_modules") projectile-globally-ignored-directories))
 
   :custom
-  (projectile-completion-system 'helm)
   (projectile-enable-caching t)
   (projectile-switch-project-action 'projectile-find-file-dwim)
   (projectile-idle-timer-seconds 60)

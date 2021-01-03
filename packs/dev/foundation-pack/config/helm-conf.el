@@ -11,7 +11,6 @@
 
 ;;; Code:
 (use-package helm
-  :defer t
   :config
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
@@ -50,6 +49,7 @@
   (helm-projectile-on))
 
 (use-package helm-net
+  :after helm
   :config
   (setq helm-net-prefer-curl           t
         helm-surfraw-duckduckgo-url    "https://duckduckgo.com/?q=%s&ke=-1&kf=fw&kl=fr-fr&kr=b&k1=-1&k4=-1"
