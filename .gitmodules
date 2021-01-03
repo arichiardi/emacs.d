@@ -118,6 +118,7 @@
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
+	build-step = make
 [submodule "helm-ag"]
 	path = lib/helm-ag
 	url = git@github.com:emacsorphanage/helm-ag.git
