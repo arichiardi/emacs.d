@@ -118,25 +118,31 @@
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
-	build-step = make
+	build-step = nil
 [submodule "helm-ag"]
 	path = lib/helm-ag
 	url = git@github.com:emacsorphanage/helm-ag.git
+	build-step = borg-byte-compile
 [submodule "helm-cider"]
 	path = lib/helm-cider
 	url = git@github.com:clojure-emacs/helm-cider.git
+	build-step = borg-byte-compile
 [submodule "helm-descbinds"]
 	path = lib/helm-descbinds
 	url = git@github.com:emacs-helm/helm-descbinds.git
+	build-step = borg-byte-compile
 [submodule "helm-lsp"]
 	path = lib/helm-lsp
 	url = git@github.com:emacs-lsp/helm-lsp.git
+	build-step = borg-byte-compile
 [submodule "helm-org"]
 	path = lib/helm-org
 	url = git@github.com:emacs-helm/helm-org.git
+	build-step = borg-byte-compile
 [submodule "helm-projectile"]
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
+	build-step = borg-byte-compile
 [submodule "ht"]
 	path = lib/ht
 	url = git@github.com:Wilfred/ht.el.git

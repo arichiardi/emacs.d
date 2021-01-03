@@ -25,11 +25,12 @@ DASH_DIR="$BORG_LIB_DIR/dash"
 CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
 
 MAKEABLE_DIRS=(
+    "$BORG_LIB_DIR/helm"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/epl"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/pkg-info"
     "$BORG_LIB_DIR/auto-compile"
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/popwin"
-    "$PACKS_DIR/dev/foundation-pack/vendor/submodules/emacs-async"
+    "$BORG_LIB_DIR/lib/async"
 )
 
 CMAKEABLE_DIRS=(
@@ -53,7 +54,10 @@ function compile {
 
     # For auto-compile
     export LOADPATH="-L $DASH_DIR"
-    export LOADPATH+="-L $BORG_LIB_DIR/packed"
+    export LOADPATH+=" -L $BORG_LIB_DIR/packed"
+
+    # For helm
+    export EMACSLOADPATH="$BORG_LIB_DIR/async:$BORG_LIB_DIR/popup:"
 
     # The make target could be included in the list above
     for dir in ${MAKEABLE_DIRS[@]}; do
