@@ -118,7 +118,8 @@
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
-	build-step = nil
+	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/async:$HOME/.emacs.d/lib/popup:" make
+	build-step = borg-update-autoloads
 [submodule "helm-ag"]
 	path = lib/helm-ag
 	url = git@github.com:emacsorphanage/helm-ag.git
