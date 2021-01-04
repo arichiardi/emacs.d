@@ -346,12 +346,14 @@
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
+	build-step = borg-byte-compile
 [submodule "sly-asdf"]
 	path = lib/sly-asdf
 	url = git@github.com:mmgeorge/sly-asdf.git
 [submodule "sly-quicklisp"]
 	path = lib/sly-quicklisp
 	url = git@github.com:joaotavora/sly-quicklisp.git
+	build-step = borg-byte-compile
 [submodule "sly-repl-ansi-color"]
 	path = lib/sly-repl-ansi-color
 	url = git@github.com:PuercoPop/sly-repl-ansi-color.git
