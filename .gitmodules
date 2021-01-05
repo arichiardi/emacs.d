@@ -203,6 +203,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "modus-themes"]
+	path = lib/modus-themes
+	url = git@gitlab.com:protesilaos/modus-themes.git
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
