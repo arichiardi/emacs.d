@@ -36,7 +36,7 @@
                                helm-imenu-in-all-buffers)))
 
 (use-package helm-info
-  :bind ("C-h r" . helm-info-emacs))
+  :bind (("C-h r" . helm-info-emacs)))
 
 (use-package helm-descbinds
   :config
@@ -119,6 +119,7 @@ First call indent, second complete symbol, third complete fname."
      1)))
 
 (use-package helm-cider
+  :after (helm cider)
   :hook
   (cider-mode . (lambda () (helm-cider-mode 1)))
   (cider-repl-mode . (lambda () (helm-cider-mode 1)))
@@ -156,13 +157,11 @@ First call indent, second complete symbol, third complete fname."
 (define-key global-map [remap dabbrev-expand]        'helm-dabbrev)
 (define-key global-map [remap find-tag]              'helm-etags-select)
 (define-key global-map [remap xref-find-definitions] 'helm-etags-select)
-(define-key global-map (kbd "M-g a")                 'helm-do-grep-ag)
-(define-key global-map (kbd "M-g g")                 'helm-grep-do-git-grep)
-(define-key global-map (kbd "M-g i")                 'helm-gid)
-(define-key global-map (kbd "C-x r p")               'helm-projects-history)
-(define-key global-map (kbd "C-x r c")               'helm-addressbook-bookmarks)
-(define-key global-map (kbd "C-c t r")               'helm-dictionary)
-(define-key global-map (kbd "C-x C-b")               'helm-buffers-list)
-(define-key global-map (kbd "C-h C-l")               'helm-locate-library)
+(global-set-key (kbd "M-s")                          'helm-do-grep-ag)
+(global-set-key (kbd "C-x r p")                      'helm-projects-history)
+(global-set-key (kbd "C-x r c")                      'helm-addressbook-bookmarks)
+(global-set-key (kbd "C-c t r")                      'helm-dictionary)
+(global-set-key (kbd "C-x C-b")                      'helm-buffers-list)
+(global-set-key (kbd "C-h C-l")                      'helm-locate-library)
 
 ;;; helm-conf.el ends here
