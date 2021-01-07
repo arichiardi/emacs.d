@@ -10,17 +10,22 @@
 ;; http://tuhdo.github.io/helm-intro.html
 
 ;;; Code:
+
+(require 'helm-config)
+
 (use-package helm
+  :diminish helm-mode
+  :requires helm-config
   :config
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
-  (require 'helm-config)
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-info-bash)
-  ;; use helm to list eshell history
-  (add-hook 'eshell-mode-hook
-            #'(lambda ()
-                (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
+  (helm-mode 1)
 
+  :hook
+  ;; use helm to list eshell history
+  (eshell-mode . (lambda ()
+                         (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
   :custom
   ;; See https://github.com/bbatsov/prelude/pull/670 for a detailed
   ;; discussion of these options.
@@ -36,15 +41,17 @@
                                helm-imenu-in-all-buffers)))
 
 (use-package helm-info
+  :after helm
   :bind (("C-h r" . helm-info-emacs)))
 
 (use-package helm-descbinds
+  :after helm
   :config
   ;; C-h b, C-x C-h etc...
   (helm-descbinds-mode 1))
 
 (use-package helm-projectile
-  :after (helm projectile)
+  :after helm
   :config
   (helm-projectile-on))
 
@@ -56,6 +63,7 @@
         helm-google-suggest-search-url helm-surfraw-duckduckgo-url))
 
 (use-package helm-external
+  :after helm
   :config
   (setq helm-raise-command                 "wmctrl -xa %s"
         helm-default-external-file-browser "pcmanfm"))
@@ -76,7 +84,7 @@ First call indent, second complete symbol, third complete fname."
   (define-key lisp-interaction-mode-map (kbd "TAB") 'helm-multi-lisp-complete-at-point))
 
 (use-package helm-org
-  :after (org-mode)
+  :after helm
   :config
   (setq helm-org-headings-fontify t))
 
@@ -119,7 +127,7 @@ First call indent, second complete symbol, third complete fname."
      1)))
 
 (use-package helm-cider
-  :after (helm cider)
+  :after helm
   :hook
   (cider-mode . (lambda () (helm-cider-mode 1)))
   (cider-repl-mode . (lambda () (helm-cider-mode 1)))
