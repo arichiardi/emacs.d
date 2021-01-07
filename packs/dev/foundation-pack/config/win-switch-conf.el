@@ -6,9 +6,11 @@
 ;;; Code:
 
 (use-package win-switch
+  ;; this is not great cause when you change theme it will break.
+  :config
+  (setq win-switch-feedback-background-color (cdr (assoc 'bg-special-cold modus-operandi-theme-default-colors-alist)))
+  (setq win-switch-feedback-foreground-color (cdr (assoc 'fg-main modus-operandi-theme-default-colors-alist)))
   :custom
-  (win-switch-feedback-background-color "DeepPink3")
-  (win-switch-feedback-foreground-color "black")
   (win-switch-window-threshold 0)
   (win-switch-idle-time 1)
 
