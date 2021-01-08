@@ -127,10 +127,6 @@ First call indent, second complete symbol, third complete fname."
      1)))
 
 (use-package helm-cider
-  :after helm
-  :hook
-  (cider-mode . (lambda () (helm-cider-mode 1)))
-  (cider-repl-mode . (lambda () (helm-cider-mode 1)))
   :bind (:map cider-repl-mode-map
          ("C-r" . helm-cider-repl-history)))
 
