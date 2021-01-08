@@ -17,6 +17,9 @@
   :diminish helm-mode
   :requires helm-config
   :config
+  ;; https://github.com/syl20bnr/spacemacs/issues/13564
+  ;; another useful command is (delete-dups extended-command-history)
+  (setq history-delete-duplicates t)
   (when (executable-find "curl")
     (setq helm-google-suggest-use-curl-p t))
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-info-bash)
