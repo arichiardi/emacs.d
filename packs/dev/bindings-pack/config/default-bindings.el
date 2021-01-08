@@ -82,11 +82,6 @@
 (global-set-key (kbd "C-c w /") (lambda () (interactive) (enlarge-window -1)))
 (global-set-key (kbd "C-c w '") (lambda () (interactive) (enlarge-window 1)))
 
-;; clojure
-
-(define-key clojure-mode-map (kbd "C-c l l") 'align-cljlet)
-(define-key clojure-mode-map (kbd "C-M-z")   'align-cljlet)
-
 (define-key paredit-mode-map (kbd "C-c l k") 'paredit-splice-sexp-killing-forward)
 (define-key paredit-mode-map (kbd "C-c l w") 'paredit-splice-sexp-killing-backward)
 (define-key paredit-mode-map (kbd "C-c l l") 'align-cljlet)
@@ -157,8 +152,6 @@
 ;;scroll other window
 (global-set-key (kbd "C-M-]") 'scroll-other-window)
 (global-set-key (kbd "C-M-[") 'scroll-other-window-down)
-
-
 
 ;;fast vertical naviation
 (global-set-key  (kbd "M-U") (lambda () (interactive) (forward-line -10)))

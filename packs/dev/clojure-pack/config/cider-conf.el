@@ -1,3 +1,9 @@
+;;; cider-conf.el --- Cider Config
+
+;;; Commentary:
+
+;;; Code:
+
 (live-add-pack-lib "sesman")
 (live-add-pack-lib "cider")
 (live-add-pack-lib "spinner-el")
@@ -5,6 +11,18 @@
 (live-add-pack-lib "parseedn")
 
 (load "cider-autoloads" t t)
+
+(defun ar-emacs--cider-hook ()
+  "The cider hook lambda."
+  (eldoc-mode)
+  (subword-mode)
+  (paredit-mode)
+  (company-mode-on)
+  (cider-company-enable-fuzzy-completion)
+  (helm-cider-mode 1))
+
+;; Known hosts
+;; (setq cider-known-endpoints '(("localhost" "5555") ("localhost" "5055") ("localhost" "5088")))
 
 (use-package cider
   ;; This seems enough for cider, see also:
@@ -28,13 +46,8 @@
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
 
-  :config
-  (add-hook 'cider-mode-hook #'eldoc-mode)
-  (add-hook 'cider-mode-hook #'subword-mode)
-  (add-hook 'cider-mode-hook #'paredit-mode)
-  (add-hook 'cider-mode-hook #'company-mode)
+  :hook
+  (cider-mode . #'ar-emacs--cider-hook)
+  (cider-repl-mode . #'ar-emacs--cider-hook))
 
-  (add-hook 'cider-repl-mode-hook #'paredit-mode)
-  (add-hook 'cider-repl-mode-hook #'eldoc-mode)
-  (add-hook 'cider-repl-mode-hook #'company-mode)
-  (add-hook 'cider-repl-mode-hook #'subword-mode))
+;;; cider-conf.el ends here
