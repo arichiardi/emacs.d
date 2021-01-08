@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package company
+  :diminish
   :defer t
   :custom
   (company-idle-delay 0 "Set delay to zero")
