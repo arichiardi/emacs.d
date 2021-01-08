@@ -29,14 +29,15 @@
 
   :custom
   (clojure-toplevel-inside-comment-form t "Allow coloring of (comment) form at the top level")
+  (clojure-verify-major-mode nil "Disable extension verification cause it causes stack overflow")
 
   :bind (:map clojure-mode-map
-              ("C-M-x" . live-warn-when-cider-not-connected)
-              ("C-x C-e" . live-warn-when-cider-not-connected)
-              ("C-c C-e" . live-warn-when-cider-not-connected)
-              ("C-c C-l" . live-warn-when-cider-not-connected)
-	          ("C-c l l" . align-cljjet)
-              ("M-t" . live-transpose-words-with-hyphens))
+         ("C-M-x" . live-warn-when-cider-not-connected)
+         ("C-x C-e" . live-warn-when-cider-not-connected)
+         ("C-c C-e" . live-warn-when-cider-not-connected)
+         ("C-c C-l" . live-warn-when-cider-not-connected)
+         ("C-c l l" . align-cljjet)
+         ("M-t" . live-transpose-words-with-hyphens))
 
   :config
   ;; Treat hyphens as a word character when transposing words
