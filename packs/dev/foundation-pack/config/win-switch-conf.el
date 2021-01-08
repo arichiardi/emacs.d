@@ -6,15 +6,17 @@
 ;;; Code:
 
 (use-package win-switch
-  ;; this is not great cause when you change theme it will break.
-  :config
-  (setq win-switch-feedback-background-color (cdr (assoc 'bg-special-cold modus-operandi-theme-default-colors-alist)))
-  (setq win-switch-feedback-foreground-color (cdr (assoc 'fg-main modus-operandi-theme-default-colors-alist)))
+  :commands win-switch-dispatch
+
   :custom
   (win-switch-window-threshold 0)
   (win-switch-idle-time 1)
 
   :config
+  ;; this is not great cause when you change theme it will break.
+  (setq win-switch-feedback-background-color (cdr (assoc 'bg-special-cold modus-operandi-theme-default-colors-alist)))
+  (setq win-switch-feedback-foreground-color (cdr (assoc 'fg-main modus-operandi-theme-default-colors-alist)))
+
   ;; disable majority of shortcuts
   (win-switch-set-wrap-around)
   (win-switch-set-keys '() 'up)
