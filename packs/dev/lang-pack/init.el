@@ -5,6 +5,7 @@
 ;;; Code:
 
 (use-package volatile-highlights
+  :diminish
   :config
   (volatile-highlights-mode t))
 
