@@ -6,11 +6,6 @@
 
 (live-add-pack-lib "clojure-mode")
 
-(defun live-warn-when-cider-not-connected ()
-  "Print warning if the REPL has not been launched."
-  (interactive)
-  (message "nREPL server not connected. Run M-x cider or M-x cider-jack-in to connect."))
-
 (use-package clojure-mode
   :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'" "\\.clje\\'" "\\.joke\\'" "\\.bb\\'")
   :defines clojure-mode-syntax-table
@@ -27,10 +22,6 @@
   (clojure-verify-major-mode nil "Disable extension verification cause it causes stack overflow")
 
   :bind (:map clojure-mode-map
-         ("C-M-x" . live-warn-when-cider-not-connected)
-         ("C-x C-e" . live-warn-when-cider-not-connected)
-         ("C-c C-e" . live-warn-when-cider-not-connected)
-         ("C-c C-l" . live-warn-when-cider-not-connected)
          ("C-c l l" . align-cljjet)
          ("M-t" . live-transpose-words-with-hyphens)
          ("C-c C-z" . nil)
