@@ -48,6 +48,9 @@
   (setq transient-history-file (expand-file-name (expand-file-name "history.el" "transient")
                                                  live-tmp-dir)))
 
+(use-package ws-butler
+  :diminish)
+
 (ws-butler-global-mode)
 
 (use-package editorconfig
