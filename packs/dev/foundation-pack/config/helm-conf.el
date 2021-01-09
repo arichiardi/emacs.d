@@ -129,10 +129,6 @@ First call indent, second complete symbol, third complete fname."
                                ".git"))
      1)))
 
-(use-package helm-cider
-  :bind (:map cider-repl-mode-map
-         ("C-r" . helm-cider-repl-history)))
-
 (use-package helm-ag
   :after helm
   :custom
