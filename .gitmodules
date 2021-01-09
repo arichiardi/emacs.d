@@ -22,6 +22,9 @@
 [submodule "bui"]
 	path = lib/bui
 	url = git@github.com:alezost/bui.el.git
+[submodule "clojure-mode"]
+	path = lib/clojure-mode
+	url = git@github.com:clojure-emacs/clojure-mode.git
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:emacscollective/closql.git
@@ -221,9 +224,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/cider"]
 	path = packs/dev/clojure-pack/vendor/submodules/cider
 	url = git://github.com/clojure-emacs/cider.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/clojure-mode"]
-        path = packs/dev/clojure-pack/vendor/submodules/clojure-mode
-        url = git://github.com/clojure-emacs/clojure-mode.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
 	path = packs/dev/clojure-pack/vendor/submodules/edn
 	url = git://github.com/expez/edn.el.git
