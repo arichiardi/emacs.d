@@ -20,8 +20,8 @@
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
   :defer t
 
-  :config
-  (cider-company-enable-fuzzy-completion)
+  ;; :config
+  ;; (cider-company-enable-fuzzy-completion) ;; https://github.com/clojure-emacs/cider/issues/2964
 
   :custom
   (cider-popup-stacktraces t "Popup stacktraces always on")
