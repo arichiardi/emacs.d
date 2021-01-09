@@ -11,20 +11,15 @@
   (interactive)
   (message "nREPL server not connected. Run M-x cider or M-x cider-jack-in to connect."))
 
-(defun ar-emacs--clojure-mode-hook ()
-  "The clojure-mode hook lambda."
-  (enable-paredit-mode)
-  (rainbow-delimiters-mode)
-  (flyspell-prog-mode)
-  (subword-mode)
-  (company-mode-on))
-
 (use-package clojure-mode
   :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'" "\\.clje\\'" "\\.joke\\'" "\\.bb\\'")
   :defines clojure-mode-syntax-table
 
-  :hook
-  (clojure-mode . #'ar-emacs--clojure-mode-hook)
+  :hook ((clojure-mode . paredit-mode)
+         (clojure-mode . subword-mode)
+         (clojure-mode . rainbow-delimiters-mode)
+         (clojure-mode . flyspell-prog-mode)
+         (clojure-mode . company-mode))
   ;; (clojure-mode . (lambda () (setq buffer-save-without-query t)))
 
   :custom
@@ -37,7 +32,12 @@
          ("C-c C-e" . live-warn-when-cider-not-connected)
          ("C-c C-l" . live-warn-when-cider-not-connected)
          ("C-c l l" . align-cljjet)
-         ("M-t" . live-transpose-words-with-hyphens))
+         ("M-t" . live-transpose-words-with-hyphens)
+         ("C-c C-z" . nil)
+         ("C-h" . help-command)
+         ;; better twice because I often forget
+         ("C-t C-s" . clojure-toggle-keyword-string)
+         ("C-t C-k" . clojure-toggle-keyword-string))
 
   :config
   ;; Treat hyphens as a word character when transposing words

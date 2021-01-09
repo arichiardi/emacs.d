@@ -12,15 +12,6 @@
 
 (load "cider-autoloads" t t)
 
-(defun ar-emacs--cider-hook ()
-  "The cider hook lambda."
-  (eldoc-mode)
-  (subword-mode)
-  (paredit-mode)
-  (company-mode-on)
-  (cider-company-enable-fuzzy-completion)
-  (helm-cider-mode 1))
-
 ;; Known hosts
 ;; (setq cider-known-endpoints '(("localhost" "5555") ("localhost" "5055") ("localhost" "5088")))
 
@@ -28,6 +19,9 @@
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
   :defer t
+
+  :config
+  (cider-company-enable-fuzzy-completion)
 
   :custom
   (cider-popup-stacktraces t "Popup stacktraces always on")
@@ -47,7 +41,14 @@
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
 
   :hook
-  (cider-mode . #'ar-emacs--cider-hook)
-  (cider-repl-mode . #'ar-emacs--cider-hook))
+  (cider-mode . eldoc-mode)
+  (cider-mode . (lambda () (helm-cider-mode 1)))
+
+  (cider-repl-mode . eldoc-mode)
+  (cider-repl-mode . subword-mode)
+  (cider-repl-mode . paredit-mode)
+  (cider-repl-mode . company-mode)
+  (cider-repl-mode . (lambda () (helm-cider-mode 1)))
+  )
 
 ;;; cider-conf.el ends here
