@@ -127,7 +127,7 @@
 [submodule "helm-cider"]
 	path = lib/helm-cider
 	url = git@github.com:clojure-emacs/helm-cider.git
-	build-step = borg-byte-compile
+	build-step = borg-update-autoloads
 [submodule "helm-descbinds"]
 	path = lib/helm-descbinds
 	url = git@github.com:emacs-helm/helm-descbinds.git
