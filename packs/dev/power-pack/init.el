@@ -74,7 +74,7 @@
   :hook (restclient-mode . company-mode))
 
 (use-package feature-mode
-  :mode "\.feature$"
+  :mode "\\.feature$"
   :hook (cucumber-mode . yas-minor-mode)
   :custom
   (feature-default-language "en" "Set the default language"))
