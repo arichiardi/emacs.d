@@ -19,9 +19,9 @@
 (defun ar-emacs--org-get-x-clipboard ()
   "Return the values of the X."
   (delq nil
-		(list (org-get-x-clipboard 'PRIMARY)
-		      (org-get-x-clipboard 'CLIPBOARD)
-		      (org-get-x-clipboard 'SECONDARY))))
+	(list (org-get-x-clipboard 'PRIMARY)
+	      (org-get-x-clipboard 'CLIPBOARD)
+	      (org-get-x-clipboard 'SECONDARY))))
 
 (defun ar-emacs--org-retrieve-commit-text ()
   "Return INITIAL or try to call git-commit-buffer-message."
@@ -102,13 +102,13 @@ This can be 0 for immediate, or a floating point value.")
        #'(lambda nil (interactive) (org-todo "NOT_FIXING")))))
 
 (use-package org
-  :mode (("\\.org\\'" . org-mode)
-         ("\\.org.gpg\\'" . org-mode))
+  :mode ("\\.org\\'" "\\.org.gpg\\'")
   :hook
   (org-mode . org-indent-mode)
   (org-mode . flyspell-mode)
   (org-after-todo-state-change . ar-emacs--org-auto-todo-state-change)
 
+  :config
   ;; http://orgmode.org/worg/org-configs/org-customization-guide.html
   ;; https://github.com/robertutterback/config/blob/master/emacs/org-mode.org
   ;; http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/
