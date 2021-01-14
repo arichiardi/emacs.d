@@ -12,11 +12,6 @@
 (use-package gfm-mode
   :mode "README\\.md\\'")
 
-(use-package markdown-mode
-  :mode "\\.md\\'"
-  :custom
-  (markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md" "Render markdown using pandoc."))
-
 (use-package json-mode
   :mode "\\.json\\'"
   :custom

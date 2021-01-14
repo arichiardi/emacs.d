@@ -40,8 +40,19 @@
          ("C-c s i" . synosaurus-choose-and-insert)
          ("C-c s r" . synosaurus-choose-and-replace))
   :custom
-  (synosaurus-backend 'synosaurus-backend-wordnet "Set the wordnet backend.")
-  :hook (text-mode . synosaurus-mode))
+  (synosaurus-backend 'synosaurus-backend-wordnet "Set the wordnet backend."))
+
+(use-package markdown-mode
+  :mode "\\.md\\'"
+  :custom
+  (markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md" "Render markdown using pandoc."))
+
+(use-package text-mode
+ :preface (provide 'text-mode)
+ :mode "\\.adoc$"
+ :hook
+ (text-mode . flyspell-mode)
+ (text-mode . synosaurus-mode))
 
 (use-package know-your-http-well
   :defer t
