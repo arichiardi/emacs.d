@@ -43,10 +43,10 @@
   :hook
   (cider-mode . eldoc-mode)
 
+  (cider-repl-mode . clojure-mode)
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
-  (cider-repl-mode . company-mode)
-  )
+  (cider-repl-mode . company-mode))
 
 ;;; cider-conf.el ends here
