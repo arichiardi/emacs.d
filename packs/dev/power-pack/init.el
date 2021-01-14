@@ -68,6 +68,4 @@
 (use-package dap-java
   :after (dap-mode lsp-java))
 
-(use-package logstash-conf)
-
 ;;; init.el ends here
