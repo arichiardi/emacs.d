@@ -12,11 +12,23 @@
 (live-load-config-file "ace-jump-mode-conf.el")
 (live-load-config-file "multiple-cursors-conf.el")
 (live-load-config-file "paren-conf.el")
-(live-load-config-file "git-gutter-conf.el")
 (live-load-config-file "wc-mode-conf.el")
 (live-load-config-file "eval-in-repl-conf.el")
 (live-load-config-file "zeal-at-point-conf.el")
 (live-load-config-file "treemacs-conf.el")
+
+(use-package git-gutter
+  :diminish
+  :commands global-git-gutter-mode
+  :config
+  (setq git-gutter:window-width 2)
+  (setq git-gutter:lighter " G-+")
+  (setq git-gutter:modified-sign "~ ")
+  (setq git-gutter:added-sign "+ ")
+  (setq git-gutter:deleted-sign "- ")
+  (setq git-gutter:unchanged-sign "  "))
+
+(global-git-gutter-mode t)
 
 (use-package docker
   :commands (docker)
