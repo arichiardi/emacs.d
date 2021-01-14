@@ -5,7 +5,6 @@
 ;;; Code:
 
 (require 'mwe-log-commands)
-(require 'iy-go-to-char)
 (require 'lively)
 
 (live-load-config-file "highlight-tail-conf.el")
