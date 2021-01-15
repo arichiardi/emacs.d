@@ -232,9 +232,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/jump-el"]
 	path = packs/dev/clojure-pack/vendor/submodules/jump-el
 	url = git@github.com:eschulte/jump.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/parseedn"]
-	path = packs/dev/clojure-pack/vendor/submodules/parseedn
-	url = git@github.com:clojure-emacs/parseedn.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/peg"]
 	path = packs/dev/clojure-pack/vendor/submodules/peg
 	url = git@github.com:emacsmirror/peg.git
@@ -244,12 +241,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters"]
 	path = packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters
 	url = https://github.com/Fanael/rainbow-delimiters
-[submodule "packs/dev/clojure-pack/vendor/submodules/seq-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/seq-el
-	url = git@github.com:NicolasPetton/seq.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/sesman"]
-	path = packs/dev/clojure-pack/vendor/submodules/sesman
-	url = git@github.com:vspinu/sesman.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/spinner-el"]
 	path = packs/dev/clojure-pack/vendor/submodules/spinner-el
 	url = git@github.com:Malabarba/spinner.el.git
@@ -309,6 +300,9 @@
 [submodule "parseclj"]
 	path = lib/parseclj
 	url = git@github.com:clojure-emacs/parseclj.git
+[submodule "parseedn"]
+	path = lib/parseedn
+	url = git@github.com:clojure-emacs/parseedn.git
 [submodule "persp-projectile"]
 	path = lib/persp-projectile
 	url = git@github.com:bbatsov/persp-projectile.git
@@ -342,6 +336,9 @@
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git
+[submodule "sesman"]
+	path = lib/sesman
+	url = git@github.com:vspinu/sesman.git
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git

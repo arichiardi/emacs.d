@@ -4,11 +4,7 @@
 
 ;;; Code:
 
-(live-add-pack-lib "sesman")
 (live-add-pack-lib "cider")
-(live-add-pack-lib "spinner-el")
-(live-add-pack-lib "seq-el")
-(live-add-pack-lib "parseedn")
 
 (load "cider-autoloads" t t)
 
@@ -43,7 +39,6 @@
   :hook
   (cider-mode . eldoc-mode)
 
-  (cider-repl-mode . clojure-mode)
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
