@@ -35,6 +35,8 @@
   (cider-invert-insert-eval-p t "Enable insert-into-REPL eval behavior")
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
+  (cider-print-fn 'zprint)
+  (cider-print-options nil "zprint options are chosen from .zprint.edn") ;; see https://github.com/clojure-emacs/cider/issues/2966
 
   :hook
   (cider-mode . eldoc-mode)
