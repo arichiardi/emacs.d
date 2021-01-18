@@ -1,3 +1,5 @@
+(setq ispell-local-dictionary "canadian")
+
 (use-package dash
   :config (dash-enable-font-lock))
 
