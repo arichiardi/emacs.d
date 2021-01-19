@@ -5,4 +5,4 @@
   (which-key-setup-side-window-right-bottom)
 
   :custom
-  (which-key-idle-delay 0.5))
+  (which-key-idle-delay 0.25))
