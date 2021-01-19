@@ -32,7 +32,7 @@
   (cider-use-tooltips nil "Do not use tooltips")
   ;; (cider-show-error-buffer 'only-in-repl "Show error buffer only in the REPL")
   (cider-offer-to-open-cljs-app-in-browser nil "Ask before opening up the browser")
-  (cider-invert-insert-eval-p t "Enable insert-into-REPL eval behavior")
+  (cider-invert-insert-eval-p t "Always eval after insert into REPL")
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
   (cider-print-fn 'zprint)
@@ -40,10 +40,12 @@
 
   :hook
   (cider-mode . eldoc-mode)
+  (cider-mode . which-key-mode)
 
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
-  (cider-repl-mode . company-mode))
+  (cider-repl-mode . company-mode)
+  (cider-repl-mode . which-key-mode))
 
 ;;; cider-conf.el ends here
