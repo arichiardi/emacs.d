@@ -15,7 +15,6 @@
          (clojure-mode . rainbow-delimiters-mode)
          (clojure-mode . flyspell-prog-mode)
          (clojure-mode . company-mode))
-  ;; (clojure-mode . (lambda () (setq buffer-save-without-query t)))
 
   :custom
   (clojure-toplevel-inside-comment-form t "Allow coloring of (comment) form at the top level")
@@ -89,8 +88,11 @@
     (html5 'defun)                 ;; hiccup
     (is-resolved 1)                ;; unbroken-promises
     (is-rejected 1)                ;; unbroken-promises
-    (->files 1))
+    (->files 1)))
 
-  )
+(use-package flycheck-clj-kondo
+  :diminish
+  :demand t
+  :after clojure-mode)
 
 ;;; clojure-conf.el ends here
