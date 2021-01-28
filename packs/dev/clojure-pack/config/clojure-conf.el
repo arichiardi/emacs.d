@@ -30,6 +30,8 @@
          ("C-t C-k" . clojure-toggle-keyword-string))
 
   :config
+  (require 'flycheck-clj-kondo)
+
   ;; Treat hyphens as a word character when transposing words
   (defvar clojure-mode-with-hyphens-as-word-sep-syntax-table
     (let ((st (make-syntax-table clojure-mode-syntax-table)))
@@ -40,7 +42,7 @@
     "Treat hyphens as a word character when transposing words"
     (interactive "*p")
     (with-syntax-table clojure-mode-with-hyphens-as-word-sep-syntax-table
-      (transpose-words arg)))
+     (transpose-words arg)))
 
   (define-clojure-indent
     (fold 'defun)
@@ -88,11 +90,9 @@
     (html5 'defun)                 ;; hiccup
     (is-resolved 1)                ;; unbroken-promises
     (is-rejected 1)                ;; unbroken-promises
-    (->files 1)))
-
-(use-package flycheck-clj-kondo
-  :diminish
-  :demand t
-  :after clojure-mode)
+    (->files 1)
+    (stub 1)                       ;; shrubbery
+    (mock 1)                       ;; shrubbery
+    ))
 
 ;;; clojure-conf.el ends here
