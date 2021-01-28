@@ -1,6 +1,6 @@
 (live-load-config-file "default-bindings.el")
 
-(use-package
+(use-package which-key
   :init
   (which-key-setup-side-window-right-bottom)
 
