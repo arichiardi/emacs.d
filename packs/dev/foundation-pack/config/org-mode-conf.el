@@ -102,7 +102,7 @@ This can be 0 for immediate, or a floating point value.")
        #'(lambda nil (interactive) (org-todo "NOT_FIXING")))))
 
 (use-package org
-  :mode ("\\.org\\'" "\\.org.gpg\\'")
+  :mode ("\\.org\\'")
   :hook
   (org-mode . org-indent-mode)
   (org-mode . flyspell-mode)
