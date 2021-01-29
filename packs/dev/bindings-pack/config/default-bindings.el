@@ -1,5 +1,6 @@
-;; Default Emacs Live bindings
+;;; default-bindings.el --- Default Emacs Live bindings
 
+;;; Commentary:
 
 ;; C-c Groups
 ;;
@@ -8,7 +9,7 @@
 ;;f - winner redo
 ;;g - git gutter
 ;;l - lispy shortcuts (i.e. paredit and clojure specific fns)
-;;m - emacs eval shortcuts
+;;m - Emacs eval shortcuts
 ;;t - text shortcuts
 ;;i - utf8 char shortcuts
 ;;j - quick-jump shortcuts
@@ -17,6 +18,10 @@
 ;;s - show popupwindows
 ;;w - window and buffer shortcuts
 
+;;; Code:
+
+;; gracefully kill Emacs --daemon
+(global-set-key (kbd "C-x C-M-c") 'save-buffers-kill-emacs)
 
 ;; Should be able to eval-and-replace anywhere.
 (global-set-key (kbd "C-c e") 'eval-and-replace)
@@ -224,3 +229,5 @@
 (global-set-key (kbd "C-x o") 'win-switch-dispatch)
 
 (global-set-key (kbd "C-x !") 'live-server-kill-terminal)
+
+;;; default-bindings.el ends here
