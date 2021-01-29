@@ -10,10 +10,18 @@
 (defvar live-magit-documentation-dir (expand-file-name "Documentation" live-magit-dir))
 ;; (defvar live-magit-autoloads (concat live-magit-lisp-dir "/magit-autoloads.el"))
 
+(defun ar-emacs--magit-quit-session ()
+  "Restores the previous window configuration and kills the magit buffer"
+  (interactive)
+  (kill-buffer)
+  (jump-to-register :magit-fullscreen))
+
 (use-package magit
   :defer t
   :bind (("C-x g" . magit-status)
-         ("C-x M-g" . magit-dispatch-popup))
+         ("C-x M-g" . magit-dispatch-popup)
+         (:map magit-status-mode-map
+          ("q" . ar-emacs--magit-quit-session)))
   :init
   (setq magit-view-git-manual-method 'woman)
 
