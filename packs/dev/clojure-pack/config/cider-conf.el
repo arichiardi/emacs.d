@@ -41,11 +41,13 @@
   :hook
   (cider-mode . eldoc-mode)
   (cider-mode . which-key-mode)
+  (cider-repl-mode . (lambda () (helm-cider-mode 1)))
 
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
   (cider-repl-mode . company-mode)
-  (cider-repl-mode . which-key-mode))
+  (cider-repl-mode . which-key-mode)
+  (cider-repl-mode . (lambda () (helm-cider-mode 1))))
 
 ;;; cider-conf.el ends here
