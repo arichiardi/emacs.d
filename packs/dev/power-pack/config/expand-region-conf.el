@@ -1,2 +1,4 @@
 (live-add-pack-lib "expand-region")
-(require 'expand-region)
+
+(use-package expand-region
+  :commands er/expand-region)
