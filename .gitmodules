@@ -79,6 +79,9 @@
 [submodule "eval-in-repl"]
 	path = lib/eval-in-repl
 	url = git@github.com:kaz-yos/eval-in-repl.git
+[submodule "expand-region"]
+	path = lib/expand-region
+	url = git@github.com:magnars/expand-region.el.git
 [submodule "f"]
 	path = lib/f
 	url = git@github.com:rejeep/f.el.git
@@ -282,9 +285,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/emacs-git-gutter"]
 	path = packs/dev/power-pack/vendor/submodules/emacs-git-gutter
 	url = git@github.com:syohex/emacs-git-gutter.git
-[submodule "packs/dev/power-pack/vendor/submodules/expand-region"]
-	path = packs/dev/power-pack/vendor/submodules/expand-region
-	url = git@github.com:magnars/expand-region.el.git
 [submodule "packs/dev/power-pack/vendor/submodules/ht"]
 	path = packs/dev/power-pack/vendor/submodules/ht
 	url = git@github.com:Wilfred/ht.el.git
