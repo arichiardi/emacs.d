@@ -411,3 +411,4 @@
 [submodule "zeal-at-point"]
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
+	build-step = borg-byte-compile
