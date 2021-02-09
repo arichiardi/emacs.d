@@ -12,7 +12,6 @@
   (setq projectile-known-projects-file (concat live-tmp-dir "projectile-known-projects.eld"))
 
   :config
-  (setq projectile-mode-line '(:eval (format " Prj[%s]" (projectile-project-name))))
   (projectile-register-project-type 'yarn '("package.json")
                                     :compile "yarn install"
                                     :test "yarn test"
@@ -21,6 +20,7 @@
         (append '("node_modules") projectile-globally-ignored-directories))
 
   :custom
+  (projectile-mode-line-prefix " Prj")
   (projectile-enable-caching t)
   (projectile-switch-project-action 'projectile-find-file-dwim)
   (projectile-idle-timer-seconds 60)
