@@ -35,6 +35,7 @@
   (cider-invert-insert-eval-p t "Always eval after insert into REPL")
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
+  (cider-ns-refresh-show-log-buffer nil "Do not pop up the cider-ns-refresh logs")
 
   ;; (cider-print-options nil "zprint options are chosen from .zprint.edn") ;; see https://github.com/clojure-emacs/cider/issues/2966
 
