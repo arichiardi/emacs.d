@@ -19,15 +19,15 @@
 (live-load-config-file "treemacs-conf.el")
 
 (use-package git-gutter
-  :diminish
   :commands global-git-gutter-mode
-  :config
-  (setq git-gutter:window-width 2)
-  (setq git-gutter:lighter " G-+")
-  (setq git-gutter:modified-sign "~ ")
-  (setq git-gutter:added-sign "+ ")
-  (setq git-gutter:deleted-sign "- ")
-  (setq git-gutter:unchanged-sign "  "))
+  :custom
+  (git-gutter:window-width 2)
+  (git-gutter:lighter " Gut")
+  (git-gutter:modified-sign "~ ")
+  (git-gutter:added-sign "+ ")
+  (git-gutter:deleted-sign "- ")
+  (git-gutter:unchanged-sign "  ")
+  (git-gutter:disabled-modes (list 'org-mode)))
 
 (global-git-gutter-mode t)
 

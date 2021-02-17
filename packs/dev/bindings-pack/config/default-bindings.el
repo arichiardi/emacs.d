@@ -32,6 +32,12 @@
 
 ;; Git Gutter
 (global-set-key (kbd "C-c g g") 'git-gutter:toggle)
+(global-set-key (kbd "C-c g u") 'git-gutter:update-all-windows)
+(global-set-key (kbd "C-c g r") 'git-gutter:revert-hunk)
+(global-set-key (kbd "C-c g s") 'git-gutter:stage-hunk)
+(global-set-key (kbd "<M-prior>") 'git-gutter:previous-hunk)
+(global-set-key (kbd "<M-next>") 'git-gutter:next-hunk)
+(global-set-key (kbd "C-c g d") 'git-gutter:popup-hunk)
 
 ;; Jump to next/previous diff
 (global-set-key (kbd "C-c g p") 'git-gutter:previous-diff)
