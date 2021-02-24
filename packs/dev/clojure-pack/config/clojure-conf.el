@@ -93,6 +93,7 @@
     (->files 1)
     (stub 1)                       ;; shrubbery
     (mock 1)                       ;; shrubbery
+    (spy 1)                        ;; shrubbery
     ))
 
 ;;; clojure-conf.el ends here
