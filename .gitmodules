@@ -183,6 +183,9 @@
 [submodule "json-snatcher"]
 	path = lib/json-snatcher
 	url = git@github.com:Sterlingg/json-snatcher.git
+[submodule "kaocha-runner"]
+	path = lib/kaocha-runner
+	url = git@github.com:magnars/kaocha-runner.el.git
 [submodule "know-your-http-well"]
 	path = lib/know-your-http-well
 	url = git@github.com:for-GET/know-your-http-well.git
