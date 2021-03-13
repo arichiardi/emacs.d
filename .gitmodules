@@ -369,6 +369,9 @@
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
+[submodule "sqlup-mode"]
+	path = lib/sqlup-mode
+	url = git@github.com:Trevoke/sqlup-mode.el.git
 [submodule "synosaurus"]
 	path = lib/synosaurus
 	url = git@github.com:hpdeifel/synosaurus.git
