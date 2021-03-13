@@ -100,6 +100,10 @@
     (stub 1)                       ;; shrubbery
     (mock 1)                       ;; shrubbery
     (spy 1)                        ;; shrubbery
+    (when-joined '(2 :form :form (0))) ;; cohesic
+    (defhandler 'defun)                ;; cohesic
+    (exception '(1 :form))             ;; cohesic
+    (defmeasurement 1)                 ;; cohesic
     ))
 
 ;;; clojure-conf.el ends here
