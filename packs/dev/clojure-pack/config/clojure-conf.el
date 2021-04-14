@@ -23,7 +23,9 @@
          (clojure-mode . subword-mode)
          (clojure-mode . rainbow-delimiters-mode)
          (clojure-mode . flyspell-prog-mode)
-         (clojure-mode . company-mode))
+         (clojure-mode . company-mode)
+         (clojure-mode . zprint-mode)
+         )
 
   :custom
   (clojure-toplevel-inside-comment-form t "Allow coloring of (comment) form at the top level")
