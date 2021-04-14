@@ -11,6 +11,7 @@
 ;; from http://emacs-journey.blogspot.com.au/2012/06/improving-ansi-term.html
 ;; kill the buffer when terminal is exited
 (defadvice term-sentinel (around my-advice-term-sentinel (proc msg))
+  "I don't know what this does I just copied it."
   (if (memq (process-status proc) '(signal exit))
       (let ((buffer (process-buffer proc)))
         ad-do-it
@@ -19,7 +20,8 @@
 (ad-activate 'term-sentinel)
 
 (defun live-term-use-utf8 ()
-  (set-buffer-process-coding-system 'utf-8-unix 'utf-8-unix))
+  "Set coding system for the current process."
+  (set-process-coding-system 'utf-8-unix 'utf-8-unix))
 (add-hook 'term-exec-hook 'live-term-use-utf8)
 
 (defun live-term-paste (&optional string)

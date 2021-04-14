@@ -13,6 +13,7 @@
   (push '(clojure-mode . "java") zeal-at-point-mode-alist)
   (push '(clojurescript-mode . ("cljs" "svg" "nodejs")) zeal-at-point-mode-alist)
   (push '(terraform-mode . "terraform") zeal-at-point-mode-alist)
+  (push '(sh-mode . "bash") zeal-at-point-mode-alist)
 
   (defun ar-emacs--zeal-set-docset-from-file-extension ()
     "Set the Zeal docset from the file extension."
