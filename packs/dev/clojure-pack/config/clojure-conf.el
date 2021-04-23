@@ -24,7 +24,8 @@
          (clojure-mode . rainbow-delimiters-mode)
          (clojure-mode . flyspell-prog-mode)
          (clojure-mode . company-mode)
-         (clojure-mode . zprint-mode)
+         ;; disable until we find a way to hook up the configuration
+         ;; (clojure-mode . zprint-mode)
          )
 
   :custom
