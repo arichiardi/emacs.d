@@ -1,3 +1,9 @@
+;;; shell-conf.el --- Shell Configuration
+
+;;; Commentary:
+
+;;; Code:
+
 (require 'term)
 
 (defcustom eshell-directory-name
@@ -89,3 +95,9 @@ eshell windows easier."
   (setq compilation-environment '("TERM=xterm-256color"))
 
   :bind (("C-c x e" . ar-emacs--eshell-here)))
+
+(use-package eshell-mode
+  :bind
+  ([remap eshell-list-history] . helm-eshell-history))
+
+;;; shell-conf.el ends here
