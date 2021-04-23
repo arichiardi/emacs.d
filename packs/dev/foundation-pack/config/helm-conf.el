@@ -25,10 +25,6 @@
   (add-to-list 'helm-sources-using-default-as-input 'helm-source-info-bash)
   (helm-mode 1)
 
-  :hook
-  ;; use helm to list eshell history
-  (eshell-mode . (lambda ()
-                         (substitute-key-definition 'eshell-list-history 'helm-eshell-history eshell-mode-map)))
   :custom
   ;; See https://github.com/bbatsov/prelude/pull/670 for a detailed
   ;; discussion of these options.
