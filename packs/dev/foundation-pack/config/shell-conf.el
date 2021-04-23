@@ -97,7 +97,14 @@ eshell windows easier."
   :bind (("C-c x e" . ar-emacs--eshell-here)))
 
 (use-package eshell-mode
+  ;; window-normalize-buffer: No such live buffer *helm-mode-completion-at-point* [2 times]
+  ;; helm-M-x-execute-command: No such live buffer *helm pcomplete*
+  ;; :hook
+  ;; (eshell-mode . (lambda ()
+  ;;                  (eshell-cmpl-initialize)))
+
   :bind
+  ;; ([remap eshell-pcomplete] . helm-esh-pcomplete)
   ([remap eshell-list-history] . helm-eshell-history))
 
 ;;; shell-conf.el ends here
