@@ -8,9 +8,6 @@
 
 (load "cider-autoloads" t t)
 
-;; Known hosts
-;; (setq cider-known-endpoints '(("localhost" "5555") ("localhost" "5055") ("localhost" "5088")))
-
 (use-package cider
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
@@ -30,13 +27,18 @@
   (cider-repl-wrap-history t "Wrap history")
   (cider-repl-history-size 2000 "Custom history size")
   (cider-use-tooltips nil "Do not use tooltips")
-  ;; (cider-show-error-buffer 'only-in-repl "Show error buffer only in the REPL")
   (cider-offer-to-open-cljs-app-in-browser nil "Ask before opening up the browser")
   (cider-invert-insert-eval-p t "Always eval after insert into REPL")
   (cider-switch-to-repl-on-insert nil "Do not switch to the REPL on insert")
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
   (cider-ns-refresh-show-log-buffer nil "Do not pop up the cider-ns-refresh logs")
 
+  (nrepl-use-ssh-fallback-for-remote-hosts t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
+  (cider-infer-remote-nrepl-ports t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
+
+  (cider-known-endpoints '(("localhost" "1667") ;; babashka
+                           ("localhost" "5555") ;; common
+                           ))
   ;; (cider-print-options nil "zprint options are chosen from .zprint.edn") ;; see https://github.com/clojure-emacs/cider/issues/2966
 
   :hook
