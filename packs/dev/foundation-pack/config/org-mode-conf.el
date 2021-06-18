@@ -117,7 +117,7 @@ This can be 0 for immediate, or a floating point value.")
   (setq org-archive-location (concat org-directory "/archive/archive.org.gpg" "::datetree/")) ;; Filename::heading
   (setq org-agenda-files (list (concat org-directory "/agenda/notes.org.gpg")
                                (concat org-directory "/agenda/work.org.gpg")
-                               (concat org-directory "/agenda/home.org.gpg")))
+                               (concat org-directory "/agenda/personal.org.gpg")))
 
   (setq org-agenda-include-diary t)
   (setq org-reverse-note-order t)
