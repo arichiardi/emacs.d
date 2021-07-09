@@ -127,7 +127,8 @@ This can be 0 for immediate, or a floating point value.")
   (setq org-catch-invisible-edits 'show)
   ;; http://stackoverflow.com/a/27048241
   (setq org-loop-over-headlines-in-active-region 'start-level)
-
+  ;; https://stackoverflow.com/a/45951872/1888507
+  (setq org-treat-insert-todo-heading-as-state-change t)
   ;;;;;;;;;;;;;;
   ;;  Refile  ;;
   ;;;;;;;;;;;;;;
