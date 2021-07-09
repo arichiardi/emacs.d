@@ -159,7 +159,7 @@ This can be 0 for immediate, or a floating point value.")
   (setq org-log-into-drawer "LOGBOOK")
 
   (setq org-todo-keywords
-        (quote ((sequence "TODO(t)" "NEXT(n)" "STARTED(s)" "|" "DONE(d)")
+        (quote ((sequence "TODO(t!)" "NEXT(n)" "STARTED(s)" "|" "DONE(d)")
                 (sequence "WAITING(w@/!)" "HOLD(h@/!)" "|" "CANCELLED(c@/!)")
                 (sequence "|" "NOT_FIXING(f)"))))
 
