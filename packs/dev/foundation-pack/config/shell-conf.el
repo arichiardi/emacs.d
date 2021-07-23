@@ -107,4 +107,12 @@ eshell windows easier."
   ;; ([remap eshell-pcomplete] . helm-esh-pcomplete)
   ([remap eshell-list-history] . helm-eshell-history))
 
+(use-package comint
+  :bind (:map comint-mode-map
+         ("C-r" . comint-history-isearch-backward)
+         ("C-M-r" . comint-history-isearch-backward-regexp))
+  :custom
+  (comint-buffer-maximum-size 20000 "Increase comint buffer size.")
+  (comint-prompt-read-only t "Make the prompt read only."))
+
 ;;; shell-conf.el ends here
