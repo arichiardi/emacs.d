@@ -29,7 +29,7 @@
          )
 
   :custom
-  (clojure-toplevel-inside-comment-form t "Allow coloring of (comment) form at the top level")
+  (clojure-toplevel-inside-comment-form t "Eval forms in (comment) as if top level")
   (clojure-verify-major-mode nil "Disable extension verification cause it causes stack overflow")
 
   :bind (:map clojure-mode-map
