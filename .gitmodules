@@ -378,6 +378,9 @@
 [submodule "tablist"]
 	path = lib/tablist
 	url = git@github.com:politza/tablist.git
+[submodule "tide"]
+	path = lib/tide
+	url = git@github.com:ananthakumaran/tide.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
@@ -387,6 +390,9 @@
 [submodule "tuareg"]
 	path = lib/tuareg
 	url = git@github.com:ocaml/tuareg.git
+[submodule "typescript-mode"]
+	path = lib/typescript-mode
+	url = git@github.com:emacs-typescript/typescript.el.git
 [submodule "use-package"]
 	path = lib/use-package
 	url = git@github.com:jwiegley/use-package.git
@@ -428,3 +434,9 @@
 [submodule "zprint-mode"]
 	path = lib/zprint-mode
 	url = git@github.com:pesterhazy/zprint-mode.el.git
+[submodule "lib/typescript-mode"]
+	path = lib/typescript-mode
+	url = git@github.com:emacs-typescript/typescript.el.git
+[submodule "lib/tide"]
+	path = lib/tide
+	url = git@github.com:ananthakumaran/tide.git
