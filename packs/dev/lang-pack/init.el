@@ -18,17 +18,24 @@
   ((json-reformat:indent-width 2 "Set width to 2")
    (js-indent-level 2 "Set indent level to 2")))
 
+(defun ar-emacs--point-after-equal-p (id action context)
+  "Return t if point is after \\=, nil otherwise.  This predicate
+is only tested on \"insert\" action."
+  (when (eq action 'insert)
+    (save-excursion
+      (= (preceding-char) ?=))))
+
 (use-package web-mode
   :mode ("\\.jsx\\'" "\\.tsx\\'")
   :hook
   ((web-mode . company-mode)
-   (web-mode . smartparens-strict-mode)
+   ;; Cannot write inline functions otherwise
+   ;; See: https://github.com/Fuco1/smartparens/issues/1101
+   ;; (web-mode . smartparens-strict-mode)
+   (web-mode . smartparens-mode)
    (web-mode . subword-mode)
    (web-mode . eldoc-mode)
-   (web-mode . which-key-mode)
-   (web-mode . tide-setup)
-   (web-mode . tide-hl-identifier-mode)
-   (web-mode . ar-emacs--setup-tsx-company-backends))
+   (web-mode . which-key-mode))
   :custom
   (web-mode-content-types-alist '(("jsx" . "\\.[jt]sx?\\'")))
   (web-mode-enable-auto-pairing t)
@@ -37,8 +44,7 @@
   (company-transformers '(company-sort-by-backend-importance))
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
-  (flycheck-add-mode 'typescript-tslint 'web-mode)
-  (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append))
+  (sp-local-pair 'web-mode "<" nil :unless '(ar-emacs--point-after-equal-p)))
 
 (live-load-config-file "flycheck-conf.el")
 (live-load-config-file "yaml-conf.el")
