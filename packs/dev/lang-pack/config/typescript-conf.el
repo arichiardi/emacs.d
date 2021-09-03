@@ -50,11 +50,15 @@ Put this in .dir-locals.el:
    (typescript-mode . eldoc-mode)
    (typescript-mode . which-key-mode)
    (typescript-mode . tide-setup)
-   (typescript-mode . tide-hl-identifier-mode))
+   (typescript-mode . tide-hl-identifier-mode)
+   (web-mode . tide-setup)
+   (web-mode . tide-hl-identifier-mode)
+   (web-mode . ar-emacs--setup-tsx-company-backends))
   :custom
   (typescript-indent-level 2)
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
+  (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
   (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append))
 
