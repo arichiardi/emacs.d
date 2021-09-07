@@ -191,6 +191,12 @@
 	url = git@github.com:for-GET/know-your-http-well.git
 [submodule "lib/modus-vivendi-theme"]
 	url = git@github.com:emacsmirror/modus-themes.git
+[submodule "lib/tide"]
+	path = lib/tide
+	url = git@github.com:ananthakumaran/tide.git
+[submodule "lib/typescript-mode"]
+	path = lib/typescript-mode
+	url = git@github.com:emacs-typescript/typescript.el.git
 [submodule "lsp-java"]
 	path = lib/lsp-java
 	url = git@github.com:emacs-lsp/lsp-java.git
@@ -218,6 +224,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "mmm-mode"]
+	path = lib/mmm-mode
+	url = git@github.com:purcell/mmm-mode.git
 [submodule "modus-themes"]
 	path = lib/modus-themes
 	url = git@gitlab.com:protesilaos/modus-themes.git
@@ -434,9 +443,3 @@
 [submodule "zprint-mode"]
 	path = lib/zprint-mode
 	url = git@github.com:pesterhazy/zprint-mode.el.git
-[submodule "lib/typescript-mode"]
-	path = lib/typescript-mode
-	url = git@github.com:emacs-typescript/typescript.el.git
-[submodule "lib/tide"]
-	path = lib/tide
-	url = git@github.com:ananthakumaran/tide.git
