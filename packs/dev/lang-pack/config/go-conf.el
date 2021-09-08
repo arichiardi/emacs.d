@@ -9,7 +9,6 @@
 
   :hook
   (go-mode . smartparens-strict-mode)
-  (go-mode . editorconfig-mode)
   (go-mode . subword-mode)
   (go-mode . flycheck-mode)
   (go-mode . company-mode-on)
