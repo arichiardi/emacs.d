@@ -58,4 +58,8 @@
 
 (use-package editorconfig
   :custom
-  (editorconfig-trim-whitespaces-mode 'ws-butler-mode "Only trim touched lines"))
+  (editorconfig-trim-whitespaces-mode 'ws-butler-mode "Only trim touched lines")
+  :hook
+  (editorconfig-after-apply-functions . (lambda (_) (setq web-mode-block-padding 0)))
+  :config
+  (editorconfig-mode 1))

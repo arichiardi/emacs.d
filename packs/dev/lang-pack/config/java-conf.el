@@ -26,7 +26,6 @@
                                       :test-suffix "Test")))
 
 (add-hook 'java-mode-hook #'ar-emacs--configure-java)
-(add-hook 'java-mode-hook #'editorconfig-mode)
 (add-hook 'java-mode-hook #'subword-mode)
 (add-hook 'java-mode-hook #'smartparens-strict-mode)
 

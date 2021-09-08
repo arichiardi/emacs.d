@@ -18,8 +18,7 @@
   (ar-emacs--apply-if-not-editorconfig)
   :hook
   ((js2-mode . company-mode)
-   (js2-mode . smartparens-strict-mode)
-   (js2-mode . editorconfig-mode)))
+   (js2-mode . smartparens-strict-mode)))
 
 (defun ar-emacs--configure-js-comint ()
   "JavaScript comint configuration hook."
