@@ -40,7 +40,8 @@ Put this in .dir-locals.el:
     (expand-file-name node-module-path root)))
 
 (use-package typescript-mode
-  :mode ("\\.ts\\'")
+  :after (mmm-mode)
+  :mode ("\\.[jt]sx?\\'")
   :init
   (require 'smartparens-javascript)
   :hook
@@ -51,9 +52,7 @@ Put this in .dir-locals.el:
    (typescript-mode . which-key-mode)
    (typescript-mode . tide-setup)
    (typescript-mode . tide-hl-identifier-mode)
-   (web-mode . tide-setup)
-   (web-mode . tide-hl-identifier-mode)
-   (web-mode . ar-emacs--setup-tsx-company-backends))
+   (typescript-mode . ar-emacs--setup-tsx-company-backends))
   :custom
   (typescript-indent-level 2)
   (flycheck-check-syntax-automatically '(save mode-enabled))
