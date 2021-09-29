@@ -298,3 +298,4 @@
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
 (put 'downcase-region 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
