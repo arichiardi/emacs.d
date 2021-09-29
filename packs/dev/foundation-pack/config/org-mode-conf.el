@@ -102,7 +102,7 @@ This can be 0 for immediate, or a floating point value.")
        #'(lambda nil (interactive) (org-todo "NOT_FIXING")))))
 
 (use-package org
-  :mode ("\\.org\\'")
+  :mode ("\\.org" . org-mode)
   :hook
   (org-mode . org-indent-mode)
   (org-mode . flyspell-mode)
@@ -182,8 +182,7 @@ This can be 0 for immediate, or a floating point value.")
                 ("TODO" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("NEXT" ("WAITING") ("CANCELLED") ("HOLD"))
                 ("STARTED" ("WAITING") ("CANCELLED") ("HOLD") ("NEXT"))
-                ("DONE" ("WAITING") ("CANCELLED") ("HOLD")))))
-  )
+                ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))))
 
 (use-package org-capture
   :config

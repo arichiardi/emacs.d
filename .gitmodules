@@ -236,6 +236,11 @@
 [submodule "ob-restclient"]
 	path = lib/ob-restclient
 	url = git@github.com:alf/ob-restclient.el.git
+[submodule "org"]
+	path = lib/org
+	url = https://code.orgmode.org/bzg/org-mode.git
+	build-step = make
+	build-step = make autoloads
 [submodule "org-jira"]
 	path = lib/org-jira
 	url = git@github.com:ahungry/org-jira.git
