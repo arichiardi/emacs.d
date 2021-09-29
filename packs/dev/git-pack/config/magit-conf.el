@@ -34,7 +34,8 @@
   :custom
   (magit-prefer-remote-upstream t "Favor remote branches when reading upstreams.")
   ;; https://emacs.stackexchange.com/questions/54787/magit-set-upstream-to-origin-master-automatically
-  (magit-branch-adjust-remote-upstream-alist '(("origin/master")) "Set upstream of new branches to origin/master")
+  (magit-branch-adjust-remote-upstream-alist '(("main"  . ("/"))
+                                               ("master" . ("main" "master" "next" "maint"))))
 
   :hook
   ((magit-log-edit-mode . (lambda ()
