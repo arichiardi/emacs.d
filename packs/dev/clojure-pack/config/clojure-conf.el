@@ -23,10 +23,7 @@
          (clojure-mode . subword-mode)
          (clojure-mode . rainbow-delimiters-mode)
          (clojure-mode . flyspell-prog-mode)
-         (clojure-mode . company-mode)
-         ;; disable until we find a way to hook up the configuration
-         ;; (clojure-mode . zprint-mode)
-         )
+         (clojure-mode . company-mode))
 
   :custom
   (clojure-toplevel-inside-comment-form t "Eval forms in (comment) as if top level")
