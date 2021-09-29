@@ -54,6 +54,7 @@ Put this in .dir-locals.el:
    (typescript-mode . tide-hl-identifier-mode)
    (typescript-mode . ar-emacs--setup-tsx-company-backends))
   :custom
+  (tide-sync-request-timeout 3 "Seems like two seconds is too little sometimes")
   (typescript-indent-level 2)
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
