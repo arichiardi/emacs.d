@@ -159,6 +159,9 @@
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
 	build-step = borg-byte-compile
+[submodule "hl-todo"]
+	path = lib/hl-todo
+	url = git@github.com:tarsius/hl-todo.git
 [submodule "ht"]
 	path = lib/ht
 	url = git@github.com:Wilfred/ht.el.git

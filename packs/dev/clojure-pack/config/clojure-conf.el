@@ -23,7 +23,9 @@
          (clojure-mode . subword-mode)
          (clojure-mode . rainbow-delimiters-mode)
          (clojure-mode . flyspell-prog-mode)
-         (clojure-mode . company-mode))
+         (clojure-mode . company-mode)
+         ;; Does not inherit from prog-mode
+         (clojure-mode . hl-todo-mode))
 
   :custom
   (clojure-toplevel-inside-comment-form t "Eval forms in (comment) as if top level")
