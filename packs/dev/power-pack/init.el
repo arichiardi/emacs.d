@@ -91,4 +91,12 @@
 (use-package dap-java
   :after (dap-mode lsp-java))
 
+(use-package hl-todo
+  :hook
+  (prog-mode . hl-todo-mode)
+  (text-mode . hl-todo-mode)
+
+  :customize
+  (hl-todo-highlight-punctuation ":"))
+
 ;;; init.el ends here

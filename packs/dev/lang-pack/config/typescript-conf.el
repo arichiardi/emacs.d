@@ -52,7 +52,9 @@ Put this in .dir-locals.el:
    (typescript-mode . which-key-mode)
    (typescript-mode . tide-setup)
    (typescript-mode . tide-hl-identifier-mode)
-   (typescript-mode . ar-emacs--setup-tsx-company-backends))
+   (typescript-mode . ar-emacs--setup-tsx-company-backends)
+   ;; Does not inherit from prog-mode
+   (typescript-mode . hl-todo-mode))
   :custom
   (tide-sync-request-timeout 3 "Seems like two seconds is too little sometimes")
   (typescript-indent-level 2)
