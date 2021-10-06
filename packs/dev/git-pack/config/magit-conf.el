@@ -24,6 +24,7 @@
           ("q" . ar-emacs--magit-quit-session))
          (:map dired-mode-map
           ("C-x g" . magit-dired-log)))
+  :hooks (magit-todos-mode)
   :init
   (setq magit-view-git-manual-method 'woman)
 
@@ -41,6 +42,10 @@
   ((magit-log-edit-mode . (lambda ()
                               (set-fill-column 72)
                               (auto-fill-mode 1)))))
+
+(use-package magit-todos
+  :after magit
+  :hook (magit-status-mode . magit-todos-mode))
 
 (with-eval-after-load 'info
   (info-initialize)

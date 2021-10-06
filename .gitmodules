@@ -218,6 +218,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+[submodule "magit-todos"]
+	path = lib/magit-todos
+	url = git@github.com:alphapapa/magit-todos.git
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
@@ -330,6 +333,9 @@
 [submodule "parseedn"]
 	path = lib/parseedn
 	url = git@github.com:clojure-emacs/parseedn.git
+[submodule "pcre2el"]
+	path = lib/pcre2el
+	url = git@github.com:joddie/pcre2el.git
 [submodule "persp-projectile"]
 	path = lib/persp-projectile
 	url = git@github.com:bbatsov/persp-projectile.git
