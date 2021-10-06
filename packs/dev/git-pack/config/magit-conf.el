@@ -21,21 +21,21 @@
   :bind (("C-x g" . magit-status)
          ("C-x M-g" . magit-dispatch-popup)
          (:map magit-status-mode-map
-          ("q" . ar-emacs--magit-quit-session)))
+          ("q" . ar-emacs--magit-quit-session))
+         (:map dired-mode-map
+          ("C-x g" . magit-dired-log)))
   :init
   (setq magit-view-git-manual-method 'woman)
 
-  :config
-  (magit-add-section-hook 'magit-status-sections-hook
-                          'magit-insert-modules
-                          'magit-insert-stashes
-                          'append)
-
   :custom
+  (magit-section-visibility-indicator '("..." . t))
+  (magit-diff-refine-hunk t)
   (magit-prefer-remote-upstream t "Favor remote branches when reading upstreams.")
   ;; https://emacs.stackexchange.com/questions/54787/magit-set-upstream-to-origin-master-automatically
   (magit-branch-adjust-remote-upstream-alist '(("main"  . ("/"))
                                                ("master" . ("main" "master" "next" "maint"))))
+  ;; https://irreal.org/blog/?p=8877
+  (magit-section-initial-visibility-alist '((stashes . hide) (untracked . hide) (unpushed . hide)))
 
   :hook
   ((magit-log-edit-mode . (lambda ()
