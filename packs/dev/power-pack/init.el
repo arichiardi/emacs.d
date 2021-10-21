@@ -46,7 +46,8 @@
 (use-package markdown-mode
   :mode "\\.md\\'"
   :custom
-  (markdown-open-command "function md() { pandoc \"$1\" | lynx -stdin; }; md" "Render markdown using pandoc."))
+  (markdown-command '("pandoc" "--from=markdown" "--to=html5") "Compile markdown with pandoc, it seems to render GFM better.")
+  (markdown-open-command "code" "Fallback mode opens externally with vscode."))
 
 (use-package text-mode
  :preface (provide 'text-mode)
