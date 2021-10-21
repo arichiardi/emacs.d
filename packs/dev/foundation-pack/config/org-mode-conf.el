@@ -233,18 +233,17 @@ This can be 0 for immediate, or a floating point value.")
            (file ,(concat org-directory "/agenda/work.org.gpg"))
            "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" :clock-resume t)
 
-          ("wc" "Commit Ticket"
+          ("wn" "Note"
            entry
-           (file+olp+datetree ,(concat org-directory "/agenda/tickets.org.gpg"))
+           (file ,(concat org-directory "/agenda/work.org.gpg"))
            ,(string-join
-             (list "* %(ar-emacs--org-find-commit-ticket (ar-emacs--org-retrieve-commit-text)) %^g"
+             (list "* %? :note:"
+                   "%a"
                    ":LOGBOOK:"
-                   ":added: %T"
+                   ":added: %U"
                    ":END:"
-                   "%(ar-emacs--org-find-commit-msg (ar-emacs--org-retrieve-commit-text))%?")
-             "\n")
-           :clock-resume t
-           :tree-type week)
+                   "%?")
+             "\n") :clock-in t :clock-resume t)
 
           ("wm" "Meeting/Call"
            entry
@@ -255,8 +254,7 @@ This can be 0 for immediate, or a floating point value.")
            entry
            (file "")
            "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
-          ))
-  )
+          )))
 
 (use-package org-clock
   :init
