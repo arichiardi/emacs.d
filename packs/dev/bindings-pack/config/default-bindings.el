@@ -237,4 +237,9 @@
 
 (global-set-key (kbd "C-x !") 'live-server-kill-terminal)
 
+;;; Multiple Cursors
+(global-set-key (kbd "<C-S-mouse-1>") 'mc/add-cursor-on-click) ; works just in a X window
+(global-set-key (kbd "<C-next>") 'mc/mark-next-like-this)
+(global-set-key (kbd "<C-prior>") 'mc/mark-previous-like-this)
+
 ;;; default-bindings.el ends here
