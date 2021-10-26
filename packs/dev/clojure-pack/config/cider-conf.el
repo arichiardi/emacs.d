@@ -44,6 +44,7 @@
   :hook
   (cider-mode . eldoc-mode)
   (cider-mode . which-key-mode)
+  (cider-mode . clj-refactor-mode)
   (cider-repl-mode . (lambda () (helm-cider-mode 1)))
 
   (cider-repl-mode . eldoc-mode)
