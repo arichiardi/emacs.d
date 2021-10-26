@@ -27,6 +27,10 @@
 	url = git@github.com:clojure-emacs/cider.git
 	build-step = eldev compile
 	build-step = eldev build :autoloads
+[submodule "clj-refactor"]
+	path = lib/clj-refactor
+	url = git@github.com:clojure-emacs/clj-refactor.el.git
+	build-step = make compile
 [submodule "clojure-mode"]
 	path = lib/clojure-mode
 	url = git@github.com:clojure-emacs/clojure-mode.git
@@ -93,6 +97,9 @@
 [submodule "feature-mode"]
 	path = lib/feature-mode
 	url = git@github.com:michaelklishin/cucumber.el.git
+[submodule "findr"]
+	path = lib/findr
+	url = git@github.com:emacsorphanage/findr.git
 [submodule "flycheck"]
 	path = lib/flycheck
 	url = git@github.com:flycheck/flycheck.git
@@ -191,6 +198,9 @@
 [submodule "json-snatcher"]
 	path = lib/json-snatcher
 	url = git@github.com:Sterlingg/json-snatcher.git
+[submodule "jump"]
+	path = lib/jump
+	url = git@github.com:eschulte/jump.el.git
 [submodule "kaocha-runner"]
 	path = lib/kaocha-runner
 	url = git@github.com:magnars/kaocha-runner.el.git
@@ -241,6 +251,9 @@
 [submodule "modus-themes"]
 	path = lib/modus-themes
 	url = git@gitlab.com:protesilaos/modus-themes.git
+[submodule "multiple-cursors"]
+	path = lib/multiple-cursors
+	url = git@github.com:magnars/multiple-cursors.el.git
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
