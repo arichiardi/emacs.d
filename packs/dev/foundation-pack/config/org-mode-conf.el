@@ -109,15 +109,21 @@ This can be 0 for immediate, or a floating point value.")
   (org-after-todo-state-change . ar-emacs--org-auto-todo-state-change)
 
   :config
+  (setq org-directory (concat "~/git/" "ar-org"))
+  (setq ar-emacs--work-org-file (concat org-directory "/agenda/work.org.gpg"))
+  (setq ar-emacs--notes-org-file (concat org-directory "/agenda/notes.org.gpg"))
+  (setq ar-emacs--personal-org-file (concat org-directory "/agenda/personal.org.gpg"))
+
   ;; http://orgmode.org/worg/org-configs/org-customization-guide.html
   ;; https://github.com/robertutterback/config/blob/master/emacs/org-mode.org
   ;; http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/
-  (setq org-directory (concat "~/git/" "ar-org"))
-  (setq org-default-notes-file (concat org-directory "/agenda/notes.org.gpg"))
+
+
+  (setq org-default-notes-file ar-emacs--notes-org-file)
   (setq org-archive-location (concat org-directory "/archive/archive.org.gpg" "::datetree/")) ;; Filename::heading
-  (setq org-agenda-files (list (concat org-directory "/agenda/notes.org.gpg")
-                               (concat org-directory "/agenda/work.org.gpg")
-                               (concat org-directory "/agenda/personal.org.gpg")))
+  (setq org-agenda-files (list ar-emacs--notes-org-file
+                               ar-emacs--work-org-file
+                               ar-emacs--personal-org-file))
 
   (setq org-agenda-include-diary t)
   (setq org-reverse-note-order t)
@@ -186,6 +192,14 @@ This can be 0 for immediate, or a floating point value.")
 
 (use-package org-capture
   :config
+  (setq ar-emacs--org-capture-todo (string-join
+                                    (list "* TODO %^{Brief Description} %^g"
+                                          ":LOGBOOK:"
+                                          ":ADDED: %U"
+                                          ":END:"
+                                          "%?")
+                                    "\n"))
+
   (setq org-capture-templates
         `(("a" "Article/video to read/watch"
            entry
@@ -195,65 +209,54 @@ This can be 0 for immediate, or a floating point value.")
           ("t" "Todo"
            entry
            (file "")
-           ,(string-join
-             (list "* TODO %^{Brief Description} %^g"
-                   ":LOGBOOK:"
-                   ":added: %U"
-                   ":END:"
-                   "%?")
-             "\n")
+           ,ar-emacs--org-capture-todo
            :clock-resume t)
-
-          ("b" "Blog idea"
-           entry
-           (file "")
-           "* TODO %^{Brief Description}\n%?\n" :clock-resume t)
 
           ("e" "Email"
            entry
            (file "")
-           "* TODO %^{Title}\n  Source: %u, %c\n\n  %i" :clock-in t :clock-resume t)
+           "* TODO %^{Title}\n Source: %u, %c\n\n  %i" :clock-resume t)
 
           ("n" "Note, snippet, word or fact"
            entry
            (file "")
            ,(string-join
              (list "* %? :note:"
-                   "%a"
+                   "%A"
                    ":LOGBOOK:"
-                   ":added: %U"
+                   "ADDED: %U"
                    ":END:"
                    "%?")
-             "\n")  :clock-in t :clock-resume t)
+             "\n") :clock-resume t)
 
           ("w" "Work Templates")
 
           ("wt" "Work Todo"
            entry
-           (file ,(concat org-directory "/agenda/work.org.gpg"))
-           "* TODO %^{Brief Description} %^g\n%?\nAdded: %U" :clock-resume t)
+           (file ,ar-emacs--work-org-file)
+           `ar-emacs--org-capture-todo
+           :clock-resume t)
 
-          ("wn" "Note"
+          ("wr" "Review Note"
            entry
-           (file ,(concat org-directory "/agenda/work.org.gpg"))
+           (file ,ar-emacs--work-org-file)
            ,(string-join
-             (list "* %? :note:"
-                   "%a"
+             (list "* %^{Brief Description} :review:%^g:"
                    ":LOGBOOK:"
-                   ":added: %U"
+                   "ADDED: %U"
                    ":END:"
                    "%?")
-             "\n") :clock-in t :clock-resume t)
+             "\n") :clock-resume t)
 
           ("wm" "Meeting/Call"
            entry
-           (file ,(concat org-directory "/agenda/work.org.gpg"))
-           "* %^{Name} :meeting:\n%?\n" :clock-in t :clock-resume t)
+           (file ,ar-emacs--work-org-file)
+           "* %^{Name} :meeting:\n%?\n" :clock-resume t)
 
           ("wr" "Respond to"
            entry
            (file "")
-           "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-in t :clock-resume t :immediate-finish t)
+           "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-resume t)
           )))
 
 (use-package org-clock
