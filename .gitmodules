@@ -22,6 +22,11 @@
 [submodule "bui"]
 	path = lib/bui
 	url = git@github.com:alezost/bui.el.git
+[submodule "cider"]
+	path = lib/cider
+	url = git@github.com:clojure-emacs/cider.git
+	build-step = eldev compile
+	build-step = eldev build :autoloads
 [submodule "clojure-mode"]
 	path = lib/clojure-mode
 	url = git@github.com:clojure-emacs/clojure-mode.git
@@ -253,9 +258,6 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/cider"]
-	path = packs/dev/clojure-pack/vendor/submodules/cider
-	url = git://github.com/clojure-emacs/cider.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
 	path = packs/dev/clojure-pack/vendor/submodules/edn
 	url = git://github.com/expez/edn.el.git
@@ -277,9 +279,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters"]
 	path = packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters
 	url = https://github.com/Fanael/rainbow-delimiters
-[submodule "packs/dev/clojure-pack/vendor/submodules/spinner-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/spinner-el
-	url = git@github.com:Malabarba/spinner.el.git
 [submodule "packs/dev/foundation-pack/vendor/submodules/epl"]
         path = packs/dev/foundation-pack/vendor/submodules/epl
         url = git://github.com/cask/epl.git
@@ -360,6 +359,9 @@
 [submodule "projectile"]
 	path = lib/projectile
 	url = git@github.com:bbatsov/projectile.git
+[submodule "queue"]
+	path = lib/queue
+	url = git@github.com:emacsmirror/queue.git
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
