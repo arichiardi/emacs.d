@@ -1,3 +1,9 @@
+;;; init.el --- Foundation Pack
+
+;;; Commentary:
+
+;;; Code:
+
 (setq ispell-local-dictionary "canadian")
 
 (use-package dash
@@ -63,3 +69,7 @@
   (editorconfig-after-apply-functions . (lambda (_) (setq web-mode-block-padding 0)))
   :config
   (editorconfig-mode 1))
+
+(global-so-long-mode)
+
+;;; init.el ends here
