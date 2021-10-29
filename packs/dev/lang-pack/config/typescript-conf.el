@@ -67,7 +67,9 @@ Put this in .dir-locals.el:
 (use-package tide
   :init
   (setq tide-tsserver-logs-folder (expand-file-name "tsserver" live-tmp-dir))
-  (setq tide-tsserver-process-environment (format "TSS_LOG=-level verbose -file %s" tide-tsserver-logs-folder)))
+  (setq tide-tsserver-process-environment (format "TSS_LOG=-level verbose -file %s" tide-tsserver-logs-folder))
+  :custom
+  (tide-save-buffer-after-code-edit nil))
 
 ;; aligns annotation to the right hand side
 ;; (setq company-tooltip-align-annotations t)
