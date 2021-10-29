@@ -97,7 +97,7 @@
   (prog-mode . hl-todo-mode)
   (text-mode . hl-todo-mode)
 
-  :customize
+  :custom
   (hl-todo-highlight-punctuation ":"))
 
 ;;; init.el ends here
