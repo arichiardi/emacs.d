@@ -24,7 +24,6 @@
           ("q" . ar-emacs--magit-quit-session))
          (:map dired-mode-map
           ("C-x g" . magit-dired-log)))
-  :hook (magit-todos-mode)
   :init
   (setq magit-view-git-manual-method 'woman)
 
