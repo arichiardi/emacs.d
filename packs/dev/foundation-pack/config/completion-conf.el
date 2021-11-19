@@ -9,8 +9,9 @@
   :defer t
   :custom
   (company-tooltip-limit 25)
-  (company-auto-commit t)
-  (company-require-match t)
+  (company-auto-commit-chars nil)
+  (company-auto-commit nil)
+  (company-require-match nil)
   (company-tooltip-flip-when-above t)
   ;; (company-idle-delay .2)
   (company-tooltip-idle-delay 0)
