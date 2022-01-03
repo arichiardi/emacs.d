@@ -1,15 +1,24 @@
+;;; cosmetic.el --- Cosmetic
+
+;;; Commentary:
+
+;;; Code:
+
+;; This setting needs to match what is in .Xresources
+(set-face-attribute 'default nil :font "JetBrains Mono-11")
+
 (setq font-lock-maximum-decoration t
       color-theme-is-global t)
 
 ;; Line-wrapping
 (set-default 'fill-column 72)
 
-;get rid of clutter
+;; get rid of clutter
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
-;remove bells
+;; remove bells
 (setq ring-bell-function 'ignore)
 
 (defun live-set-frame-font (font-string)
@@ -32,3 +41,5 @@
     (live-set-frame-font font-string))))
 
 (live-set-frame-darwin-font "Menlo-12")
+
+;;; cosmetic.el ends here
