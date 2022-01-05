@@ -45,16 +45,16 @@ Put this in .dir-locals.el:
   :init
   (require 'smartparens-javascript)
   :hook
-  ((typescript-mode . company-mode)
-   (typescript-mode . smartparens-strict-mode)
-   (typescript-mode . subword-mode)
-   (typescript-mode . eldoc-mode)
-   (typescript-mode . which-key-mode)
-   (typescript-mode . tide-setup)
-   (typescript-mode . tide-hl-identifier-mode)
-   (typescript-mode . ar-emacs--setup-tsx-company-backends)
-   ;; Does not inherit from prog-mode
-   (typescript-mode . hl-todo-mode))
+  (typescript-mode . company-mode)
+  (typescript-mode . smartparens-strict-mode)
+  (typescript-mode . subword-mode)
+  (typescript-mode . eldoc-mode)
+  (typescript-mode . which-key-mode)
+  (typescript-mode . tide-setup)
+  (typescript-mode . tide-hl-identifier-mode)
+  (typescript-mode . ar-emacs--setup-tsx-company-backends)
+  ;; Does not inherit from prog-mode
+  (typescript-mode . hl-todo-mode)
   :custom
   (tide-sync-request-timeout 3 "Seems like two seconds is too little sometimes")
   (typescript-indent-level 2)
@@ -62,7 +62,9 @@ Put this in .dir-locals.el:
   :config
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
-  (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append))
+  ;; typescript-mode/:config: typescript-tide is not a valid syntax checker
+  ;; (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
+  )
 
 (use-package tide
   :init
@@ -70,9 +72,6 @@ Put this in .dir-locals.el:
   (setq tide-tsserver-process-environment (format "TSS_LOG=-level verbose -file %s" tide-tsserver-logs-folder))
   :custom
   (tide-save-buffer-after-code-edit nil))
-
-;; aligns annotation to the right hand side
-;; (setq company-tooltip-align-annotations t)
 
 ;; From Spacemacs
 (defun ts-open-region-in-playground (start end)
