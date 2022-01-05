@@ -7,8 +7,7 @@
 ;; This setting needs to match what is in .Xresources
 (set-face-attribute 'default nil :font "JetBrains Mono-11")
 
-(setq font-lock-maximum-decoration t
-      color-theme-is-global t)
+(setq font-lock-maximum-decoration t)
 
 ;; Line-wrapping
 (set-default 'fill-column 72)
