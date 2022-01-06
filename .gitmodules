@@ -171,6 +171,9 @@
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
 	build-step = borg-byte-compile
+[submodule "helm-xref"]
+	path = lib/helm-xref
+	url = git@github.com:brotzeit/helm-xref.git
 [submodule "hl-todo"]
 	path = lib/hl-todo
 	url = git@github.com:tarsius/hl-todo.git
