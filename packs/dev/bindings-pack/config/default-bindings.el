@@ -206,7 +206,6 @@
 (define-key global-map [remap list-buffers]          'helm-mini)
 (define-key global-map [remap dabbrev-expand]        'helm-dabbrev)
 (define-key global-map [remap find-tag]              'helm-etags-select)
-(define-key global-map [remap xref-find-definitions] 'helm-etags-select)
 (global-set-key (kbd "M-s")                          'helm-do-grep-ag)
 (global-set-key (kbd "C-x r p")                      'helm-projects-history)
 (global-set-key (kbd "C-x r c")                      'helm-addressbook-bookmarks)

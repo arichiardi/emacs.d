@@ -139,4 +139,7 @@ First call indent, second complete symbol, third complete fname."
   (helm-ag-insert-at-point 'symbol)
   (helm-ag-use-grep-ignore-list t))
 
+(use-package helm-xref
+  :after helm)
+
 ;;; helm-conf.el ends here
