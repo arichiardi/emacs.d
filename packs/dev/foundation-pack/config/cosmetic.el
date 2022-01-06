@@ -4,10 +4,12 @@
 
 ;;; Code:
 
-;; It seems emacsclient requires to set backend and font with elisp rather than .Xresources.
-;; However, the below settings need to match what is in .Xresources.
-(add-to-list 'default-frame-alist '(font-backend . ftcrhb))
-(set-face-attribute 'default nil :font "JetBrains Mono-8")
+;; FIXME: [emacs 29] It seems emacsclient requires to set backend and font with elisp alongside than
+;; .Xresources. However, we had to revert because of a segmentation fault.
+;; (add-to-list 'default-frame-alist '(font-backend . ftcrhb)
+;;
+;; NOTE: all the elisp settings need to match what is in .Xresources
+(set-face-attribute 'default nil :font "JetBrains Mono-11")
 
 (setq font-lock-maximum-decoration t)
 
