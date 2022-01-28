@@ -234,7 +234,7 @@ This can be 0 for immediate, or a floating point value.")
           ("wt" "Work Todo"
            entry
            (file ,ar-emacs--work-org-file)
-           `ar-emacs--org-capture-todo
+           ,ar-emacs--org-capture-todo
            :clock-resume t)
 
           ("wr" "Review Note"
