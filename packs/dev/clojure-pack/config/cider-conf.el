@@ -16,6 +16,12 @@
   :config
   (cider-company-enable-fuzzy-completion)
 
+  :bind ((:map cider-ns-map
+               ("d" . ar-emacs-cider-repl-in-ns-dev))
+         (:map cider-eval-commands-map
+               ("M-l" . ar-emacs-clj-eval-all-let-bindings)
+               ("M-d" . cider-debug-defun-at-point)))
+
   :custom
   (cider-popup-stacktraces t "Popup stacktraces always on")
   (cider-popup-stacktraces-in-repl nil "Popup stacktraces not in REPL")
