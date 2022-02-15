@@ -4,14 +4,16 @@
 
 ;;; Code:
 
-(live-add-pack-lib "projectile")
-
 (use-package projectile
   :init
   (setq projectile-cache-file (concat live-tmp-dir "projectile-cache"))
   (setq projectile-known-projects-file (concat live-tmp-dir "projectile-known-projects.eld"))
 
   :config
+  ;; Pretty standard to have this setup, setting it globally
+  (projectile-update-project-type 'clojure-cli
+                                  :test-dir "test/"
+                                  :src-dir "src/")
   (projectile-register-project-type 'yarn '("package.json")
                                     :compile "yarn install"
                                     :test "yarn test"
