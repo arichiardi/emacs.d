@@ -20,6 +20,9 @@
 
 ;;; Code:
 
+;; Distinguish C-m from RET - https://emacs.stackexchange.com/a/20241/3979
+(define-key input-decode-map [?\C-m] [C-m])
+
 ;; gracefully kill Emacs --daemon
 (global-set-key (kbd "C-x C-M-c") 'save-buffers-kill-emacs)
 
