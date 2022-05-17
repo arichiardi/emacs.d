@@ -8,6 +8,22 @@
 
 (load "cider-autoloads" t t)
 
+(use-package clj-refactor
+  :diminish clj-refactor-mode
+  :config
+  (cljr-add-keybindings-with-prefix "C-c C-m")
+  (setq cljr-magic-require-namespaces (append '(("s" . "clojure.spec.alpha") ("ig" . "integrant.core") ("edn"   . "clojure.edn"))))
+  (setq cljr-project-clean-exceptions (append '("deps.edn" "build.clj")))
+
+  :custom
+  (cljr-warn-on-eval nil)
+  (cljr-eagerly-build-asts-on-startup t "do not build the project AST on startup")
+  (cljr-auto-clean-ns nil "We do not want to mess with existing requires")
+  (cljr-auto-sort-ns nil "We do not want to mess with existing requires")
+  (cljr-favor-prefix-notation nil "no we do not like it")
+  (cljr-clojure-test-declaration "[clojure.test :as test :refer [deftest testing is]]")
+  (cljr-magic-requires :prompt))
+
 (use-package cider
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
@@ -51,7 +67,10 @@
   (cider-mode . eldoc-mode)
   (cider-mode . which-key-mode)
   (cider-mode . clj-refactor-mode)
-  (cider-repl-mode . (lambda () (helm-cider-mode 1)))
+  (cider-mode . (lambda ()
+                  (progn
+                    (helm-cider-mode 1)
+                    (yas-minor-mode 1))))
 
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
