@@ -55,6 +55,10 @@
 [submodule "company-shell"]
 	path = lib/company-shell
 	url = git@github.com:Alexander-Miller/company-shell.git
+[submodule "compat"]
+	path = lib/compat
+	url = git@github.com:emacsmirror/compat.git
+	build-step = make
 [submodule "copy-as-format"]
 	path = lib/copy-as-format
 	url = git@github.com:sshaw/copy-as-format.git
