@@ -24,6 +24,10 @@
   (cljr-clojure-test-declaration "[clojure.test :as test :refer [deftest testing is]]")
   (cljr-magic-requires :prompt))
 
+(use-package ob-clojure
+  :init
+  (setq org-babel-clojure-backend 'cider))
+
 (use-package cider
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
