@@ -7,7 +7,6 @@
 (live-add-pack-lib "clojure-mode")
 
 (use-package clojure-mode
-  :mode ("\\.clj\\'" "\\.cljs\\'" "\\.cljc\\'" "\\.clje\\'" "\\.joke\\'" "\\.bb\\'")
   :defines clojure-mode-syntax-table
 
   :init
@@ -41,6 +40,8 @@
          ("C-t C-k" . clojure-toggle-keyword-string))
 
   :config
+  (add-to-list 'interpreter-mode-alist '("bb" . clojure-mode))
+
   (require 'flycheck-clj-kondo)
 
   ;; Treat hyphens as a word character when transposing words
@@ -105,6 +106,7 @@
     (stub 1)                       ;; shrubbery
     (mock 1)                       ;; shrubbery
     (spy 1)                        ;; shrubbery
+    (js-await 'defun)              ;; shadow cljs
     (when-joined '(2 :form :form (0))) ;; cohesic
     (defhandler 'defun)                ;; cohesic
     (exception '(1 :form))             ;; cohesic
