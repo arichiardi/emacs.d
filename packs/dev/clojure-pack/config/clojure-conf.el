@@ -7,6 +7,12 @@
 (live-add-pack-lib "clojure-mode")
 
 (use-package clojure-mode
+  :mode (("\\.clj\\'" . clojure-mode)
+         ("\\.cljs\\'" . clojurescript-mode)
+         ("\\.cljc\\'" . clojurec-mode)
+         ("\\.boot\\'" . clojure-mode)
+         ("\\.edn\\'" . clojure-mode)
+         ("\\.bb\\'" . clojure-mode))
   :defines clojure-mode-syntax-table
 
   :init
@@ -18,13 +24,13 @@
              ("w" . kaocha-runner-show-warnings)
              ("h" . kaocha-runner-hide-windows))
 
-  :hook ((clojure-mode . paredit-mode)
-         (clojure-mode . subword-mode)
-         (clojure-mode . rainbow-delimiters-mode)
-         (clojure-mode . flyspell-prog-mode)
-         (clojure-mode . company-mode)
-         ;; Does not inherit from prog-mode
-         (clojure-mode . hl-todo-mode))
+  :hook
+  ((clojure-mode clojurescript-mode clojurec-mode) . paredit-mode)
+  ((clojure-mode clojurescript-mode clojurec-mode) . subword-mode)
+  ((clojure-mode clojurescript-mode clojurec-mode) . rainbow-delimiters-mode)
+  ((clojure-mode clojurescript-mode clojurec-mode) . flyspell-prog-mode)
+  ((clojure-mode clojurescript-mode clojurec-mode) . company-mode)
+  ((clojure-mode clojurescript-mode clojurec-mode) . hl-todo-mode)
 
   :custom
   (clojure-toplevel-inside-comment-form t "Eval forms in (comment) as if top level")
@@ -40,8 +46,6 @@
          ("C-t C-k" . clojure-toggle-keyword-string))
 
   :config
-  (add-to-list 'interpreter-mode-alist '("bb" . clojure-mode))
-
   (require 'flycheck-clj-kondo)
 
   ;; Treat hyphens as a word character when transposing words
