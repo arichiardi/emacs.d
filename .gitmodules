@@ -128,6 +128,9 @@
 [submodule "git-modes"]
 	path = lib/git-modes
 	url = git@github.com:magit/git-modes.git
+[submodule "git-timemachine"]
+	path = lib/git-timemachine
+	url = git@github.com:emacsmirror/git-timemachine.git
 [submodule "go-complete"]
 	path = lib/go-complete
 	url = git@github.com:vibhavp/go-complete.git
