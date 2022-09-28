@@ -4,6 +4,8 @@
 
 ;;; Code:
 
+(setq ar-emacs-org-directory "~/git/ar-org")
+
 (use-package org-protocol
   :demand t)
 
@@ -77,6 +79,11 @@ This can be 0 for immediate, or a floating point value.")
       (org-insert-heading-respect-content arg)
     (cua-rectangle-mark-mode arg)))
 
+(defun ar-emacs--org-id-complete-link (&optional arg)
+  "Create an id: link using completion (with optional ARG)."
+  (concat "id:"
+          (org-id-get-with-outline-path-completion)))
+
 ;; no time for transforming this to use-package at the moment
 (eval-after-load "org"
   '(progn
@@ -106,10 +113,12 @@ This can be 0 for immediate, or a floating point value.")
   :hook
   (org-mode . org-indent-mode)
   (org-mode . flyspell-mode)
+  (org-mode . company-mode)
   (org-after-todo-state-change . ar-emacs--org-auto-todo-state-change)
 
   :config
-  (setq org-directory (concat "~/git/" "ar-org"))
+  (setq org-directory ar-emacs-org-directory)
+  (setq org-id-locations-file (expand-file-name ".org-id-locations" live-etc-dir))
   (setq ar-emacs--work-org-file (concat org-directory "/agenda/work.org.gpg"))
   (setq ar-emacs--notes-org-file (concat org-directory "/agenda/notes.org.gpg"))
   (setq ar-emacs--personal-org-file (concat org-directory "/agenda/personal.org.gpg"))
@@ -117,7 +126,6 @@ This can be 0 for immediate, or a floating point value.")
   ;; http://orgmode.org/worg/org-configs/org-customization-guide.html
   ;; https://github.com/robertutterback/config/blob/master/emacs/org-mode.org
   ;; http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/
-
 
   (setq org-default-notes-file ar-emacs--notes-org-file)
   (setq org-archive-location (concat org-directory "/archive/archive.org.gpg" "::datetree/")) ;; Filename::heading
@@ -135,6 +143,9 @@ This can be 0 for immediate, or a floating point value.")
   (setq org-loop-over-headlines-in-active-region 'start-level)
   ;; https://stackoverflow.com/a/45951872/1888507
   (setq org-treat-insert-todo-heading-as-state-change t)
+  ;; https://emacs.stackexchange.com/a/12434/3979
+  (org-link-set-parameters "id"
+                           :complete 'ar-emacs--org-id-complete-link)
   ;;;;;;;;;;;;;;
   ;;  Refile  ;;
   ;;;;;;;;;;;;;;
