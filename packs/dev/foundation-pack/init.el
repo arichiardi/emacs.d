@@ -41,6 +41,7 @@
 (live-load-config-file "zone-conf.el")
 (live-load-config-file "monkey-patch.el")
 (live-load-config-file "org-mode-conf.el")
+(live-load-config-file "org-roam-conf.el")
 (live-load-config-file "completion-conf.el")
 (live-load-config-file "helm-conf.el")
 (live-load-config-file "projectile-conf.el")

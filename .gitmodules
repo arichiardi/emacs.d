@@ -278,6 +278,15 @@
 [submodule "org-jira"]
 	path = lib/org-jira
 	url = git@github.com:ahungry/org-jira.git
+[submodule "org-roam"]
+	path = lib/org-roam
+	url = git@github.com:org-roam/org-roam.git
+	load-path = .
+	load-path = extensions
+	build-step = eldev compile
+[submodule "org-roam-ui"]
+	path = lib/org-roam-ui
+	url = git@github.com:org-roam/org-roam-ui.git
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
@@ -285,8 +294,8 @@
 	path = packs/dev/clojure-pack/vendor/submodules/edn
 	url = git://github.com/expez/edn.el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/fuzzy-el"]
-        path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
-        url = git://github.com/auto-complete/fuzzy-el.git
+	path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
+	url = git://github.com/auto-complete/fuzzy-el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/hydra"]
 	path = packs/dev/clojure-pack/vendor/submodules/hydra
 	url = git://github.com/abo-abo/hydra.git
@@ -397,6 +406,9 @@
 [submodule "sesman"]
 	path = lib/sesman
 	url = git@github.com:vspinu/sesman.git
+[submodule "simple-httpd"]
+	path = lib/simple-httpd
+	url = git@github.com:skeeto/emacs-web-server.git
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
@@ -453,6 +465,9 @@
 [submodule "web-mode"]
 	path = lib/web-mode
 	url = git@github.com:fxbois/web-mode.git
+[submodule "websocket"]
+	path = lib/websocket
+	url = git@github.com:ahyatt/emacs-websocket.git
 [submodule "which-key"]
 	path = lib/which-key
 	url = git@github.com:justbur/emacs-which-key.git
