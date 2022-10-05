@@ -10,8 +10,31 @@
   :after org
   :config
   (setq org-roam-directory (concat ar-emacs-org-directory "/zettelkasten"))
+  (setq org-roam-dailies-directory "journal/")
+  (setq ar-emacs--org-roam-current-job-file (concat org-roam-directory "/cohesic.org.gpg"))
+
   (setq org-roam-db-location (expand-file-name "org-roam.db" live-etc-dir))
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+
+  ;; capture
+  (setq ar-emacs--org-roam-capture-todo-header "* TODO %^{Brief Description} %^g")
+  (setq ar-emacs--org-roam-capture-work-todo
+    (string-join
+     (list ar-emacs--org-roam-capture-todo-header
+           ":PROPERTIES:"
+           ":ID: %(org-id-new)"
+           ":END:"
+           "%?")
+     "\n"))
+
+  (setq org-roam-capture-templates
+        `(("w" "Work Templates")
+	      ("wt" "Work Todo"
+           entry
+           ,ar-emacs--org-roam-capture-work-todo
+           :target (file+olp ,ar-emacs--work-org-roam-file ("Tasks"))
+           :clock-resume t)))
+
   (org-roam-db-autosync-mode)
   :custom
   (org-roam-database-connector 'sqlite)

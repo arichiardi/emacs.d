@@ -135,7 +135,10 @@ This can be 0 for immediate, or a floating point value.")
 
   (setq org-agenda-include-diary t)
   (setq org-reverse-note-order t)
+  ;; Links
   (setq org-return-follows-link t)
+  (setq org-id-link-to-org-use-id t)
+
   (setq org-log-done t)
   (setq org-fast-tag-selection-single-key 'expert)
   (setq org-catch-invisible-edits 'show)
