@@ -13,6 +13,7 @@
   (setq org-roam-dailies-directory "journal/")
   (setq ar-emacs--org-roam-current-job-file (concat org-roam-directory "/cohesic.org.gpg"))
 
+  (setq org-roam-link-extensions '(".org" ".org.gpg"))
   (setq org-roam-db-location (expand-file-name "org-roam.db" live-etc-dir))
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
 
