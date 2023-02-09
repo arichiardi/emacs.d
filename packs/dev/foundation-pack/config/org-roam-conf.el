@@ -33,7 +33,7 @@
 	      ("wt" "Work Todo"
            entry
            ,ar-emacs--org-roam-capture-work-todo
-           :target (file+olp ,ar-emacs--work-org-roam-file ("Tasks"))
+           :target (file+olp ,ar-emacs--org-roam-current-job-file ("Tasks"))
            :clock-resume t)))
 
   (org-roam-db-autosync-mode)
