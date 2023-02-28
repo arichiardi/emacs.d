@@ -83,6 +83,7 @@
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:skeeto/emacsql.git
+	no-byte-compile = emacsql-pg.el
 [submodule "emojify"]
 	path = lib/emojify
 	url = git@github.com:iqbalansari/emacs-emojify.git
@@ -225,6 +226,9 @@
 [submodule "lib/typescript-mode"]
 	path = lib/typescript-mode
 	url = git@github.com:emacs-typescript/typescript.el.git
+[submodule "llama"]
+	path = lib/llama
+	url = https://git.sr.ht/~tarsius/llama
 [submodule "lsp-java"]
 	path = lib/lsp-java
 	url = git@github.com:emacs-lsp/lsp-java.git
