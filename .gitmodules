@@ -498,3 +498,6 @@
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
 	build-step = borg-byte-compile
+[submodule "lib/dotenv-el"]
+	path = lib/dotenv-el
+	url = git@github.com:pkulev/dotenv.el.git
