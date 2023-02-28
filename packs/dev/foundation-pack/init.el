@@ -71,6 +71,15 @@
   :config
   (editorconfig-mode 1))
 
+(use-package dotenv
+  :after projectile
+  :config
+  (defun dotenv-projectile-hook ()
+   "Projectile hook."
+   (dotenv-update-project-env (projectile-project-root)))
+
+  (add-to-list 'projectile-after-switch-project-hook #'dotenv-projectile-hook))
+
 (global-so-long-mode)
 
 ;;; init.el ends here
