@@ -65,6 +65,7 @@ eshell windows easier."
 
 ;; https://github.com/seagle0128/.emacs.d/blob/master/lisp/init-shell.el
 (use-package xterm-color
+  :commands xterm-color-filter
   :defines (compilation-environment
             eshell-preoutput-filter-functions
             eshell-output-filter-functions)
