@@ -77,6 +77,9 @@
 [submodule "docker-tramp"]
 	path = lib/docker-tramp
 	url = git@github.com:emacs-pe/docker-tramp.el.git
+[submodule "dotenv"]
+	path = lib/dotenv
+	url = git@github.com:pkulev/dotenv.el.git
 [submodule "editorconfig"]
 	path = lib/editorconfig
 	url = git@github.com:editorconfig/editorconfig-emacs.git
@@ -498,6 +501,3 @@
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
 	build-step = borg-byte-compile
-[submodule "lib/dotenv-el"]
-	path = lib/dotenv-el
-	url = git@github.com:pkulev/dotenv.el.git
