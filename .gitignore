@@ -30,3 +30,4 @@ ido.last
 etc/*
 *-autoloads.el
 .dap*
+/epkgs/
