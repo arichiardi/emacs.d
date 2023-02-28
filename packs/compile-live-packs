@@ -22,7 +22,7 @@ PACKS_DIR="$HOME/.emacs.d/packs"
 
 DASH_DIR="$BORG_LIB_DIR/dash"
 
-CIDER_MAKEABLE_DIR="$PACKS_DIR/dev/clojure-pack/vendor/submodules/cider"
+CIDER_MAKEABLE_DIR="$BORG_LIB_DIR/cider"
 
 MAKEABLE_DIRS=(
     "$PACKS_DIR/dev/foundation-pack/vendor/submodules/epl"
