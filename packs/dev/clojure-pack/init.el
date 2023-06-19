@@ -17,5 +17,6 @@
 (live-load-config-file "clojure-conf.el")
 (live-load-config-file "cider-conf.el")
 
+(use-package babashka)
 
 ;;; init.el ends here
