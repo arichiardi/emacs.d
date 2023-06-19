@@ -13,6 +13,9 @@
 [submodule "avy"]
 	path = lib/avy
 	url = git@github.com:abo-abo/avy.git
+[submodule "babashka-el"]
+	path = lib/babashka-el
+	url = git@github.com:licht1stein/babashka.el.git
 [submodule "borg"]
 	path = lib/borg
 	url = git@github.com:emacscollective/borg.git
