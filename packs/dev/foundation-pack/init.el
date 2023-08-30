@@ -71,8 +71,6 @@
   :config
   (editorconfig-mode 1))
 
-(global-so-long-mode)
-
 ;;(defun dotenv-projectile-hook ()
 ;;   (dotenv-update-project-env (projectile-project-root)))
 
