@@ -86,10 +86,6 @@
 [submodule "editorconfig"]
 	path = lib/editorconfig
 	url = git@github.com:editorconfig/editorconfig-emacs.git
-[submodule "emacsql"]
-	path = lib/emacsql
-	url = git@github.com:skeeto/emacsql.git
-	no-byte-compile = emacsql-pg.el
 [submodule "emojify"]
 	path = lib/emojify
 	url = git@github.com:iqbalansari/emacs-emojify.git
@@ -501,3 +497,7 @@
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
 	build-step = borg-byte-compile
+[submodule "emacsql"]
+	path = lib/emacsql
+	url = git@github.com:magit/emacsql.git
+	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/emacsql:" make
