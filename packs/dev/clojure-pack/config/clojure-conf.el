@@ -14,6 +14,7 @@
          ("\\.edn\\'" . clojure-mode)
          ("\\.bb\\'" . clojure-mode))
   :defines clojure-mode-syntax-table
+  :functions put-clojure-indent
 
   :init
   (bind-keys :prefix-map ar-emacs-kaocha-prefix-map
@@ -35,6 +36,9 @@
   :custom
   (clojure-toplevel-inside-comment-form t "Eval forms in (comment) as if top level")
   (clojure-verify-major-mode nil "Disable extension verification cause it causes stack overflow")
+  (clojure-defun-indents '(fold pfold slice describe testing given using with it do-it go-loop defprotocol defrecord
+                           deftype defroutes async eval-str deftask start stop read-eval-call-test alet mlet fact
+                           eval-in capture-output alias in-parallel either fdef html5 js-await defhandler))
 
   :bind (:map clojure-mode-map
          ("C-c l l" . align-cljjet)
@@ -60,61 +64,31 @@
     (with-syntax-table clojure-mode-with-hyphens-as-word-sep-syntax-table
      (transpose-words arg)))
 
-  (define-clojure-indent
-    (fold 'defun)
-    (pfold 'defun)
-    (pdoseq 1)
-    (slice 'defun)
-    (for-all 1)
-    (describe 'defun)
-    (testing 'defun)
-    (given 'defun)
-    (using 'defun)
-    (with 'defun)
-    (it 'defun)
-    (do-it 'defun)
-    (go-loop 'defun)
-    (defprotocol 'defun)
-    (defrecord 'defun)
-    (deftype 'defun)
-    (deftype 'defun)
-    (defroutes 'defun)
-    (defroutes 'defun)
-    (GET 2)
-    (POST 2)
-    (PUT 2)
-    (DELETE 2)
-    (HEAD 2)
-    (ANY 2)
-    (context 2)
-    (async 'defun)
-    (eval-str 'defun)
-    (deftask 'defun)
-    (start 'defun)
-    (stop 'defun)
-    (read-eval-call-test 'defun)
-    (alet 'defun)
-    (mlet 'defun)
-    (fact 'defun)                  ;; midje
-    (eval-in 'defun)               ;; classlojure
-    (trace-forms (lambda (_ _) 0)) ;; re-frame macros
-    (capture-output 'defun)        ;; lambdacd
-    (alias 'defun)                 ;; lambdacd
-    (in-parallel 'defun)           ;; lambdacd
-    (either 'defun)                ;; lambdacd
-    (fdef 'defun)
-    (html5 'defun)                 ;; hiccup
-    (is-resolved 1)                ;; unbroken-promises
-    (is-rejected 1)                ;; unbroken-promises
-    (->files 1)
-    (stub 1)                       ;; shrubbery
-    (mock 1)                       ;; shrubbery
-    (spy 1)                        ;; shrubbery
-    (js-await 'defun)              ;; shadow cljs
-    (when-joined '(2 :form :form (0))) ;; cohesic
-    (defhandler 'defun)                ;; cohesic
-    (exception '(1 :form))             ;; cohesic
-    (defmeasurement 1)                 ;; cohesic
-    ))
+    (put-clojure-indent 'pdoseq 1)
+
+    (put-clojure-indent 'for-all 1)
+
+    (put-clojure-indent 'GET 2)
+    (put-clojure-indent 'POST 2)
+    (put-clojure-indent 'PUT 2)
+    (put-clojure-indent 'DELETE 2)
+    (put-clojure-indent 'HEAD 2)
+    (put-clojure-indent 'ANY 2)
+    (put-clojure-indent 'context 2)
+
+
+    (put-clojure-indent 'trace-forms (lambda (_ _) 0)) ;; re-frame macros
+
+    (put-clojure-indent 'is-resolved 1)                ;; unbroken-promises
+    (put-clojure-indent '->files 1)
+    (put-clojure-indent 'stub 1)                       ;; shrubbery
+    (put-clojure-indent 'mock 1)                       ;; shrubbery
+    (put-clojure-indent 'spy 1)                        ;; shrubbery
+
+    (put-clojure-indent 'when-joined '(2 :form :form (0))) ;; cohesic
+
+    (put-clojure-indent 'exception '(1 :form))             ;; cohesic
+    (put-clojure-indent 'defmeasurement 1)                 ;; cohesic
+    )
 
 ;;; clojure-conf.el ends here
