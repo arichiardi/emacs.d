@@ -18,19 +18,6 @@
 (live-load-config-file "gtags-conf.el")
 (live-load-config-file "treemacs-conf.el")
 
-(use-package git-gutter
-  :commands global-git-gutter-mode
-  :custom
-  (git-gutter:window-width 2)
-  (git-gutter:lighter " Gut")
-  (git-gutter:modified-sign "~ ")
-  (git-gutter:added-sign "+ ")
-  (git-gutter:deleted-sign "- ")
-  (git-gutter:unchanged-sign "  ")
-  (git-gutter:disabled-modes '(org-mode org-roam-db-autosync-modeorg-roam-mode)))
-
-(global-git-gutter-mode t)
-
 (use-package docker
   :commands (docker)
   :bind ("C-c x d" . docker))
