@@ -4,6 +4,9 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = git@github.com:abo-abo/ace-window.git
+[submodule "alert"]
+	path = lib/alert
+	url = https://github.com/jwiegley/alert
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
@@ -86,6 +89,10 @@
 [submodule "editorconfig"]
 	path = lib/editorconfig
 	url = git@github.com:editorconfig/editorconfig-emacs.git
+[submodule "emacsql"]
+	path = lib/emacsql
+	url = git@github.com:magit/emacsql.git
+	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/emacsql:" make
 [submodule "emojify"]
 	path = lib/emojify
 	url = git@github.com:iqbalansari/emacs-emojify.git
@@ -382,6 +389,9 @@
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
+[submodule "pomidor"]
+	path = lib/pomidor
+	url = https://github.com/TatriX/pomidor
 [submodule "popup"]
 	path = lib/popup
 	url = git@github.com:auto-complete/popup-el.git
@@ -497,7 +507,3 @@
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
 	build-step = borg-byte-compile
-[submodule "emacsql"]
-	path = lib/emacsql
-	url = git@github.com:magit/emacsql.git
-	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/emacsql:" make

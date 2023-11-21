@@ -100,4 +100,21 @@
   :custom
   (hl-todo-highlight-punctuation ":"))
 
+(use-package alert
+  :custom
+  (alert-default-style 'libnotify)
+  (alert-fade-time 3))
+
+(use-package pomidor
+  :bind (("<f12>" . pomidor))
+  :custom
+  (pomidor-sound-tick nil)
+  (pomidor-sound-tack nil)
+  (pomidor-play-sound-file
+   (lambda (file)
+     (start-process "emacs-pomidor-play-sound"
+                    nil
+                    "aplay"
+                    file))))
+
 ;;; init.el ends here
