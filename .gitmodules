@@ -31,8 +31,8 @@
 [submodule "cider"]
 	path = lib/cider
 	url = git@github.com:clojure-emacs/cider.git
-	build-step = eldev compile
-	build-step = eldev build :autoloads
+	build-step = make compile
+  	build-step = borg-update-autoloads
 [submodule "clj-refactor"]
 	path = lib/clj-refactor
 	url = git@github.com:clojure-emacs/clj-refactor.el.git

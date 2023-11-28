@@ -75,7 +75,6 @@
                   (progn
                     (helm-cider-mode 1)
                     (yas-minor-mode 1))))
-
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
