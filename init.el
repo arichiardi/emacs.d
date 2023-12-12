@@ -299,3 +299,9 @@
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
 (put 'downcase-region 'disabled nil)
 (put 'narrow-to-region 'disabled nil)
+
+;; EPG save stuck with gpg 2.4.3
+;;   https://emacs.stackexchange.com/a/78896/3979
+(fset 'epg-wait-for-status 'ignore)
+
+;;; init.el Ends here
