@@ -28,6 +28,26 @@
            "%?")
      "\n"))
 
+  (setq org-roam-dailies-capture-templates
+        `(("d" "default"
+           entry
+           "** %<%H:%M %p> %i%?\n"
+           :if-new (file+head+olp
+                    "%<%Y-%m-%d>.org.gpg"
+                    ,(string-join
+                      (list ":PROPERTIES:"
+                            ":ID: %(org-id-new)"
+                            ":END:"
+                            "-*- epa-file-encrypt-to: (\"a.richiardi.work@gmail.com\") -*-"
+                            "-*- backup-inhibited t; -*-"
+                            "#+TITLE: %<%Y-%m-%d>"
+                            "#+AUTHOR: Andrea Richiardi"
+                            "#+CATEGORY: daily"
+                            "#+STARTUP: content indent")
+                      "\n")
+                    ("Journal"))
+           :jump-to-captured t)))
+
   (setq org-roam-capture-templates
         `(("w" "Work Templates")
 	      ("wt" "Work Todo"
