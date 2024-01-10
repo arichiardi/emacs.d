@@ -457,6 +457,7 @@
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
+  	build-step = make redo
 [submodule "treepy"]
 	path = lib/treepy
 	url = git@github.com:volrath/treepy.el.git
