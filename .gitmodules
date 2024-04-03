@@ -508,3 +508,6 @@
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
 	build-step = borg-byte-compile
+[submodule "zprint"]
+	path = lib/zprint
+	url = https://github.com/DogLooksGood/zprint.el.git
