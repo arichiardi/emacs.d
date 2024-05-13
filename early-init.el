@@ -38,3 +38,9 @@
 ;; in this file and can conflict with later config (particularly where the
 ;; cursor color is concerned).
 ;; (advice-add #'x-apply-session-resources :override #'ignore)
+
+;; Set eln-cache dir: https://emacs.stackexchange.com/a/70478
+(when (boundp 'native-comp-eln-load-path)
+  (startup-redirect-eln-cache (expand-file-name "~/.cache/eln-cache" user-emacs-directory)))
+
+;;; early-init.el ends here
