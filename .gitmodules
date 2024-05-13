@@ -306,9 +306,6 @@
 [submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
 	path = packs/dev/clojure-pack/vendor/submodules/edn
 	url = git://github.com/expez/edn.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/fuzzy-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/fuzzy-el
-	url = git://github.com/auto-complete/fuzzy-el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/hydra"]
 	path = packs/dev/clojure-pack/vendor/submodules/hydra
 	url = git://github.com/abo-abo/hydra.git
