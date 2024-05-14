@@ -11,9 +11,6 @@
 (live-add-pack-lib "uuid")
 (require 'uuid)
 
-(live-add-pack-lib "edn")
-(require 'edn)
-
 (live-load-config-file "clojure-conf.el")
 (live-load-config-file "cider-conf.el")
 

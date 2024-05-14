@@ -89,6 +89,9 @@
 [submodule "editorconfig"]
 	path = lib/editorconfig
 	url = git@github.com:editorconfig/editorconfig-emacs.git
+[submodule "edn.el"]
+	path = lib/edn.el
+	url = git@github.com:expez/edn.el.git
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:magit/emacsql.git
@@ -99,9 +102,15 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+[submodule "epl"]
+	path = lib/epl
+	url = https://github.com/cask/epl
 [submodule "eval-in-repl"]
 	path = lib/eval-in-repl
 	url = git@github.com:kaz-yos/eval-in-repl.git
+[submodule "exec-path-from-shell"]
+	path = lib/exec-path-from-shell
+	url = git@github.com:purcell/exec-path-from-shell.git
 [submodule "expand-region"]
 	path = lib/expand-region
 	url = git@github.com:magnars/expand-region.el.git
@@ -167,7 +176,7 @@
 [submodule "helm-ag"]
 	path = lib/helm-ag
 	url = git@github.com:emacsorphanage/helm-ag.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "helm-cider"]
 	path = lib/helm-cider
 	url = git@github.com:clojure-emacs/helm-cider.git
@@ -175,19 +184,19 @@
 [submodule "helm-descbinds"]
 	path = lib/helm-descbinds
 	url = git@github.com:emacs-helm/helm-descbinds.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "helm-lsp"]
 	path = lib/helm-lsp
 	url = git@github.com:emacs-lsp/helm-lsp.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "helm-org"]
 	path = lib/helm-org
 	url = git@github.com:emacs-helm/helm-org.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "helm-projectile"]
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "helm-xref"]
 	path = lib/helm-xref
 	url = git@github.com:brotzeit/helm-xref.git
@@ -244,9 +253,6 @@
 [submodule "lsp-mode"]
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
-[submodule "lsp-treemacs"]
-	path = lib/lsp-treemacs
-	url = git@github.com:emacs-lsp/lsp-treemacs.git
 [submodule "lsp-ui"]
 	path = lib/lsp-ui
 	url = git@github.com:emacs-lsp/lsp-ui.git
@@ -303,41 +309,9 @@
 [submodule "packed"]
 	path = lib/packed
 	url = git@github.com:emacscollective/packed.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/edn"]
-	path = packs/dev/clojure-pack/vendor/submodules/edn
-	url = git://github.com/expez/edn.el.git
 [submodule "packs/dev/clojure-pack/vendor/submodules/hydra"]
 	path = packs/dev/clojure-pack/vendor/submodules/hydra
 	url = git://github.com/abo-abo/hydra.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/jump-el"]
-	path = packs/dev/clojure-pack/vendor/submodules/jump-el
-	url = git@github.com:eschulte/jump.el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/peg"]
-	path = packs/dev/clojure-pack/vendor/submodules/peg
-	url = git@github.com:emacsmirror/peg.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/popup-el"]
-        path = packs/dev/clojure-pack/vendor/submodules/popup-el
-        url = git://github.com/auto-complete/popup-el.git
-[submodule "packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters"]
-	path = packs/dev/clojure-pack/vendor/submodules/rainbow-delimiters
-	url = https://github.com/Fanael/rainbow-delimiters
-[submodule "packs/dev/foundation-pack/vendor/submodules/epl"]
-        path = packs/dev/foundation-pack/vendor/submodules/epl
-        url = git://github.com/cask/epl.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell"]
-        path = packs/dev/foundation-pack/vendor/submodules/exec-path-from-shell
-        url = git://github.com/purcell/exec-path-from-shell.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/pkg-info"]
-	path = packs/dev/foundation-pack/vendor/submodules/pkg-info
-	url = git://github.com/lunaryorn/pkg-info.el.git
-[submodule "packs/dev/foundation-pack/vendor/submodules/popwin"]
-	path = packs/dev/foundation-pack/vendor/submodules/popwin
-	url = git@github.com:m2ym/popwin-el.git
-        ignore = untracked
-[submodule "packs/dev/foundation-pack/vendor/submodules/smex"]
-        path = packs/dev/foundation-pack/vendor/submodules/smex
-        url = git://github.com/nonsequitur/smex.git
-        ignore = untracked
 [submodule "packs/dev/foundation-pack/vendor/submodules/swiper"]
 	path = packs/dev/foundation-pack/vendor/submodules/swiper
 	url = git://github.com/abo-abo/swiper.git
@@ -350,18 +324,6 @@
 [submodule "packs/dev/power-pack/vendor/submodules/ace-jump-mode"]
 	path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
 	url = git@github.com:winterTTr/ace-jump-mode.git
-[submodule "packs/dev/power-pack/vendor/submodules/ht"]
-	path = packs/dev/power-pack/vendor/submodules/ht
-	url = git@github.com:Wilfred/ht.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/multiple-cursors"]
-        path = packs/dev/power-pack/vendor/submodules/multiple-cursors
-        url = git://github.com/magnars/multiple-cursors.el.git
-[submodule "packs/dev/power-pack/vendor/submodules/treemacs"]
-	path = packs/dev/power-pack/vendor/submodules/treemacs
-	url = git@github.com:Alexander-Miller/treemacs.git
-[submodule "packs/dev/power-pack/vendor/submodules/wc-mode"]
-	path = packs/dev/power-pack/vendor/submodules/wc-mode
-	url = git://github.com/bnbeckwith/wc-mode.git
 [submodule "paredit"]
 	path = lib/paredit
 	url = https://mumble.net/~campbell/git/paredit.git
@@ -374,6 +336,9 @@
 [submodule "pcre2el"]
 	path = lib/pcre2el
 	url = git@github.com:joddie/pcre2el.git
+[submodule "peg"]
+	path = lib/peg
+	url = git@github.com:emacsmirror/peg.git
 [submodule "persp-projectile"]
 	path = lib/persp-projectile
 	url = git@github.com:bbatsov/persp-projectile.git
@@ -383,6 +348,9 @@
 [submodule "pfuture"]
 	path = lib/pfuture
 	url = git@github.com:Alexander-Miller/pfuture.git
+[submodule "pkg-info"]
+	path = lib/pkg-info
+	url = git@github.com:emacsorphanage/pkg-info.git
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
@@ -392,6 +360,9 @@
 [submodule "popup"]
 	path = lib/popup
 	url = git@github.com:auto-complete/popup-el.git
+[submodule "popwin"]
+	path = lib/popwin
+	url = git@github.com:emacsorphanage/popwin.git
 [submodule "pos-tip"]
 	path = lib/pos-tip
 	url = git@github.com:pitkali/pos-tip.git
@@ -404,6 +375,9 @@
 [submodule "queue"]
 	path = lib/queue
 	url = git@github.com:emacsmirror/queue.git
+[submodule "rainbow-delimiters"]
+	path = lib/rainbow-delimiters
+	url = git@github.com:Fanael/rainbow-delimiters.git
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
@@ -422,20 +396,24 @@
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
-	build-step = borg-byte-compile
+	build-step = borg-makeinfo
 [submodule "sly-asdf"]
 	path = lib/sly-asdf
 	url = git@github.com:mmgeorge/sly-asdf.git
 [submodule "sly-quicklisp"]
 	path = lib/sly-quicklisp
 	url = git@github.com:joaotavora/sly-quicklisp.git
-	build-step = borg-byte-compile
+	build-step = borg-makeinfo
 [submodule "sly-repl-ansi-color"]
 	path = lib/sly-repl-ansi-color
 	url = git@github.com:PuercoPop/sly-repl-ansi-color.git
 [submodule "smartparens"]
 	path = lib/smartparens
 	url = git@github.com:Fuco1/smartparens.git
+[submodule "smex"]
+	path = lib/smex
+	url = git@github.com:nonsequitur/smex.git
+	ignore = untracked
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
@@ -473,6 +451,9 @@
 [submodule "volatile-highlights"]
 	path = lib/volatile-highlights
 	url = git@github.com:k-talo/volatile-highlights.el.git
+[submodule "wc-mode"]
+	path = lib/wc-mode
+	url = git@github.com:bnbeckwith/wc-mode.git
 [submodule "web-mode"]
 	path = lib/web-mode
 	url = git@github.com:fxbois/web-mode.git
@@ -504,7 +485,7 @@
 [submodule "zeal-at-point"]
 	path = lib/zeal-at-point
 	url = git@github.com:jinzhu/zeal-at-point.git
-	build-step = borg-byte-compile
+	build-step = borg-compile
 [submodule "zprint"]
 	path = lib/zprint
 	url = https://github.com/DogLooksGood/zprint.el.git

@@ -16,7 +16,6 @@
 (live-load-config-file "eval-in-repl-conf.el")
 (live-load-config-file "zeal-at-point-conf.el")
 (live-load-config-file "gtags-conf.el")
-(live-load-config-file "treemacs-conf.el")
 
 (use-package git-gutter
   :commands global-git-gutter-mode
