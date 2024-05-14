@@ -12,3 +12,9 @@
 
 (font-lock-add-keywords 'css-mode
                         '((live-fontify-hex-colors)))
+
+(font-lock-add-keywords 'less-mode
+                        '((live-fontify-hex-colors)))
+
+(font-lock-add-keywords 'nxml-mode
+                        '((live-fontify-hex-colors)))
