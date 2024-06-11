@@ -19,7 +19,8 @@
                                     :test "yarn test"
                                     :run "yarn start")
   (setq projectile-globally-ignored-directories
-        (append '("node_modules") projectile-globally-ignored-directories))
+        (append '("node_modules" "target" "logs")
+                projectile-globally-ignored-directories))
 
   :custom
   (projectile-mode-line-prefix " Prj")
