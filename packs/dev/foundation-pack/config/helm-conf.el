@@ -11,11 +11,8 @@
 
 ;;; Code:
 
-(require 'helm-config)
-
 (use-package helm
   :diminish helm-mode
-  :requires helm-config
   :config
   ;; https://github.com/syl20bnr/spacemacs/issues/13564
   ;; another useful command is (delete-dups extended-command-history)
