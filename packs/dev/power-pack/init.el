@@ -85,12 +85,6 @@
   :config
   (persp-mode))
 
-(use-package dap-mode
-  :after lsp-mode)
-
-(use-package dap-java
-  :after (dap-mode lsp-java))
-
 (use-package hl-todo
   :hook
   (prog-mode . hl-todo-mode)

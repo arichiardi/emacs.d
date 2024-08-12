@@ -121,7 +121,6 @@ See: https://github.com/Fuco1/smartparens/issues/1101"
 (live-load-config-file "lisp-conf.el")
 (live-load-config-file "python-conf.el")
 (live-load-config-file "lua-conf.el")
-(live-load-config-file "java-conf.el")
 (live-load-config-file "javascript-conf.el")
 (live-load-config-file "go-conf.el")
 (live-load-config-file "typescript-conf.el")
