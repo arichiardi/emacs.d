@@ -17,6 +17,7 @@
 ;;p - project shortcuts
 ;;s - show popupwindows
 ;;w - window and buffer shortcuts
+;;x - enabling modes
 
 ;;; Code:
 
@@ -248,5 +249,10 @@
 (global-set-key (kbd "C-s") 'phi-search)
 (global-set-key (kbd "C-r") 'phi-search-backward)
 (global-set-key (kbd "M-%") 'phi-search-query)
+
+;; C-c x custom group for enabling modes
+(define-key prog-mode-map (kbd "C-c x s") 'subword-mode)
+(define-key prog-mode-map (kbd "C-c x w") 'whitespace-mode)
+(define-key prog-mode-map (kbd "C-c x l") 'display-line-numbers-mode)
 
 ;;; default-bindings.el ends here
