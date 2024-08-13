@@ -43,10 +43,6 @@
                               (set-fill-column 72)
                               (auto-fill-mode 1)))))
 
-(use-package magit-todos
-  :after magit
-  :hook (magit-status-mode . magit-todos-mode))
-
 (with-eval-after-load 'info
   (info-initialize)
   (push live-magit-documentation-dir Info-directory-list))
