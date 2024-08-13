@@ -339,6 +339,9 @@
 [submodule "pfuture"]
 	path = lib/pfuture
 	url = git@github.com:Alexander-Miller/pfuture.git
+[submodule "phi-search"]
+	path = lib/phi-search
+	url = https://github.com/zk-phi/phi-search
 [submodule "pkg-info"]
 	path = lib/pkg-info
 	url = git@github.com:emacsorphanage/pkg-info.git
