@@ -31,3 +31,7 @@ etc/*
 *-autoloads.el
 .dap*
 /epkgs/
+/eln-cache/
+/elpa/
+/emojis/
+/multisession/
