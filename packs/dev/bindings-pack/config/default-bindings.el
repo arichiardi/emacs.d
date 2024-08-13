@@ -244,4 +244,9 @@
 (global-set-key (kbd "<C-next>") 'mc/mark-next-like-this)
 (global-set-key (kbd "<C-prior>") 'mc/mark-previous-like-this)
 
+;; phi-search
+(global-set-key (kbd "C-s") 'phi-search)
+(global-set-key (kbd "C-r") 'phi-search-backward)
+(global-set-key (kbd "M-%") 'phi-search-query)
+
 ;;; default-bindings.el ends here
