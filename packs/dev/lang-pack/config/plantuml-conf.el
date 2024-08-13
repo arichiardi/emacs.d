@@ -23,6 +23,8 @@
     (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
 
   :custom
-  ((plantuml-output-type "png" "Set the default output to png")))
+  ((plantuml-output-type "png" "Set the default output to png")
+   (plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
+   (plantuml-default-exec-mode 'jar)))
 
 ;;; plantuml-conf.el ends here
