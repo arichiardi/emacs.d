@@ -28,6 +28,21 @@
   :init
   (setq org-babel-clojure-backend 'cider))
 
+;; From http://emacsredux.com/blog/2013/09/25/removing-key-bindings-from-minor-mode-keymaps/
+(defun custom-cider-mode-hook ()
+  (let ((oldmap (cdr (assoc 'cider-mode minor-mode-map-alist)))
+        (newmap (make-sparse-keymap)))
+    (set-keymap-parent newmap oldmap)
+
+    (define-key newmap (kbd "C-c M-J") nil)
+    (define-key newmap (kbd "C-c M-c") nil)
+    (define-key newmap (kbd "C-c M-j") nil)
+    (define-key newmap (kbd "C-c C-z") nil)
+    (define-key newmap (kbd "C-c C-a") 'cider-switch-to-repl-buffer)
+
+    (make-local-variable 'minor-mode-overriding-map-alist)
+    (push `(cider-mode . ,newmap) minor-mode-overriding-map-alist)))
+
 (use-package cider
   ;; This seems enough for cider, see also:
   ;; https://emacs.stackexchange.com/questions/19694/use-package-defer-t-and-autoloads
@@ -75,11 +90,43 @@
                   (progn
                     (helm-cider-mode 1)
                     (yas-minor-mode 1))))
+  (cider-mode . custom-cider-mode-hook)
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
   (cider-repl-mode . company-mode)
   (cider-repl-mode . which-key-mode)
   (cider-repl-mode . (lambda () (helm-cider-mode 1))))
+
+
+(with-eval-after-load "cider-mode"
+  (define-key cider-mode-map (kbd "C-c C-z") nil)
+
+  ;; Remove because conflicts with clj-refactor
+  (define-key cider-mode-map (kbd "C-c C-m") nil)
+
+  ;; Remove because bound by clojure already
+  (define-key cider-mode-map (kbd "C-M-i") nil)
+  (define-key cider-mode-map (kbd "C-c C-e") 'cider-insert-last-sexp-in-repl)
+  (define-key cider-mode-map (kbd "C-M-.") 'ar-emacs-prelude-goto-symbol)
+  (define-key cider-mode-map (kbd "C-s-r") 'ar-emacs-cider-repl-refresh-and-test)
+
+  (define-key cider-mode-map (kbd "C-c r f") 'ar-emacs-cljs-figwheel-main-repl)
+  (define-key cider-mode-map (kbd "C-c r n") 'ar-emacs-cljs-node-repl)
+  (define-key cider-mode-map (kbd "C-c r b") 'ar-emacs-cljs-boot-repl)
+  (define-key cider-mode-map (kbd "C-c r s") 'ar-emacs-cljs-shadow-select-repl))
+
+(with-eval-after-load "cider-repl"
+    ;; Remove because conflicts with clj-refactor
+  (define-key cider-mode-map (kbd "C-c C-m") nil)
+
+  (define-key cider-repl-mode-map (kbd "C-c r f") 'ar-emacs-cljs-figwheel-main-repl)
+  (define-key cider-repl-mode-map (kbd "C-c r n") 'ar-emacs-cljs-node-repl)
+  (define-key cider-repl-mode-map (kbd "C-c r p") 'ar-emacs-cljs-piggieback-node-repl)
+  (define-key cider-repl-mode-map (kbd "C-c r b") 'ar-emacs-cljs-boot-repl)
+  (define-key cider-repl-mode-map (kbd "C-c r s") 'ar-emacs-cljs-shadow-select-repl)
+
+  (define-key cider-repl-mode-map (kbd "C-r") nil)
+  (define-key cider-repl-mode-map (kbd "C-r") 'helm-cider-repl-history))
 
 ;;; cider-conf.el ends here
