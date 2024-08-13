@@ -36,7 +36,8 @@
                                                ("master" . ("main" "master" "next" "maint"))))
   ;; https://irreal.org/blog/?p=8877
   (magit-section-initial-visibility-alist '((stashes . hide) (untracked . hide) (unpushed . hide)))
-
+  ;; https://github.com/magit/magit/issues/1953
+  (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :hook
   ((magit-log-edit-mode . (lambda ()
                               (set-fill-column 72)
