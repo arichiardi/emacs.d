@@ -24,6 +24,10 @@
 (cua-mode 1)
 (setq cua-enable-cua-keys nil)
 
+(add-hook 'minibuffer-setup-hook
+          (lambda ()
+            (local-set-key (kbd "C-v") 'clipboard-yank)))
+
 ;;enable winner mode for C-c-(<left>|<right>) to navigate the history
 ;;of buffer changes i.e. undo a split screen
 (when (fboundp 'winner-mode)
