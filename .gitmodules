@@ -420,6 +420,9 @@
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
+[submodule "sql-indent"]
+	path = lib/sql-indent
+	url = https://github.com/bsvingen/sql-indent
 [submodule "sqlup-mode"]
 	path = lib/sqlup-mode
 	url = git@github.com:Trevoke/sqlup-mode.el.git
