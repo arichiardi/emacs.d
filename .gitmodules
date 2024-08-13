@@ -80,9 +80,6 @@
 [submodule "docker"]
 	path = lib/docker
 	url = git@github.com:Silex/docker.el.git
-[submodule "docker-tramp"]
-	path = lib/docker-tramp
-	url = git@github.com:emacs-pe/docker-tramp.el.git
 [submodule "dotenv"]
 	path = lib/dotenv
 	url = git@github.com:pkulev/dotenv.el.git
