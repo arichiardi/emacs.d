@@ -4,7 +4,26 @@
 
 ;;; Code:
 
-(setq ispell-local-dictionary "canadian")
+(setq ispell-local-dictionary "en_US-w-accents")
+
+(setq make-backup-files nil) ;; stop creating backup~ files
+(setq auto-save-default nil) ;; stop creating #autosave# files
+(setq create-lockfiles nil)  ;; stop having lockfiles
+
+(setq live-disable-zone t)
+(setq cua-enable-cua-keys t)
+(setq shift-select-mode t)
+(setq mouse-drag-copy-region t)
+(setq visible-bell t)
+(setq completion-styles '(basic substring partial-completion))
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default fill-column 100)
+(setq-default truncate-lines t)
+(setq electric-indent-mode t)
+
+(setq auth-sources '("~/.authinfo.gpg"))
 
 (use-package dash
   :config (dash-enable-font-lock))
@@ -38,7 +57,6 @@
 (live-load-config-file "shell-conf.el")
 (live-load-config-file "spelling-conf.el")
 (live-load-config-file "win-switch-conf.el")
-(live-load-config-file "zone-conf.el")
 (live-load-config-file "monkey-patch.el")
 (live-load-config-file "org-mode-conf.el")
 (live-load-config-file "org-roam-conf.el")

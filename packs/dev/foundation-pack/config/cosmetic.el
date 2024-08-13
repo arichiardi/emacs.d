@@ -14,6 +14,20 @@
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
 (if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
 
+;; http://stackoverflow.com/questions/7874548/emacs-23-3-1-whitespace-style
+(setq whitespace-display-mappings
+      '(
+    (space-mark   ?\     [? ]) ;; use space not dot
+    (space-mark   ?\xA0  [?\u00A4]     [?_])
+    (space-mark   ?\x8A0 [?\x8A4]      [?_])
+    (space-mark   ?\x920 [?\x924]      [?_])
+    (space-mark   ?\xE20 [?\xE24]      [?_])
+    (space-mark   ?\xF20 [?\xF24]      [?_])
+    (newline-mark ?\n    [?$ ?\n])
+    (tab-mark     ?\t    [?\u00BB ?\t] [?\\ ?\t])))
+
+(setq whitespace-style (quote (face trailing lines tabs newline space-mark tab-mark newline-mark)))
+
 ;; remove bells
 (setq ring-bell-function 'ignore)
 
