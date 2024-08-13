@@ -423,6 +423,9 @@
 [submodule "sqlup-mode"]
 	path = lib/sqlup-mode
 	url = git@github.com:Trevoke/sqlup-mode.el.git
+[submodule "string-edit-at-point"]
+	path = lib/string-edit-at-point
+	url = https://github.com/magnars/string-edit.el
 [submodule "synosaurus"]
 	path = lib/synosaurus
 	url = git@github.com:hpdeifel/synosaurus.git

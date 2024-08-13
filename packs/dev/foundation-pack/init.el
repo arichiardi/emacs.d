@@ -83,6 +83,7 @@
   ;; (prog-mode . #'dotenv-projectile-hook)
 ;;)
 
+(use-package string-edit)
 (use-package ar-emacs)
 
 ;;; init.el ends here

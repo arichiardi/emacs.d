@@ -85,6 +85,7 @@
 
 (global-set-key (kbd "C-c s m") 'live-show-messages)
 (global-set-key (kbd "C-c s p") 'helm-eshell-prompts-all)
+(global-set-key (kbd "C-c s e") 'string-edit-at-point)
 
 ;;window and buffer movement
 (global-set-key (kbd "C-c w s") 'swap-windows)
