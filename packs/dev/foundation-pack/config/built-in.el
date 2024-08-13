@@ -17,13 +17,6 @@
 (setq-default save-place t)
 (setq save-place-file (concat live-tmp-dir "places"))
 
-;;enable cua-mode for rectangular selections
-(require 'cua-base)
-(require 'cua-gmrk)
-(require 'cua-rect)
-(cua-mode 1)
-(setq cua-enable-cua-keys nil)
-
 (add-hook 'minibuffer-setup-hook
           (lambda ()
             (local-set-key (kbd "C-v") 'clipboard-yank)))
