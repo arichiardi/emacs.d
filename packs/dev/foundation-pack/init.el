@@ -11,7 +11,6 @@
 (setq create-lockfiles nil)  ;; stop having lockfiles
 
 (setq live-disable-zone t)
-(setq cua-enable-cua-keys t)
 (setq shift-select-mode t)
 (setq mouse-drag-copy-region t)
 (setq visible-bell t)
@@ -47,6 +46,7 @@
 (live-load-config-file "backup-dir-conf.el")
 (live-load-config-file "util-fns.el")
 (live-load-config-file "built-in.el")
+(live-load-config-file "cua-conf.el")
 (live-load-config-file "cosmetic.el")
 (live-load-config-file "smex-conf.el")
 (live-load-config-file "tramp-conf.el")
