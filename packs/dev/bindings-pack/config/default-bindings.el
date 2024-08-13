@@ -49,11 +49,13 @@
 (global-set-key (kbd "C-c g d") 'git-gutter:popup-diff)
 (global-set-key (kbd "C-c g r") 'git-gutter:revert-hunk)
 
-;;text manipulation shortcuts
+;; text manipulation shortcuts
 (global-set-key (kbd "C-c t b") 'untabify-buffer)
 (global-set-key (kbd "C-c t r") 'untabify)
+(global-set-key (kbd "C-c t c") 'whitespace-cleanup)
+(global-set-key (kbd "C-c t d") 'duplicate-dwim)
 
-;;emacs-lisp shortcuts
+;; emacs-lisp shortcuts
 (global-set-key (kbd "C-c m s") 'eval-and-replace) ;swap
 (global-set-key (kbd "C-c m b") 'eval-buffer)
 (global-set-key (kbd "C-c m e") 'eval-last-sexp)
@@ -62,7 +64,7 @@
 (global-set-key (kbd "C-c m n") 'eval-print-last-sexp)
 (global-set-key (kbd "C-c m r") 'eval-region)
 
-;;funky characters
+;; funky characters
 (global-set-key (kbd "C-c i l") (lambda () (interactive) (insert "λ")))
 (global-set-key (kbd "C-c i n") (lambda () (interactive) (insert "ℕ")))
 (global-set-key (kbd "C-c i i") (lambda () (interactive) (insert "∞")))
@@ -98,6 +100,12 @@
 (global-set-key (kbd "C-c w ,") 'enlarge-window-horizontally)
 (global-set-key (kbd "C-c w /") (lambda () (interactive) (enlarge-window -1)))
 (global-set-key (kbd "C-c w '") (lambda () (interactive) (enlarge-window 1)))
+(global-set-key (kbd "C-c w <up>") 'buf-move-up)
+(global-set-key (kbd "C-c w <down>") 'buf-move-down)
+(global-set-key (kbd "C-c w <left>") 'buf-move-left)
+(global-set-key (kbd "C-c w <right>") 'buf-move-right)
+(global-set-key (kbd "C-c w o <prior>") 'scroll-other-window-down)
+(global-set-key (kbd "C-c w o <next>") 'scroll-other-window)
 
 (define-key paredit-mode-map (kbd "C-c l k") 'paredit-splice-sexp-killing-forward)
 (define-key paredit-mode-map (kbd "C-c l w") 'paredit-splice-sexp-killing-backward)
@@ -126,57 +134,52 @@
 (define-key paredit-mode-map (kbd "M-T")     'transpose-sexps)
 (define-key paredit-mode-map (kbd "C-M-k")   'live-paredit-copy-sexp-at-point)
 
-;;increment and decrement number at point
+;; increment and decrement number at point
 (global-set-key (kbd "C-M-_")  'live-decrement-number-at-point)
 (global-set-key (kbd "M-=")    'live-increment-number-at-point)
 (global-set-key (kbd "C-M-=")    'live-increment-number-at-point)
 
-
-;;browse kill ring (visual paste)
+;; browse kill ring (visual paste)
 (global-set-key (kbd "M-y") 'browse-kill-ring)
 
-;;make C-] and M-] cut and copy respectively
+;; make C-] and M-] cut and copy respectively
 (global-set-key (kbd "C-]") 'kill-region)
 (global-set-key (kbd "M-]") 'kill-ring-save)
 
-;;mark current function
+;; mark current function
 (global-set-key (kbd "C-x C-p") 'mark-defun)
 
-;;use delete-horizontal-space to completely nuke all whitespace
+;; use delete-horizontal-space to completely nuke all whitespace
 (global-set-key (kbd "M-SPC ") 'live-delete-whitespace-except-one)
 
-;;make ^h delete rather than help
-(global-set-key (kbd "C-h") 'delete-backward-char)
-(define-key paredit-mode-map (kbd "C-h") 'paredit-backward-delete)
-
-;;allow the deletion of words:
-;;backward kill word (forward kill word is M-d)
+;; allow the deletion of words:
+;; backward kill word (forward kill word is M-d)
 (global-set-key (kbd "C-\\") 'backward-kill-word)
 (define-key paredit-mode-map (kbd "C-\\") 'paredit-backward-kill-word)
 
-;;kill line backwards
+;; kill line backwards
 (global-set-key (kbd "M-k") 'live-backwards-kill-line)
 
-;;kill regions
+;; kill regions
 (global-set-key (kbd "C-x C-k") 'kill-region)
 
-;;set the mark
+;; set the mark
 (global-set-key (kbd "C-SPC") 'set-mark-command)
 
-;;repeat previous command
+;; repeat previous command
 (global-set-key (kbd "M-'") 'repeat)
 
-;;scroll other window
+;; scroll other window
 (global-set-key (kbd "C-M-]") 'scroll-other-window)
 (global-set-key (kbd "C-M-[") 'scroll-other-window-down)
 
-;;fast vertical naviation
+;; fast vertical naviation
 (global-set-key  (kbd "M-U") (lambda () (interactive) (forward-line -10)))
 (global-set-key  (kbd "M-D") (lambda () (interactive) (forward-line 10)))
 (global-set-key  (kbd "M-p") 'outline-previous-visible-heading)
 (global-set-key  (kbd "M-n") 'outline-next-visible-heading)
 
-;; Align your code in a pretty way.
+;; Align your code in a pretty way
 (global-set-key (kbd "C-x \\") 'align-regexp)
 
 ;; comment region
@@ -191,7 +194,7 @@
 (global-set-key (kbd "M-`")       'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b")   'ibuffer)
 
-;; Window switching.
+;; Window switching
 (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
 (global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
 
@@ -214,7 +217,7 @@
 (global-set-key (kbd "M-s")                          'helm-do-grep-ag)
 (global-set-key (kbd "C-x r p")                      'helm-projects-history)
 (global-set-key (kbd "C-x r c")                      'helm-addressbook-bookmarks)
-(global-set-key (kbd "C-c t r")                      'helm-dictionary)
+(global-set-key (kbd "C-x r d")                      'helm-dictionary)
 (global-set-key (kbd "C-x C-b")                      'helm-buffers-list)
 ;; What to do with these?
 ;; (global-set-key (kbd "C-h i")                        'helm-info)
@@ -255,5 +258,27 @@
 (define-key prog-mode-map (kbd "C-c x s") 'subword-mode)
 (define-key prog-mode-map (kbd "C-c x w") 'whitespace-mode)
 (define-key prog-mode-map (kbd "C-c x l") 'display-line-numbers-mode)
+
+;; custom zoom bindings
+(global-set-key (kbd "s-=") 'text-scale-increase)
+(global-set-key (kbd "s--") 'text-scale-decrease)
+
+;; org-mode
+(global-set-key (kbd "C-c l") 'org-store-link)
+(global-set-key (kbd "C-c a") 'org-agenda)
+(global-set-key (kbd "C-c c") 'org-capture)
+
+;; projectile
+(global-set-key (kbd "s-d") 'helm-projectile-find-dir)
+(global-set-key (kbd "s-p") 'projectile-persp-switch-project)
+(global-set-key (kbd "s-f") 'helm-projectile-find-file)
+(global-set-key (kbd "s-b") 'helm-projectile-switch-to-buffer)
+(global-set-key (kbd "s-.") 'projectile-find-tag)
+(global-set-key (kbd "s-s") 'helm-projectile-ag)
+(global-set-key (kbd "s-g") 'helm-projectile-grep)
+(global-set-key (kbd "s-M-t") 'projectile-toggle-between-implementation-and-test)
+
+;; company-mode
+(global-set-key (kbd "<backtab>") 'company-complete)
 
 ;;; default-bindings.el ends here

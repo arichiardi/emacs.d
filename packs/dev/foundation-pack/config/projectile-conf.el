@@ -29,7 +29,9 @@
   (projectile-idle-timer-seconds 60)
   (projectile-create-missing-test-files t)
   (projectile-completion-system 'helm)
-  (projectile-tags-backend 'ggtags))
+  (projectile-tags-backend 'ggtags)
+  :bind ((:map projectile-mode-map
+               ("C-c p" . projectile-command-map))))
 
 (use-package persp-projectile
   :after (projectile perspective))
