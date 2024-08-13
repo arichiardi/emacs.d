@@ -178,13 +178,9 @@
 
   (setq user-init-file (or load-file-name buffer-file-name))
   (setq user-emacs-directory (file-name-directory user-init-file))
-  ;; (message "Loading %s..." user-init-file)
   (setq package-enable-at-startup nil)
-  ;; (package-initialize)
   (setq inhibit-startup-buffer-menu t)
   (setq inhibit-startup-screen t)
-  ;; (setq inhibit-startup-echo-area-message "locutus")
-  ;; (setq initial-buffer-choice t)
   (setq load-prefer-newer t)
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
@@ -256,6 +252,9 @@
   (if (and (file-exists-p pack-file) (not live-safe-modep))
       (load-file pack-file)))
 
+(when live-current-pack-dir
+  (message (concat "Packs location: " live-current-pack-dir)))
+
 ;; Load all packs - Power Extreme!
 (mapc (lambda (pack-dir)
           (live-load-pack pack-dir))
@@ -295,6 +294,8 @@
     (setq custom-file (concat live-custom-dir "custom-configuration.el")))
 (when (file-exists-p custom-file)
   (load custom-file))
+
+(message (concat "Custom file location: " custom-file))
 
 (message "\n\n Pack loading completed. Your Emacs is Live...\n\n")
 (put 'downcase-region 'disabled nil)
