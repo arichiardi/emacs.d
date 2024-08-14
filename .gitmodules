@@ -288,6 +288,9 @@
 [submodule "org-jira"]
 	path = lib/org-jira
 	url = git@github.com:ahungry/org-jira.git
+[submodule "org-present"]
+	path = lib/org-present
+	url = https://github.com/rlister/org-present
 [submodule "org-roam"]
 	path = lib/org-roam
 	url = git@github.com:org-roam/org-roam.git
