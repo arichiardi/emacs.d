@@ -113,17 +113,25 @@
                     "aplay"
                     file))))
 
+(use-package olivetti
+  :custom
+  (olivetti-style 'fancy)
+  (olivetti-body-width 0.75))
+
 (use-package org-present
+  :custom
+  ;; (org-present-text-scale 2 "The original value of 5 is too much.")
+  (org-present-startup-folded t "We want to unfold slides slowly.")
   :hook
   (org-present-mode . (lambda ()
-                        (org-present-big)
                         (org-display-inline-images)
                         (org-present-hide-cursor)
-                        (org-present-read-only)))
+                        (org-present-read-only)
+                        (olivetti-mode 1)))
   (org-present-mode-quit . (lambda ()
-                             (org-present-small)
+                             (olivetti-mode -1)
                              (org-remove-inline-images)
-                             (org-present-show-cursor)
-                             (org-present-read-write))))
+                             (org-present-read-write)
+                             (org-present-show-cursor))))
 
 ;;; init.el ends here
