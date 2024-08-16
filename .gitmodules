@@ -280,6 +280,9 @@
 [submodule "ob-restclient"]
 	path = lib/ob-restclient
 	url = git@github.com:alf/ob-restclient.el.git
+[submodule "olivetti"]
+	path = lib/olivetti
+	url = https://github.com/rnkn/olivetti
 [submodule "org"]
 	path = lib/org
 	url = https://code.orgmode.org/bzg/org-mode.git
