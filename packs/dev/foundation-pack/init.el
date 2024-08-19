@@ -90,6 +90,17 @@
   :config
   (editorconfig-mode 1))
 
+;; We cannot obtain what described below because of the dynamic nature
+;; of asdf.
+;;
+;;   https://github.com/purcell/exec-path-from-shell?tab=readme-ov-file#setting-up-your-shell-startup-files-correctly
+(use-package exec-path-from-shell
+  :commands (exec-path-from-shell-initialize)
+  :config
+  (setq exec-path-from-shell-variables '("PATH"))
+  :init
+  (exec-path-from-shell-initialize))
+
 (use-package string-edit)
 (use-package ar-emacs)
 
