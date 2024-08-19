@@ -9,6 +9,14 @@
 ;; Line-wrapping
 (set-default 'fill-column 72)
 
+(add-hook 'prog-mode-hook
+          (lambda () (setq-local fill-column 100)))
+
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq-default truncate-lines t)
+(setq electric-indent-mode t)
+
 ;; get rid of clutter
 (if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 (if (fboundp 'tool-bar-mode) (tool-bar-mode -1))

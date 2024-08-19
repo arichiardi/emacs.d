@@ -40,8 +40,7 @@
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   :hook
   ((magit-log-edit-mode . (lambda ()
-                              (set-fill-column 72)
-                              (auto-fill-mode 1)))))
+                            (auto-fill-mode 1)))))
 
 (with-eval-after-load 'info
   (info-initialize)
