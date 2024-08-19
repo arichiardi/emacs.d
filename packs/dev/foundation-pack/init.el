@@ -16,12 +16,6 @@
 (setq visible-bell t)
 (setq completion-styles '(basic substring partial-completion))
 
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq-default fill-column 100)
-(setq-default truncate-lines t)
-(setq electric-indent-mode t)
-
 (setq auth-sources '("~/.authinfo.gpg"))
 
 (use-package dash
