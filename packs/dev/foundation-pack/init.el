@@ -90,17 +90,6 @@
   :config
   (editorconfig-mode 1))
 
-;;(defun dotenv-projectile-hook ()
-;;   (dotenv-update-project-env (projectile-project-root)))
-
-;;(use-package dotenv
-;;  :commands dotenv-update-project-env
-;;  :hook
-  ;; Disabling for now
-  ;;   https://github.com/pkulev/dotenv.el/issues/3
-  ;; (prog-mode . #'dotenv-projectile-hook)
-;;)
-
 (use-package string-edit)
 (use-package ar-emacs)
 
