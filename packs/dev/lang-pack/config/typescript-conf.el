@@ -40,7 +40,7 @@ Put this in .dir-locals.el:
     (expand-file-name node-module-path root)))
 
 (use-package typescript-mode
-  :after (mmm-mode)
+  :after (company flycheck mmm-mode)
   :mode ("\\.[jt]sx?\\'")
   :init
   (require 'smartparens-javascript)
