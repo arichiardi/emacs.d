@@ -274,7 +274,7 @@
 (global-set-key (kbd "s-f") 'helm-projectile-find-file)
 (global-set-key (kbd "s-b") 'helm-projectile-switch-to-buffer)
 (global-set-key (kbd "s-.") 'projectile-find-tag)
-(global-set-key (kbd "s-s") 'helm-projectile-ag)
+(global-set-key (kbd "s-s") 'helm-projectile-rg)
 (global-set-key (kbd "s-g") 'helm-projectile-grep)
 (global-set-key (kbd "s-M-t") 'projectile-toggle-between-implementation-and-test)
 

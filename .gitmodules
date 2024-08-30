@@ -194,6 +194,9 @@
 	path = lib/helm-projectile
 	url = git@github.com:bbatsov/helm-projectile.git
 	build-step = borg-compile
+[submodule "helm-rg"]
+	path = lib/helm-rg
+	url = https://github.com/cosmicexplorer/helm-rg
 [submodule "helm-xref"]
 	path = lib/helm-xref
 	url = git@github.com:brotzeit/helm-xref.git

@@ -133,8 +133,13 @@ First call indent, second complete symbol, third complete fname."
   :after helm
   :custom
   (helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
-  (helm-ag-command-option "--all-text")
   (helm-ag-insert-at-point 'symbol))
+
+(use-package helm-rg
+  :after helm
+  :custom
+  (helm-rg-input-min-search-chars 3)
+  (helm-rg-file-paths-in-matches-behavior 'relative))
 
 (use-package helm-xref
   :after helm)
