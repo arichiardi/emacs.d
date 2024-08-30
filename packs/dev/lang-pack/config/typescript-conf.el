@@ -53,6 +53,7 @@ Put this in .dir-locals.el:
   (typescript-mode . tide-setup)
   (typescript-mode . tide-hl-identifier-mode)
   (typescript-mode . ar-emacs--setup-tsx-company-backends)
+  (typescript-mode . prettier-mode)
   ;; Does not inherit from prog-mode
   (typescript-mode . hl-todo-mode)
   :custom

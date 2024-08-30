@@ -206,6 +206,9 @@
 [submodule "hydra"]
 	path = lib/hydra
 	url = git@github.com:abo-abo/hydra.git
+[submodule "iter2"]
+	path = lib/iter2
+	url = https://github.com/doublep/iter2
 [submodule "js-comint"]
 	path = lib/js-comint
 	url = git@github.com:redguardtoo/js-comint.git
@@ -271,6 +274,9 @@
 [submodule "multiple-cursors"]
 	path = lib/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el.git
+[submodule "nvm"]
+	path = lib/nvm
+	url = https://github.com/rejeep/nvm.el
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
@@ -363,6 +369,9 @@
 [submodule "pos-tip"]
 	path = lib/pos-tip
 	url = git@github.com:pitkali/pos-tip.git
+[submodule "prettier"]
+	path = lib/prettier
+	url = https://github.com/jscheid/prettier.el
 [submodule "prettier-js"]
 	path = lib/prettier-js
 	url = git@github.com:prettier/prettier-emacs.git
