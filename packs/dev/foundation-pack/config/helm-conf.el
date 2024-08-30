@@ -49,7 +49,8 @@
 (use-package helm-projectile
   :after helm
   :config
-  (helm-projectile-on))
+  (helm-projectile-on)
+  :custom (helm-projectile-ignore-strategy 'search-tool))
 
 (use-package helm-net
   :after helm
