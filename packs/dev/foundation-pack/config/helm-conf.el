@@ -27,7 +27,7 @@
   ;; discussion of these options.
   (helm-split-window-in-side-p t)
   (helm-buffers-fuzzy-matching t)
-  (helm-move-to-line-cycle-in-source t)
+  (helm-move-to-line-cycle-in-source nil "See https://emacs.stackexchange.com/questions/52356/how-to-navigate-inside-helm-buffer")
   (helm-ff-search-library-in-sexp t)
   (helm-ff-file-name-history-use-recentf t)
   (helm-commands-using-frame '(completion-at-point
