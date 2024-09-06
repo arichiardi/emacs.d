@@ -8,18 +8,42 @@
 
 (live-load-config-file "live-fontify-hex-conf.el")
 
-(defun my-modus-themes-custom-faces (&rest _)
+;; Theme-agnostic setup can be configured thus, from:
+;; https://protesilaos.com/emacs/modus-themes#h:86f6906b-f090-46cc-9816-1fe8aeb38776
+
+;; (defvar ar-emacs-after-enable-theme-hook nil
+;;    "Normal hook run after enabling a theme.")
+
+;; (defun run-after-enable-theme-hook (&rest _args)
+;;    "Run `after-enable-theme-hook'."
+;;    (run-hooks 'ar-emacs-after-enable-theme-hook))
+
+;; (advice-add 'enable-theme :after #'run-after-enable-theme-hook)
+
+;; From https://github.com/protesilaos/modus-themes/issues/112#issuecomment-2234622808
+(defun ar-emacs--maybe-run-modus-theme-hooks (theme)
+  (when (memq theme '(modus-vivendi modus-operandi))
+    (run-hooks 'modus-themes-after-load-theme-hook)))
+(add-hook 'enable-theme-functions #'ar-emacs--maybe-run-modus-theme-hooks)
+
+(defun ar-emacs---modus-themes-custom-hook ()
   (modus-themes-with-colors
     (custom-set-faces
-     `(helm-rg-title-face ((,c :inherit :background ,bg-heading-1 :foreground ,fg-heading-1)))
-     `(helm-rg-extra-arg-face ((,c :inherit :foreground ,yellow-faint)))
-     `(helm-rg-active-arg-face ((,c :inherit :foreground ,green-faint)))
-     `(helm-rg-error-message ((,c :inherit :foreground ,modeline-err)))
-     `(helm-rg-title-face ((,c :inherit :foreground ,magenta-faint)))
-     `(helm-rg-directory-header-face ((,c :inherit :background ,bg-main :foreground ,fg-main))))))
+     `(helm-rg-title-face ((,c :background ,bg-heading-1 :foreground ,fg-heading-1 :weight normal)))
+     `(helm-rg-extra-arg-face ((,c :foreground ,yellow-faint)))
+     `(helm-rg-inactive-arg-face ((,c :background ,bg-inactive)))
+     `(helm-rg-active-arg-face ((,c :background ,bg-active)))
+     `(helm-rg-directory-cmd-face ((,c :background ,bg-main)))
+     `(helm-rg-error-message ((,c :foreground ,modeline-err)))
+     `(helm-rg-title-face ((,c :foreground ,magenta-faint)))
+     `(helm-rg-directory-header-face ((,c :background ,bg-main :foreground ,fg-main :weight normal)))
+     `(helm-rg-preview-line-highlight ((,c :background ,bg-active))))))
+(add-hook 'modus-themes-after-load-theme-hook #'ar-emacs---modus-themes-custom-hook)
 
-(use-package modus-vivendi-theme
-  :hook (modus-themes-after-load-theme . #'my-modus-themes-custom-faces)
-  :config (load-theme 'modus-vivendi t))
+(use-package modus-themes
+  :demand
+  :config
+  (load-theme 'modus-vivendi :no-confirm)
+  (enable-theme 'modus-vivendi))
 
 ;;; init.el ends here
