@@ -1,6 +1,11 @@
+;;; mouse-conf.el --- Completion Config
+
+;;; Commentary:
+
+;;; Code:
+
 ;; Mouse in terminal
 (require 'mouse)
-
 
 (defun initialise-mouse-mode (&optional frame)
   "Initialise mouse mode for the current terminal."
@@ -20,12 +25,9 @@
 
 (add-hook 'after-make-frame-functions 'initialise-mouse-mode)
 
-(setq mouse-yank-at-point t)
+(setq mouse-yank-at-point t
+      ;; https://stackoverflow.com/questions/1128927/how-to-scroll-line-by-line-in-gnu-emacs
+      scroll-step           1
+      scroll-conservatively 10000)
 
-(global-set-key [mouse-4] '(lambda ()
-                             (interactive)
-                             (scroll-down 1)))
-
-(global-set-key [mouse-5] '(lambda ()
-                             (interactive)
-                             (scroll-up 1)))
+;;; mouse-conf.el ends here
