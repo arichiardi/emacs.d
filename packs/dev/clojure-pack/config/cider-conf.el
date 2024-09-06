@@ -4,18 +4,16 @@
 
 ;;; Code:
 
-(live-add-pack-lib "cider")
-
 (load "cider-autoloads" t t)
 
 (use-package clj-refactor
   :diminish clj-refactor-mode
   :config
-  (cljr-add-keybindings-with-prefix "C-c C-m")
   (setq cljr-magic-require-namespaces (append '(("s" . "clojure.spec.alpha") ("ig" . "integrant.core") ("edn"   . "clojure.edn"))))
   (setq cljr-project-clean-exceptions (append '("deps.edn" "build.clj")))
 
   :custom
+  (cljr-add-keybindings-with-prefix "C-c C-m")
   (cljr-warn-on-eval nil)
   (cljr-eagerly-build-asts-on-startup t "do not build the project AST on startup")
   (cljr-auto-clean-ns nil "We do not want to mess with existing requires")
