@@ -4,7 +4,6 @@
 
 ;;; Code:
 
-(require 'mwe-log-commands)
 (require 'lively)
 
 (live-load-config-file "irc-conf.el")
