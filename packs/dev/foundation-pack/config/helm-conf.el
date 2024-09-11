@@ -135,11 +135,33 @@ First call indent, second complete symbol, third complete fname."
   (helm-ag-base-command "ag --nocolor --nogroup --ignore-case")
   (helm-ag-insert-at-point 'symbol))
 
+(defun ar-emacs---helm-rg-setup-faces ()
+  (message "Setting up helm-rg faces")
+  (modus-themes-with-colors
+    (custom-set-faces
+     `(helm-rg-title-face ((,c :background ,bg-heading-1 :foreground ,fg-heading-1 :weight normal)))
+     `(helm-rg-extra-arg-face ((,c :foreground ,yellow-faint)))
+     `(helm-rg-inactive-arg-face ((,c :background ,bg-inactive)))
+     `(helm-rg-active-arg-face ((,c :background ,bg-active)))
+     `(helm-rg-directory-cmd-face ((,c :background ,bg-main)))
+     `(helm-rg-error-message ((,c :foreground ,modeline-err)))
+     `(helm-rg-title-face ((,c :foreground ,magenta-faint)))
+     `(helm-rg-directory-header-face ((,c :background ,bg-main :foreground ,fg-main :weight normal)))
+     `(helm-rg-preview-line-highlight ((,c :background ,bg-active))))))
+
+(add-hook 'modus-themes-after-load-theme-hook #'ar-emacs---helm-rg-setup-faces)
+
 (use-package helm-rg
   :after helm
   :custom
   (helm-rg-input-min-search-chars 3)
-  (helm-rg-file-paths-in-matches-behavior 'relative))
+  (helm-rg-file-paths-in-matches-behavior 'relative)
+  ;; :config
+  ;; (setq helm-rg--color-format-argument-alist
+  ;;       (modus-themes-with-colors `((red :cmd-line "red" :text-property "red3"))))
+  ;; (setq helm-rg--style-format-argument-alist
+  ;;       '((bold :cmd-line "normal" :text-property bold)))
+  )
 
 (use-package helm-xref
   :after helm)
