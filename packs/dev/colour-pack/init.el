@@ -26,20 +26,6 @@
     (run-hooks 'modus-themes-after-load-theme-hook)))
 (add-hook 'enable-theme-functions #'ar-emacs--maybe-run-modus-theme-hooks)
 
-(defun ar-emacs---modus-themes-custom-hook ()
-  (modus-themes-with-colors
-    (custom-set-faces
-     `(helm-rg-title-face ((,c :background ,bg-heading-1 :foreground ,fg-heading-1 :weight normal)))
-     `(helm-rg-extra-arg-face ((,c :foreground ,yellow-faint)))
-     `(helm-rg-inactive-arg-face ((,c :background ,bg-inactive)))
-     `(helm-rg-active-arg-face ((,c :background ,bg-active)))
-     `(helm-rg-directory-cmd-face ((,c :background ,bg-main)))
-     `(helm-rg-error-message ((,c :foreground ,modeline-err)))
-     `(helm-rg-title-face ((,c :foreground ,magenta-faint)))
-     `(helm-rg-directory-header-face ((,c :background ,bg-main :foreground ,fg-main :weight normal)))
-     `(helm-rg-preview-line-highlight ((,c :background ,bg-active))))))
-(add-hook 'modus-themes-after-load-theme-hook #'ar-emacs---modus-themes-custom-hook)
-
 (use-package modus-themes
   :demand
   :config
