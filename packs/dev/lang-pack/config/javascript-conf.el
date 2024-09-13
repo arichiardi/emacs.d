@@ -10,7 +10,7 @@
     (setq js2-basic-offset 2)))
 
 (use-package js2-mode
-  :mode "\\.js\\'"
+  :mode ("\\.[j]sx?\\'")
   :interpreter "node"
   :bind (:map js2-mode-map
          ("C-c M-j" . js-comint-repl))
@@ -18,12 +18,14 @@
   (ar-emacs--apply-if-not-editorconfig)
   :hook
   ((js2-mode . company-mode)
-   (js2-mode . smartparens-strict-mode)))
+   (js2-mode . smartparens-strict-mode)
+   (js2-mode . subword-mode)
+   (js2-mode . eldoc-mode)
+   (js2-mode . prettier-mode)))
 
 (defun ar-emacs--configure-js-comint ()
   "JavaScript comint configuration hook."
-  (add-hook 'comint-output-filter-functions 'js-comint-process-output)
-  (js-do-use-nvm))
+  (add-hook 'comint-output-filter-functions 'js-comint-process-output))
 
 (use-package js-comint
   :after js2-mode
