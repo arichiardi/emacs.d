@@ -41,7 +41,7 @@ Put this in .dir-locals.el:
 
 (use-package typescript-mode
   :after (company flycheck mmm-mode)
-  :mode ("\\.[jt]sx?\\'")
+  :mode ("\\.[t]sx?\\'")
   :init
   (require 'smartparens-javascript)
   :hook
@@ -54,7 +54,7 @@ Put this in .dir-locals.el:
   (typescript-mode . tide-hl-identifier-mode)
   (typescript-mode . ar-emacs--setup-tsx-company-backends)
   (typescript-mode . prettier-mode)
-  ;; Does not inherit from prog-mode
+  ;; Does not inherit from prog-mode so we include hl-todo-mode here
   (typescript-mode . hl-todo-mode)
   :custom
   (tide-sync-request-timeout 3 "Seems like two seconds is too little sometimes")
