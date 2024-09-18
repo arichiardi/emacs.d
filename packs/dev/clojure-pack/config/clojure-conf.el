@@ -76,6 +76,7 @@
     (put-clojure-indent 'ANY 2)
     (put-clojure-indent 'context 2)
 
+    (put-clojure-indent 'as-element 0)
 
     (put-clojure-indent 'trace-forms (lambda (_ _) 0)) ;; re-frame macros
 
