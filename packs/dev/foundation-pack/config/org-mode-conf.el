@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-(setq ar-emacs-org-directory "~/git/ar-org")
-
 (use-package org-protocol
   :demand t)
 
@@ -117,7 +115,6 @@ This can be 0 for immediate, or a floating point value.")
   (org-after-todo-state-change . ar-emacs--org-auto-todo-state-change)
 
   :config
-  (setq org-directory ar-emacs-org-directory)
   (setq org-id-locations-file (expand-file-name ".org-id-locations" live-etc-dir))
   (setq ar-emacs--work-org-file (concat org-directory "/agenda/work.org.gpg"))
   (setq ar-emacs--notes-org-file (concat org-directory "/agenda/notes.org.gpg"))
