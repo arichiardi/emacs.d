@@ -85,4 +85,7 @@ If nothing is selected - open the whole current buffer."
   (browse-url (concat "http://www.typescriptlang.org/Playground#src="
                       (url-hexify-string (buffer-substring-no-properties start end)))))
 
+(use-package prettier
+  :custom (prettier-inline-errors-flag t "Show overlay"))
+
 ;;; typescript-conf.el ends here
