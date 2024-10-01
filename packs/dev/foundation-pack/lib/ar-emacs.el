@@ -164,7 +164,7 @@ Optionally accepts an explicit SYMBOL-LIST."
           (init-expr (pop bindings)))
       (when bound-name
         (let ((form (concat "(def " bound-name " " init-expr ")")))
-          (ar-emacs-clj--send-to-repl form))))
+          (ar-emacs-send-to-repl form))))
     (ar-emacs--clj-eval-bindings bindings)))
 
 (defun ar-emacs-clj-eval-all-let-bindings ()
@@ -241,7 +241,7 @@ Optionally accepts an explicit SYMBOL-LIST."
         (paredit-forward))
     (goto-char (point-min))))
 
-(defun ar-emacs-clj--send-to-repl (form)
+(defun ar-emacs-send-to-repl (form)
   "Send a FORM to the REPL for evaluation.
 
 It detects if either Cider or Inf-Clojure are enabled for the
@@ -265,7 +265,7 @@ current buffer and makes the right choice."
 
    (t (error "No Clojure mode enabled; use `cider-mode' or `inf-clojure-minor-mode'"))))
 
-(defun ar-emacs-clj--set-cljs-repl-type ()
+(defun ar-emacs-set-cljs-repl-type ()
   "Set the cider REPL type to cljs."
   (when (or (bound-and-true-p cider-mode)
         (equal major-mode 'cider-repl-mode))
@@ -276,14 +276,14 @@ current buffer and makes the right choice."
 (defun ar-emacs-cljs-piggieback-node-repl ()
   (interactive)
   (save-some-buffers)
-  (ar-emacs-clj--send-to-repl
+  (ar-emacs-send-to-repl
    (concat "(require 'cljs.repl.node)\n"
            "(cemerick.piggieback/cljs-repl (cljs.repl.node/repl-env))\n")))
 
 (defun ar-emacs-cljs-node-repl ()
   (interactive)
   (save-some-buffers)
-  (ar-emacs-clj--send-to-repl
+  (ar-emacs-send-to-repl
    (concat "(require '[cljs.repl :as repl])"
            "(require '[cljs.repl.node :as node])"
            "(repl/repl (node/repl-env))")))
