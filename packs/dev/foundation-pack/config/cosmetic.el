@@ -41,7 +41,7 @@
 
 (defun live-set-frame-font (font-string)
   "Sets the default font and sets all frames to the same font trying to maintain window resolution. Only changes font if window system is not a basic terminal."
-  (interactive "MNew emacs live default font: ")
+  (interactive "New emacs live default font: ")
   (setq default-frame-alist
         (remove-if (lambda (x)
                      (eq 'font (car x)))
@@ -53,11 +53,9 @@
 
 (defun live-set-frame-darwin-font (font-string)
   "Sets the default font and sets all frames to the same font trying to maintain window resolution. Only changes font if system-type is darwin in a window system."
-  (interactive "MNew darwin default font: ")
+  (interactive "New darwin default font: ")
   (cond
    ((eq system-type 'darwin)
     (live-set-frame-font font-string))))
-
-(live-set-frame-darwin-font "Menlo-12")
 
 ;;; cosmetic.el ends here
