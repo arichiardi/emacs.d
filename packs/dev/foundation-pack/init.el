@@ -83,18 +83,27 @@
   :config
   (editorconfig-mode 1))
 
-;; We cannot obtain what described below because of the dynamic nature
-;; of asdf.
-;;
+(setq live-exec-path-default-variables '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "PATH" "MANPATH"))
+
+(setq-default exec-path-from-shell-variables '())
+
+;; We cannot achieve full speed because of the dynamic nature of asdf.
 ;;   https://github.com/purcell/exec-path-from-shell?tab=readme-ov-file#setting-up-your-shell-startup-files-correctly
+
 (use-package exec-path-from-shell
-  :commands (exec-path-from-shell-initialize)
-  :config
-  (setq exec-path-from-shell-variables '("PATH"))
+  :defines (exec-path-from-shell-variables)
+  ;; We want to always add the default variables above.
   :init
-  (exec-path-from-shell-initialize))
+  (setq exec-path-from-shell-variables
+        (-distinct (-non-nil (append exec-path-from-shell-variables live-exec-path-default-variables))))
+  :hook
+  (after-init . (lambda ()
+                  (message "Initializing exec-path-from-shell")
+                  (print exec-path-from-shell-variables)
+                  (exec-path-from-shell-initialize))))
 
 (use-package string-edit)
+
 (use-package ar-emacs)
 
 ;;; init.el ends here
