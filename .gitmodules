@@ -10,6 +10,7 @@
 [submodule "async"]
 	path = lib/async
 	url = git@github.com:jwiegley/emacs-async.git
+	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/dash:" make
 [submodule "auto-compile"]
 	path = lib/auto-compile
 	url = git@github.com:emacscollective/auto-compile.git
@@ -89,7 +90,7 @@
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:magit/emacsql.git
-	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/emacsql:" make
+	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/emacsql:" make
 [submodule "emojify"]
 	path = lib/emojify
 	url = git@github.com:iqbalansari/emacs-emojify.git
@@ -168,7 +169,7 @@
 [submodule "helm"]
 	path = lib/helm
 	url = git@github.com:emacs-helm/helm.git
-	build-step = EMACSLOADPATH="$HOME/.emacs.d/lib/async:$HOME/.emacs.d/lib/popup:" make
+	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/async:$HOME/.config/emacs/lib/popup:" make
 	build-step = borg-update-autoloads
 [submodule "helm-ag"]
 	path = lib/helm-ag
