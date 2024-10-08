@@ -127,9 +127,6 @@
 [submodule "flycheck-plantuml"]
 	path = lib/flycheck-plantuml
 	url = git@github.com:alexmurray/flycheck-plantuml.git
-[submodule "flycheck-pos-tip"]
-	path = lib/flycheck-pos-tip
-	url = git@github.com:flycheck/flycheck-pos-tip.git
 [submodule "ggtags"]
 	path = lib/ggtags
 	url = git@github.com:leoliu/ggtags.git
