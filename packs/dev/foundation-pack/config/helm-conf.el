@@ -155,13 +155,7 @@ First call indent, second complete symbol, third complete fname."
   :after helm
   :custom
   (helm-rg-input-min-search-chars 3)
-  (helm-rg-file-paths-in-matches-behavior 'relative)
-  ;; :config
-  ;; (setq helm-rg--color-format-argument-alist
-  ;;       (modus-themes-with-colors `((red :cmd-line "red" :text-property "red3"))))
-  ;; (setq helm-rg--style-format-argument-alist
-  ;;       '((bold :cmd-line "normal" :text-property bold)))
-  )
+  (helm-rg-file-paths-in-matches-behavior 'relative))
 
 (use-package helm-xref
   :after helm)
