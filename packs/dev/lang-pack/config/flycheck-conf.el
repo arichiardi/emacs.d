@@ -1,13 +1,10 @@
-(live-add-pack-lib "flycheck")
-(live-add-pack-lib "pos-tip")
-(live-add-pack-lib "flycheck-pos-tip")
+;;; flycheck-conf.el --- Flycheck Config
 
-(require 'flycheck-pos-tip)
-(require 'flycheck)
+;;; Commentary:
 
-(add-hook 'after-init-hook #'global-flycheck-mode)
+;;; Code:
 
-(eval-after-load 'flycheck
-  '(progn
-     (flycheck-pos-tip-mode)
-     (setq flycheck-display-errors-function #'flycheck-pos-tip-error-messages)))
+(use-package flycheck
+  :init (global-flycheck-mode))
+
+;;; flycheck-conf.el ends here
