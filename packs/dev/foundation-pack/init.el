@@ -89,17 +89,29 @@
 
 ;; We cannot achieve full speed because of the dynamic nature of asdf.
 ;;   https://github.com/purcell/exec-path-from-shell?tab=readme-ov-file#setting-up-your-shell-startup-files-correctly
-
+;;
+;; Why do we run exec-path-from-shell-initialize twice?
+;;
+;; The first time sets PATH for things like executable-find, see:
+;;   https://github.com/cosmicexplorer/helm-rg/issues/17#issuecomment-2392418383
+;;
+;; The second time is for allowing packs to customize exec-path-from-shell-variables (packs are
+;; loaded last).
 (use-package exec-path-from-shell
   :defines (exec-path-from-shell-variables)
   ;; We want to always add the default variables above.
   :init
   (setq exec-path-from-shell-variables
         (-distinct (-non-nil (append exec-path-from-shell-variables live-exec-path-default-variables))))
+  (setq exec-path-from-shell-arguments '())
+  :config
+  (progn (message "Running exec-path-from-shell.")
+         (message "Variables %s" exec-path-from-shell-variables)
+         (exec-path-from-shell-initialize))
   :hook
   (after-init . (lambda ()
-                  (message "Initializing exec-path-from-shell")
-                  (print exec-path-from-shell-variables)
+                  (message "Running exec-path-from-shell after-init.")
+                  (message "Variables %s" exec-path-from-shell-variables)
                   (exec-path-from-shell-initialize))))
 
 (use-package string-edit)
