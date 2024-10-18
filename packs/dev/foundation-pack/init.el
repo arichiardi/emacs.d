@@ -101,6 +101,7 @@
   :defines (exec-path-from-shell-variables)
   ;; We want to always add the default variables above.
   :init
+  (setq exec-path-from-shell-arguments nil)
   (setq exec-path-from-shell-variables
         (-distinct (-non-nil (append exec-path-from-shell-variables live-exec-path-default-variables))))
   (setq exec-path-from-shell-arguments '())
