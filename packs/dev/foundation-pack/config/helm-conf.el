@@ -155,7 +155,10 @@ First call indent, second complete symbol, third complete fname."
   :after helm
   :custom
   (helm-rg-input-min-search-chars 3)
-  (helm-rg-file-paths-in-matches-behavior 'relative))
+  (helm-rg-file-paths-in-matches-behavior 'relative)
+  :bind (:map helm-rg-map
+              ("M-b" . nil) ;; clashes with move backwards
+              ("M-B" . helm-rg--bounce)))
 
 (use-package helm-xref
   :after helm)
