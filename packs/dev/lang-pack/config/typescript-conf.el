@@ -64,7 +64,7 @@ Put this in .dir-locals.el:
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
   ;; typescript-mode/:config: typescript-tide is not a valid syntax checker
-  ;; (flycheck-add-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
+  ;; (flycheck-admd-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
   )
 
 (use-package tide
@@ -86,6 +86,6 @@ If nothing is selected - open the whole current buffer."
                       (url-hexify-string (buffer-substring-no-properties start end)))))
 
 (use-package prettier
-  :custom (prettier-inline-errors-flag t "Show overlay"))
+  :custom (prettier-inline-errors-flag t "Show overlay for errors"))
 
 ;;; typescript-conf.el ends here
