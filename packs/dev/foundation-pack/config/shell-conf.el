@@ -116,4 +116,13 @@ eshell windows easier."
   (comint-buffer-maximum-size 20000 "Increase comint buffer size.")
   (comint-prompt-read-only t "Make the prompt read only."))
 
+(use-package vterm
+  :commands (vterm-send-string vterm-send-return)
+  :hook (vterm-mode . (lambda ()
+                        (vterm-send-string "source ~/.profile" t)
+                        (vterm-send-return)))
+  :custom
+  (vterm-max-scrollback 75000)
+  (vterm-kill-buffer-on-exit t))
+
 ;;; shell-conf.el ends here
