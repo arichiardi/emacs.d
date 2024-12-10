@@ -104,7 +104,6 @@
   (setq exec-path-from-shell-arguments nil)
   (setq exec-path-from-shell-variables
         (-distinct (-non-nil (append exec-path-from-shell-variables live-exec-path-default-variables))))
-  (setq exec-path-from-shell-arguments '())
   :config
   (progn (message "Running exec-path-from-shell.")
          (message "Variables %s" exec-path-from-shell-variables)
