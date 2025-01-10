@@ -53,9 +53,6 @@
 [submodule "company-lua"]
 	path = lib/company-lua
 	url = git@github.com:ptrv/company-lua.git
-[submodule "company-quickhelp"]
-	path = lib/company-quickhelp
-	url = git@github.com:expez/company-quickhelp.git
 [submodule "company-restclient"]
 	path = lib/company-restclient
 	url = git@github.com:iquiw/company-restclient.git
@@ -367,9 +364,6 @@
 [submodule "popwin"]
 	path = lib/popwin
 	url = git@github.com:emacsorphanage/popwin.git
-[submodule "pos-tip"]
-	path = lib/pos-tip
-	url = git@github.com:pitkali/pos-tip.git
 [submodule "prettier"]
 	path = lib/prettier
 	url = https://github.com/jscheid/prettier.el

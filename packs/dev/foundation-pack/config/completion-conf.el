@@ -4,8 +4,6 @@
 
 ;;; Code:
 
-(use-package company-quickhelp)
-
 (use-package company
   :diminish
   :defer t
@@ -19,9 +17,8 @@
   (company-idle-delay .2)
   (company-tooltip-idle-delay 0)
   :hook
-  ((company-mode . (lambda () (company-quickhelp-mode)))
-   (shell-mode . (lambda ()
-                   (add-to-list (make-local-variable 'company-backends)
-                                '(company-shell company-shell-env))))))
+  (shell-mode . (lambda ()
+                  (add-to-list (make-local-variable 'company-backends)
+                               '(company-shell company-shell-env)))))
 
 ;;; completion-conf.el ends here
