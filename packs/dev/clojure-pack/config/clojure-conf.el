@@ -88,11 +88,8 @@
 
     (put-clojure-indent 'when-joined '(2 :form :form (0))) ;; cohesic
 
-    (put-clojure-indent 'exception '(1 :form))             ;; cohesic
-    (put-clojure-indent 'defmeasurement 1)                 ;; cohesic
-
-    (put-clojure-indent 'merr/-> :->)               ;; merr
-    (put-clojure-indent 'merr/->> :->>)             ;; merr
+    (put-clojure-indent 'merr/-> :->)                  ;; merr
+    (put-clojure-indent 'merr/->> :->>)                ;; merr
     )
 
 ;;; clojure-conf.el ends here
