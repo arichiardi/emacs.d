@@ -260,6 +260,9 @@
 [submodule "merlin"]
 	path = lib/merlin
 	url = git@github.com:emacsmirror/merlin.git
+[submodule "mermaid-mode"]
+	path = lib/mermaid-mode
+	url = https://github.com/abrochard/mermaid-mode
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
