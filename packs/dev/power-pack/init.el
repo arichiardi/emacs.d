@@ -133,4 +133,6 @@
                              (org-present-read-write)
                              (org-present-show-cursor))))
 
+(use-package mermaid-mode)
+
 ;;; init.el ends here
