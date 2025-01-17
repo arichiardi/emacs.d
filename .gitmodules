@@ -124,6 +124,9 @@
 [submodule "flycheck-plantuml"]
 	path = lib/flycheck-plantuml
 	url = git@github.com:alexmurray/flycheck-plantuml.git
+[submodule "flycheck-posframe"]
+	path = lib/flycheck-posframe
+	url = https://github.com/alexmurray/flycheck-posframe
 [submodule "ggtags"]
 	path = lib/ggtags
 	url = git@github.com:leoliu/ggtags.git
@@ -367,6 +370,9 @@
 [submodule "popwin"]
 	path = lib/popwin
 	url = git@github.com:emacsorphanage/popwin.git
+[submodule "posframe"]
+	path = lib/posframe
+	url = https://github.com/tumashu/posframe
 [submodule "prettier"]
 	path = lib/prettier
 	url = https://github.com/jscheid/prettier.el
