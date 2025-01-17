@@ -116,6 +116,9 @@
 
 (use-package string-edit)
 
+;; Disable annoying tooltips on hover tooltip
+(setq show-help-function nil)
+
 (use-package ar-emacs)
 
 ;;; init.el ends here
