@@ -403,7 +403,7 @@
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git
-	build-step = borg-makeinfo
+	build-step = make compile compile-contrib
 [submodule "sly-asdf"]
 	path = lib/sly-asdf
 	url = git@github.com:mmgeorge/sly-asdf.git
