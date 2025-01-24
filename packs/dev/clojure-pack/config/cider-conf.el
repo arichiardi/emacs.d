@@ -9,7 +9,10 @@
 (use-package clj-refactor
   :diminish clj-refactor-mode
   :config
-  (setq cljr-magic-require-namespaces (append '(("s" . "clojure.spec.alpha") ("ig" . "integrant.core") ("edn"   . "clojure.edn"))))
+  (setq cljr-magic-require-namespaces (append '(("edn"   . "clojure.edn")
+                                                ("s" . "clojure.spec.alpha")
+                                                ("str" . "clojure.string")
+                                                ("ig" . "integrant.core"))))
   (setq cljr-project-clean-exceptions (append '("deps.edn" "build.clj")))
 
   :custom
@@ -20,7 +23,7 @@
   (cljr-auto-sort-ns nil "We do not want to mess with existing requires")
   (cljr-favor-prefix-notation nil "no we do not like it")
   (cljr-clojure-test-declaration "[clojure.test :as test :refer [deftest testing is]]")
-  (cljr-magic-requires :prompt))
+  (cljr-magic-requireds t "Never prompt but only complete the requires from cljr-magic-require-namespaces"))
 
 (use-package ob-clojure
   :init
