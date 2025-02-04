@@ -31,6 +31,7 @@
   (projectile-completion-system 'helm)
   (projectile-tags-backend 'ggtags)
   (projectile-sort-order 'recently-active)
+  (projectile-auto-cleanup-known-projects t "new in 2.9")
   :bind ((:map projectile-mode-map
                ("C-c p" . projectile-command-map))))
 
