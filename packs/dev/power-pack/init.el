@@ -109,7 +109,7 @@
    (lambda (file)
      (start-process "emacs-pomidor-play-sound"
                     nil
-                    "aplay"
+                    (if (eq system-type 'darwin) "afplay" "aplay")
                     file))))
 
 (use-package olivetti
