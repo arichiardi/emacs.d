@@ -56,17 +56,25 @@ Returns a list of cons cells (name . directive) for each .md file."
 
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
-           :prefix "C-c C-l"
-           ("s" . gptel-send)
-           ("m" . gptel-menu)
-           ("r" . gptel-rewrite))
+           :prefix "C-c C-a"
+           ("a" . gptel)
+           ("C-a" . gptel)
+           ("s"   . gptel-send)
+           ("C-s" . gptel-send)
+           ("m"   . gptel-menu)
+           ("C-m" . gptel-menu)
+           ("r"   . gptel-rewrite)
+           ("C-r" . gptel-rewrite))
 
 (use-package gptel
+  :commands (gptel gptel-menu gptel-rewrite gptel-send)
   :bind (:map gptel-mode-map
          ("C-c C-c" . gptel-send))
 
+  :hook (gptel-mode . (lambda () (olivetti-mode 1)))
+
   :custom
-  ((gptel-default-mode 'org-mode "Use org-mode as the default")
+  ((gptel-default-mode 'org-mode)
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side"))
 
