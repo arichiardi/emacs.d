@@ -74,7 +74,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   :hook (gptel-mode . (lambda () (olivetti-mode 1)))
 
   :custom
-  ((gptel-default-mode 'org-mode)
+  ((gptel-default-mode 'org-mode "Use org-mode as the default")
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side"))
 
@@ -84,7 +84,9 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq gptel-model 'qwen2.5-coder:7b
         gptel-backend (gptel-make-ollama "Ollama"
-                        :host "192.168.52.200:11434"
+                        :host (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
+                                      ":"
+                                      (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434"))
                         :stream t
                         :models '("deepseek-r1:14b"
                                   "qwen2.5-coder:7b"
