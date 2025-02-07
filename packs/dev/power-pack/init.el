@@ -18,6 +18,7 @@
 (live-load-config-file "gtags-conf.el")
 (live-load-config-file "terraform-conf.el")
 (live-load-config-file "sql-conf.el")
+(live-load-config-file "llm-conf.el")
 
 (use-package git-gutter
   :commands global-git-gutter-mode
