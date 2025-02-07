@@ -83,9 +83,9 @@
   (feature-default-language "en" "Set the default language"))
 
 (use-package perspective
-  :after projectile
-  :config
-  (persp-mode))
+  :custom
+  (persp-mode-prefix-key (kbd "C-c M-p"))
+  :hook (prog-mode . (lambda () (persp-mode 1))))
 
 (use-package hl-todo
   :hook
