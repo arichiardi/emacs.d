@@ -35,3 +35,5 @@ etc/*
 /elpa/
 /emojis/
 /multisession/
+/bookmarks
+/projects
