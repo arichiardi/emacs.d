@@ -328,9 +328,6 @@
 [submodule "packs/dev/org-pack/vendor/submodules/org-mode"]
 	path = packs/dev/org-pack/vendor/submodules/org-mode
 	url = https://code.orgmode.org/bzg/org-mode.git
-[submodule "packs/dev/power-pack/vendor/submodules/ace-jump-mode"]
-	path = packs/dev/power-pack/vendor/submodules/ace-jump-mode
-	url = git@github.com:winterTTr/ace-jump-mode.git
 [submodule "paredit"]
 	path = lib/paredit
 	url = https://mumble.net/~campbell/git/paredit.git

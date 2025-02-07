@@ -234,9 +234,6 @@
     (let ((case-fold-search isearch-case-fold-search))
       (occur (if isearch-regexp isearch-string (regexp-quote isearch-string))))))
 
-;; Ace jump mode
-(global-set-key (kbd "C-o") 'ace-jump-mode)
-
 ;; Show documentation/information with M-RET
 (define-key lisp-mode-shared-map (kbd "M-RET") 'live-lisp-describe-thing-at-point)
 
