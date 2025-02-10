@@ -82,14 +82,13 @@ Returns a list of cons cells (name . directive) for each .md file."
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'qwen2.5-coder:7b
+  (setq gptel-model 'codestral:22b
         gptel-backend (gptel-make-ollama "Ollama"
                         :host (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
                                       ":"
                                       (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434"))
                         :stream t
-                        :models '("deepseek-r1:14b"
-                                  "qwen2.5-coder:7b"
+                        :models '("codestral:22b"
                                   "qwen2.5-coder:32b")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
