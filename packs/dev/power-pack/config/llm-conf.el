@@ -56,7 +56,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
-           :prefix "C-c C-a"
+           :prefix "C-c C-x"
            ("a" . gptel)
            ("C-a" . gptel)
            ("s"   . gptel-send)
@@ -68,8 +68,6 @@ Returns a list of cons cells (name . directive) for each .md file."
 
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send)
-  :bind (:map gptel-mode-map
-         ("C-c C-c" . gptel-send))
 
   :hook (gptel-mode . (lambda () (olivetti-mode 1)))
 
