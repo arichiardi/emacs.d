@@ -74,7 +74,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   :custom
   ((gptel-default-mode 'org-mode "Use org-mode as the default")
    (gptel-window-select t "Select the window after creation")
-   (gptel-window-side 'right "Display on the right side"))
+   (gptel-window-side 'right "Display on the right side")
+   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
+   (gptel-org-branching-context t))
 
 
   :config
@@ -117,6 +119,10 @@ Returns a list of cons cells (name . directive) for each .md file."
                              "- If you use LaTeX notation, enclose math in \\( and \\) or \\[ and \\] delimiters.")
                        "\n"))
             ,@markdown-directives)))
+
+  ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
+  (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
+  (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
   )
 
 ;;; llm-conf.el ends here
