@@ -299,4 +299,7 @@
 ;;   https://emacs.stackexchange.com/a/78896/3979
 (fset 'epg-wait-for-status 'ignore)
 
+;; Must be set before loading ‘use-package’.
+(setopt use-package-enable-imenu-support t)
+
 ;;; init.el Ends here
