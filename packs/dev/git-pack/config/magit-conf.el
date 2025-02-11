@@ -38,6 +38,8 @@
   (magit-section-initial-visibility-alist '((stashes . hide) (untracked . hide) (unpushed . hide)))
   ;; https://github.com/magit/magit/issues/1953
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
+  (magit-format-file-function #'magit-format-file-nerd-icons)
+
   :hook
   ((magit-log-edit-mode . (lambda ()
                             (auto-fill-mode 1)))))
