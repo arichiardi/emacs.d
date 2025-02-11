@@ -247,7 +247,7 @@
 	url = git@github.com:emacs-typescript/typescript.el.git
 [submodule "llama"]
 	path = lib/llama
-	url = https://git.sr.ht/~tarsius/llama
+	url = https://github.com/tarsius/llama
 [submodule "lsp-mode"]
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
@@ -281,6 +281,12 @@
 [submodule "multiple-cursors"]
 	path = lib/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el.git
+[submodule "nerd-icons"]
+	path = lib/nerd-icons
+	url = https://github.com/rainstormstudio/nerd-icons.el
+[submodule "nerd-icons-dired"]
+	path = lib/nerd-icons-dired
+	url = https://github.com/rainstormstudio/nerd-icons-dired
 [submodule "nvm"]
 	path = lib/nvm
 	url = https://github.com/rejeep/nvm.el
