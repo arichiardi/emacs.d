@@ -128,18 +128,92 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
   (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
 
+(defun ar-emacs-minuet-js-few-shots ()
+  "JavaScript few-shots configuration."
+  `((:role "user"
+    :content ,(string-join
+               (list "// language: javascript"
+                     "<contextAfterCursor>"
+                     ""
+                     "fib(5)"
+                     "<contextBeforeCursor>"
+                     "function fibonacci(n) {"
+                     "    <cursorPosition>")
+               "\n"))
+    (:role "assistant"
+     :content ,(string-join
+                (list "    // Recursive Fibonacci implementation"
+                      "    if (n < 2) {"
+                      "        return n;"
+                      "    }"
+                      "    return fibonacci(n - 1) + fibonacci(n - 2);"
+                      "<endCompletion>"
+                      "    // Iterative Fibonacci implementation"
+                      "    let a = 0, b = 1;"
+                      "    for (let i = 0; i < n; i++) {"
+                      "        [a, b] = [b, a + b];"
+                      "    }"
+                      "    return a;"
+                      "<endCompletion>"
+                      "")
+                "\n"))))
+
+(defun ar-emacs-minuet-clojure-few-shots ()
+  "Clojure few-shots configuration."
+  `((:role "user"
+     :content ,(string-join
+                (list ";; language: clojure"
+                      "<contextAfterCursor>"
+                      ""
+                      "(fib 5)"
+                      "<contextBeforeCursor>"
+                      ";; max is which fib number you'd like computed (0th, 1st, 2nd, etc.)"
+                      ";; n is which fib number you're on for this call (0th, 1st, 2nd, etc.)"
+                      ";; j is the nth fib number (ex. when n = 5, j = 5)"
+                      ";; i is the nth - 1 fib number"
+                      "(defn- fib-iter"
+                      "  \"A simple interative process (using a recursive function) that carries state"
+                      "  along with it (as args) until it reaches a solution.\""
+                      "  [max n i j]"
+                      "  <cursorPosition>")
+                "\n"))
+    (:role "assistant"
+     :content ,(string-join
+                (list "  (if (= n max)"
+                      "    j"
+                      "    (recur max"
+                      "           (inc n)"
+                      "           j"
+                      "           (+ i j))))"
+                      "<endCompletion>"
+                      "(defn fib"
+                      "  [max]"
+                      "  (if (< max 2)"
+                      "    max"
+                      "    (fib-iter max 1 0N 1N)))"
+                      "<endCompletion>"
+                      "")
+                "\n"))))
+
+(defun ar-emacs-minuet-few-shots ()
+  "Minuet :few-shots that dependents on the major-mode."
+  (cond
+   ((derived-mode-p 'js-mode)      (ar-emacs-minuet-js-few-shots))
+   ((derived-mode-p 'clojure-mode) (ar-emacs-minuet-clojure-few-shots))
+   ((derived-mode-p 'python-mode)  minuet-default-fewshots)
+   (t                              minuet-default-fewshots)))
+
 (use-package minuet
   :init (add-to-list 'load-path (expand-file-name "lib/minuet-ai.el" user-emacs-directory))
   :commands (minuet-complete-with-minibuffer minuet-show-suggestion minuet-accept-suggestion)
   :bind
   (("C-M-<tab>" . #'minuet-complete-with-minibuffer)
    ("M-<tab>" . #'minuet-show-suggestion)
-
    :map minuet-active-mode-map
    ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
    ("<prior>" . #'minuet-previous-suggestion)
    ("<next>" . #'minuet-next-suggestion)
-   ("M-A" . #'minuet-accept-suggestion)
+   ("M-S-RET" . #'minuet-accept-suggestion)
    ;; Accept the first line of completion, or N lines with a numeric-prefix:
    ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
    ;; ("M-a" . #'minuet-accept-suggestion-line)
@@ -168,26 +242,25 @@ Returns a list of cons cells (name . directive) for each .md file."
               :prompt minuet-default-prompt
               :guidelines minuet-default-guidelines
               :n-completions-template minuet-default-n-completion-template)
-     :fewshots minuet-default-fewshots
+     :fewshots ar-emacs-minuet-few-shots
      :chat-input (:template minuet-default-chat-input-template
                   :language-and-tab minuet--default-chat-input-language-and-tab-function
                   :context-before-cursor minuet--default-chat-input-before-cursor-function
-                  :context-after-cursor minuet--default-chat-input-after-cursor-function)
-     :optional nil))
+                  :context-after-cursor minuet--default-chat-input-after-cursor-function)))
 
   (setq minuet-openai-fim-compatible-options
   `(:name "Ollama FIM"
-    :end-point (concat "http://" (ar-emacs-ollama-host-w-port) "/v1/completions")
+    :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/completions")
     :api-key "TERM"
     :model "deepseek-coder-v2:16b"
     :template (:prompt minuet--default-fim-prompt-function
-               :suffix minuet--default-fim-suffix-function)
-    :optional nil))
+               :suffix minuet--default-fim-suffix-function)))
 
   (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256)
+
+  (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 256)
   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
-
 
 
 ;;; llm-conf.el ends here
