@@ -272,6 +272,9 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
+[submodule "minuet-ai.el"]
+	path = lib/minuet-ai.el
+	url = git@github.com:milanglacier/minuet-ai.el.git
 [submodule "mmm-mode"]
 	path = lib/mmm-mode
 	url = git@github.com:purcell/mmm-mode.git
@@ -367,6 +370,9 @@
 [submodule "plantuml-mode"]
 	path = lib/plantuml-mode
 	url = git@github.com:skuro/plantuml-mode.git
+[submodule "plz"]
+	path = lib/plz
+	url = https://github.com/alphapapa/plz.el
 [submodule "pomidor"]
 	path = lib/pomidor
 	url = https://github.com/TatriX/pomidor
