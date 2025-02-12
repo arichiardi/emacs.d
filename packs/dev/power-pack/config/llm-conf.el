@@ -54,6 +54,12 @@ Returns a list of cons cells (name . directive) for each .md file."
            "Do NOT use markdown backticks (```) to format your response. If you use LaTex notation, enclose math in \\( and \\), or \\[ and \\] delimiters.")
      "\n")))
 
+(defun ar-emacs-ollama-host-w-port ()
+  "Compute the host:port pointing to the ollama server."
+  (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
+          ":"
+          (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
+
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
            :prefix "C-c C-x"
@@ -84,9 +90,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq gptel-model 'codestral:22b
         gptel-backend (gptel-make-ollama "Ollama"
-                        :host (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
-                                      ":"
-                                      (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434"))
+                        :host (ar-emacs-ollama-host-w-port)
                         :stream t
                         :models '("codestral:22b"
                                   "qwen2.5-coder:32b")))
@@ -122,7 +126,68 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
-  (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n")
+  (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
+
+(use-package minuet
+  :init (add-to-list 'load-path (expand-file-name "lib/minuet-ai.el" user-emacs-directory))
+  :commands (minuet-complete-with-minibuffer minuet-show-suggestion minuet-accept-suggestion)
+  :bind
+  (("C-M-<tab>" . #'minuet-complete-with-minibuffer)
+   ("M-<tab>" . #'minuet-show-suggestion)
+
+   :map minuet-active-mode-map
+   ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
+   ("<prior>" . #'minuet-previous-suggestion)
+   ("<next>" . #'minuet-next-suggestion)
+   ("M-A" . #'minuet-accept-suggestion)
+   ;; Accept the first line of completion, or N lines with a numeric-prefix:
+   ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
+   ;; ("M-a" . #'minuet-accept-suggestion-line)
+   ("C-g" . #'minuet-dismiss-suggestion)
+   )
+
+  ;;
+  :custom
+  (minuet-provider 'openai-compatible) ;; 'openai-fim-compatible
+  (minuet-n-completions 10)
+
+  ;; I recommend beginning with a small context window size and incrementally
+  ;; expanding it, depending on your local computing power. A context window
+  ;; of 512, serves as an good starting point to estimate your computing
+  ;; power. Once you have a reliable estimate of your local computing power,
+  ;; you should adjust the context window to a larger value.
+  (minuet-context-window 4096)
+
+  :config
+  (setq minuet-openai-compatible-options
+   `(:name "Ollama"
+     :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/chat/completions")
+     :api-key "TERM"
+     :model "deepseek-coder-v2:16b"
+     :system (:template minuet-default-system-template
+              :prompt minuet-default-prompt
+              :guidelines minuet-default-guidelines
+              :n-completions-template minuet-default-n-completion-template)
+     :fewshots minuet-default-fewshots
+     :chat-input (:template minuet-default-chat-input-template
+                  :language-and-tab minuet--default-chat-input-language-and-tab-function
+                  :context-before-cursor minuet--default-chat-input-before-cursor-function
+                  :context-after-cursor minuet--default-chat-input-after-cursor-function)
+     :optional nil))
+
+  (setq minuet-openai-fim-compatible-options
+  `(:name "Ollama FIM"
+    :end-point (concat "http://" (ar-emacs-ollama-host-w-port) "/v1/completions")
+    :api-key "TERM"
+    :model "deepseek-coder-v2:16b"
+    :template (:prompt minuet--default-fim-prompt-function
+               :suffix minuet--default-fim-suffix-function)
+    :optional nil))
+
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256)
+  (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
+
+
 
 ;;; llm-conf.el ends here
