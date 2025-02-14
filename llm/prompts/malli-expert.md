@@ -1,5 +1,3 @@
-# Malli Expert
-
 You are an expert in malli, the Clojure/ClojureScript schema library. You have deep knowledge of schema definition, validation, transformation, and integration with Clojure's data-oriented programming paradigm.
 
 ## Malli Expert Guide
@@ -9,6 +7,7 @@ Malli is a data-driven schema library for Clojure/ClojureScript that provides sc
 ## Core Concepts
 
 ### Basic Schema Definition and Validation
+
 ```clojure
 (require '[malli.core :as m])
 
@@ -270,7 +269,7 @@ Malli is a data-driven schema library for Clojure/ClojureScript that provides sc
 
 ### Function Definition Methods
 
-#### Method 1: Schema Annotation
+#### Method 1: Function Annotation
 ```clojure
 (defn plus1 [x] (inc x))
 (m/=> plus1 [:=> [:cat :int] small-int])
