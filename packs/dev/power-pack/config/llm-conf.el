@@ -60,18 +60,6 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
 
-(bind-keys :prefix-map ar-emacs-llm-prefix-map
-           :prefix-docstring "Prefix key for all things LLM."
-           :prefix "C-c C-x"
-           ("a" . gptel)
-           ("C-a" . gptel)
-           ("s"   . gptel-send)
-           ("C-s" . gptel-send)
-           ("m"   . gptel-menu)
-           ("C-m" . gptel-menu)
-           ("r"   . gptel-rewrite)
-           ("C-r" . gptel-rewrite))
-
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send)
 
@@ -206,19 +194,16 @@ Returns a list of cons cells (name . directive) for each .md file."
 (use-package minuet
   :init (add-to-list 'load-path (expand-file-name "lib/minuet-ai.el" user-emacs-directory))
   :commands (minuet-complete-with-minibuffer minuet-show-suggestion minuet-accept-suggestion)
-  :bind
-  (("C-M-<tab>" . #'minuet-complete-with-minibuffer)
-   ("M-<tab>" . #'minuet-show-suggestion)
-   :map minuet-active-mode-map
-   ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
-   ("<prior>" . #'minuet-previous-suggestion)
-   ("<next>" . #'minuet-next-suggestion)
-   ("M-S-RET" . #'minuet-accept-suggestion)
-   ;; Accept the first line of completion, or N lines with a numeric-prefix:
-   ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
-   ;; ("M-a" . #'minuet-accept-suggestion-line)
-   ("C-g" . #'minuet-dismiss-suggestion)
-   )
+  :bind (:map minuet-active-mode-map
+              ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
+              ("<prior>" . #'minuet-previous-suggestion)
+              ("<next>" . #'minuet-next-suggestion)
+              ("M-S-RET" . #'minuet-accept-suggestion)
+              ;; Accept the first line of completion, or N lines with a numeric-prefix:
+              ;; e.g. C-u 2 M-a will accepts 2 lines of completion.
+              ;; ("M-a" . #'minuet-accept-suggestion-line)
+              ("C-g" . #'minuet-dismiss-suggestion)
+              )
 
   ;;
   :custom
@@ -237,7 +222,7 @@ Returns a list of cons cells (name . directive) for each .md file."
    `(:name "Ollama"
      :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/chat/completions")
      :api-key "TERM"
-     :model "deepseek-coder-v2:16b"
+     :model "codestral:22b"
      :system (:template minuet-default-system-template
               :prompt minuet-default-prompt
               :guidelines minuet-default-guidelines
@@ -262,5 +247,19 @@ Returns a list of cons cells (name . directive) for each .md file."
   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
 
+(bind-keys :prefix-map ar-emacs-llm-prefix-map
+           :prefix-docstring "Prefix key for all things LLM."
+           :prefix "C-c C-x"
+           ("<tab>" .  minuet-show-suggestion)
+           ("M-<tab>" . minuet-complete-with-minibuffer)
+           ("<return>" . minuet-accept-suggestion)
+           ("a" . gptel)
+           ("C-a" . gptel)
+           ("s"   . gptel-send)
+           ("C-s" . gptel-send)
+           ("m"   . gptel-menu)
+           ("C-m" . gptel-menu)
+           ("r"   . gptel-rewrite)
+           ("C-r" . gptel-rewrite))
 
 ;;; llm-conf.el ends here
