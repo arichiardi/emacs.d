@@ -53,9 +53,6 @@
 [submodule "company-lua"]
 	path = lib/company-lua
 	url = git@github.com:ptrv/company-lua.git
-[submodule "company-restclient"]
-	path = lib/company-restclient
-	url = git@github.com:iquiw/company-restclient.git
 [submodule "company-shell"]
 	path = lib/company-shell
 	url = git@github.com:Alexander-Miller/company-shell.git
@@ -296,9 +293,6 @@
 [submodule "ob-mongo"]
 	path = lib/ob-mongo
 	url = git@github.com:krisajenkins/ob-mongo.git
-[submodule "ob-restclient"]
-	path = lib/ob-restclient
-	url = git@github.com:alf/ob-restclient.el.git
 [submodule "olivetti"]
 	path = lib/olivetti
 	url = https://github.com/rnkn/olivetti
@@ -406,9 +400,6 @@
 [submodule "request"]
 	path = lib/request
 	url = git@github.com:tkf/emacs-request.git
-[submodule "restclient"]
-	path = lib/restclient
-	url = git@github.com:pashky/restclient.el.git
 [submodule "s"]
 	path = lib/s
 	url = git@github.com:magnars/s.el.git

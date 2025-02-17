@@ -64,18 +64,6 @@
              http-relation
              http-status-code))
 
-(use-package company-restclient
-  :defer t
-  :after (company cl-lib restclient know-your-http-well)
-  :hook (restclient-mode . (lambda ()
-                             (set (make-local-variable 'company-backends)
-                                  (list
-                                   (cons 'company-restclient default-company-backends))))))
-
-(use-package restclient
-  :mode "\\.http$"
-  :hook (restclient-mode . company-mode))
-
 (use-package feature-mode
   :mode "\\.feature$"
   :hook (cucumber-mode . yas-minor-mode)
