@@ -81,6 +81,8 @@ Returns a list of cons cells (name . directive) for each .md file."
                         :host (ar-emacs-ollama-host-w-port)
                         :stream t
                         :models '("codestral:22b"
+                                  "deepseek-coder-v2:16b"
+                                  "deepseek-r1:14b"
                                   "qwen2.5-coder:32b")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
