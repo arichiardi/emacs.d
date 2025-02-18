@@ -75,7 +75,8 @@
   (cider-prompt-for-symbol nil "Do not prompt for symbol (in docs among other things)")
   (cider-ns-refresh-show-log-buffer nil "Do not pop up the cider-ns-refresh logs")
   (cider-reuse-dead-repls 'auto "do not prompt unless necessary")
-
+  (cider-download-java-sources t "cider 1.17 new feature")
+ 
   (nrepl-use-ssh-fallback-for-remote-hosts t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
   (cider-infer-remote-nrepl-ports t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
 
