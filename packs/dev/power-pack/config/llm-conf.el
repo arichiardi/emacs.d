@@ -76,14 +76,15 @@ Returns a list of cons cells (name . directive) for each .md file."
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'codestral:22b
+  (setq gptel-model 'codellama:34b-instruct
         gptel-backend (gptel-make-ollama "Ollama"
                         :host (ar-emacs-ollama-host-w-port)
                         :stream t
-                        :models '("codestral:22b"
+                        :models '("codellama:34b-instruct"
+                                  "deepseek-r1:32b"
                                   "deepseek-coder-v2:16b"
-                                  "deepseek-r1:14b"
-                                  "qwen2.5-coder:32b")))
+                                  "mixtral:8x7b"
+                                  "mixtral:8x22b")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -224,7 +225,7 @@ Returns a list of cons cells (name . directive) for each .md file."
    `(:name "Ollama"
      :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/chat/completions")
      :api-key "TERM"
-     :model "codestral:22b"
+     :model "codellama:34b-code"
      :system (:template minuet-default-system-template
               :prompt minuet-default-prompt
               :guidelines minuet-default-guidelines
@@ -243,9 +244,9 @@ Returns a list of cons cells (name . directive) for each .md file."
     :template (:prompt minuet--default-fim-prompt-function
                :suffix minuet--default-fim-suffix-function)))
 
-  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 256)
+  (minuet-set-optional-options minuet-openai-fim-compatible-options :max_tokens 512)
 
-  (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 256)
+  (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 512)
   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
 
