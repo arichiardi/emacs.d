@@ -116,7 +116,6 @@ See: https://github.com/Fuco1/smartparens/issues/1101"
 
 (live-load-config-file "flycheck-conf.el")
 (live-load-config-file "yaml-conf.el")
-(live-load-config-file "plantuml-conf.el")
 (live-load-config-file "elisp-conf.el")
 (live-load-config-file "lisp-conf.el")
 (live-load-config-file "python-conf.el")

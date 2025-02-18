@@ -121,7 +121,32 @@
                              (org-present-read-write)
                              (org-present-show-cursor))))
 
-(use-package mermaid-mode)
+(use-package flycheck-plantuml
+  :no-require t
+  :after (:all flycheck plantuml-mode)
+  :config
+  (flycheck-plantuml-setup))
+
+(use-package plantuml-mode
+  :mode ("\\.plantuml\\'" "\\.puml\\'")
+  :commands (org-src-lang-modes)
+
+  :config
+  ;; Enable plantuml-mode for PlantUML files
+  (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
+  (use-package org
+    :config
+    (setq org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
+    (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+
+  :custom
+  ((plantuml-output-type "png" "Set the default output to png")
+   (plantuml-default-exec-mode 'executable)))
+
+(use-package mermaid-mode
+  :mode "\\.mmd$"
+  :custom
+  (mermaid-tmp-dir (expand-file-name "mermaid" live-tmp-dir)))
 
 (use-package nerd-icons
   :custom
