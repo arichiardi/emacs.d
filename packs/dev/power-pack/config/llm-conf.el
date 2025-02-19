@@ -250,19 +250,4 @@ Returns a list of cons cells (name . directive) for each .md file."
   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
 
-(bind-keys :prefix-map ar-emacs-llm-prefix-map
-           :prefix-docstring "Prefix key for all things LLM."
-           :prefix "C-c C-x"
-           ("<tab>" .  minuet-show-suggestion)
-           ("M-<tab>" . minuet-complete-with-minibuffer)
-           ("<return>" . minuet-accept-suggestion)
-           ("a" . gptel)
-           ("C-a" . gptel)
-           ("s"   . gptel-send)
-           ("C-s" . gptel-send)
-           ("m"   . gptel-menu)
-           ("C-m" . gptel-menu)
-           ("r"   . gptel-rewrite)
-           ("C-r" . gptel-rewrite))
-
 ;;; llm-conf.el ends here

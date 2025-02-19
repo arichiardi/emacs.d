@@ -16,10 +16,35 @@
 (global-set-key (kbd "C-c C-o") 'delete-blank-lines)
 (global-set-key (kbd "C-M-\\") 'live-delete-whitespace-except-one)
 
-(global-set-key (kbd "C-c w t") 'ar-emacs-toggle-window-split)
-(global-set-key (kbd "C-c w s") 'ar-emacs-resize-window)
+(bind-keys :prefix-map ar-emacs-llm-prefix-map
+           :prefix-docstring "Prefix key for all things LLM."
+           :prefix "C-c C-x"
+           ("<tab>" .  minuet-show-suggestion)
+           ("M-<tab>" . minuet-complete-with-minibuffer)
+           ("b" . gptel)
+           ("C-b" . gptel)
+           ("s"   . gptel-send)
+           ("C-s" . gptel-send)
+           ("<return>"   . gptel-menu)
+           ("C-<return>" . gptel-menu)
+           ("r"   . gptel-rewrite)
+           ("C-r" . gptel-rewrite))
 
-(global-set-key (kbd "C-c t s") 'ar-emacs-sprunge)
+(bind-keys :prefix-map ar-emacs-text-prefix-map
+           :prefix-docstring "Prefix key for text manipulation."
+           :prefix "C-c t"
+           ("d" . duplicate-dwim)
+           ("s" . ar-emacs-sprunge)
+           ("u" . untabify-buffer)
+           ("w c" . whitespace-cleanup)
+           ("l p" . ar-emacs-move-line-up)
+           ("l n" . ar-emacs-move-line-down))
+
+(bind-keys :prefix-map ar-emacs-window-prefix-map
+           :prefix-docstring "Prefix key for window manipulation."
+           :prefix "C-c w"
+           ("s" . ar-emacs-resize-window)
+           ("t" . ar-emacs-toggle-window-split))
 
 ;; Some Intellj bindings I am used to
 (global-set-key (kbd "C-y") 'kill-whole-line)
@@ -27,9 +52,5 @@
 
 (global-set-key "\033[32;16~" 'set-rectangular-region-anchor)
 (global-set-key (kbd "s-SPC") 'set-rectangular-region-anchor)
-
-(with-eval-after-load "prog-mode"
-  (define-key prog-mode-map (kbd "M-p") 'ar-emacs-move-line-up)
-  (define-key prog-mode-map (kbd "M-n") 'ar-emacs-move-line-down))
 
 ;;; ar-bindings.el ends here
