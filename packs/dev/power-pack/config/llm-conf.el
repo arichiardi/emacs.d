@@ -60,10 +60,37 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
 
+(defun ar-emacs-gptel-deepseek-wrap-think-block (beg end)
+   "Wrap '<think>' blocks in an Org-mode drawer if not already wrapped."
+   (when (and (gptel-mode) (derived-mode-p 'org-mode))
+     (save-excursion
+       (goto-char beg)
+       ;; Find all occurrences of <think> blocks
+       (when (re-search-forward (rx (and line-start (* space) "<think>")) end t)
+         (let ((start (line-beginning-position)))
+           ;; Check if the block is already wrapped
+           (unless (save-excursion
+                     (forward-line -1)
+                     (looking-at "^:THINK:$"))
+             ;; Insert Org-mode drawer start
+             (goto-char start)
+             (insert-and-inherit ":THINK:\n")
+             (forward-line 1)
+             ;; Find the closing tag again after insertion
+             (when (re-search-forward (rx (and line-start (* space) "</think>")) end t)
+               (end-of-line)
+               ;; Ensure we don't add duplicate :END:
+               (unless (looking-at "\n:END:")
+                 (insert-and-inherit "\n:END:\n"))
+               ;; Move back to the start of the drawer for org-cycle
+               (goto-char start)
+               (org-cycle))))))))
+
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel--ollama-fetch-models)
 
-  :hook (gptel-mode . (lambda () (olivetti-mode 1)))
+  :hook
+  (gptel-mode . (lambda () (olivetti-mode 1)))
 
   :custom
   ((gptel-default-mode 'org-mode "Use org-mode as the default")
@@ -71,7 +98,6 @@ Returns a list of cons cells (name . directive) for each .md file."
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
    (gptel-org-branching-context t))
-
 
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
@@ -114,6 +140,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   ;; See https://github.com/karthink/gptel/issues/447
   ;; Commit cherry-picked: cbe6f30
   (advice-add 'gptel-menu :before (lambda () (gptel--ollama-fetch-models "Ollama")))
+
+  ;; https://github.com/karthink/gptel/discussions/579#discussioncomment-11935728
+  (add-hook 'gptel-post-response-functions #'ar-emacs-gptel-deepseek-wrap-think-block)
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
