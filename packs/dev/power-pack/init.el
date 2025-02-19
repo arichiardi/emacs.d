@@ -134,10 +134,7 @@
   :config
   ;; Enable plantuml-mode for PlantUML files
   (add-to-list 'org-src-lang-modes '("plantuml" . plantuml))
-  (use-package org
-    :config
-    (setq org-plantuml-jar-path "/usr/share/java/plantuml/plantuml.jar")
-    (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t))))
+  (setq plantuml-jar-path (ar-emacs-plantuml-jar-path))
 
   :custom
   ((plantuml-output-type "png" "Set the default output to png")
