@@ -7,8 +7,15 @@
 (use-package org-protocol
   :demand t)
 
-(use-package ob-clojure)
-(use-package ob-mongo)
+(use-package ob-clojure :after org)
+(use-package ob-python :after org)
+(use-package ob-shell :after org)
+(use-package ob-sql :after org)
+(use-package ob-plantuml
+  :after (ar-emacs org)
+  :config
+  (org-babel-do-load-languages 'org-babel-load-languages '((plantuml . t)))
+  (setq org-plantuml-jar-path (ar-emacs-plantuml-jar-path)))
 
 (defun ar-emacs--get-open-org-file ()
   "Asks to the user to select one of the `org-mode' buffers."

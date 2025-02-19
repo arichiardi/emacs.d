@@ -402,6 +402,17 @@ Returns whatever the action returns."
      (string-match-p (regexp-quote safe-dir) (file-name-directory buffer-file-name)))
    ar-emacs--safe-project-dirs))
 
+(defun ar-emacs-plantuml-jar-path ()
+  "Retrieve the path to the plantuml.jar."
+  ;; TODO: find a way to get the path in linux
+  (when (eq system-type 'darwin)
+    (->> "brew --prefix plantuml"
+         (shell-command-to-string)
+         (string-trim)
+         (file-truename)
+         (expand-file-name "libexec")
+         (expand-file-name "plantuml.jar"))))
+
 (provide 'ar-emacs)
 
 ;;; ar-emacs.el ends here
