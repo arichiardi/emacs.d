@@ -49,12 +49,6 @@
 (global-set-key (kbd "C-c g d") 'git-gutter:popup-diff)
 (global-set-key (kbd "C-c g r") 'git-gutter:revert-hunk)
 
-;; text manipulation shortcuts
-(global-set-key (kbd "C-c t b") 'untabify-buffer)
-(global-set-key (kbd "C-c t r") 'untabify)
-(global-set-key (kbd "C-c t c") 'whitespace-cleanup)
-(global-set-key (kbd "C-c t d") 'duplicate-dwim)
-
 ;; emacs-lisp shortcuts
 (global-set-key (kbd "C-c m s") 'eval-and-replace) ;swap
 (global-set-key (kbd "C-c m b") 'eval-buffer)
