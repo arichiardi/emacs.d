@@ -244,7 +244,7 @@
 	url = git@github.com:emacs-typescript/typescript.el.git
 [submodule "llama"]
 	path = lib/llama
-	url = https://github.com/tarsius/llama
+	url = git@github.com:tarsius/llama.git
 [submodule "lsp-mode"]
 	path = lib/lsp-mode
 	url = git@github.com:emacs-lsp/lsp-mode.git
