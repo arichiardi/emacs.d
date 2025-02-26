@@ -14,6 +14,7 @@
   :hook
   (git-commit-mode . flyspell-mode)
   (git-rebase-mode . flyspell-mode)
-  (markdown-mode . flyspell-mode))
+  (markdown-mode . flyspell-mode)
+  (plantuml-mode . flyspell-mode))
 
 ;;; spelling-conf.el ends here
