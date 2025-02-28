@@ -60,7 +60,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
 
-(defun ar-emacs-gptel-deepseek-wrap-think-block (beg end)
+(defun ar-emacs-gptel-wrap-think-block (beg end)
    "Wrap '<think>' blocks in an Org-mode drawer if not already wrapped."
    (when (and (gptel-mode) (derived-mode-p 'org-mode))
      (save-excursion
@@ -88,7 +88,9 @@ Returns a list of cons cells (name . directive) for each .md file."
 
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel--ollama-fetch-models)
-
+  :bind (:map gptel-mode-map
+              ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
+              ("C-c C-c" . #'gptel-abort))
   :hook
   (gptel-mode . (lambda () (olivetti-mode 1)))
 
@@ -97,7 +99,9 @@ Returns a list of cons cells (name . directive) for each .md file."
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
-   (gptel-org-branching-context t))
+   (gptel-org-branching-context t)
+   (gptel-expert-commands t))
+
 
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
@@ -106,7 +110,15 @@ Returns a list of cons cells (name . directive) for each .md file."
         gptel-backend (gptel-make-ollama "Ollama"
                         :host (ar-emacs-ollama-host-w-port)
                         :stream t
-                        :models '()))
+                        :models '((qwen2.5-coder:32b-instruct-q6_K
+                                   :description "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing."
+                                   :request-params (:options (:num_ctx 32768 :min_p 0.1)))
+                                  (phi4:14b-q8_0
+                                   :description "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+                                   :request-params (:options (:num_ctx 16384 :min_p 0.1)))
+                                  (deepseek-coder-v2:16b-lite-instruct-q4_K_M
+                                   :description "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks."
+                                   :request-params (:options (:num_ctx 65536 :min_p 0.1))))))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -139,10 +151,10 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   ;; See https://github.com/karthink/gptel/issues/447
   ;; Commit cherry-picked: cbe6f30
-  (advice-add 'gptel-menu :before (lambda () (gptel--ollama-fetch-models "Ollama")))
+  ;; (advice-add 'gptel-menu :before (lambda () (gptel--ollama-fetch-models "Ollama")))
 
   ;; https://github.com/karthink/gptel/discussions/579#discussioncomment-11935728
-  (add-hook 'gptel-post-response-functions #'ar-emacs-gptel-deepseek-wrap-think-block)
+  (add-hook 'gptel-post-response-functions #'ar-emacs-gptel-wrap-think-block)
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -238,7 +250,7 @@ Returns a list of cons cells (name . directive) for each .md file."
               )
 
   :custom
-  (minuet-provider 'openai-compatible) ;; 'openai-fim-compatible
+  (minuet-provider 'openai-fim-compatible) ;; 'openai-fim-compatible
   (minuet-n-completions 10)
 
   ;; I recommend beginning with a small context window size and incrementally
@@ -268,7 +280,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   `(:name "Ollama FIM"
     :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/completions")
     :api-key "TERM"
-    :model "deepseek-coder-v2:16b"
+    :model "deepseek-coder-v2:16b-lite-base-q4_K_M"
     :template (:prompt minuet--default-fim-prompt-function
                :suffix minuet--default-fim-suffix-function)))
 
