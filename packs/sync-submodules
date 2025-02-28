@@ -1,0 +1,5 @@
+#!/bin/bash
+
+# Avoid sync-ing request because of this:
+#  https://github.com/tkf/emacs-request/issues/227
+git -c submodule."request".update=none submodule update --recursive --init
