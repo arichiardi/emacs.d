@@ -27,6 +27,8 @@
            ("C-s" . gptel-send)
            ("<return>"   . gptel-menu)
            ("C-<return>" . gptel-menu)
+           ("q" . gptel-abort)
+           ("C-q" . gptel-abort)
            ("r"   . gptel-rewrite)
            ("C-r" . gptel-rewrite))
 
