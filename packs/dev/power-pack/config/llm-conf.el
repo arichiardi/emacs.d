@@ -54,11 +54,17 @@ Returns a list of cons cells (name . directive) for each .md file."
            "Do NOT use markdown backticks (```) to format your response. If you use LaTex notation, enclose math in \\( and \\), or \\[ and \\] delimiters.")
      "\n")))
 
-(defun ar-emacs-ollama-host-w-port ()
+(defun ar-emacs-gptel-ollama-endpoint ()
   "Compute the host:port pointing to the ollama server."
   (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
           ":"
           (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
+
+(defun ar-emacs-gptel-vllm-endpoint ()
+  "Compute the host:port pointing to the ollama server."
+  (concat (or (getenv "EMACS_GPTEL_VLLM_HOST") "localhost")
+          ":"
+          (or (getenv "EMACS_GPTEL_VLLM_PORT") "8000")))
 
 (defun ar-emacs-gptel-wrap-think-block (beg end)
    "Wrap '<think>' blocks in an Org-mode drawer if not already wrapped."
@@ -86,6 +92,44 @@ Returns a list of cons cells (name . directive) for each .md file."
                (goto-char start)
                (org-cycle))))))))
 
+(setq ar-emacs-gptel-backend-ollama
+      (gptel-make-ollama "Ollama"
+        :host (ar-emacs-gptel-ollama-endpoint)
+        :stream t
+        :models '((qwen2.5-coder:32b-instruct-q6_K
+                   :description "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing."
+                   :request-params (:options (:num_ctx 32768 :min_p 0.1)))
+                  (phi4:14b-q8_0
+                   :description "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
+                   :request-params (:options (:num_ctx 16384 :min_p 0.1)))
+                  (deepseek-coder-v2:16b-lite-instruct-q4_K_M
+                   :description "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks."
+                   :request-params (:options (:num_ctx 65536 :min_p 0.1))))))
+
+(setq ar-emacs-gptel-backend-vllm
+      (gptel-make-openai "vLLM"
+        :protocol "http"
+        :host (ar-emacs-gptel-vllm-endpoint)
+        :header '(("Content-Type" . "application/json"))
+        :stream t
+        :models '((Valdemardi/DeepSeek-R1-Distill-Qwen-32B-AWQ
+                   :description "We introduce our first-generation reasoning model DeepSeek-R1. DeepSeek-R1 achieves performance comparable to OpenAI-o1 across math, code, and reasoning tasks."
+                   :request-params (:min_p 0.1))
+                  (Qwen/Qwen2.5-Coder-32B-Instruct-AWQ
+                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
+                   ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
+                   :request-params (:min_p 0.1))
+                  (Qwen/Qwen2.5-Coder-14B-Instruct-GPTQ-Int8
+                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
+                   ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
+                   :request-params (:frequency_penalty 0
+                                    :min_p 0.1
+                                    :presence_penalty 0
+                                    :temperature 0.7
+                                    :top_k 20
+                                    :top_p 0.8
+                                    :repetition_penalty 1)))))
+
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel--ollama-fetch-models)
   :bind (:map gptel-mode-map
@@ -106,19 +150,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'qwen2.5-coder:32b-instruct-q6_K
-        gptel-backend (gptel-make-ollama "Ollama"
-                        :host (ar-emacs-ollama-host-w-port)
-                        :stream t
-                        :models '((qwen2.5-coder:32b-instruct-q6_K
-                                   :description "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing."
-                                   :request-params (:options (:num_ctx 32768 :min_p 0.1)))
-                                  (phi4:14b-q8_0
-                                   :description "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-                                   :request-params (:options (:num_ctx 16384 :min_p 0.1)))
-                                  (deepseek-coder-v2:16b-lite-instruct-q4_K_M
-                                   :description "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks."
-                                   :request-params (:options (:num_ctx 65536 :min_p 0.1))))))
+
+  (setq gptel-model 'Qwen/Qwen2.5-Coder-32B-Instruct-AWQ
+        gptel-backend ar-emacs-gptel-backend-vllm)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -263,9 +297,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   :config
   (setq minuet-openai-compatible-options
    `(:name "Ollama"
-     :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/chat/completions")
+     :end-point ,(concat "http://" (ar-emacs-gptel-vllm-endpoint) "/v1/chat/completions")
      :api-key "TERM"
-     :model "qwen2.5-coder:32b-instruct-q6_K"
+     :model "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ"
      :system (:template minuet-default-system-template
               :prompt minuet-default-prompt
               :guidelines minuet-default-guidelines
@@ -278,9 +312,9 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq minuet-openai-fim-compatible-options
   `(:name "Ollama FIM"
-    :end-point ,(concat "http://" (ar-emacs-ollama-host-w-port) "/v1/completions")
+    :end-point ,(concat "http://" (ar-emacs-gptel-vllm-endpoint) "/v1/completions")
     :api-key "TERM"
-    :model "deepseek-coder-v2:16b-lite-base-q4_K_M"
+    :model "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ"
     :template (:prompt minuet--default-fim-prompt-function
                :suffix minuet--default-fim-suffix-function)))
 
