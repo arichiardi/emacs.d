@@ -66,31 +66,45 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_VLLM_PORT") "8000")))
 
-(defun ar-emacs-gptel-wrap-think-block (beg end)
-   "Wrap '<think>' blocks in an Org-mode drawer if not already wrapped."
+(defvar ar-emacs-opening-think-regex (rx (and line-start (* space) "<think>")))
+(defvar ar-emacs-closing-think-regex (rx (and line-start (* space) "</think>")))
+
+(defun ar-emacs-gptel-wrap-think-block2 (beg end)
+   "Wrap \"<think>\" blocks in an org-mode drawer if not already wrapped.
+
+The BEG END parameters are positions within the buffer"
    (when (and (gptel-mode) (derived-mode-p 'org-mode))
      (save-excursion
        (goto-char beg)
-       ;; Find all occurrences of <think> blocks
-       (when (re-search-forward (rx (and line-start (* space) "<think>")) end t)
-         (let ((start (line-beginning-position)))
-           ;; Check if the block is already wrapped
-           (unless (save-excursion
-                     (forward-line -1)
-                     (looking-at "^:THINK:$"))
-             ;; Insert Org-mode drawer start
-             (goto-char start)
+       ;; Find occurrence of </think> blocks
+       (when (re-search-forward ar-emacs-closing-think-regex end t)
+         (let* ((beg-of-closing-block (match-beginning 0))
+                (end-of-closing-block (match-end 0))
+                (end-of-opening-block (save-excursion
+                                        (re-search-forward ar-emacs-opening-think-regex end t)))
+                (beg-of-think-drawer (or end-of-opening-block beg))
+                (beg-of-think-end-drawer (+ beg-of-closing-block 8))
+                (end-of-think-end-drawer (+ end-of-closing-block 8)))
+           ;; Go to beg or the end of the opening block
+           (goto-char beg-of-think-drawer)
+           (unless (save-excursion (looking-at "^:THINK:$"))
+             ;; Insert org-mode draweb start
              (insert-and-inherit ":THINK:\n")
-             (forward-line 1)
-             ;; Find the closing tag again after insertion
-             (when (re-search-forward (rx (and line-start (* space) "</think>")) end t)
-               (end-of-line)
-               ;; Ensure we don't add duplicate :END:
-               (unless (looking-at "\n:END:")
-                 (insert-and-inherit "\n:END:\n"))
-               ;; Move back to the start of the drawer for org-cycle
-               (goto-char start)
-               (org-cycle))))))))
+             ;; Delete <think> backward
+             (when end-of-opening-block
+               (delete-char -7))
+             ;; Go to closing tag again after insertion :THINK:\n (8 chars)
+             (goto-char beg-of-think-end-drawer)
+             ;; Ensure we don't add duplicate :END:
+             (unless (save-excursion (looking-at ":END:\n"))
+               (insert-and-inherit ":END:\n")
+               ;; Delete </think> starting from the end of :END:\n (6 chars)
+               (delete-region (+ beg-of-think-end-drawer 6)
+                              ;; Also remove the extra newline
+                              (+ end-of-think-end-drawer 6 1)))
+             ;; Move back to the start of the drawer for org-cycle
+             (goto-char beg-of-think-drawer)
+             (org-cycle)))))))
 
 (setq ar-emacs-gptel-backend-ollama
       (gptel-make-ollama "Ollama"
@@ -188,7 +202,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   ;; (advice-add 'gptel-menu :before (lambda () (gptel--ollama-fetch-models "Ollama")))
 
   ;; https://github.com/karthink/gptel/discussions/579#discussioncomment-11935728
-  (add-hook 'gptel-post-response-functions #'ar-emacs-gptel-wrap-think-block)
+  (add-hook 'gptel-post-response-functions #'ar-emacs-gptel-wrap-think-block2)
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
