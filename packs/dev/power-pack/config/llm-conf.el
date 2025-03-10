@@ -129,7 +129,8 @@ The BEG END parameters are positions within the buffer"
         :models '((Qwen/QwQ-32B-AWQ
                    :description "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks, especially hard problems."
                    ;; From https://huggingface.co/Qwen/QwQ-32B-AWQ
-                   :request-params (:temperature 0.6 :top_p 0.95 :top_k 40
+                   :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
+                                    :temperature 0.6 :repeat-penalty 1.1
                                     :add_generation_prompt "true"))
                   (Valdemardi/DeepSeek-R1-Distill-Qwen-32B-AWQ
                    :description "We introduce our first-generation reasoning model DeepSeek-R1. DeepSeek-R1 achieves performance comparable to OpenAI-o1 across math, code, and reasoning tasks."
