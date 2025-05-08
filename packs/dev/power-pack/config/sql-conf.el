@@ -14,8 +14,10 @@
 
   :hook
   ((sql-mode . sqlind-minor-mode)
-   (sql-mode . sqlup-mode)
-   (sql-interactive-mode . sqlup-mode))
+   ;; Disabling for now (always available via commands)
+   ;; (sql-mode . sqlup-mode)
+   ;; (sql-interactive-mode . sqlup-mode)
+   )
 
   :bind (:map sql-mode-map
          ("C-c C-a" . sql-product-interactive)
@@ -36,6 +38,7 @@
 
 (use-package sql-indent
   :hook (sqlind-minor-mode . (lambda ()
+                               (setq sqlind-basic-offset 1)
                                (setq sqlind-indentation-offsets-alist
                                      `((select-clause sqlind-right-justify-clause)
                                        (insert-clause 0)
