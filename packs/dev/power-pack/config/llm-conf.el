@@ -126,20 +126,26 @@ The BEG END parameters are positions within the buffer"
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen/QwQ-32B-AWQ
+        :models '((QwQ-32B
                    :description "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks, especially hard problems."
                    ;; From https://huggingface.co/Qwen/QwQ-32B-AWQ
                    :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
                                     :temperature 0.6 :repeat-penalty 1.1
                                     :add_generation_prompt "true"))
-                  (Valdemardi/DeepSeek-R1-Distill-Qwen-32B-AWQ
+                  (Qwen3-30B
+                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                   ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
+                   :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
+                                           :temperature 0.6 :repeat-penalty 1.1
+                                           :add_generation_prompt "true"))
+                  (DeepSeek-R1-Distill-Qwen-32B
                    :description "We introduce our first-generation reasoning model DeepSeek-R1. DeepSeek-R1 achieves performance comparable to OpenAI-o1 across math, code, and reasoning tasks."
                    :request-params (:min_p 0.1))
-                  (Qwen/Qwen2.5-Coder-32B-Instruct-AWQ
+                  (Qwen2.5-Coder-32B-Instruct
                    :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
                    ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
                    :request-params (:min_p 0.1))
-                  (Qwen/Qwen2.5-Coder-14B-Instruct-GPTQ-Int8
+                  (Qwen2.5-Coder-14B-Instruct
                    :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
                    ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
                    :request-params (:frequency_penalty 0
@@ -164,14 +170,13 @@ The BEG END parameters are positions within the buffer"
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
    (gptel-org-branching-context t)
-   (gptel-expert-commands t))
-
+   (gptel-expert-commands t)
+   (gptel-include-reasoning t))
 
   :config
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-
-  (setq gptel-model 'Qwen/Qwen2.5-Coder-32B-Instruct-AWQ
+  (setq gptel-model 'Qwen3-30B
         gptel-backend ar-emacs-gptel-backend-vllm)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
