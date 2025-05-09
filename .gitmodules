@@ -17,6 +17,9 @@
 [submodule "avy"]
 	path = lib/avy
 	url = git@github.com:abo-abo/avy.git
+[submodule "avy-flycheck"]
+	path = lib/avy-flycheck
+	url = https://github.com/magicdirac/avy-flycheck
 [submodule "babashka-el"]
 	path = lib/babashka-el
 	url = git@github.com:licht1stein/babashka.el.git

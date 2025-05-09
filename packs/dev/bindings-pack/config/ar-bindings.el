@@ -35,6 +35,7 @@
 (bind-keys :prefix-map ar-emacs-text-prefix-map
            :prefix-docstring "Prefix key for text manipulation."
            :prefix "C-c t"
+           ("a" . avy-resume)
            ("d" . duplicate-dwim)
            ("s" . ar-emacs-sprunge)
            ("u" . untabify-buffer)
@@ -54,5 +55,10 @@
 
 (global-set-key "\033[32;16~" 'set-rectangular-region-anchor)
 (global-set-key (kbd "s-SPC") 'set-rectangular-region-anchor)
+
+;; Avy
+(global-set-key (kbd "C-:") 'avy-goto-char-timer)
+(global-set-key (kbd "C-'") 'avy-goto-char-2)
+(global-set-key (kbd "M-g g") 'avy-goto-line)
 
 ;;; ar-bindings.el ends here

@@ -156,4 +156,11 @@
   :hook
   (dired-mode . nerd-icons-dired-mode))
 
+(use-package avy
+  :hook
+  (after-init . avy-setup-default)
+  (after-init . avy-flycheck-setup))
+
+(use-package avy-flycheck)
+
 ;;; init.el ends here
