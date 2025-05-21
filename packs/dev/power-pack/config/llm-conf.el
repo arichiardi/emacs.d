@@ -96,10 +96,10 @@ Returns a list of cons cells (name . directive) for each .md file."
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
-                                           :temperature 0.6 :repeat-penalty 1.1
-                                           :add_generation_prompt "true"))
-                  (DeepSeek-R1-Distill-Qwen-32B
-                   :description "We introduce our first-generation reasoning model DeepSeek-R1. DeepSeek-R1 achieves performance comparable to OpenAI-o1 across math, code, and reasoning tasks."
+                                    :temperature 0.6 :repeat-penalty 1.1
+                                    :add_generation_prompt "true"))
+                  (GLM4-32B
+                   :description "The GLM family welcomes new members, the GLM-4-32B-0414 series models, featuring 32 billion parameters. Its performance is comparable to OpenAI’s GPT series and DeepSeek’s V3/R1 series."
                    :request-params (:min_p 0.1))
                   (Qwen2.5-Coder-32B-Instruct
                    :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
