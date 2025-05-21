@@ -283,7 +283,7 @@ Returns a list of cons cells (name . directive) for each .md file."
    `(:name "Ollama"
      :end-point ,(concat "http://" (ar-emacs-gptel-vllm-endpoint) "/v1/chat/completions")
      :api-key "TERM"
-     :model "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ"
+     :model "Qwen3-30B"
      :system (:template minuet-default-system-template
               :prompt minuet-default-prompt
               :guidelines minuet-default-guidelines
@@ -298,7 +298,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   `(:name "Ollama FIM"
     :end-point ,(concat "http://" (ar-emacs-gptel-vllm-endpoint) "/v1/completions")
     :api-key "TERM"
-    :model "Qwen/Qwen2.5-Coder-32B-Instruct-AWQ"
+    :model "Qwen3-30B"
     :template (:prompt minuet--default-fim-prompt-function
                :suffix minuet--default-fim-suffix-function)))
 
