@@ -263,6 +263,9 @@
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
+[submodule "mcp"]
+	path = lib/mcp
+	url = git@github.com:lizqwerscott/mcp.el.git
 [submodule "merlin"]
 	path = lib/merlin
 	url = git@github.com:emacsmirror/merlin.git

@@ -134,6 +134,9 @@ Returns a list of cons cells (name . directive) for each .md file."
    (gptel-include-reasoning t))
 
   :config
+  ;; for mcp.el tools
+  (require 'gptel-integrations)
+
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
   (setq gptel-model 'Qwen3-30B
@@ -305,5 +308,18 @@ Returns a list of cons cells (name . directive) for each .md file."
   (minuet-set-optional-options minuet-openai-compatible-options :max_tokens 512)
   (minuet-set-optional-options minuet-openai-compatible-options :top_p 0.9)
   )
+
+(use-package mcp
+  :commands (mcp-connect-server)
+  :custom
+  (mcp-log-level 'info)
+
+  ;; servers
+  (setq mcp-hub-servers
+        `(("filesystem" . (:command "podman"
+                           :args ("run" "-i" "--rm" "--network=host"
+                                  "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
+                                  "mcp/filesystem"
+                                  "/projects"))))))
 
 ;;; llm-conf.el ends here
