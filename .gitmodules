@@ -275,9 +275,6 @@
 [submodule "mic-paren"]
 	path = lib/mic-paren
 	url = git@github.com:emacsattic/mic-paren.git
-[submodule "minuet-ai.el"]
-	path = lib/minuet-ai.el
-	url = git@github.com:milanglacier/minuet-ai.el.git
 [submodule "mmm-mode"]
 	path = lib/mmm-mode
 	url = git@github.com:purcell/mmm-mode.git
