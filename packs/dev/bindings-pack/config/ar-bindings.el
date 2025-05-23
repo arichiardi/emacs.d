@@ -24,7 +24,6 @@
            ("b" . gptel)
            ("C-b" . gptel)
            ("m" . mcp-hub)
-           ("C-m" . mcp-hub)
            ("s"   . gptel-send)
            ("C-s" . gptel-send)
            ("<return>"   . gptel-menu)
