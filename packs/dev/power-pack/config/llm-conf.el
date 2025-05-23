@@ -101,10 +101,10 @@ Returns a list of cons cells (name . directive) for each .md file."
                   (GLM4-32B
                    :description "The GLM family welcomes new members, the GLM-4-32B-0414 series models, featuring 32 billion parameters. Its performance is comparable to OpenAI’s GPT series and DeepSeek’s V3/R1 series."
                    :request-params (:min_p 0.1))
-                  (Qwen2.5-Coder-32B-Instruct
-                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
-                   ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
-                   :request-params (:min_p 0.1))
+                  (Devstral-Small
+                   :description "Devstral is an agentic LLM for software engineering tasks built under a collaboration between Mistral AI and All Hands AI 🙌. Devstral excels at using tools to explore codebases, editing multiple files and power software engineering agents. The model achieves remarkable performance on SWE-bench which positionates it as the #1 open source model on this benchmark."
+                   :request-params (:temperature 0.15
+                                    :min_p 0.01))
                   (Qwen2.5-Coder-14B-Instruct
                    :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
                    ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
@@ -146,7 +146,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
         (let ((markdown-directives (ar-emacs-gptel-load-all-markdown-directives ar-emacs-llm-prompts-dir)))
-          `((default . ,(string-join
+          `((generate . (string-join
                          (list "To assist: be terse. Do not offer unprompted advice or clarifications. "
                                "Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Speak directly and be willing to make creative guesses."
                                "Explain your reasoning but if you don’t know, say you don’t know. Be willing to reference less reputable sources for ideas."
