@@ -179,18 +179,22 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
   (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
 
-
 (use-package mcp
-  :commands (mcp-connect-server)
+  :defines (mcp-hub-servers)
   :custom
   (mcp-log-level 'info)
 
-  ;; servers
+  :config
   (setq mcp-hub-servers
-        `(("filesystem" . (:command "podman"
-                           :args ("run" "-i" "--rm" "--network=host"
-                                  "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
-                                  "mcp/filesystem"
-                                  "/projects"))))))
+        (append mcp-hub-servers
+         `(("time" . (:command "uvx" :args ("mcp-server-time"
+                                            "--local-timezone=Canada/Mountain")))
+           ("filesystem" . (:command "podman"
+                                     :args ("run" "-i" "--rm" "--network=host"
+                                            "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
+                                            "mcp/filesystem"
+                                            "/projects")))
+           ("context" . (:command "uvx"
+                                  :args ("--from" "llm-context" "lc-mcp")))))))
 
 ;;; llm-conf.el ends here
