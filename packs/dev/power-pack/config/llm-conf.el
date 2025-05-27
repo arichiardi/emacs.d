@@ -95,9 +95,10 @@ Returns a list of cons cells (name . directive) for each .md file."
                   (Qwen3-30B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
-                   :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
-                                    :temperature 0.6 :repeat-penalty 1.1
-                                    :add_generation_prompt "true"))
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
+                                    :temperature 0.7
+                                    :add_generation_prompt "true"
+                                    :chat_template_kwargs (:enable_thinking "false")))
                   (GLM4-32B
                    :description "The GLM family welcomes new members, the GLM-4-32B-0414 series models, featuring 32 billion parameters. Its performance is comparable to OpenAI’s GPT series and DeepSeek’s V3/R1 series."
                    :request-params (:min_p 0.1))
