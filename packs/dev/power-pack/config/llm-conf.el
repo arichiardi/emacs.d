@@ -153,7 +153,8 @@ Returns a list of cons cells (name . directive) for each .md file."
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
         (let ((markdown-directives (ar-emacs-gptel-load-all-markdown-directives ar-emacs-llm-prompts-dir)))
-          `((generate . (string-join
+          `((default . nil)
+            (generate . (string-join
                          (list "To assist: be terse. Do not offer unprompted advice or clarifications. "
                                "Speak in specific, topic relevant terminology. Do NOT hedge or qualify. Speak directly and be willing to make creative guesses."
                                "Explain your reasoning but if you don’t know, say you don’t know. Be willing to reference less reputable sources for ideas."
