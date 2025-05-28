@@ -171,9 +171,11 @@ Returns a list of cons cells (name . directive) for each .md file."
                        "\n"))
             ,@markdown-directives)))
 
-  ;; See https://github.com/karthink/gptel/issues/447
-  ;; Commit cherry-picked: cbe6f30
-  ;; (advice-add 'gptel-menu :before (lambda () (gptel--ollama-fetch-models "Ollama")))
+  (gptel-make-preset 'clojure-mcp
+    :description "A preset optimized for clojure-mcp"
+    :backend "vLLM"
+    :model 'Qwen3-14B
+    :system (alist-get 'clojure-mcp gptel-directives))
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
