@@ -19,19 +19,15 @@
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
            :prefix "C-c C-x"
-           ("<tab>" .  minuet-show-suggestion)
-           ("M-<tab>" . minuet-complete-with-minibuffer)
-           ("b" . gptel)
            ("C-b" . gptel)
-           ("m" . mcp-hub)
-           ("s"   . gptel-send)
-           ("C-s" . gptel-send)
-           ("<return>"   . gptel-menu)
-           ("C-<return>" . gptel-menu)
            ("q" . gptel-abort)
            ("C-q" . gptel-abort)
-           ("r"   . gptel-rewrite)
-           ("C-r" . gptel-rewrite))
+           ("C-h" . mcp-hub)
+           ("C-r" . gptel-rewrite)
+           ("C-s" . gptel-send)
+           ("C-t" . gptel-tools)
+           ("<return>"   . gptel-menu)
+           ("C-<return>" . gptel-menu))
 
 (bind-keys :prefix-map ar-emacs-text-prefix-map
            :prefix-docstring "Prefix key for text manipulation."
