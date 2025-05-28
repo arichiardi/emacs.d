@@ -125,9 +125,8 @@ Returns a list of cons cells (name . directive) for each .md file."
                                     :repetition_penalty 1)))))
 
 (use-package gptel
-  :commands (gptel gptel-menu gptel-rewrite gptel-send gptel--ollama-fetch-models)
+  :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
-              ;; These keymaps activate only when a minuet suggestion is displayed in the current buffer
               ("C-c C-c" . #'gptel-abort))
   :hook
   (gptel-mode . (lambda () (olivetti-mode 1)))
