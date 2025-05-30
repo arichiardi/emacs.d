@@ -13,7 +13,7 @@
   :custom
   (company-tooltip-limit 25)
   (company-auto-commit-chars nil)
-  (company-tooltip-flip-when-above t)
+  (company-tooltip-flip-when-above nil "don't want to press down for going up!")
   (company-idle-delay .2)
   (company-tooltip-idle-delay 0)
   :hook
