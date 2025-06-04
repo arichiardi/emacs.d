@@ -157,19 +157,97 @@ Optionally accepts an explicit SYMBOL-LIST."
                        (mapcar #'buffer-name repl-buffers)
                        nil t))))
 
-(defun ar-emacs--clj-eval-bindings (bindings)
-  "Define a symbol binding for each BINDINGS."
+(defun ar-emacs--clj-parse-sym-kw-map (bound-expr init-expr)
+  "Parse an EDN string representing a symbol-keyword map and generate DEF forms.
+
+BOUND-EXPR is a string like \"{task-id :id, task-canonical-id :canonical-id}\", and
+INIT-EXPR is a string representing the variable holding the map value.
+
+Returns a string containing the DEF forms for each symbol-keyword pair,
+or nil if the map is empty."
+  (let* ((hash (parseedn-read-str bound-expr))
+         (keys (hash-table-keys hash)))
+    (when (not (null keys))
+      (let ((defs (mapcar (lambda (key)
+                            (let ((value (gethash key hash)))
+                              (format "(def %s (%s task))"
+                                      (symbol-name key)
+                                      (symbol-name value))))
+                          keys)))
+        (format "(let [sym# %s] %s)"
+                init-expr
+                (mapconcat 'identity defs " "))))))
+
+(defun ar-emacs--clj-parse-keys-map (bound-expr init-expr)
+  "Parse an EDN string representing a map with :keys and generate DEF forms.
+
+BOUND-EXPR is a string like \"{\\:keys [task-id task-canonical-id]}\", and
+INIT-EXPR is a string representing the variable holding the map value.
+
+Returns a string containing the DEF forms for each key in the :keys
+vector, or nil if the :keys vector is empty."
+  (let* ((hash (parseedn-read-str bound-expr))
+         (keys (gethash :keys hash)))
+    (when keys
+      (let ((defs (mapcar (lambda (key)
+                            (format "(def %s (:%s task))" key key))
+                          keys)))
+        (format "(let [sym# %s] %s)"
+                init-expr
+                (mapconcat 'identity defs " "))))))
+
+(defun ar-emacs--clj-bound-map-p (expr)
+  "Check if EXPR is an EDN map by checking if it starts with '{'.
+
+This is a simple heuristic and may not cover all valid EDN map formats,
+but is sufficient for the use case of destructuring bindings."
+  (string-prefix-p "{" expr))
+
+(defun ar-emacs--clj-binding-to-form (bound-expr init-expr)
+  "Evaluate destructuring bindings and generate DEF forms at the REPL.
+
+BOUND-EXPR is a string representing a binding symbol or an EDN map.
+INIT-EXPR is a string representing the value expression.
+
+Returns a string containing the DEF form for the binding, or nil if the
+binding is not a valid destructuring form."
+  (when bound-expr
+    (cond
+     ((ar-emacs--clj-bound-map-p bound-expr)
+      (or
+       ;; Handle map with :keys destructuring
+       (ar-emacs--clj-parse-keys-map bound-expr init-expr)
+       ;; Handle symbol-keyword map destructuring
+       (ar-emacs--clj-parse-sym-kw-map bound-expr init-expr)))
+     ;; Fallback: simple binding
+     (t
+      (concat "(def " bound-expr " " init-expr ")")))))
+
+(defun ar-emacs--clj-bindings-to-forms (bindings)
+  "Parse destructuring bindings and generate forms.
+
+BINDINGS is a list of symbols and expressions representing a let binding.
+
+Returns a list of forms (as strings) containing the DEF forms for each binding."
   (when bindings
-    (let ((bound-name (pop bindings))
-          (init-expr (pop bindings)))
-      (when bound-name
-        (let ((form (concat "(def " bound-name " " init-expr ")")))
-          (ar-emacs-send-to-repl form))))
-    (ar-emacs--clj-eval-bindings bindings)))
+    (let* ((bound-expr (string-trim (pop bindings)))
+           (init-expr (string-trim (pop bindings)))
+           (form (ar-emacs--clj-binding-to-form bound-expr init-expr)))
+      (cons form (ar-emacs--clj-bindings-to-forms bindings)))))
 
 (defun ar-emacs-clj-eval-all-let-bindings ()
+  "Evaluate all let bindings in the current buffer and send each (def ...)
+form to the REPL.
+
+Each form is sent individually, and any nil forms are skipped.  Errors
+are re-thrown."
   (interactive)
-  (ar-emacs--clj-eval-bindings (clojure--read-let-bindings)))
+  (condition-case err
+      (let ((forms (ar-emacs--clj-bindings-to-forms (clojure--read-let-bindings))))
+        (dolist (form forms)
+          (when form
+            (ar-emacs-send-to-repl form))))
+    (error (signal (car err) (cdr err)))))
 
 ;; http://whattheemacsd.com/
 (defun ar-emacs-rename-current-buffer-file ()
