@@ -91,8 +91,7 @@ Returns a list of cons cells (name . directive) for each .md file."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
                                     :temperature 0.7
-                                    :add_generation_prompt "true"
-                                    :chat_template_kwargs (:enable_thinking "false")))
+                                    :add_generation_prompt "true"))
                   (Qwen3-30B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
