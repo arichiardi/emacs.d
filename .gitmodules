@@ -418,10 +418,6 @@
 [submodule "smartparens"]
 	path = lib/smartparens
 	url = git@github.com:Fuco1/smartparens.git
-[submodule "smex"]
-	path = lib/smex
-	url = git@github.com:nonsequitur/smex.git
-	ignore = untracked
 [submodule "spinner"]
 	path = lib/spinner
 	url = git@github.com:Malabarba/spinner.el.git
