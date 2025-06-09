@@ -1,4 +1,4 @@
-;;; shell-conf.el --- Shell Configuration
+;;; term-conf.el --- Term Configuration
 
 ;;; Commentary:
 
@@ -141,4 +141,4 @@ eshell windows easier."
   (add-hook 'eshell-load-hook #'eat-eshell-mode))
 
 
-;;; shell-conf.el ends here
+;;; term-conf.el ends here
