@@ -71,7 +71,8 @@ eshell windows easier."
             eshell-output-filter-functions)
   :init
   ;; For shell and interpreters
-  (setenv "TERM" "xterm-256color")
+  ;; Disabled for now as not really in use.
+  ;; (setenv "TERM" "xterm-256color")
   (setq comint-output-filter-functions
         (remove 'ansi-color-process-output comint-output-filter-functions))
   (add-hook 'comint-preoutput-filter-functions 'xterm-color-filter)
@@ -93,7 +94,7 @@ eshell windows easier."
           (remove 'eshell-handle-ansi-color eshell-output-filter-functions)))
 
   ;; For compilation buffers
-  (setq compilation-environment '("TERM=xterm-256color"))
+  ;; (setq compilation-environment '("TERM=xterm-256color"))
 
   :bind (("C-c x e" . ar-emacs--eshell-here)))
 
@@ -124,5 +125,20 @@ eshell windows easier."
   :custom
   (vterm-max-scrollback 75000)
   (vterm-kill-buffer-on-exit t))
+
+(eval-and-compile
+  (defun eat-load-path ()
+    (mapcar (lambda (x)
+              (expand-file-name x (car (borg-load-path "eat"))))
+            '("eat.el" "gpl.texi" "eat.texi" "fdl.texi" "gpl.texi"
+              "term/eat.el" "terminfo/e" "terminfo/65" "integration"))))
+
+(use-package eat
+  :load-path (lambda () (eat-load-path))
+
+  :config
+  ;; For `eat-eshell-mode'.
+  (add-hook 'eshell-load-hook #'eat-eshell-mode))
+
 
 ;;; shell-conf.el ends here
