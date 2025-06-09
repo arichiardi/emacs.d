@@ -21,6 +21,3 @@
 ;; Work around a bug on OS X where system-name is a fully qualified
 ;; domain name
 (setq system-name (car (split-string system-name "\\.")))
-
-;; Ignore .DS_Store files with ido mode
-(add-to-list 'ido-ignore-files "\\.DS_Store")
