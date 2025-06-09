@@ -48,7 +48,7 @@
 (live-load-config-file "key-chord-conf.el")
 (live-load-config-file "recentf-conf.el")
 (live-load-config-file "popwin-conf.el")
-(live-load-config-file "shell-conf.el")
+(live-load-config-file "term-conf.el")
 (live-load-config-file "spelling-conf.el")
 (live-load-config-file "win-switch-conf.el")
 (live-load-config-file "monkey-patch.el")
