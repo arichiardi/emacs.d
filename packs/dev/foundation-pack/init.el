@@ -26,7 +26,6 @@
   :hook ((sh-mode . company-mode)
          (sh-mode . rainbow-delimiters-mode)))
 
-(require 'dircolors)
 (require 'smooth-scrolling)
 (require 'buffer-move)
 
