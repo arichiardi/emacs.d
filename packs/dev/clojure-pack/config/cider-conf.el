@@ -91,15 +91,13 @@
   (cider-mode . clj-refactor-mode)
   (cider-mode . (lambda ()
                   (progn
-                    (helm-cider-mode 1)
                     (yas-minor-mode 1))))
   (cider-mode . custom-cider-mode-hook)
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
   (cider-repl-mode . company-mode)
-  (cider-repl-mode . which-key-mode)
-  (cider-repl-mode . (lambda () (helm-cider-mode 1))))
+  (cider-repl-mode . which-key-mode))
 
 
 (with-eval-after-load "cider-mode"
@@ -129,7 +127,6 @@
   (define-key cider-repl-mode-map (kbd "C-c r b") 'ar-emacs-cljs-boot-repl)
   (define-key cider-repl-mode-map (kbd "C-c r s") 'ar-emacs-cljs-shadow-select-repl)
 
-  (define-key cider-repl-mode-map (kbd "C-r") nil)
-  (define-key cider-repl-mode-map (kbd "C-r") 'helm-cider-repl-history))
+  (define-key cider-repl-mode-map (kbd "C-r") nil))
 
 ;;; cider-conf.el ends here
