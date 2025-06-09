@@ -126,7 +126,8 @@ Returns a list of cons cells (name . directive) for each .md file."
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
-              ("C-c C-c" . #'gptel-abort))
+              ("C-c C-c" . #'gptel-abort)
+              ("C-c C-g" . #'gptel-abort))
   :hook
   (gptel-mode . (lambda () (olivetti-mode 1)))
 
@@ -144,7 +145,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'Qwen3-30B
+  (setq gptel-model 'Qwen3-14B
         gptel-backend ar-emacs-gptel-backend-vllm)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
@@ -177,11 +178,13 @@ Returns a list of cons cells (name . directive) for each .md file."
                        "\n"))
             ,@markdown-directives)))
 
-  (gptel-make-preset 'clojure-mcp
-    :description "A preset optimized for clojure-mcp"
+  (gptel-make-preset 'web-searcher
+    :description "A preset optimized for web searches"
     :backend "vLLM"
     :model 'Qwen3-14B
-    :system (alist-get 'clojure-mcp gptel-directives))
+    :post (lambda () (gptel-mcp-connect
+                      (list "fetch"))))
+
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -197,14 +200,17 @@ Returns a list of cons cells (name . directive) for each .md file."
   :config
   (setq mcp-hub-servers
         (append mcp-hub-servers
-         `(("mcp/filesystem" . (:command "podman"
-                                     :args ("run" "-i" "--rm" "--network=host"
-                                            "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
-                                            "mcp/filesystem"
-                                            "/projects")))
-           ("mcp/fetch" . (:command "podman"
-                                     :args ("run", "-i", "--rm", "mcp/fetch")))
-           ("mcp/time" . (:command "uvx" :args ("mcp-server-time"
-                                            "--local-timezone=Canada/Mountain")))))))
+         `(("filesystem" . (:command
+                            "podman"
+                            :args ("run" "-i" "--rm" "--network=host"
+                                   "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
+                                   "mcp/filesystem"
+                                   "/projects")))
+           ("fetch" . (:command
+                       "podman"
+                       :args ("run", "-i", "--rm", "mcp/fetch")))
+           ("time" . (:command
+                      "uvx"
+                      :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))))))
 
 ;;; llm-conf.el ends here
