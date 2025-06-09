@@ -46,7 +46,7 @@
 	url = git@github.com:clojure-emacs/clojure-mode.git
 [submodule "closql"]
 	path = lib/closql
-	url = git@github.com:emacscollective/closql.git
+	url = https://codeberg.org/akib/emacs-eat
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
