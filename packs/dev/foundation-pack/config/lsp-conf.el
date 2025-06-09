@@ -21,12 +21,6 @@
   :bind (:map lsp-command-map
          ("ws" . lsp-ui-peek-find-workspace-symbol)))
 
-(use-package helm-lsp
-    :after (helm lsp-mode)
-    :commands (helm-lsp-workspace-symbol helm-lsp-code-actions)
-    :bind (([remap lsp-execute-code-action] . helm-lsp-code-actions)
-           ([remap lsp-ui-peek-find-workspace-symbol] . helm-lsp-workspace-symbol)))
-
 (use-package lsp-ui
   :after lsp-mode
   :commands lsp-ui-mode
