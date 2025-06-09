@@ -158,7 +158,6 @@ This can be 0 for immediate, or a floating point value.")
   ;;;;;;;;;;;;;;
   (setq org-refile-targets '((ar-emacs--get-open-org-file . (:maxlevel . 2))))
   (setq org-refile-use-outline-path 'file)
-  (setq org-completion-use-ido t)
 
   ;;;;;;;;;;;
   ;; Babel ;;

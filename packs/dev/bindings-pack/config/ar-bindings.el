@@ -59,4 +59,15 @@
 (global-set-key (kbd "M-g c") 'avy-goto-char)
 (global-set-key (kbd "M-g g") 'avy-goto-line)
 
+;; Projectiln
+(global-set-key (kbd "s-p") 'projectile-persp-switch-project)
+(global-set-key (kbd "s-.") 'projectile-find-tag)
+(global-set-key (kbd "s-M-t") 'projectile-toggle-between-implementation-and-test)
+
+;; Consult
+(global-set-key (kbd "s-s") 'ar-emacs-consult-ripgrep)
+(global-set-key (kbd "s-g") 'ar-emacs-consult-git-grep)
+
+(provide 'ar-bindings)
+
 ;;; ar-bindings.el ends here

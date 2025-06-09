@@ -80,7 +80,6 @@
 (global-set-key (kbd "C-c d f") 'diff-buffer-with-file)
 
 (global-set-key (kbd "C-c s m") 'live-show-messages)
-(global-set-key (kbd "C-c s p") 'helm-eshell-prompts-all)
 (global-set-key (kbd "C-c s e") 'string-edit-at-point)
 
 ;;window and buffer movement
@@ -132,9 +131,6 @@
 (global-set-key (kbd "C-M-_")  'live-decrement-number-at-point)
 (global-set-key (kbd "M-=")    'live-increment-number-at-point)
 (global-set-key (kbd "C-M-=")    'live-increment-number-at-point)
-
-;; browse kill ring (visual paste)
-(global-set-key (kbd "M-y") 'browse-kill-ring)
 
 ;; make C-] and M-] cut and copy respectively
 (global-set-key (kbd "C-]") 'kill-region)
@@ -192,33 +188,6 @@
 (global-set-key (kbd "C-x O") (lambda () (interactive) (other-window -1))) ;; back one
 (global-set-key (kbd "C-x C-o") (lambda () (interactive) (other-window 2))) ;; forward two
 
-;; Helm
-(global-set-key (kbd "M-x")                          'undefined)
-(global-set-key (kbd "M-x")                          'helm-M-x)
-(global-set-key (kbd "M-y")                          'helm-show-kill-ring)
-(global-set-key (kbd "C-x f")                        'helm-recentf)
-(global-set-key (kbd "C-x C-f")                      'helm-find-files)
-(global-set-key (kbd "C-c <SPC>")                    'helm-all-mark-rings)
-(global-set-key [remap bookmark-jump]                'helm-filtered-bookmarks)
-(global-set-key (kbd "C-:")                          'helm-eval-expression-with-eldoc)
-(global-set-key (kbd "C-,")                          'helm-calcul-expression)
-(global-set-key (kbd "<f5> s")                       'helm-find)
-(global-set-key (kbd "S-<f2>")                       'helm-execute-kmacro)
-(define-key global-map [remap jump-to-register]      'helm-register)
-(define-key global-map [remap list-buffers]          'helm-mini)
-(define-key global-map [remap dabbrev-expand]        'helm-dabbrev)
-(define-key global-map [remap find-tag]              'helm-etags-select)
-(global-set-key (kbd "M-s")                          'helm-do-grep-ag)
-(global-set-key (kbd "C-x r p")                      'helm-projects-history)
-(global-set-key (kbd "C-x r c")                      'helm-addressbook-bookmarks)
-(global-set-key (kbd "C-x r d")                      'helm-dictionary)
-(global-set-key (kbd "C-x C-b")                      'helm-buffers-list)
-;; What to do with these?
-;; (global-set-key (kbd "C-h i")                        'helm-info)
-;; (global-set-key (kbd "C-h a")                        'helm-apropos)
-;; (global-set-key (kbd "C-h C-d")                      'helm-debug-open-last-log)
-;; (global-set-key (kbd "C-h C-l")                      'helm-locate-library)
-
 ;; If you want to be able to M-x without meta
 (global-set-key (kbd "C-x C-m") 'execute-extended-command)
 
@@ -258,16 +227,6 @@
 (global-set-key (kbd "C-c l") 'org-store-link)
 (global-set-key (kbd "C-c a") 'org-agenda)
 (global-set-key (kbd "C-c c") 'org-capture)
-
-;; projectile
-(global-set-key (kbd "s-d") 'helm-projectile-find-dir)
-(global-set-key (kbd "s-p") 'projectile-persp-switch-project)
-(global-set-key (kbd "s-f") 'helm-projectile-find-file)
-(global-set-key (kbd "s-b") 'helm-projectile-switch-to-buffer)
-(global-set-key (kbd "s-.") 'projectile-find-tag)
-(global-set-key (kbd "s-s") 'helm-projectile-rg)
-(global-set-key (kbd "s-g") 'helm-projectile-grep)
-(global-set-key (kbd "s-M-t") 'projectile-toggle-between-implementation-and-test)
 
 ;; company-mode
 (global-set-key (kbd "<backtab>") 'company-complete)

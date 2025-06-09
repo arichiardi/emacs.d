@@ -87,7 +87,6 @@
 
   :hook
   (cider-mode . eldoc-mode)
-  (cider-mode . which-key-mode)
   (cider-mode . clj-refactor-mode)
   (cider-mode . (lambda ()
                   (progn
@@ -96,8 +95,7 @@
   (cider-repl-mode . eldoc-mode)
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
-  (cider-repl-mode . company-mode)
-  (cider-repl-mode . which-key-mode))
+  (cider-repl-mode . company-mode))
 
 
 (with-eval-after-load "cider-mode"

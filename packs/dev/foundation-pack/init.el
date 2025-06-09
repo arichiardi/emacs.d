@@ -14,7 +14,6 @@
 (setq shift-select-mode t)
 (setq mouse-drag-copy-region t)
 (setq visible-bell t)
-(setq completion-styles '(basic substring partial-completion))
 
 (setq auth-sources '("~/.authinfo.gpg"))
 
@@ -41,7 +40,6 @@
 (live-load-config-file "built-in.el")
 (live-load-config-file "cua-conf.el")
 (live-load-config-file "cosmetic.el")
-(live-load-config-file "smex-conf.el")
 (live-load-config-file "tramp-conf.el")
 (live-load-config-file "mouse-conf.el")
 (live-load-config-file "key-chord-conf.el")
@@ -53,7 +51,6 @@
 (live-load-config-file "monkey-patch.el")
 (live-load-config-file "org-mode-conf.el")
 (live-load-config-file "completion-conf.el")
-(live-load-config-file "helm-conf.el")
 (live-load-config-file "projectile-conf.el")
 (live-load-config-file "ediff-conf.el")
 (live-load-config-file "lsp-conf.el")
@@ -116,8 +113,26 @@
 
 (use-package string-edit)
 
+;;;;;;;; From the Vertico configuration
+
 ;; Disable annoying tooltips on hover tooltip
 (setq show-help-function nil)
+
+;; Enable context menu. `vertico-multiform-mode' adds a menu in the minibuffer to switch display
+;; modes.
+(setq context-menu-mode t)
+
+;; Support opening new minibuffers from inside existing minibuffers.
+(setq enable-recursive-minibuffers t)
+
+;; Hide commands in M-x which do not work in the current mode.  Vertico
+;; commands are hidden in normal buffers. This setting is useful beyond
+;; Vertico.
+(setq read-extended-command-predicate #'command-completion-default-include-p)
+
+;; Do not allow the cursor in the minibuffer prompt
+(setq minibuffer-prompt-properties
+ '(read-only t cursor-intangible t face minibuffer-prompt))
 
 (use-package ar-emacs)
 

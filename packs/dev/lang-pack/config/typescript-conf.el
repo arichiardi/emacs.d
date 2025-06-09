@@ -49,7 +49,6 @@ Put this in .dir-locals.el:
   (typescript-mode . smartparens-strict-mode)
   (typescript-mode . subword-mode)
   (typescript-mode . eldoc-mode)
-  (typescript-mode . which-key-mode)
   (typescript-mode . tide-setup)
   (typescript-mode . tide-hl-identifier-mode)
   (typescript-mode . ar-emacs--setup-tsx-company-backends)

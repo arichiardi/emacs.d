@@ -491,6 +491,35 @@ Returns whatever the action returns."
          (expand-file-name "libexec")
          (expand-file-name "plantuml.jar"))))
 
+(defun ar-emacs-consult-ripgrep ()
+  "Run `consult-ripgrep' using the selected region as the initial search string.
+The search will be performed in the current project root (from
+projectile, if available), or in the current directory otherwise."
+  (interactive)
+  (let* ((region (when (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))))
+         (dir (if (fboundp 'projectile-project-root)
+                  (projectile-project-root)
+                default-directory)))
+    (if region
+        (consult-ripgrep dir region)
+      (consult-ripgrep))))
+
+(defun ar-emacs-consult-git-grep ()
+  "Run `consult-git-grep' using the selected region as the initial search string.
+The search will be performed in the current project root (from
+projectile, if available), or in the current directory otherwise."
+  (interactive)
+  (let* ((region (when (use-region-p)
+                  (buffer-substring-no-properties (region-beginning) (region-end))))
+         (dir (if (fboundp 'projectile-project-root)
+                  (projectile-project-root)
+                default-directory)))
+    (if region
+        (consult-git-grep dir region)
+      (consult-ripgrep))))
+
+
 (provide 'ar-emacs)
 
 ;;; ar-emacs.el ends here
