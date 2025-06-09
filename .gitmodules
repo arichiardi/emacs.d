@@ -523,3 +523,6 @@
 [submodule "zprint"]
 	path = lib/zprint
 	url = https://github.com/DogLooksGood/zprint.el.git
+[submodule "eat"]
+	path = lib/eat
+	url = https://codeberg.org/akib/emacs-eat
