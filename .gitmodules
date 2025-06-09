@@ -66,6 +66,21 @@
 	path = lib/compat
 	url = git@github.com:emacsmirror/compat.git
 	build-step = make
+[submodule "consult"]
+	path = lib/consult
+	url = https://github.com/minad/consult
+[submodule "consult-ag"]
+	path = lib/consult-ag
+	url = git@github.com:abrochard/consult-ag.git
+[submodule "consult-company"]
+	path = lib/consult-company
+	url = https://github.com/mohkale/consult-company
+[submodule "consult-flycheck"]
+	path = lib/consult-flycheck
+	url = https://github.com/minad/consult-flycheck
+[submodule "consult-projectile"]
+	path = lib/consult-projectile
+	url = https://gitlab.com/OlMon/consult-projectile
 [submodule "copy-as-format"]
 	path = lib/copy-as-format
 	url = git@github.com:sshaw/copy-as-format.git
@@ -78,6 +93,9 @@
 [submodule "docker"]
 	path = lib/docker
 	url = git@github.com:Silex/docker.el.git
+[submodule "eat"]
+	path = lib/eat
+	url = https://codeberg.org/akib/emacs-eat
 [submodule "editorconfig"]
 	path = lib/editorconfig
 	url = git@github.com:editorconfig/editorconfig-emacs.git
@@ -166,33 +184,6 @@
 [submodule "hcl-mode"]
 	path = lib/hcl-mode
 	url = https://github.com/hcl-emacs/hcl-mode
-[submodule "helm"]
-	path = lib/helm
-	url = git@github.com:emacs-helm/helm.git
-	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/async:$HOME/.config/emacs/lib/popup:" make
-	build-step = borg-update-autoloads
-[submodule "helm-ag"]
-	path = lib/helm-ag
-	url = git@github.com:emacsorphanage/helm-ag.git
-	build-step = borg-compile
-[submodule "helm-descbinds"]
-	path = lib/helm-descbinds
-	url = git@github.com:emacs-helm/helm-descbinds.git
-	build-step = borg-compile
-[submodule "helm-org"]
-	path = lib/helm-org
-	url = git@github.com:emacs-helm/helm-org.git
-	build-step = borg-compile
-[submodule "helm-projectile"]
-	path = lib/helm-projectile
-	url = git@github.com:bbatsov/helm-projectile.git
-	build-step = borg-compile
-[submodule "helm-rg"]
-	path = lib/helm-rg
-	url = https://github.com/cosmicexplorer/helm-rg
-[submodule "helm-xref"]
-	path = lib/helm-xref
-	url = git@github.com:brotzeit/helm-xref.git
 [submodule "hl-todo"]
 	path = lib/hl-todo
 	url = git@github.com:tarsius/hl-todo.git
@@ -252,6 +243,9 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+[submodule "marginalia"]
+	path = lib/marginalia
+	url = https://github.com/minad/marginalia
 [submodule "markdown-mode"]
 	path = lib/markdown-mode
 	url = git@github.com:jrblevin/markdown-mode.git
@@ -291,6 +285,9 @@
 [submodule "olivetti"]
 	path = lib/olivetti
 	url = https://github.com/rnkn/olivetti
+[submodule "orderless"]
+	path = lib/orderless
+	url = https://github.com/oantolin/orderless
 [submodule "org"]
 	path = lib/org
 	url = https://code.orgmode.org/bzg/org-mode.git
@@ -471,6 +468,9 @@
 [submodule "utop"]
 	path = lib/utop
 	url = git@github.com:emacsmirror/utop.git
+[submodule "vertico"]
+	path = lib/vertico
+	url = https://github.com/minad/vertico
 [submodule "volatile-highlights"]
 	path = lib/volatile-highlights
 	url = git@github.com:k-talo/volatile-highlights.el.git
@@ -486,9 +486,6 @@
 [submodule "websocket"]
 	path = lib/websocket
 	url = git@github.com:ahyatt/emacs-websocket.git
-[submodule "which-key"]
-	path = lib/which-key
-	url = git@github.com:justbur/emacs-which-key.git
 [submodule "win-switch"]
 	path = lib/win-switch
 	url = git@github.com:genovese/win-switch.git
@@ -515,6 +512,3 @@
 [submodule "zprint"]
 	path = lib/zprint
 	url = https://github.com/DogLooksGood/zprint.el.git
-[submodule "eat"]
-	path = lib/eat
-	url = https://codeberg.org/akib/emacs-eat

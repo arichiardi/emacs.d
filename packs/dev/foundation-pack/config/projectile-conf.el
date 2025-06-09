@@ -28,7 +28,6 @@
   (projectile-switch-project-action 'projectile-find-file-dwim)
   (projectile-idle-timer-seconds 60)
   (projectile-create-missing-test-files t)
-  (projectile-completion-system 'helm)
   (projectile-tags-backend 'ggtags)
   (projectile-sort-order 'recently-active)
   (projectile-auto-cleanup-known-projects t "new in 2.9")
