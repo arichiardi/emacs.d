@@ -183,10 +183,6 @@
 	path = lib/helm-descbinds
 	url = git@github.com:emacs-helm/helm-descbinds.git
 	build-step = borg-compile
-[submodule "helm-lsp"]
-	path = lib/helm-lsp
-	url = git@github.com:emacs-lsp/helm-lsp.git
-	build-step = borg-compile
 [submodule "helm-org"]
 	path = lib/helm-org
 	url = git@github.com:emacs-helm/helm-org.git
