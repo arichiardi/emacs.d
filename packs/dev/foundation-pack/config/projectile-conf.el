@@ -32,7 +32,9 @@
   (projectile-sort-order 'recently-active)
   (projectile-auto-cleanup-known-projects t "new in 2.9")
   :bind ((:map projectile-mode-map
-               ("C-c p" . projectile-command-map))))
+               ("C-c p" . projectile-command-map))
+         (:map projectile-command-map
+               ("x e" . ar-emacs-projectile-run-eat))))
 
 (use-package persp-projectile
   :after (projectile perspective))
