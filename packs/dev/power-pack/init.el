@@ -28,12 +28,7 @@
   (git-gutter:added-sign "+ ")
   (git-gutter:deleted-sign "- ")
   (git-gutter:unchanged-sign "  ")
-  (git-gutter:disabled-modes '(org-mode org-roam-db-autosync-mode org-roam-mode))
-
-  :config
-  ;; temporary fix lambda-themes
-  ;; https://github.com/Lambda-Emacs/lambda-themes/issues/11
-  (set-face-background 'git-gutter:unchanged "#282b35"))
+  (git-gutter:disabled-modes '(org-mode org-roam-db-autosync-mode org-roam-mode)))
 
 (global-git-gutter-mode +1)
 
