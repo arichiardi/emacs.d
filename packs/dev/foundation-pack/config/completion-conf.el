@@ -160,7 +160,15 @@
   ;; package.
   (marginalia-mode))
 
+
+(eval-and-compile
+  (defun vertico-load-path ()
+    (mapcar (lambda (x)
+              (expand-file-name x (car (borg-load-path "vertico"))))
+            '("vertico.el" "extensions"))))
+
 (use-package vertico
+  :load-path (lambda () (vertico-load-path))
   :init
   (vertico-mode)
 
@@ -168,7 +176,8 @@
          ("?" . minibuffer-completion-help)
          ("TAB" . vertico-insert)
          ("S-<up>" . vertico-previous)
-         ("S-<down>" . vertico-next))
+         ("S-<down>" . vertico-next)
+         ("<right>" . vertico-insert))
 
   :config
   (when (< emacs-major-version 31)
@@ -184,6 +193,19 @@
   (vertico-count 10)
   (vertico-resize t)
   (vertico-cycle t "Enable cycling for `vertico-next/previous'"))
+
+(use-package vertico-directory
+  :after vertico
+  :ensure nil
+  ;; More convenient directory navigation commands
+  :bind (:map vertico-map
+              ("RET" . vertico-directory-enter)
+              ("DEL" . vertico-directory-delete-char)
+              ("<right>" . vertico-insert)
+              ("<left>" . vertico-directory-delete-word)
+              ("M-DEL" . vertico-directory-up))
+  ;; Tidy shadowed file names
+  :hook (rfn-eshadow-update-overlay . vertico-directory-tidy))
 
 ;; Persist history over Emacs restarts. Vertico sorts by history position.
 (use-package savehist
