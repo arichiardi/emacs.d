@@ -1,4 +1,4 @@
-;;; ar-emacs.el --- Some useful functions
+;;; ar-emacs.el --- Some useful functions -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;
 ;; Some useful functions
@@ -519,6 +519,11 @@ projectile, if available), or in the current directory otherwise."
         (consult-git-grep dir region)
       (consult-ripgrep))))
 
+(defun ar-emacs-projectile-run-eat ()
+  "Start `eat' in the project root."
+  (interactive)
+  (projectile-with-default-dir (projectile-acquire-root)
+    (eat)))
 
 (provide 'ar-emacs)
 
