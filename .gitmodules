@@ -220,6 +220,9 @@
 [submodule "know-your-http-well"]
 	path = lib/know-your-http-well
 	url = git@github.com:for-GET/know-your-http-well.git
+[submodule "lambda-themes"]
+	path = lib/lambda-themes
+	url = git@github.com:Lambda-Emacs/lambda-themes.git
 [submodule "lib/modus-vivendi-theme"]
 	url = git@github.com:emacsmirror/modus-themes.git
 [submodule "lib/tide"]
