@@ -35,6 +35,6 @@
   (lambda-themes-set-variable-pitch nil)
   :config
   (load-theme 'lambda-dark-faded :no-confirm)
-  (enable-theme 'lambda-dark))
+  (enable-theme 'lambda-dask-faded))
 
 ;;; init.el ends here
