@@ -76,14 +76,17 @@
   (cider-ns-refresh-show-log-buffer nil "Do not pop up the cider-ns-refresh logs")
   (cider-reuse-dead-repls 'auto "do not prompt unless necessary")
   (cider-download-java-sources t "cider 1.17 new feature")
- 
+
   (nrepl-use-ssh-fallback-for-remote-hosts t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
   (cider-infer-remote-nrepl-ports t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
 
   (cider-known-endpoints '(("localhost" "1667") ;; babashka
                            ("localhost" "5555") ;; common
                            ))
-  ;; (cider-print-options nil "zprint options are chosen from .zprint.edn") ;; see https://github.com/clojure-emacs/cider/issues/2966
+  ;; Pretty printing
+  (cider-print-fn zprint)
+  ;; see https://github.com/clojure-emacs/cider/issues/2966
+  (cider-print-options nil "zprint options are chosen from .zprint.edn")
 
   :hook
   (cider-mode . eldoc-mode)
