@@ -67,6 +67,7 @@
 ;; Consult
 (global-set-key (kbd "s-s") 'ar-emacs-consult-ripgrep)
 (global-set-key (kbd "s-g") 'ar-emacs-consult-git-grep)
+(global-set-key (kbd "s-f") 'projectile-find-file-dwim)
 
 (provide 'ar-bindings)
 
