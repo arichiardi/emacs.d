@@ -20,21 +20,19 @@
 
 (add-hook 'enable-theme-functions #'ar-emacs--run-theme-hooks)
 
-;; (use-package modus-themes
-;;   :demand
-;;   :config
-;;   (load-theme 'modus-vivendi :no-confirm)
-;;   (enable-theme 'modus-vivendi)
-;;   )
-
 (use-package lambda-themes
   :demand
-  :custom
-  (lambda-themes-set-italic-comments nil)
-  (lambda-themes-set-italic-keywords nil)
-  (lambda-themes-set-variable-pitch nil)
   :config
-  (load-theme 'lambda-dark-faded :no-confirm)
-  (enable-theme 'lambda-dask-faded))
+  (setopt lambda-themes-set-italic-comments nil)
+  (setopt lambda-themes-set-italic-keywords nil)
+  (setopt lambda-themes-set-variable-pitch nil))
+
+;; https://www.gnu.org/software//emacs/manual/html_node/modus-themes/Sample-configuration-with-and-without-use_002dpackage.html
+;;
+(use-package emacs
+  :config
+  ;; (require-theme 'modus-themes) ; `require-theme' is ONLY for the built-in Modus themes
+
+  (load-theme 'lambda-dark-faded :no-confirm))
 
 ;;; init.el ends here
