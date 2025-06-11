@@ -72,9 +72,6 @@
 [submodule "consult-ag"]
 	path = lib/consult-ag
 	url = git@github.com:abrochard/consult-ag.git
-[submodule "consult-company"]
-	path = lib/consult-company
-	url = https://github.com/mohkale/consult-company
 [submodule "consult-flycheck"]
 	path = lib/consult-flycheck
 	url = https://github.com/minad/consult-flycheck

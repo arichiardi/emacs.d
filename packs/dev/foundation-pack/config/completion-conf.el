@@ -19,8 +19,6 @@
   :init
   (setq company-require-match nil)
   (setq company-auto-commit nil)
-  :bind (:map company-mode-map
-         ([remap completion-at-point] . consult-company))
 
   :custom
   (company-tooltip-limit 25)
