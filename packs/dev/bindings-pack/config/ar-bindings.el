@@ -1,4 +1,4 @@
-;;; ar-bindings.el --- AR Emacs bindings
+;;; ar-bindings.el --- AR Emacs bindings -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;

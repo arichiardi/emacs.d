@@ -1,4 +1,4 @@
-;;; llm-conf.el -- The LLM (AI) configuration
+;;; llm-conf.el -- The LLM (AI) configuration -*- lexical-binding: t; -*-
 ;;
 ;; Author: Andrea Richiardi
 
