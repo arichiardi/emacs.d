@@ -5,7 +5,12 @@
 ;;
 ;;; Code:
 
-(require 'dash)
+(setq ar-emacs-projects-dir (expand-file-name "git" (exec-path-from-shell-getenv "HOME")))
+
+(setq ar-emacs-home-config-dir (or (exec-path-from-shell-getenv "XDG_CONFIG_HOME")
+                                   (expand-file-name ".config" (exec-path-from-shell-getenv "HOME"))))
+
+(setq ar-emacs-emacs-config-dir (expand-file-name "emacs" ar-emacs-home-config-dir))
 
 ;; From: http://stackoverflow.com/questions/20041904/eclipse-like-line-commenting-in-emacs#answer-20064658
 (defun ar-emacs-comment-or-uncomment-region-or-line ()

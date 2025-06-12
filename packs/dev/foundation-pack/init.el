@@ -35,6 +35,9 @@
 (live-add-pack-lib "pkg-info")
 (require 'pkg-info)
 
+(live-add-pack-lib "ar-emacs")
+(require 'ar-emacs)
+
 (live-load-config-file "backup-dir-conf.el")
 (live-load-config-file "util-fns.el")
 (live-load-config-file "built-in.el")
@@ -133,7 +136,5 @@
 ;; Do not allow the cursor in the minibuffer prompt
 (setq minibuffer-prompt-properties
  '(read-only t cursor-intangible t face minibuffer-prompt))
-
-(use-package ar-emacs)
 
 ;;; init.el ends here
