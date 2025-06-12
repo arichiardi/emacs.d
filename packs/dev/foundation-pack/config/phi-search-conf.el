@@ -1,4 +1,5 @@
-;;; phi-search-conf.el --- Phi-search config
+;;; phi-search-conf.el --- Phi-search config -*- lexical-binding: t -*-
+
 ;;; Commentary:
 ;;
 
@@ -21,5 +22,4 @@
 
 (use-package phi-replace)
 
-;; End:
 ;;; phi-search-conf.el ends here
