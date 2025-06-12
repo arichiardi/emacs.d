@@ -185,6 +185,14 @@ Returns a list of cons cells (name . directive) for each .md file."
     :post (lambda () (gptel-mcp-connect
                       (list "fetch"))))
 
+  (gptel-make-preset 'emacs-configurator
+    :description "A preset optimized for modifying my emacs config"
+    :backend "vLLM"
+    :model 'Qwen3-14B
+    :system (alist-get 'emacs-configurator gptel-directives)
+    :post (lambda () (gptel-mcp-connect
+                      (list "filesystem-emacs" "git-emacs"))))
+
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -198,14 +206,27 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq mcp-hub-servers '())
 
   :config
+
   (setq mcp-hub-servers
-        (append mcp-hub-servers
-         `(("filesystem" . (:command
-                            "podman"
-                            :args ("run" "-i" "--rm" "--network=host"
-                                   "--mount" ,(concat "type=bind,src=" (exec-path-from-shell-getenv "HOME") "/git,dst=/projects")
-                                   "mcp/filesystem"
-                                   "/projects")))
+        (append
+         mcp-hub-servers
+         `(("filesystem-git" . (:command
+                                "podman"
+                                :args ("run" "-i" "--rm" "--network=host"
+                                       "--mount" ,(concat "type=bind,src=" ar-emacs-projects-dir ",dst=/projects")
+                                       "mcp/filesystem"
+                                       "/projects")))
+           ("filesystem-emacs" . (:command
+                                  "podman"
+                                  :args ("run" "-i" "--rm" "--network=host"
+                                         "--mount" ,(concat "type=bind,src=" ar-emacs-emacs-config-dir ",dst=/projects")
+                                         "mcp/filesystem"
+                                         "/projects")))
+           ("git-emacs" . (:command
+                           "uvx"
+                           :args ("mcp-server-git"
+                                  "--repository" ,ar-emacs-emacs-config-dir)
+                           :env {:AR_PROMPT_GIT_DISABLED "true"))
            ("fetch" . (:command
                        "podman"
                        :args ("run", "-i", "--rm", "mcp/fetch")))
