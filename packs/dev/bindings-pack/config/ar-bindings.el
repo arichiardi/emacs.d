@@ -23,6 +23,7 @@
            ("q" . gptel-abort)
            ("C-q" . gptel-abort)
            ("C-h" . mcp-hub)
+           ("C-f" . gptel-add)
            ("C-r" . gptel-rewrite)
            ("C-s" . gptel-send)
            ("C-t" . gptel-tools)
