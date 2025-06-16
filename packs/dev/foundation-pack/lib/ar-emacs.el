@@ -5,6 +5,8 @@
 ;;
 ;;; Code:
 
+(require 'exec-path-from-shell)
+
 (setq ar-emacs-projects-dir (expand-file-name "git" (exec-path-from-shell-getenv "HOME")))
 
 (setq ar-emacs-home-config-dir (or (exec-path-from-shell-getenv "XDG_CONFIG_HOME")
