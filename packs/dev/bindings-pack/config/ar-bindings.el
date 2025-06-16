@@ -18,17 +18,15 @@
 
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
-           :prefix "C-c C-x"
+           :prefix "C-c x"
            ("C-b" . gptel)
            ("q" . gptel-abort)
-           ("C-q" . gptel-abort)
-           ("C-h" . mcp-hub)
-           ("C-f" . gptel-add)
-           ("C-r" . gptel-rewrite)
-           ("C-s" . gptel-send)
-           ("C-t" . gptel-tools)
-           ("<return>"   . gptel-menu)
-           ("C-<return>" . gptel-menu))
+           ("h" . mcp-hub)
+           ("f" . gptel-add)
+           ("r" . gptel-rewrite)
+           ("s" . gptel-send)
+           ("t" . gptel-tools)
+           ("<return>"   . gptel-menu))
 
 (bind-keys :prefix-map ar-emacs-text-prefix-map
            :prefix-docstring "Prefix key for text manipulation."
