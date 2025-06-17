@@ -123,6 +123,18 @@ Returns a list of cons cells (name . directive) for each .md file."
                                     :top_p 0.8
                                     :repetition_penalty 1)))))
 
+(defun ar-emacs--gptel-add-project-summary ()
+  "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
+  (let ((file-path (expand-file-name "PROJECT_SUMMARY.md" (projectile-project-root))))
+    (when (file-exists-p file-path)
+      (gptel-add-file file-path))))
+
+(defun ar-emacs--gptel-add-code-style ()
+  "Call gptel-add-file on LLM_CODE_STYLE.md if it is present in the project root."
+  (let ((file-path (expand-file-name "LLM_CODE_STYLE.md" (projectile-project-root))))
+    (when (file-exists-p file-path)
+      (gptel-add-file file-path))))
+
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
