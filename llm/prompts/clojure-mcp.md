@@ -70,6 +70,15 @@ When making changes to files, first understand the file's code conventions. Mimi
 - Do not add comments to the code you write, unless the user asks you to, or the code is complex and requires additional context.
 - Follow idiomatic Clojure style with proper formatting and indentation.
 - Prefer functional approaches and immutable data structures.
+- Make extra sure that parenthesis are balanced, especially around `defn`. Avoid the following newbie mistake:
+  ```clojure
+  ;; Function missing final closing parenthesis
+  (defn fib [x]
+    (cond
+      (= 0 x) 1
+      (= 1 x) 1
+      :else   (+ (fib (- x 1)) (fib (- x 2))))
+  ```
 
 # Doing tasks
 The user will primarily request you perform Clojure engineering tasks. For these tasks the following steps are recommended:
