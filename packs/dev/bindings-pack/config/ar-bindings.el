@@ -28,6 +28,13 @@
            ("t" . gptel-tools)
            ("<return>"   . gptel-menu))
 
+(bind-keys :prefix-map ar-emacs-clojure-prefix-map
+           :prefix-docstring "Prefix key for Clojure."
+           :prefix "C-c c"
+           ("b" . ar-emacs-clj-eval-all-let-bindings)
+           ("d" . cider-debug-defun-at-point)
+           ("s" . clojure-sort-ns))
+
 (bind-keys :prefix-map ar-emacs-text-prefix-map
            :prefix-docstring "Prefix key for text manipulation."
            :prefix "C-c t"
