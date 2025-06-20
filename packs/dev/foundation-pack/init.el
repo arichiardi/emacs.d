@@ -1,4 +1,4 @@
-;;; init.el --- Foundation Pack
+;;; init.el --- Foundation Pack -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
