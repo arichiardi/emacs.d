@@ -15,18 +15,19 @@
 (global-set-key (kbd "C-v") 'cua-paste)
 (global-set-key (kbd "C-c C-o") 'delete-blank-lines)
 (global-set-key (kbd "C-M-\\") 'live-delete-whitespace-except-one)
+(global-set-key (kbd "C-c C-o") 'delete-blank-lines)
 
 (bind-keys :prefix-map ar-emacs-llm-prefix-map
            :prefix-docstring "Prefix key for all things LLM."
            :prefix "C-c x"
-           ("C-b" . gptel)
+           ("<return>" . gptel)
            ("q" . gptel-abort)
            ("h" . mcp-hub)
            ("f" . gptel-add)
            ("r" . gptel-rewrite)
            ("s" . gptel-send)
            ("t" . gptel-tools)
-           ("<return>"   . gptel-menu))
+           ("m"   . gptel-menu))
 
 (bind-keys :prefix-map ar-emacs-clojure-prefix-map
            :prefix-docstring "Prefix key for Clojure."
