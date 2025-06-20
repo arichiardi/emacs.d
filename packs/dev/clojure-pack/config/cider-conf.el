@@ -55,7 +55,7 @@
   :bind ((:map cider-ns-map
                ("d" . ar-emacs-cider-repl-in-ns-dev))
          (:map cider-eval-commands-map
-               ("M-l" . ar-emacs-clj-eval-all-let-bindings)
+               ("M-b" . ar-emacs-clj-eval-all-let-bindings)
                ("M-d" . cider-debug-defun-at-point)))
 
   :custom
