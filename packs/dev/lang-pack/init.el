@@ -114,6 +114,10 @@ See: https://github.com/Fuco1/smartparens/issues/1101"
 
 (use-package mmm-auto)
 
+(use-package nix-mode
+  :mode "\\.nix\\'"
+  :config (global-nix-prettify-mode))
+
 (live-load-config-file "flycheck-conf.el")
 (live-load-config-file "yaml-conf.el")
 (live-load-config-file "elisp-conf.el")

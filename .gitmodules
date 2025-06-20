@@ -276,6 +276,9 @@
 [submodule "nerd-icons-dired"]
 	path = lib/nerd-icons-dired
 	url = https://github.com/rainstormstudio/nerd-icons-dired
+[submodule "nix-mode"]
+	path = lib/nix-mode
+	url = https://github.com/NixOS/nix-mode
 [submodule "nvm"]
 	path = lib/nvm
 	url = https://github.com/rejeep/nvm.el
