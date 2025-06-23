@@ -407,6 +407,9 @@
 [submodule "simple-httpd"]
 	path = lib/simple-httpd
 	url = git@github.com:skeeto/emacs-web-server.git
+[submodule "simpleclip"]
+	path = lib/simpleclip
+	url = https://github.com/rolandwalker/simpleclip
 [submodule "sly"]
 	path = lib/sly
 	url = git@github.com:joaotavora/sly.git

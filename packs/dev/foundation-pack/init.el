@@ -116,6 +116,9 @@
 
 (use-package string-edit)
 
+(use-package simpleclip
+  :commands (simpleclip-get-contents simpleclip-set-contents))
+
 ;;;;;;;; From the Vertico configuration
 
 ;; Disable annoying tooltips on hover tooltip
