@@ -103,6 +103,9 @@
 	path = lib/emacsql
 	url = git@github.com:magit/emacsql.git
 	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/emacsql:" make
+[submodule "embark"]
+	path = lib/embark
+	url = https://github.com/oantolin/embark
 [submodule "emojify"]
 	path = lib/emojify
 	url = git@github.com:iqbalansari/emacs-emojify.git
