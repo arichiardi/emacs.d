@@ -207,6 +207,19 @@
   (vertico-resize t)
   (vertico-cycle t "Enable cycling for `vertico-next/previous'"))
 
+(use-package vertico-multiform
+  :after vertico
+  ;; load-path (lambda () (vertico-multiform-load-path))
+  :commands (vertico-multiform-mode)
+  :config
+  (vertico-multiform-mode)
+
+  (add-to-list 'vertico-multiform-categories '(embark-bindings grid))
+  (add-to-list 'vertico-multiform-categories '(embark-keybinding grid)))
+
+(use-package vertico-grid
+  :after vertico)
+
 ;;;;;;;;;;;;
 ;; Embark ;;
 ;;;;;;;;;;;;
@@ -237,13 +250,6 @@
   ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
 
   :config
-  ;; Vertico users may wish to configure a grid display for the actions and key-bindings,
-  ;; reminiscent of the popular package which-key, but, of course, enhanced by the use of completion
-  ;; to narrow the list of commands. In order to get the grid display, put the following in your
-  ;; Vertico configuration:
-  ;; (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
-  ;; (vertico-multiform-mode)
-
   ;; Hide the mode line of the Embark live/completions buffers
   (add-to-list 'display-buffer-alist
                '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
