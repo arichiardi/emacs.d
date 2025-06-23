@@ -4,6 +4,10 @@
 
 ;;; Code:
 
+;;;;;;;;;;;;;;;
+;; Orderless ;;
+;;;;;;;;;;;;;;;
+
 (add-hook 'minibuffer-setup-hook
           (lambda ()
             (setopt completion-styles '(orderless basic))))
@@ -12,6 +16,10 @@
   :custom
   (completion-styles '(orderless basic))
   (completion-category-overrides '((file (styles basic partial-completion)))))
+
+;;;;;;;;;;;;;
+;; Company ;;
+;;;;;;;;;;;;;
 
 (use-package company
   :diminish
@@ -31,6 +39,10 @@
   (shell-mode . (lambda ()
                   (add-to-list (make-local-variable 'company-backends)
                                '(company-shell company-shell-env)))))
+
+;;;;;;;;;;;;;
+;; Consult ;;
+;;;;;;;;;;;;;
 
 (use-package consult
   ;; Replace bindings. Lazily loaded by `use-package'.
@@ -141,8 +153,10 @@
   ;; (keymap-set consult-narrow-map (concat consult-narrow-key " ?") #'consult-narrow-help)
 
 )
+;;;;;;;;;;;;;;;;
+;; Marginalia ;;
+;;;;;;;;;;;;;;;;
 
-;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
   ;; available in the *Completions* buffer, add it to the
@@ -155,6 +169,10 @@
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
+
+;;;;;;;;;;;;;
+;; Vertico ;;
+;;;;;;;;;;;;;
 
 (eval-and-compile
   (defun vertico-load-path ()
@@ -188,6 +206,10 @@
   (vertico-count 10)
   (vertico-resize t)
   (vertico-cycle t "Enable cycling for `vertico-next/previous'"))
+
+;;;;;;;;;;;;
+;; Embark ;;
+;;;;;;;;;;;;
 
 (use-package embark
   :bind
