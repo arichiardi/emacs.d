@@ -142,8 +142,6 @@
 
 )
 
-(use-package consult-ag)
-
 ;; Enable rich annotations using the Marginalia package
 (use-package marginalia
   ;; Bind `marginalia-cycle' locally in the minibuffer.  To make the binding
@@ -157,7 +155,6 @@
   ;; the mode gets enabled right away. Note that this forces loading the
   ;; package.
   (marginalia-mode))
-
 
 (eval-and-compile
   (defun vertico-load-path ()
@@ -191,6 +188,50 @@
   (vertico-count 10)
   (vertico-resize t)
   (vertico-cycle t "Enable cycling for `vertico-next/previous'"))
+
+(use-package embark
+  :bind
+  (("C-." . embark-act)         ;; pick some comfortable binding
+   ("C-;" . embark-dwim)        ;; good alternative: M-.
+   ("C-h B" . embark-bindings)) ;; alternative for `describe-bindings'
+  ((:map embark-general-map
+         ("W" . simpleclip-set-contents)))
+
+  :init
+  ;; Optionally replace the key help with a completing-read interface
+  ;; (setq prefix-help-command #'embark-prefix-help-command)
+
+  ;; Show the Embark target at point via Eldoc. You may adjust the
+  ;; Eldoc strategy, if you want to see the documentation from
+  ;; multiple providers. Beware that using this can be a little
+  ;; jarring since the message shown in the minibuffer can be more
+  ;; than one line, causing the modeline to move up and down:
+
+  ;; (add-hook 'eldoc-documentation-functions #'embark-eldoc-first-target)
+  ;; (setq eldoc-documentation-strategy #'eldoc-documentation-compose-eagerly)
+
+  ;; Add Embark to the mouse context menu. Also enable `context-menu-mode'.
+  ;; (context-menu-mode 1)
+  ;; (add-hook 'context-menu-functions #'embark-context-menu 100)
+
+  :config
+  ;; Vertico users may wish to configure a grid display for the actions and key-bindings,
+  ;; reminiscent of the popular package which-key, but, of course, enhanced by the use of completion
+  ;; to narrow the list of commands. In order to get the grid display, put the following in your
+  ;; Vertico configuration:
+  ;; (add-to-list 'vertico-multiform-categories '(embark-keybinding grid))
+  ;; (vertico-multiform-mode)
+
+  ;; Hide the mode line of the Embark live/completions buffers
+  (add-to-list 'display-buffer-alist
+               '("\\`\\*Embark Collect \\(Live\\|Completions\\)\\*"
+                 nil
+                 (window-parameters (mode-line-format . none)))))
+
+;; Consult users will also want the embark-consult package.
+(use-package embark-consult
+  :hook
+  (embark-collect-mode . consult-preview-at-point-mode))
 
 (use-package vertico-directory
   :after vertico
