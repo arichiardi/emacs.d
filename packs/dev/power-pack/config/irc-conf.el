@@ -25,14 +25,14 @@
 (use-package rcirc
   :hook ((rcirc-mode . ar-emacs--rcirc-conf-hook))
   :custom ((rcirc-server-alist '(("irc.libera.chat" :port 6697 :encryption tls
-                                  :channels ("#common-lisp.net"
-                                             "#emacs"
-                                             "#lisp"
+                                  :channels ("#emacs"
+                                             ;; "#common-lisp.net"
+                                             ;; "#lisp"
                                              ;; "#lispcafe"
-                                             "#org-roam"
+                                             ;; "#org-roam"
                                              ;; "#rofi"
                                              ;; "#LineageOS"
-                                             ))
+                                             "#podman"))
                                  ("irc.oftc.net" :port 6697 :encryption tls
                                   :channels ("#openwrt")))
                                "Setup the server list")
