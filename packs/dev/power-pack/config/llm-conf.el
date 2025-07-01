@@ -86,42 +86,29 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen3-14B
+        :models '((Qwen3-8B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                    :temperature 0.7
-                                    :add_generation_prompt "true"))
+                                           :temperature 0.7
+                                           :add_generation_prompt "true"))
+                  (Qwen3-14B
+                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                   ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
+                                           :temperature 0.7
+                                           :add_generation_prompt "true"))
                   (Qwen3-30B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                    :temperature 0.7
-                                    :add_generation_prompt "true"
-                                    :chat_template_kwargs (:enable_thinking "false")))
-                  (GLM4-32B
-                   :description "The GLM family welcomes new members, the GLM-4-32B-0414 series models, featuring 32 billion parameters. Its performance is comparable to OpenAI’s GPT series and DeepSeek’s V3/R1 series."
-                   :request-params (:min_p 0.1))
+                                           :temperature 0.7
+                                           :add_generation_prompt "true"
+                                           :chat_template_kwargs (:enable_thinking "false")))
                   (Devstral-Small
                    :description "Devstral is an agentic LLM for software engineering tasks built under a collaboration between Mistral AI and All Hands AI 🙌. Devstral excels at using tools to explore codebases, editing multiple files and power software engineering agents. The model achieves remarkable performance on SWE-bench which positionates it as the #1 open source model on this benchmark."
                    :request-params (:temperature 0.15
-                                    :min_p 0.01))
-                  (QwQ-32B
-                   :description "QwQ is the reasoning model of the Qwen series. Compared with conventional instruction-tuned models, QwQ, which is capable of thinking and reasoning, can achieve significantly enhanced performance in downstream tasks, especially hard problems."
-                   ;; From https://huggingface.co/Qwen/QwQ-32B-AWQ
-                   :request-params (:top_p 0.95 :top_k 40 :min_p 0.1
-                                    :temperature 0.6 :repeat-penalty 1.1
-                                    :add_generation_prompt "true"))
-                  (Qwen2.5-Coder-14B-Instruct
-                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
-                   ;; From https://qwen.readthedocs.io/en/latest/benchmark/speed_benchmark.html
-                   :request-params (:frequency_penalty 0
-                                    :min_p 0.1
-                                    :presence_penalty 0
-                                    :temperature 0.7
-                                    :top_k 20
-                                    :top_p 0.8
-                                    :repetition_penalty 1)))))
+                                                 :min_p 0.01)))))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -138,8 +125,9 @@ Returns a list of cons cells (name . directive) for each .md file."
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
-              ("C-c C-c" . #'gptel-abort)
-              ("C-c C-g" . #'gptel-abort))
+              ("C-c C-c" . gptel-abort)
+              ("C-c C-g" . gptel-abort)
+              ("C-c C-p" . gptel--preset))
   :hook
   (gptel-mode . (lambda () (olivetti-mode 1)))
 
