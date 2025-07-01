@@ -57,12 +57,15 @@
    ((eq system-type 'darwin)
     (live-set-frame-font font-string))))
 
-(setq ar-emacs-default-font "JetBrainsMono Nerd Font Mono-16")
-(message "Changing Font to \"%s\" for window system \"%s\"." ar-emacs-default-font window-system)
+(setq ar-emacs-default-font "JetBrainsMono NFM")
+(setq ar-emacs-default-font-size 12)
 
-(when (memq window-system '(mac ns))
-  (live-set-frame-font ar-emacs-default-font))
+(setq ar-emacs-default-font-string (format "%s-%s" ar-emacs-default-font ar-emacs-default-font-size))
 
-(live-set-frame-darwin-font ar-emacs-default-font)
+(message "Changing Font to \"%s\" for window system \"%s\"." ar-emacs-default-font-string window-system)
+
+(live-set-frame-font ar-emacs-default-font-string)
+
+(live-set-frame-darwin-font ar-emacs-default-font-string)
 
 ;;; cosmetic.el ends here
