@@ -43,4 +43,7 @@
 (when (boundp 'native-comp-eln-load-path)
   (startup-redirect-eln-cache (expand-file-name "~/.cache/eln-cache" user-emacs-directory)))
 
+;; https://github.com/d12frosted/homebrew-emacs-plus?tab=readme-ov-file#emacs-29-1
+(add-to-list 'default-frame-alist '(undecorated . t))
+
 ;;; early-init.el ends here
