@@ -92,29 +92,48 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen3-8B
+        :models '((Qwen3-14B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                           :temperature 0.7
-                                           :add_generation_prompt "true"))
-                  (Qwen3-14B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                   ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                           :temperature 0.7
-                                           :add_generation_prompt "true"))
+                                    :temperature 0.7
+                                    :add_generation_prompt "true"))
                   (Qwen3-30B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                           :temperature 0.7
-                                           :add_generation_prompt "true"
-                                           :chat_template_kwargs (:enable_thinking "false")))
+                                    :temperature 0.7
+                                    :add_generation_prompt "true"
+                                    :chat_template_kwargs (:enable_thinking "false")))
                   (Devstral-Small
                    :description "Devstral is an agentic LLM for software engineering tasks built under a collaboration between Mistral AI and All Hands AI 🙌. Devstral excels at using tools to explore codebases, editing multiple files and power software engineering agents. The model achieves remarkable performance on SWE-bench which positionates it as the #1 open source model on this benchmark."
                    :request-params (:temperature 0.15
                                                  :min_p 0.01)))))
+
+(setq ar-emacs-gptel-backend-llamacpp
+      (gptel-make-openai "llama.cpp"
+        :protocol "http"
+        :host (ar-emacs-gptel-llamacpp-endpoint)
+        :header '(("Content-Type" . "application/json"))
+        :stream t
+        :models '((Mellum-4B
+                   :description "Mellum-4b-base is JetBrains' first open-source large language model (LLM) optimized for code-related tasks.")
+                  (Qwen3-8B
+                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                    :add_generation_prompt "true"
+                                    :chat_template_kwargs (:enable_thinking "false")))
+                  (Qwen3-32B
+                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                           :add_generation_prompt "true"
+                                           :chat_template_kwargs (:enable_thinking "false")))
+                  (Jan-nano-4B
+                   :description "Jan-Nano is a compact 4-billion parameter language model specifically designed and trained for deep research tasks. This model has been optimized to work seamlessly with Model Context Protocol (MCP) servers, enabling efficient integration with various research tools and data sources."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.0 :temperature 0.7))
+                  (Qwen2.5-coder-7B
+                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
+                   :request-params (:top_p 0.95 :top_k 20 :min_p 0.0 :temperature 0.6)))))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -151,8 +170,8 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'Qwen3-14B
-        gptel-backend ar-emacs-gptel-backend-vllm)
+  (setq gptel-model 'Qwen3-32B
+        gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -186,15 +205,15 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (gptel-make-preset 'web-searcher
     :description "A preset optimized for web searches"
-    :backend "vLLM"
-    :model 'Qwen3-14B
+    :backend "llama.cpp"
+    :model 'Qwen3-32B
     :post (lambda () (gptel-mcp-connect
                       (list "fetch"))))
 
   (gptel-make-preset 'emacs-configurator
     :description "A preset optimized for modifying my emacs config"
-    :backend "vLLM"
-    :model 'Qwen3-14B
+    :backend "llama.cpp"
+    :model 'Qwen3-32B
     :system (alist-get 'emacs-configurator gptel-directives)
     :post (lambda () (gptel-mcp-connect
                       (list "filesystem-emacs" "git-emacs"))))
