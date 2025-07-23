@@ -90,6 +90,9 @@
 
     (put-clojure-indent 'merr/-> :->)                  ;; merr
     (put-clojure-indent 'merr/->> :->>)                ;; merr
+
+    (put-clojure-indent 'cond-> 0)                     ;; custom for work
+    (put-clojure-indent 'cond->> 0)                    ;; custom for work
     )
 
 ;;; clojure-conf.el ends here
