@@ -492,6 +492,9 @@
 	path = lib/win-switch
 	url = git@github.com:genovese/win-switch.git
 	build-step = nil
+[submodule "wingman"]
+	path = lib/wingman
+	url = git@github.com:czan/wingman.git
 [submodule "with-editor"]
 	path = lib/with-editor
 	url = git@github.com:magit/with-editor.git
