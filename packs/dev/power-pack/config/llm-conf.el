@@ -61,10 +61,16 @@ Returns a list of cons cells (name . directive) for each .md file."
           (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
 
 (defun ar-emacs-gptel-vllm-endpoint ()
-  "Compute the host:port pointing to the ollama server."
+  "Compute the host:port pointing to the vllm server."
   (concat (or (getenv "EMACS_GPTEL_VLLM_HOST") "localhost")
           ":"
           (or (getenv "EMACS_GPTEL_VLLM_PORT") "8000")))
+
+(defun ar-emacs-gptel-llamacpp-endpoint ()
+  "Compute the host:port pointing to the llama.cpp server."
+  (concat (or (getenv "EMACS_GPTEL_LLAMACPP_HOST") "localhost")
+          ":"
+          (or (getenv "EMACS_GPTEL_LLAMACPP_PORT") "8000")))
 
 (setq ar-emacs-gptel-backend-ollama
       (gptel-make-ollama "Ollama"
@@ -233,5 +239,40 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("time" . (:command
                       "uvx"
                       :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))))))
+
+;;;;;;;;;;;;;
+;; Wingman ;;
+;;;;;;;;;;;;;
+
+(use-package wingman
+  :hook (prog-mode . wingman-mode)
+  :bind (:map wingman-mode-prefix-map
+         ("TAB" . wingman-fim-inline)
+         :map wingman-mode-completion-transient-map
+         ("TAB" . wingman-accept-full)
+         ("S-TAB" . wingman-accept-line)
+         ("M-S-TAB" . wingman-accept-word))
+
+  :custom
+  (wingman-auto-fim nil)
+  (wingman-log-level 4)
+  (wingman-ring-n-chunks 16)
+  (wingman-llama-endpoint (concat "http://" (ar-emacs-gptel-llamacpp-endpoint) "/infill"))
+
+  ;; assumes use of Modus Themes; substitute with preferred color scheme
+  ;; (set-face-attribute 'wingman-overlay-face nil
+                      ;; :foreground  (modus-themes-get-color-value 'red-warmer)
+                      ;; :background  (modus-themes-get-color-value 'bg-inactive))
+
+  ;; don't provide completions in files that typically contain secrets
+  (add-to-list 'wingman-disable-predicates
+               (lambda ()
+                 (or (derived-mode-p 'envrc-file-mode)
+                     (derived-mode-p 'direnv-envrc-mode)
+                     (when buffer-file-name
+                       (let ((fname (file-name-nondirectory buffer-file-name)))
+                         (or (string-equal ".env" fname)
+                             (string-equal ".envrc" fname)
+                             (string-prefix-p ".localrc" fname))))))))
 
 ;;; llm-conf.el ends here
