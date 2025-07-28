@@ -4,6 +4,12 @@
 
 ;;; Code:
 
+;; GnuPG Pinentry
+;; https://www.gnu.org/software/emacs/manual/html_node/epa/GnuPG-Pinentry.html
+(use-package epg
+  :config
+  (setopt epg-pinentry-mode 'loopback))
+
 (setq ispell-local-dictionary "en_US-w-accents")
 
 (setq make-backup-files nil) ;; stop creating backup~ files
