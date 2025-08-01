@@ -121,16 +121,21 @@ Returns a list of cons cells (name . directive) for each .md file."
                   (Qwen3-8B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :add_generation_prompt "true"
                                     :chat_template_kwargs (:enable_thinking "false")))
+                  (Qwen3-30B-A3B
+                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                    :chat_template_kwargs (:enable_thinking "false")))
+
+                  (Qwen3-Coder-30B-A3B
+                   :description "Qwen3-Coder, our most agentic code model to date."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7))
+
                   (Qwen3-32B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :add_generation_prompt "true"
-                                           :chat_template_kwargs (:enable_thinking "false")))
-                  (Jan-nano-4B
-                   :description "Jan-Nano is a compact 4-billion parameter language model specifically designed and trained for deep research tasks. This model has been optimized to work seamlessly with Model Context Protocol (MCP) servers, enabling efficient integration with various research tools and data sources."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.0 :temperature 0.7))
+                                    :chat_template_kwargs (:enable_thinking "false")))
+
                   (Qwen2.5-coder-7B
                    :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
                    :request-params (:top_p 0.95 :top_k 20 :min_p 0.0 :temperature 0.6)))))
@@ -170,7 +175,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'Qwen3-32B
+  (setq gptel-model 'Qwen3-Coder-30B-A3B
         gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
@@ -203,21 +208,26 @@ Returns a list of cons cells (name . directive) for each .md file."
                        "\n"))
             ,@markdown-directives)))
 
-  (gptel-make-preset 'web-searcher
+  (gptel-make-preset 'websearcher
     :description "A preset optimized for web searches"
     :backend "llama.cpp"
-    :model 'Qwen3-32B
+    :model 'Qwen3-Coder-30B-A3B
     :post (lambda () (gptel-mcp-connect
-                      (list "fetch"))))
+                      (list "duckduckgo" "fetch" "sequential-thinking"))))
 
-  (gptel-make-preset 'emacs-configurator
+  (gptel-make-preset 'emacsconfigurator
     :description "A preset optimized for modifying my emacs config"
     :backend "llama.cpp"
-    :model 'Qwen3-32B
+    :model 'Qwen3-Coder-30B-A3B
     :system (alist-get 'emacs-configurator gptel-directives)
     :post (lambda () (gptel-mcp-connect
                       (list "filesystem-emacs" "git-emacs"))))
 
+  (gptel-make-preset 'gitassistant
+    :description "A preset to assist with git commit messages, PRs and so on"
+    :backend "copilot"
+    :model 'claude-3.7-sonnet
+    :system (alist-get 'git-assistant gptel-directives))
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -251,13 +261,21 @@ Returns a list of cons cells (name . directive) for each .md file."
                            "uvx"
                            :args ("mcp-server-git"
                                   "--repository" ,ar-emacs-emacs-config-dir)
-                           :env {:AR_PROMPT_GIT_DISABLED "true"))
+                           :env (:AR_PROMPT_GIT_DISABLED "true")))
            ("fetch" . (:command
                        "podman"
                        :args ("run", "-i", "--rm", "mcp/fetch")))
+           ("duckduckgo" . (:command
+                            "uvx"
+                            :args ("duckduckgo-mcp-server")))
+
            ("time" . (:command
                       "uvx"
-                      :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))))))
+                      :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))
+           ("sequential-thinking" . (:command
+                                     "podman"
+                                     :args ("run", "-i", "--rm", "mcp/sequentialthinking")
+                                     :env (:DISABLE_THOUGHT_LOGGING true)))))))
 
 ;;;;;;;;;;;;;
 ;; Wingman ;;
