@@ -1,4 +1,4 @@
-;;; cider-conf.el --- Cider Config
+;;; cider-conf.el --- Cider Config -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -55,8 +55,10 @@
   :bind ((:map cider-ns-map
                ("d" . ar-emacs-cider-repl-in-ns-dev))
          (:map cider-eval-commands-map
+               ("M-a" . clojure-align)
                ("M-b" . ar-emacs-clj-eval-all-let-bindings)
-               ("M-d" . cider-debug-defun-at-point)))
+               ("M-d" . cider-debug-defun-at-point)
+               ("M-s" . clojure-sort-ns)))
 
   :custom
   (cider-popup-stacktraces t "Popup stacktraces always on")

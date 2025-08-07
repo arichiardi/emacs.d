@@ -1,4 +1,4 @@
-;;; clojure-conf.el --- Clojure Config
+;;; clojure-conf.el --- Clojure Config -*- lexical-binding: t -*-
 
 ;;; Commentary:
 
@@ -41,13 +41,9 @@
                            eval-in capture-output alias in-parallel either fdef html5 js-await defhandler))
 
   :bind (:map clojure-mode-map
-         ("C-c l l" . align-cljjet)
          ("M-t" . live-transpose-words-with-hyphens)
          ("C-c C-z" . nil)
-         ("C-h" . help-command)
-         ;; better twice because I often forget
-         ("C-t C-s" . clojure-toggle-keyword-string)
-         ("C-t C-k" . clojure-toggle-keyword-string))
+         ("C-h" . help-command))
 
   :config
   (require 'flycheck-clj-kondo)
