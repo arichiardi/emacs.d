@@ -23,12 +23,13 @@
            ("<return>" . gptel)
            ("q" . gptel-abort)
            ("h" . mcp-hub)
-           ("a" . gptel-add)
+           ("f" . gptel-add)
            ("r" . gptel-rewrite)
            ("s" . gptel-send)
            ("t" . gptel-tools)
            ("m" . gptel-menu)
-           ("c" . wingman-fim-inline))
+           ("c" . wingman-fim-inline)
+           ("a" . aider-transient-menu))
 
 (bind-keys :prefix-map ar-emacs-clojure-prefix-map
            :prefix-docstring "Prefix key for Clojure."

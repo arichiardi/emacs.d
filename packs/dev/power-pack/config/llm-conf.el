@@ -312,4 +312,15 @@ Returns a list of cons cells (name . directive) for each .md file."
                              (string-equal ".envrc" fname)
                              (string-prefix-p ".localrc" fname))))))))
 
+(use-package aider
+  :config
+  ;;
+  ;; Main config taken from ~/.aider.conf.yml
+  ;;
+  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
+  (aider-magit-setup-transients) ;; add aider magit function to magit menu
+  ;; auto revert buffer
+  (global-auto-revert-mode 1)
+  (auto-revert-mode 1))
+
 ;;; llm-conf.el ends here
