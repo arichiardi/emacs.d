@@ -4,6 +4,9 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = git@github.com:abo-abo/ace-window.git
+[submodule "aider"]
+	path = lib/aider
+	url = git@github.com:tninja/aider.el.git
 [submodule "alert"]
 	path = lib/alert
 	url = https://github.com/jwiegley/alert
