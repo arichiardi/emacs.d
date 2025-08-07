@@ -34,6 +34,7 @@
 (bind-keys :prefix-map ar-emacs-clojure-prefix-map
            :prefix-docstring "Prefix key for Clojure."
            :prefix "C-c c"
+           ("a" . clojure-align)
            ("b" . ar-emacs-clj-eval-all-let-bindings)
            ("d" . cider-debug-defun-at-point)
            ("s" . clojure-sort-ns))
