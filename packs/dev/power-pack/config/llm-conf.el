@@ -72,43 +72,16 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_LLAMACPP_PORT") "8000")))
 
-(setq ar-emacs-gptel-backend-ollama
-      (gptel-make-ollama "Ollama"
-        :host (ar-emacs-gptel-ollama-endpoint)
-        :stream t
-        :models '((qwen2.5-coder:32b-instruct-q6_K
-                   :description "The latest series of Code-Specific Qwen models, with significant improvements in code generation, code reasoning, and code fixing."
-                   :request-params (:options (:num_ctx 32768 :min_p 0.1)))
-                  (phi4:14b-q8_0
-                   :description "Phi-4 is a 14B parameter, state-of-the-art open model from Microsoft."
-                   :request-params (:options (:num_ctx 16384 :min_p 0.1)))
-                  (deepseek-coder-v2:16b-lite-instruct-q4_K_M
-                   :description "An open-source Mixture-of-Experts code language model that achieves performance comparable to GPT4-Turbo in code-specific tasks."
-                   :request-params (:options (:num_ctx 65536 :min_p 0.1))))))
-
 (setq ar-emacs-gptel-backend-vllm
       (gptel-make-openai "vLLM"
         :protocol "http"
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen3-14B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                   ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                    :temperature 0.7
-                                    :add_generation_prompt "true"))
-                  (Qwen3-30B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                   ;; https://huggingface.co/karuko24/Qwen3-30B-A3B-W4A16
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01
-                                    :temperature 0.7
-                                    :add_generation_prompt "true"
-                                    :chat_template_kwargs (:enable_thinking "false")))
-                  (Devstral-Small
-                   :description "Devstral is an agentic LLM for software engineering tasks built under a collaboration between Mistral AI and All Hands AI 🙌. Devstral excels at using tools to explore codebases, editing multiple files and power software engineering agents. The model achieves remarkable performance on SWE-bench which positionates it as the #1 open source model on this benchmark."
-                   :request-params (:temperature 0.15
-                                                 :min_p 0.01)))))
+        :models '((Qwen3-Coder-30B-A3B
+                   :description "Qwen3-Coder, our most agentic code model to date."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                    :add_generation_prompt "true")))))
 
 (setq ar-emacs-gptel-backend-llamacpp
       (gptel-make-openai "llama.cpp"
@@ -116,12 +89,13 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Mellum-4B
-                   :description "Mellum-4b-base is JetBrains' first open-source large language model (LLM) optimized for code-related tasks.")
+        :models '((GLM-4.5
+                     :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
+                     :request-params (:chat_template_kwargs (:enable_thinking "False")))
                   (Qwen3-8B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :chat_template_kwargs (:enable_thinking "false")))
+                     :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
+                     :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                      :chat_template_kwargs (:enable_thinking "false")))
                   (Qwen3-30B-A3B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
@@ -134,11 +108,7 @@ Returns a list of cons cells (name . directive) for each .md file."
                   (Qwen3-32B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :chat_template_kwargs (:enable_thinking "false")))
-
-                  (Qwen2.5-coder-7B
-                   :description "Qwen2.5-Coder is the latest series of Code-Specific Qwen large language models (formerly known as CodeQwen)."
-                   :request-params (:top_p 0.95 :top_k 20 :min_p 0.0 :temperature 0.6)))))
+                                    :chat_template_kwargs (:enable_thinking "false"))))))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -175,7 +145,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'Qwen3-Coder-30B-A3B
+  (setq gptel-model 'GLM-4.5
         gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
@@ -226,7 +196,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   (gptel-make-preset 'gitassistant
     :description "A preset to assist with git commit messages, PRs and so on"
     :backend "copilot"
-    :model 'claude-3.7-sonnet
+    :model 'claude-sonnet-4
     :system (alist-get 'git-assistant gptel-directives))
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
