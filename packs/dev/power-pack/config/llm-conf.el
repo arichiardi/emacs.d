@@ -91,7 +91,8 @@ Returns a list of cons cells (name . directive) for each .md file."
         :stream t
         :models '((GLM-4.5
                      :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
-                     :request-params (:chat_template_kwargs (:enable_thinking "False")))
+                     :min_p 0.01 :temperature 0.7
+                     :request-params (:chat_template_kwargs (:enable_thinking "false")))
                   (Qwen3-8B
                      :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                      :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
