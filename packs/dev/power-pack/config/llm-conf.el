@@ -89,18 +89,17 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((GLM-4.5
-                     :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
-                     :min_p 0.01 :temperature 0.7
-                     :request-params (:chat_template_kwargs (:enable_thinking "false")))
-                  (Qwen3-8B
-                     :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                     :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                      :chat_template_kwargs (:enable_thinking "false")))
+        :models '((GLM-4.5-Air
+                   :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
+                   :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (gpt-oss-120b
+                   :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
+                   :request-params (:min_p 0.0 :top_p 1.0 :top_k 0 :temperature 1.0))
                   (Qwen3-30B-A3B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :chat_template_kwargs (:enable_thinking "false")))
+                                           :chat_template_kwargs (:enable_thinking "false")))
 
                   (Qwen3-Coder-30B-A3B
                    :description "Qwen3-Coder, our most agentic code model to date."
@@ -109,7 +108,7 @@ Returns a list of cons cells (name . directive) for each .md file."
                   (Qwen3-32B
                    :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :chat_template_kwargs (:enable_thinking "false"))))))
+                                           :chat_template_kwargs (:enable_thinking "false"))))))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -146,7 +145,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'GLM-4.5
+  (setq gptel-model 'gpt-oss-120b
         gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
@@ -182,14 +181,12 @@ Returns a list of cons cells (name . directive) for each .md file."
   (gptel-make-preset 'websearcher
     :description "A preset optimized for web searches"
     :backend "llama.cpp"
-    :model 'Qwen3-Coder-30B-A3B
     :post (lambda () (gptel-mcp-connect
                       (list "duckduckgo" "fetch" "sequential-thinking"))))
 
   (gptel-make-preset 'emacsconfigurator
     :description "A preset optimized for modifying my emacs config"
     :backend "llama.cpp"
-    :model 'Qwen3-Coder-30B-A3B
     :system (alist-get 'emacs-configurator gptel-directives)
     :post (lambda () (gptel-mcp-connect
                       (list "filesystem-emacs" "git-emacs"))))
