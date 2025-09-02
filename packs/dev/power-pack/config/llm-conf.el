@@ -250,7 +250,6 @@ Returns a list of cons cells (name . directive) for each .md file."
 ;;;;;;;;;;;;;
 
 (use-package wingman
-  :hook (prog-mode . wingman-mode)
   :bind (:map wingman-mode-prefix-map
          ("TAB" . wingman-fim-inline)
          :map wingman-mode-completion-transient-map
