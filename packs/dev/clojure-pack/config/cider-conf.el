@@ -54,6 +54,9 @@
 
   :bind ((:map cider-ns-map
                ("d" . ar-emacs-cider-repl-in-ns-dev))
+         (:map cider-repl-mode-map
+               ("C-s" . cider-repl-next-matching-input)
+               ("C-r" . cider-repl-previous-matching-input))
          (:map cider-eval-commands-map
                ("M-a" . clojure-align)
                ("M-b" . ar-emacs-clj-eval-all-let-bindings)
@@ -68,8 +71,6 @@
   (cider-repl-display-help-banner nil "No banner")
   (cider-connection-message-fn 'cider-random-tip "Tips are nice")
   (cider-overlays-use-font-lock t "Use overlays")
-  (cider-repl-wrap-history t "Wrap history")
-  (cider-repl-history-size 2000 "Custom history size")
   (cider-use-tooltips nil "Do not use tooltips")
   (cider-offer-to-open-cljs-app-in-browser nil "Ask before opening up the browser")
   (cider-invert-insert-eval-p t "Always eval after insert into REPL")
@@ -79,11 +80,15 @@
   (cider-reuse-dead-repls 'auto "do not prompt unless necessary")
   (cider-download-java-sources t "cider 1.17 new feature")
 
+  ;; REPL history
+  (cider-repl-history-highlight-current-entry t)
+  (cider-repl-history-show-preview t)
+  (cider-repl-history-highlight-inserted-item 'pulse)
+
   (nrepl-use-ssh-fallback-for-remote-hosts t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
   (cider-infer-remote-nrepl-ports t "Enabling either of these causes CIDER to use TRAMP for some SSH operations, which parses config files such as ~/.ssh/config and ~/.ssh/known_hosts.")
 
   (cider-known-endpoints '(("localhost" "1667") ;; babashka
-                           ("localhost" "5555") ;; common
                            ))
   ;; Pretty printing
   (cider-print-fn zprint)
@@ -101,7 +106,6 @@
   (cider-repl-mode . subword-mode)
   (cider-repl-mode . paredit-mode)
   (cider-repl-mode . company-mode))
-
 
 (with-eval-after-load "cider-mode"
   (define-key cider-mode-map (kbd "C-c C-z") nil)
@@ -123,13 +127,8 @@
 (with-eval-after-load "cider-repl"
     ;; Remove because conflicts with clj-refactor
   (define-key cider-mode-map (kbd "C-c C-m") nil)
-
-  (define-key cider-repl-mode-map (kbd "C-c r f") 'ar-emacs-cljs-figwheel-main-repl)
-  (define-key cider-repl-mode-map (kbd "C-c r n") 'ar-emacs-cljs-node-repl)
-  (define-key cider-repl-mode-map (kbd "C-c r p") 'ar-emacs-cljs-piggieback-node-repl)
-  (define-key cider-repl-mode-map (kbd "C-c r b") 'ar-emacs-cljs-boot-repl)
-  (define-key cider-repl-mode-map (kbd "C-c r s") 'ar-emacs-cljs-shadow-select-repl)
-
+  (define-key cider-repl-mode-map (kbd "M-r") nil)
+  (define-key cider-repl-mode-map (kbd "M-s") nil)
   (define-key cider-repl-mode-map (kbd "C-r") nil))
 
 ;;; cider-conf.el ends here
