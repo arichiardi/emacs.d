@@ -89,26 +89,31 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((GLM-4.5-Air
+        :models '((Deepseek-V3.1
+                   :description "DeepSeek-V3.1 is trained using the UE8M0 FP8 scale data format on both model weights and activations to ensure compatibility with microscaling data formats. Please refer to DeepGEMM for more details."
+                   :request-params (:top_p 0.95 :min_p 0.01 :temperature 0.6
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (GLM-4.5
+                   :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
+                   :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (GLM-4.5-Air
                    :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
                    :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
                                            :chat_template_kwargs (:enable_thinking :json-false)))
                   (gpt-oss-120b
                    :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
-                   :request-params (:min_p 0.0 :top_p 1.0 :top_k 0 :temperature 1.0))
-                  (Qwen3-30B-A3B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :chat_template_kwargs (:enable_thinking "false")))
+                   :request-params (:top_p 1.0 :top_k 0 :temperature 1.0
+                                           :chat_template_kwargs (:reasoning_effort "low")))
 
-                  (Qwen3-Coder-30B-A3B
+                  (Qwen3-Coder
                    :description "Qwen3-Coder, our most agentic code model to date."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7))
-
-                  (Qwen3-32B
-                   :description "Qwen3 is the large language model series developed by Qwen team, Alibaba Cloud."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :chat_template_kwargs (:enable_thinking "false"))))))
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (Qwen3
+                   :description "Qwen3, the latest addition to the Qwen family of large language models. Our flagship model, Qwen3-235B-A22B, achieves competitive results in benchmark evaluations of coding, math, general capabilities, etc."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                           :chat_template_kwargs (:enable_thinking :json-false))))))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
