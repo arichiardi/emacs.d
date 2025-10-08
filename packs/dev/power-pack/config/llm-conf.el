@@ -89,9 +89,9 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Deepseek-V3.1
-                   :description "DeepSeek-V3.1 is trained using the UE8M0 FP8 scale data format on both model weights and activations to ensure compatibility with microscaling data formats. Please refer to DeepGEMM for more details."
-                   :request-params (:top_p 0.95 :min_p 0.01 :temperature 0.6
+        :models '((GLM-4.6
+                   :description "GLM-4.6 key improvements: Longer context window, Superior coding performance, Advanced reasoning, More capable agents, Refined writing."
+                   :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
                                            :chat_template_kwargs (:enable_thinking :json-false)))
                   (GLM-4.5
                    :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
@@ -150,7 +150,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'gpt-oss-120b
+  (setq gptel-model 'GLM-4.5-Air
         gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
