@@ -81,7 +81,15 @@ Returns a list of cons cells (name . directive) for each .md file."
         :models '((Qwen3-Coder-30B-A3B
                    :description "Qwen3-Coder, our most agentic code model to date."
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :add_generation_prompt "true")))))
+                                    :add_generation_prompt "true"))
+                  (Nanonets-OCR2
+                   :description "Today, we are proud to announce the release of Nanonets-OCR2, a state-of-the-art suite of models designed for advanced image-to-markdown conversion and Visual Question Answering (VQA)."
+                   :request-params (:temperature 0.0 :repetition_penalty 1)
+                   :capabilities (media json)
+                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
+                   :track-media t))))
+
+;; (setq gptel-model 'Nanonets-OCR2 gptel-backend ar-emacs-gptel-backend-vllm)
 
 (setq ar-emacs-gptel-backend-llamacpp
       (gptel-make-openai "llama.cpp"
@@ -201,6 +209,13 @@ Returns a list of cons cells (name . directive) for each .md file."
     :backend "copilot"
     :model 'claude-sonnet-4
     :system (alist-get 'git-assistant gptel-directives))
+
+  (gptel-make-preset 'ocr
+    :description "A preset to assist with OCR and binary to text extraction"
+    :backend "vLLM"
+    :model 'Nanonets-OCR2
+    :track-media t
+    :system (alist-get 'nanonets-ocr gptel-directives))
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
