@@ -114,14 +114,14 @@ Returns a list of cons cells (name . directive) for each .md file."
                    :request-params (:top_p 1.0 :top_k 0 :temperature 1.0
                                            :chat_template_kwargs (:reasoning_effort "low")))
 
-                  (Qwen3-Coder
-                   :description "Qwen3-Coder, our most agentic code model to date."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
-                  (Qwen3
-                   :description "Qwen3, the latest addition to the Qwen family of large language models. Our flagship model, Qwen3-235B-A22B, achieves competitive results in benchmark evaluations of coding, math, general capabilities, etc."
+                  (Qwen3-VL-30B-A3B
+                   :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
+                   :capabilities (media json)
+                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
                                            :chat_template_kwargs (:enable_thinking :json-false))))))
+
+;; (setq gptel-model 'Qwen3-VL-30B-A3B gptel-backend ar-emacs-gptel-backend-llamacpp)
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
