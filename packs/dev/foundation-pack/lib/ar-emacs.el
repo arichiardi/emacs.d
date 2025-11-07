@@ -547,4 +547,6 @@ projectile, if available), or in the current directory otherwise."
     (sql-product 'sqlite)
     (sql-database abs-db-file)))
 
+(provide 'ar-emacs)
+
 ;;; ar-emacs.el ends here
