@@ -532,6 +532,19 @@ projectile, if available), or in the current directory otherwise."
   (projectile-with-default-dir (projectile-acquire-root)
     (eat)))
 
-(provide 'ar-emacs)
+(defun ar-emacs-select-sqlite-database ()
+  "Interactively select and set a SQLite database file for `sql-mode'."
+  (interactive)
+  (let* ((db-file (read-file-name "Select database file: "
+                                  (expand-file-name "~")
+                                  nil
+                                  t
+                                  nil
+                                  (lambda (name)
+                                    (or (file-directory-p name)
+                                        (string-suffix-p ".sqlite" name)))))
+         (abs-db-file (expand-file-name db-file)))
+    (sql-product 'sqlite)
+    (sql-database abs-db-file)))
 
 ;;; ar-emacs.el ends here
