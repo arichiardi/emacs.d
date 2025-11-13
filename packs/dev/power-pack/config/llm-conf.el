@@ -78,11 +78,7 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen3-Coder-30B-A3B
-                   :description "Qwen3-Coder, our most agentic code model to date."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                    :add_generation_prompt "true"))
-                  (Nanonets-OCR2
+        :models '((Nanonets-OCR2
                    :description "Today, we are proud to announce the release of Nanonets-OCR2, a state-of-the-art suite of models designed for advanced image-to-markdown conversion and Visual Question Answering (VQA)."
                    :request-params (:temperature 0.0 :repetition_penalty 1)
                    :capabilities (media json)
@@ -101,10 +97,6 @@ Returns a list of cons cells (name . directive) for each .md file."
                    :description "GLM-4.6 key improvements: Longer context window, Superior coding performance, Advanced reasoning, More capable agents, Refined writing."
                    :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
                                            :chat_template_kwargs (:enable_thinking :json-false)))
-                  (GLM-4.5
-                   :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
-                   :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
                   (GLM-4.5-Air
                    :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
                    :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
@@ -113,15 +105,20 @@ Returns a list of cons cells (name . directive) for each .md file."
                    :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
                    :request-params (:top_p 1.0 :top_k 0 :temperature 1.0
                                            :chat_template_kwargs (:reasoning_effort "low")))
-
-                  (Qwen3-VL-30B-A3B
+                  (Qwen3-VL-8B
+                   :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
+                   :capabilities (media json)
+                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (Qwen3-VL-32B
                    :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
                    :capabilities (media json)
                    :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
                                            :chat_template_kwargs (:enable_thinking :json-false))))))
 
-;; (setq gptel-model 'Qwen3-VL-30B-A3B gptel-backend ar-emacs-gptel-backend-llamacpp)
+;; (setq gptel-model 'Qwen3-VL-32B gptel-backend ar-emacs-gptel-backend-llamacpp)
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -158,8 +155,8 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
-  (setq gptel-model 'GLM-4.5-Air
-        gptel-backend ar-emacs-gptel-backend-llamacpp)
+  ;; (setq gptel-model 'GLM-4.5-Air
+  ;;       gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
