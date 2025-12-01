@@ -78,14 +78,15 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Nanonets-OCR2
-                   :description "Today, we are proud to announce the release of Nanonets-OCR2, a state-of-the-art suite of models designed for advanced image-to-markdown conversion and Visual Question Answering (VQA)."
-                   :request-params (:temperature 0.0 :repetition_penalty 1)
-                   :capabilities (media json)
-                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                   :track-media t))))
+        :models '((Qwen3-14B
+                   :description "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
+                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                           :chat_template_kwargs (:enable_thinking :json-false)))
+                  (gpt-oss-120b
+                   :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
+                   :request-params (:min_p 0.0 :top_p 1.0 :top_k 0 :temperature 1.0)))))
 
-;; (setq gptel-model 'Nanonets-OCR2 gptel-backend ar-emacs-gptel-backend-vllm)
+;; (setq gptel-model 'Qwen3-14B gptel-backend ar-emacs-gptel-backend-vllm)
 
 (setq ar-emacs-gptel-backend-llamacpp
       (gptel-make-openai "llama.cpp"
@@ -110,15 +111,18 @@ Returns a list of cons cells (name . directive) for each .md file."
                    :capabilities (media json)
                    :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
                    :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                                           :repetition_penalty 1.5
                                            :chat_template_kwargs (:enable_thinking :json-false)))
                   (Qwen3-VL-32B
                    :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
                    :capabilities (media json)
                    :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
+                   :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
+                                           :presence_penalty 2.0 :repetition_penalty 1.0
                                            :chat_template_kwargs (:enable_thinking :json-false))))))
 
-;; (setq gptel-model 'Qwen3-VL-32B gptel-backend ar-emacs-gptel-backend-llamacpp)
+;; (setq gptel-model 'Qwen3-VL-32B
+;;         gptel-backend ar-emacs-gptel-backend-llamacpp)
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -154,9 +158,6 @@ Returns a list of cons cells (name . directive) for each .md file."
   (require 'gptel-integrations)
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
-
-  ;; (setq gptel-model 'GLM-4.5-Air
-  ;;       gptel-backend ar-emacs-gptel-backend-llamacpp)
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
