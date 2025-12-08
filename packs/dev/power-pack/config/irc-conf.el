@@ -31,8 +31,8 @@
                                              ;; "#lispcafe"
                                              ;; "#org-roam"
                                              ;; "#rofi"
-                                             ;; "#LineageOS"
-                                             "#podman"))
+                                             "#LineageOS"
+                                             "#searxng"))
                                  ("irc.oftc.net" :port 6697 :encryption tls
                                   :channels ("#openwrt")))
                                "Setup the server list")
