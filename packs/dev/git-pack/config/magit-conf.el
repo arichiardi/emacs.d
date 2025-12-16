@@ -59,5 +59,17 @@
    (git-commit-setup . git-commit-turn-on-flyspell)
    (git-commit-setup . with-editor-usage-message)))
 
+(use-package ghub
+  :after magit)
+
+(use-package forge
+  :after magit ghub
+  :custom (forge-database-file (expand-file-name "forge-database.sqlite" live-etc-dir)))
+
+(use-package gptel-forge-prs
+  :after forge
+  :config
+  (gptel-forge-prs-install))
+
 ;; End:
 ;;; magit-conf.el ends here
