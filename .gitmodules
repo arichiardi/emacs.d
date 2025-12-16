@@ -69,6 +69,9 @@
 	path = lib/compat
 	url = git@github.com:emacsmirror/compat.git
 	build-step = make
+[submodule "cond-let"]
+	path = lib/cond-let
+	url = git@github.com:tarsius/cond-let.git
 [submodule "consult"]
 	path = lib/consult
 	url = https://github.com/minad/consult
@@ -148,6 +151,9 @@
 [submodule "flycheck-posframe"]
 	path = lib/flycheck-posframe
 	url = https://github.com/alexmurray/flycheck-posframe
+[submodule "forge"]
+	path = lib/forge
+	url = https://github.com/magit/forge
 [submodule "ggtags"]
 	path = lib/ggtags
 	url = git@github.com:leoliu/ggtags.git
@@ -175,6 +181,9 @@
 [submodule "gptel"]
 	path = lib/gptel
 	url = https://github.com/karthink/gptel
+[submodule "gptel-forge-prs"]
+	path = lib/gptel-forge-prs
+	url = git@github.com:ArthurHeymans/gptel-forge-prs.git
 [submodule "gradle-mode"]
 	path = lib/gradle-mode
 	url = git@github.com:jacobono/emacs-gradle-mode.git
@@ -504,6 +513,9 @@
 [submodule "xterm-color"]
 	path = lib/xterm-color
 	url = git@github.com:atomontage/xterm-color.git
+[submodule "yaml"]
+	path = lib/yaml
+	url = https://github.com/zkry/yaml.el
 [submodule "yaml-mode"]
 	path = lib/yaml-mode
 	url = git@github.com:yoshiki/yaml-mode.git
