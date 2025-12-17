@@ -120,6 +120,36 @@ Remember to always approach problems from a data-first perspective, considering 
 7. Document any assumptions made
 8. Do not use colon (;) but double colon (;;) for inline comments.
 
+#### Cond
+
+If you want to visually separate `cond` blocks you can MUST comment following this pattern:
+
+- Lower priority comments go into a normal comment `;;`.
+- High-level categorization goes into a comment box:
+
+```clojure
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Initializing migration state ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+;; Incremental mode (non‑history)
+...
+
+;; Full initialization for clear‑state or rebuild (any mode)
+...
+
+;; Default full init for non‑history when no other flags apply
+...
+
+;; History mode – init‑only should also trigger the init step
+...
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Performing migration ;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;
+...
+```
+
 #### Docstrings
 
 Write docstrings in conversational style. Follow these guidelines:
