@@ -127,6 +127,12 @@ Returns a list of cons cells (name . directive) for each .md file."
   ;; for mcp.el tools
   (require 'gptel-integrations)
 
+  (progn (message "Running LLM exec-path-from-shell.")
+         (exec-path-from-shell-copy-envs '("EMACS_GPTEL_VLLM_HOST"
+                                           "EMACS_GPTEL_VLLM_PORT"
+                                           "EMACS_GPTEL_LLAMA_PORT"
+                                           "EMACS_GPTEL_LLAMA_PORT")))
+
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
