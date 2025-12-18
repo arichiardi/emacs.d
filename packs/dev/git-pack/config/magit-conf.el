@@ -24,6 +24,11 @@
           ("q" . ar-emacs--magit-quit-session))
          (:map dired-mode-map
           ("C-x g" . magit-dired-log)))
+  :hook
+  ((magit-log-edit-mode . (lambda ()
+                            (auto-fill-mode 1)))
+   (magit-status-sections . magit-insert-worktrees))
+
   :init
   (setq magit-view-git-manual-method 'woman)
 
@@ -40,9 +45,8 @@
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (magit-format-file-function #'magit-format-file-nerd-icons)
 
-  :hook
-  ((magit-log-edit-mode . (lambda ()
-                            (auto-fill-mode 1)))))
+  :config
+  (setq magit-read-worktree-directory-function #'magit-read-worktree-directory-sibling))
 
 (with-eval-after-load 'info
   (info-initialize)
