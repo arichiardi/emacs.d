@@ -78,20 +78,13 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-vllm-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((Qwen3-14B
-                   :description "Qwen3 is the latest generation of large language models in Qwen series, offering a comprehensive suite of dense and mixture-of-experts (MoE) models."
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
-                  (Qwen3-VL-32B
+        :models '((Qwen3-VL-32B
                    :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
                    :capabilities (media json)
                    :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
                    :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
                                            :presence_penalty 2.0 :repetition_penalty 1.0
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
-                  (gpt-oss-120b
-                   :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
-                   :request-params (:min_p 0.0 :top_p 1.0 :top_k 0 :temperature 1.0)))))
+                                           :chat_template_kwargs (:enable_thinking :json-false))))))
 
 (setq ar-emacs-gptel-backend-llamacpp
       (gptel-make-openai "llama.cpp"
@@ -99,28 +92,7 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '((GLM-4.5-Air
-                   :description "The GLM-4.5 series models are foundation models designed for intelligent agents."
-                   :request-params (:top_p 0.9 :top_k 20 :temperature 0.6
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
-                  (gpt-oss-120b
-                   :description "The gpt-oss-120b model achieves near-parity with OpenAI o4-mini on core reasoning benchmarks, while running efficiently on a single 80 GB GPU."
-                   :request-params (:top_p 1.0 :top_k 0 :temperature 1.0
-                                           :chat_template_kwargs (:reasoning_effort "low")))
-                  (Qwen3-VL-8B
-                   :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
-                   :capabilities (media json)
-                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                   :request-params (:top_p 0.8 :top_k 20 :min_p 0.01 :temperature 0.7
-                                           :repetition_penalty 1.5
-                                           :chat_template_kwargs (:enable_thinking :json-false)))
-                  (Qwen3-VL-32B
-                   :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
-                   :capabilities (media json)
-                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                   :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
-                                           :presence_penalty 2.0 :repetition_penalty 1.0
-                                           :chat_template_kwargs (:enable_thinking :json-false))))))
+        :models '(gpt-oss-120b glm-4.6V Qwen3-VL-32B)))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
@@ -165,29 +137,28 @@ Returns a list of cons cells (name . directive) for each .md file."
           `((default . nil)
             ,@markdown-directives)))
 
-  (gptel-make-preset 'websearcher
+  (gptel-make-preset 'coder
     :description "A preset optimized for web searches"
-    :backend "llama.cpp"
-    :post (lambda () (gptel-mcp-connect
-                      (list "duckduckgo" "fetch" "sequential-thinking"))))
+    :track-media t
+    :system (alist-get 'expert-developer gptel-directives)
+    :tools '("ALL")
+    :pre (lambda () (gptel-mcp-connect
+                     (list "sequential-thinking" "duckduckgo" "fetch" "url-opener" "time" "filesystem-git"))))
 
   (gptel-make-preset 'emacsconfigurator
     :description "A preset optimized for modifying my emacs config"
-    :backend "llama.cpp"
     :system (alist-get 'emacs-configurator gptel-directives)
-    :post (lambda () (gptel-mcp-connect
-                      (list "filesystem-emacs" "git-emacs"))))
+    :tools '(:append ("filesystem-emacs" "git-emacs"))
+    :pre (lambda () (gptel-mcp-connect
+                     (list "filesystem-emacs" "git-emacs"))))
 
   (gptel-make-preset 'gitassistant
     :description "A preset to assist with git commit messages, PRs and so on"
-    :backend "copilot"
     :model 'claude-sonnet-4
     :system (alist-get 'git-assistant gptel-directives))
 
   (gptel-make-preset 'ocr
     :description "A preset to assist with OCR and binary to text extraction"
-    :backend "vLLM"
-    :model 'Nanonets-OCR2
     :track-media t
     :system (alist-get 'nanonets-ocr gptel-directives))
 
@@ -230,6 +201,9 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("duckduckgo" . (:command
                             "uvx"
                             :args ("duckduckgo-mcp-server")))
+           ("url-opener" . (:command
+                            "npx"
+                            :args ("@world9/url-opener")))
 
            ("time" . (:command
                       "uvx"
