@@ -128,7 +128,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   (require 'gptel-integrations)
 
   (progn (message "Running LLM exec-path-from-shell.")
-         (exec-path-from-shell-copy-envs '("EMACS_GPTEL_VLLM_HOST"
+         (exec-path-from-shell-copy-envs '("EMACS_SEARXNG_HOST"
+                                           "EMACS_SEARXNG_PORT"
+                                           "EMACS_GPTEL_VLLM_HOST"
                                            "EMACS_GPTEL_VLLM_PORT"
                                            "EMACS_GPTEL_LLAMA_PORT"
                                            "EMACS_GPTEL_LLAMA_PORT")))
@@ -144,12 +146,12 @@ Returns a list of cons cells (name . directive) for each .md file."
             ,@markdown-directives)))
 
   (gptel-make-preset 'coder
-    :description "A preset optimized for web searches"
+    :description "A preset optimized for coding tasks"
     :track-media t
     :system (alist-get 'expert-developer gptel-directives)
-    :tools '("ALL")
     :pre (lambda () (gptel-mcp-connect
-                     (list "sequential-thinking" "duckduckgo" "fetch" "url-opener" "time" "filesystem-git"))))
+                     (list "sequential-thinking" "searxng-local" "fetch"
+                           "url-opener" "time" "filesystem-git"))))
 
   (gptel-make-preset 'emacsconfigurator
     :description "A preset optimized for modifying my emacs config"
@@ -214,6 +216,12 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("time" . (:command
                       "uvx"
                       :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))
+           ("searxng-local" . (:command
+                               "podman"
+                               :args ("run" "-i" "--rm" "--network=host" "-e" "SEARXNG_URL"
+                                      "isokoliuk/mcp-searxng:latest")
+                               :env (:SEARXNG_URL ,(concat "http://" (getenv "EMACS_SEARXNG_HOST")
+                                                           ":" (getenv "EMACS_SEARXNG_PORT")))))
            ("sequential-thinking" . (:command
                                      "podman"
                                      :args ("run", "-i", "--rm", "mcp/sequentialthinking")
