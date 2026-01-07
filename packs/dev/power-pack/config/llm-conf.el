@@ -54,23 +54,23 @@ Returns a list of cons cells (name . directive) for each .md file."
            "Do NOT use markdown backticks (```) to format your response. If you use LaTex notation, enclose math in \\( and \\), or \\[ and \\] delimiters.")
      "\n")))
 
-(defun ar-emacs-gptel-ollama-endpoint ()
-  "Compute the host:port pointing to the ollama server."
-  (concat (or (getenv "EMACS_GPTEL_OLLAMA_HOST") "localhost")
+(defun ar-emacs-gptel-llamacpp-endpoint ()
+  "Compute the host:port pointing to the llama.cpp server."
+  (concat (or (getenv "EMACS_GPTEL_LLAMACPP_HOST") "localhost")
           ":"
-          (or (getenv "EMACS_GPTEL_OLLAMA_PORT") "11434")))
+          (or (getenv "EMACS_GPTEL_LLAMACPP_PORT") "10434")))
+
+(defun ar-emacs-gptel-ikllama-endpoint ()
+  "Compute the host:port pointing to the ollama server."
+  (concat (or (getenv "EMACS_GPTEL_IKLLAMA_HOST") "localhost")
+          ":"
+          (or (getenv "EMACS_GPTEL_IKLLAMA_PORT") "11434")))
 
 (defun ar-emacs-gptel-vllm-endpoint ()
   "Compute the host:port pointing to the vllm server."
   (concat (or (getenv "EMACS_GPTEL_VLLM_HOST") "localhost")
           ":"
-          (or (getenv "EMACS_GPTEL_VLLM_PORT") "8000")))
-
-(defun ar-emacs-gptel-llamacpp-endpoint ()
-  "Compute the host:port pointing to the llama.cpp server."
-  (concat (or (getenv "EMACS_GPTEL_LLAMACPP_HOST") "localhost")
-          ":"
-          (or (getenv "EMACS_GPTEL_LLAMACPP_PORT") "8000")))
+          (or (getenv "EMACS_GPTEL_VLLM_PORT") "12434")))
 
 (setq ar-emacs-gptel-backend-vllm
       (gptel-make-openai "vLLM"
@@ -92,7 +92,15 @@ Returns a list of cons cells (name . directive) for each .md file."
         :host (ar-emacs-gptel-llamacpp-endpoint)
         :header '(("Content-Type" . "application/json"))
         :stream t
-        :models '(gpt-oss-120b glm-4.6V Qwen3-VL-32B)))
+        :models '(gpt-oss-120b glm-4.6V glm-4.7 Qwen3-VL-32B)))
+
+(setq ar-emacs-gptel-backend-ikllama
+      (gptel-make-openai "ik_llama"
+        :protocol "http"
+        :host (ar-emacs-gptel-ikllama-endpoint)
+        :header '(("Content-Type" . "application/json"))
+        :stream t
+        :models '(GLM-4.5-Air)))
 
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
