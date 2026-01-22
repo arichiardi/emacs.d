@@ -5,6 +5,8 @@
 ;;; Code:
 
 (use-package projectile
+  :hook (after-init . projectile-mode)
+
   :init
   (setq projectile-cache-file (concat live-tmp-dir "projectile-cache"))
   (setq projectile-known-projects-file (concat live-tmp-dir "projectile-known-projects.eld"))
@@ -31,6 +33,7 @@
   (projectile-tags-backend 'ggtags)
   (projectile-sort-order 'recently-active)
   (projectile-auto-cleanup-known-projects t "new in 2.9")
+
   :bind ((:map projectile-mode-map
                ("C-c p" . projectile-command-map))
          (:map projectile-command-map
@@ -38,7 +41,5 @@
 
 (use-package persp-projectile
   :after (projectile perspective))
-
-(projectile-global-mode)
 
 ;;; projectile-conf.el ends here
