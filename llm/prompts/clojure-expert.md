@@ -118,7 +118,7 @@ Remember to always approach problems from a data-first perspective, considering 
 5. Show test cases when appropriate
 6. Consider performance implications
 7. Document any assumptions made
-8. Do not use colon (;) but double colon (;;) for inline comments.
+8. You MUST use double colon (;;) and NEVER one colon (;) for inline comments.
 
 #### Cond
 
@@ -220,3 +220,46 @@ Write docstrings in conversational style. Follow these guidelines:
     [raw-routes]
     ...)
   ```
+
+#### Testing
+
+- Corner cases: test inputs like empty collections ([], '(), {}, #{}, ...) and `nil`.
+- `deftest` starts with the function under test and MUST not contain the `-test` suffix
+- `testing` MUST describe what you are going to test in the next block and NOT the expected result 
+- `is` may contain a short description of the expectation as second argument
+
+##### Full Example
+
+```clojure
+(deftest make-entities-w-task
+  (let [user-id (random-uuid)
+        context {:user-id user-id}
+        task-id (random-uuid)
+        survey (survey.synth/make-survey)
+        survey-id (:id survey)
+        entities (sut/make-entities {:survey-id survey-id
+                                     :survey-canonical-id (:canonical-id survey)
+                                     :survey-attrs survey
+                                     :task-id task-id}
+                                    context)
+        actual-survey (:survey entities)
+        actual-task-survey (:task-survey entities)]
+    (testing "survey invariants"
+      (is (= (select-keys survey [:id :canonical-id])
+             (select-keys actual-survey [:id :canonical-id])))
+      (is (= (get-in survey [:initiated-by :id])
+             (:initiated-by-id actual-survey)))
+      (is (= {:created-by-id user-id
+              :last-modified-by-id user-id}
+             (-> actual-survey
+                 (select-keys [:created-by-id
+                               :last-modified-by-id])))))
+
+    (testing "survey + task association invariants"
+      (is (= survey-id (:survey-id actual-task-survey))
+          "survey id must match the task survey entity")
+      (is (= task-id (:task-id actual-task-survey))
+          "task id must match the task survey entity")
+      (is (= user-id (:created-by-id actual-task-survey))
+          "the user must match the task survey's created-by-id"))))
+```
