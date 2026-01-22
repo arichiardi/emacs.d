@@ -94,7 +94,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   (gptel-mode . (lambda () (olivetti-mode 1)))
 
   :custom
-  ((gptel-default-mode 'markdown-mode "Use markdown as the default")
+  ((gptel-default-mode 'org-mode)
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
