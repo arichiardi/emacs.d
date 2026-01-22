@@ -90,9 +90,8 @@
 
   (cider-known-endpoints '(("localhost" "1667") ;; babashka
                            ))
-  ;; Pretty printing
-  (cider-print-fn zprint)
   ;; see https://github.com/clojure-emacs/cider/issues/2966
+  (cider-print-fn "zprint")
   (cider-print-options nil "zprint options are chosen from .zprint.edn")
 
   :hook
