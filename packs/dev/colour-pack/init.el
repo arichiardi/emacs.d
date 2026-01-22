@@ -15,24 +15,20 @@
             (member 'modus-operandi custom-enabled-themes))
     (run-hooks 'modus-themes-after-load-theme-hook))
   (when (or (member 'lambda-dark custom-enabled-themes)
-            (member 'lambda-dask-faded custom-enabled-themes))
+            (member 'lambda-dark-faded custom-enabled-themes))
     (run-hooks 'lambda-themes-after-load-theme-hook)))
 
 (add-hook 'enable-theme-functions #'ar-emacs--run-theme-hooks)
 
 (use-package lambda-themes
-  :demand
   :config
   (setopt lambda-themes-set-italic-comments nil)
   (setopt lambda-themes-set-italic-keywords nil)
   (setopt lambda-themes-set-variable-pitch nil))
 
 ;; https://www.gnu.org/software//emacs/manual/html_node/modus-themes/Sample-configuration-with-and-without-use_002dpackage.html
-;;
 (use-package emacs
   :config
-  ;; (require-theme 'modus-themes) ; `require-theme' is ONLY for the built-in Modus themes
-
   (load-theme 'lambda-dark-faded :no-confirm))
 
 ;;; init.el ends here
