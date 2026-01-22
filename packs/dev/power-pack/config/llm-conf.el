@@ -72,36 +72,6 @@ Returns a list of cons cells (name . directive) for each .md file."
           ":"
           (or (getenv "EMACS_GPTEL_VLLM_PORT") "12434")))
 
-(setq ar-emacs-gptel-backend-vllm
-      (gptel-make-openai "vLLM"
-        :protocol "http"
-        :host (ar-emacs-gptel-vllm-endpoint)
-        :header '(("Content-Type" . "application/json"))
-        :stream t
-        :models '((Qwen3-VL-32B
-                   :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
-                   :capabilities (media json)
-                   :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                   :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
-                                           :presence_penalty 2.0 :repetition_penalty 1.0
-                                           :chat_template_kwargs (:enable_thinking :json-false))))))
-
-(setq ar-emacs-gptel-backend-llamacpp
-      (gptel-make-openai "llama.cpp"
-        :protocol "http"
-        :host (ar-emacs-gptel-llamacpp-endpoint)
-        :header '(("Content-Type" . "application/json"))
-        :stream t
-        :models '(gpt-oss-120b glm-4.6V glm-4.7 Qwen3-VL-32B)))
-
-(setq ar-emacs-gptel-backend-ikllama
-      (gptel-make-openai "ik_llama"
-        :protocol "http"
-        :host (ar-emacs-gptel-ikllama-endpoint)
-        :header '(("Content-Type" . "application/json"))
-        :stream t
-        :models '(GLM-4.5-Air)))
-
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
   (let ((file-path (expand-file-name "PROJECT_SUMMARY.md" (projectile-project-root))))
@@ -140,12 +110,44 @@ Returns a list of cons cells (name . directive) for each .md file."
                                            "EMACS_SEARXNG_PORT"
                                            "EMACS_GPTEL_VLLM_HOST"
                                            "EMACS_GPTEL_VLLM_PORT"
+                                           "EMACS_GPTEL_LLAMA_HOST"
                                            "EMACS_GPTEL_LLAMA_PORT"
-                                           "EMACS_GPTEL_LLAMA_PORT")))
+                                           "EMACS_GPTEL_IKLLAMA_HOST"
+                                           "EMACS_GPTEL_IKLLAMA_PORT")))
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
+
+  (setq ar-emacs-gptel-backend-ikllama
+        (gptel-make-openai "ik_llama"
+          :protocol "http"
+          :host (ar-emacs-gptel-ikllama-endpoint)
+          :header '(("Content-Type" . "application/json"))
+          :stream t
+          :models '(gpt-oss-120B GLM-4.5-Air GLM-4.6V Qwen3-VL-32B)))
+
+  (setq ar-emacs-gptel-backend-llamacpp
+        (gptel-make-openai "llama.cpp"
+          :protocol "http"
+          :host (ar-emacs-gptel-llamacpp-endpoint)
+          :header '(("Content-Type" . "application/json"))
+          :stream t
+          :models '(gpt-oss-120B glm-4.6V Nemotron-3-Nano-30B-A3B Qwen3-Next-80B-A3B Qwen3-VL-32B)))
+
+  (setq ar-emacs-gptel-backend-vllm
+        (gptel-make-openai "vLLM"
+          :protocol "http"
+          :host (ar-emacs-gptel-vllm-endpoint)
+          :header '(("Content-Type" . "application/json"))
+          :stream t
+          :models '((Qwen3-VL-32B
+                     :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
+                     :capabilities (media json)
+                     :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
+                     :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
+                                             :presence_penalty 2.0 :repetition_penalty 1.0
+                                             :chat_template_kwargs (:enable_thinking :json-false))))))
 
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
