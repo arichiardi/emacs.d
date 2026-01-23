@@ -37,6 +37,7 @@
   :bind ("C-c x d" . docker))
 
 (use-package synosaurus
+  :hook (text-mode . synosaurus-mode)
   :bind (:map text-mode-map
          ("C-c s l" . synosaurus-lookup)
          ("C-c s i" . synosaurus-choose-and-insert)
@@ -52,10 +53,7 @@
 
 (use-package text-mode
  :preface (provide 'text-mode)
- :mode "\\.adoc$"
- :hook
- (text-mode . flyspell-mode)
- (text-mode . synosaurus-mode))
+ :mode "\\.adoc$")
 
 (use-package know-your-http-well
   :defer t
