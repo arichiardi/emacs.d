@@ -25,8 +25,7 @@
   (setopt lambda-themes-set-theme 'dark-faded)
   (setopt lambda-themes-set-italic-comments nil)
   (setopt lambda-themes-set-italic-keywords nil)
-  ;; (setopt lambda-themes-set-variable-pitch nil)
-)
+  (setopt lambda-themes-set-variable-pitch nil))
 
 ;; https://www.gnu.org/software//emacs/manual/html_node/modus-themes/Sample-configuration-with-and-without-use_002dpackage.html
 (use-package emacs
