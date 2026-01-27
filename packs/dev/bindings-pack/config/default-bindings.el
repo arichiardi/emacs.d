@@ -175,11 +175,6 @@
 ;; comment region
 (global-set-key (kbd "M-/") 'comment-or-uncomment-region)
 
-(global-set-key (kbd "C-s")   'isearch-forward)
-(global-set-key (kbd "C-r")   'isearch-backward)
-(global-set-key (kbd "C-M-s") 'isearch-forward-regexp)
-(global-set-key (kbd "C-M-r") 'isearch-backward-regexp)
-
 ;; File
 (global-set-key (kbd "M-`")       'file-cache-minibuffer-complete)
 (global-set-key (kbd "C-x C-b")   'ibuffer)

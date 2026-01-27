@@ -64,7 +64,6 @@
 (live-load-config-file "ediff-conf.el")
 (live-load-config-file "lsp-conf.el")
 (live-load-config-file "paredit-conf.el")
-(live-load-config-file "phi-search-conf.el")
 (live-load-config-file "live.el")
 
 (when (eq system-type 'darwin)
@@ -145,5 +144,38 @@
 ;; Do not allow the cursor in the minibuffer prompt
 (setq minibuffer-prompt-properties
  '(read-only t cursor-intangible t face minibuffer-prompt))
+
+(setq mc/list-file (concat live-etc-dir "multiple-cursors-prefs.el"))
+
+(use-package multiple-cursors
+  :bind
+  ("C-S-c C-S-c" . mc/edit-lines))
+
+(use-package phi-search
+  :defer t
+
+  :config
+  (setq phi-search-limit           10000)
+  (setq phi-search-case-sensitive 'guess)
+
+  :bind
+  (("C-s" . phi-search)
+   ("C-r" . phi-search-backward)
+
+   :map mc/keymap
+   ("C-s" . phi-search)
+   ("C-r" . phi-search-backward)
+   ("C-w" . kill-region)
+
+   :map phi-search-default-map
+   ("<prior>" . phi-search-again-or-previous)
+   ("<next>" . phi-search-again-or-next)))
+
+;; (global-set-key (kbd "C-s") 'phi-search)
+;; (global-set-key (kbd "C-r") 'phi-search-backward)
+
+(use-package phi-replace
+  :bind
+  ("M-%" . phi-replace-query))
 
 ;;; init.el ends here
