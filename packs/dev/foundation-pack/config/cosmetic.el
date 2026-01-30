@@ -57,7 +57,7 @@
    ((eq system-type 'darwin)
     (live-set-frame-font font-string))))
 
-(setq ar-emacs-default-font "JetBrainsMono NFM")
+(setq ar-emacs-default-font "JetBrainsMono")
 (setq ar-emacs-default-font-size 12)
 
 (setq ar-emacs-default-font-string (format "%s-%s" ar-emacs-default-font ar-emacs-default-font-size))
