@@ -12,9 +12,9 @@ After cloning the project, you need to sync the submodules and run a couple of s
 
 ```
 git submodule update --init --recursive
-make
-./packs/compile-live-packs
 ./packs/update-live-packs
+
+make init-clean && make init-build
 ```
 
 If you get lost in submodule mess, your last resort can be something like: 
