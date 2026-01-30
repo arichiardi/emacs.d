@@ -355,7 +355,7 @@
 	url = git@github.com:joddie/pcre2el.git
 [submodule "peg"]
 	path = lib/peg
-	url = git@github.com:emacsmirror/peg.git
+	url = git@github.com:emacs-straight/peg.git
 [submodule "persp-projectile"]
 	path = lib/persp-projectile
 	url = git@github.com:bbatsov/persp-projectile.git
