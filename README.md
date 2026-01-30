@@ -25,6 +25,13 @@ git submodule update --recursive --checkout --force
 
 This will force the checkout of the submodules at the SHA stored in this parent repository.
 
+### Build assimilated modules
+
+> [!WARNING]  
+> This list will likely be outdated over time as it depends on the assimilated modules.
+
+`make build/olivetti build/marginalia build/vertico build/flycheck build/clj-refactor`
+
 ### Original Emacs Live Disclaimer
 
 An opinionated set of defaults for getting started with a specific focus
