@@ -47,6 +47,9 @@
 [submodule "clojure-mode"]
 	path = lib/clojure-mode
 	url = git@github.com:clojure-emacs/clojure-mode.git
+[submodule "closql"]
+	path = lib/closql
+	url = git@github.com:magit/closql.git
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
@@ -526,6 +529,3 @@
 [submodule "zprint"]
 	path = lib/zprint
 	url = https://github.com/DogLooksGood/zprint.el.git
-[submodule "closql"]
-	path = lib/closql
-	url = git@github.com:magit/closql.git
