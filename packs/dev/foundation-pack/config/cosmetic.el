@@ -57,15 +57,4 @@
    ((eq system-type 'darwin)
     (live-set-frame-font font-string))))
 
-(setq ar-emacs-default-font "JetBrainsMono")
-(setq ar-emacs-default-font-size 12)
-
-(setq ar-emacs-default-font-string (format "%s-%s" ar-emacs-default-font ar-emacs-default-font-size))
-
-(message "Changing Font to \"%s\" for window system \"%s\"." ar-emacs-default-font-string window-system)
-
-(live-set-frame-font ar-emacs-default-font-string)
-
-(live-set-frame-darwin-font ar-emacs-default-font-string)
-
 ;;; cosmetic.el ends here
