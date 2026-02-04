@@ -1,4 +1,4 @@
-# Emacs
+# My Emacs
 
 This repo started as a fork of [Emacs Live](https://github.com/overtone/emacs-live) but has slowly drifted away from it, mainly cause moving a bit faster than the original.
 
@@ -11,6 +11,9 @@ The philosophy here is to have a stable but rolling, contributor friendly, setup
 After cloning the project, you need to sync the submodules and run a couple of scripts for compiling (and therefore have faster startup):
 
 ```
+cd .config
+git clone git@github.com:arichiardi/emacs.d.git emacs
+cd emacs
 git submodule update --init --recursive
 ./packs/update-live-packs
 
@@ -25,6 +28,24 @@ git submodule update --recursive --checkout --force
 
 This will force the checkout of the submodules at the SHA stored in this parent repository.
 
+### Fonts
+
+Either use the following `$HOME/.Xresources`
+
+```
+!! Emacs - https://www.gnu.org/software/emacs/manual/html_node/emacs/X-Resources.html
+Emacs.menuBar:     0
+Emacs.toolBar:     0
+Emacs.font:        JetBrainsMono Nerd Font Mono-12
+```
+
+Or call the following functions in `init.el` or a custom pack:
+
+```
+(live-set-frame-font "JetBrainsMono")
+(live-set-frame-darwin-font 12)
+```
+
 ### Build assimilated modules
 
 > [!WARNING]  
@@ -32,43 +53,7 @@ This will force the checkout of the submodules at the SHA stored in this parent 
 
 `make build/olivetti build/marginalia build/vertico build/flycheck build/hl-todo`
 
-### Original Emacs Live Disclaimer
-
-An opinionated set of defaults for getting started with a specific focus
-on live coding with [Overtone](http://overtone.github.io) and
-[Quil](http://github.com/quil/quil). However, it's not just a one trick
-pony. It also happens to be:
-
-* a jolly good generic Clojure hacking config
-* a nice structured approach to organising your Emacs config
-* modular in that functionality is organised by discrete _packs_
-* a decent starting point for live coding in general
-* a goldmine of config snippets to plunder and add to your own config
-
-So, wherever you are in the multiverse, Emacs Live is ready to join you
-in battle against the evil friction of poor text editor workflows.
-
-    "Power of the horse, full force!"
-                 The Space Stallions.
-
-### Requires Emacs 24.3
-
-It is only compatible with Emacs 24.3 and above but haven't been tested on it
-thoroughly.
-
-### Getting Started
-
-The only way to install is to follow these steps:
-
-```shell
-curl -O https://raw.githubusercontent.com/arichiardi/clojure-live/master/installer/install-emacs-live.sh
-chmod + install-emacs-live.sh
-./install-emacs-live.sh # follow the installer
-...
-cd .emacs.d
-./packs/compile-live-packs
-./packs/update-live-packs
-```
+# From Emacs Live
 
 ## Live Packs
 
@@ -114,20 +99,6 @@ simply use `live-add-packs`:
 Packs are expected to reside in `~/.emacs.d/packs/` unless you specify
 them with absolute paths in which case the absolute path with be
 honoured.
-
-### Compiling dev packs and debug
-
-```shell
-cd .emacs.d
-./packs/compile-live-packs # this also accepts --magit, --cider and --clean
-./packs/update-live-packs
-```
-
-The above can be done multiple times and the `echo $?` should tell you if
-everything was alright.
-
-If something goes wrong, run `emacs --debug-init` and paste in an issue the
-relevant `*Messages*` buffer output.
 
 ### Creating your own Packs
 
