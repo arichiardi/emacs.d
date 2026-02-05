@@ -51,7 +51,7 @@ Or call the following functions in `init.el` or a custom pack:
 > [!WARNING]  
 > This list will likely be outdated over time as it depends on the assimilated modules.
 
-`make build/olivetti build/marginalia build/vertico build/flycheck build/hl-todo`
+`make build/multiple-cursors build/olivetti build/marginalia build/vertico build/flycheck build/hl-todo`
 
 # From Emacs Live
 
