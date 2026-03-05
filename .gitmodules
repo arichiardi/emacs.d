@@ -4,6 +4,9 @@
 [submodule "ace-window"]
 	path = lib/ace-window
 	url = git@github.com:abo-abo/ace-window.git
+[submodule "agent-shell"]
+	path = lib/agent-shell
+	url = git@github.com:xenodium/agent-shell.git
 [submodule "aider"]
 	path = lib/aider
 	url = git@github.com:tninja/aider.el.git
@@ -416,6 +419,9 @@
 [submodule "sesman"]
 	path = lib/sesman
 	url = git@github.com:vspinu/sesman.git
+[submodule "shell-maker"]
+	path = lib/shell-maker
+	url = git@github.com:xenodium/shell-maker.git
 [submodule "simple-httpd"]
 	path = lib/simple-httpd
 	url = git@github.com:skeeto/emacs-web-server.git
