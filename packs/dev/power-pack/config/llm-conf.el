@@ -125,7 +125,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-ikllama-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B GLM-4.5-Air GLM-4.6V Qwen3-VL-32B)))
+          :models '(gpt-oss-120B GLM-4.6V Qwen3.5-27B)))
 
   (setq ar-emacs-gptel-backend-llamacpp
         (gptel-make-openai "llama.cpp"
@@ -133,7 +133,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-llamacpp-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B glm-4.6V Qwen3-Coder-Next-80B-A3B Qwen3-VL-32B Qwen3.5-122B-A10B)))
+          :models '(gpt-oss-120B glm-4.6V Qwen3-VL-32B Qwen3.5-27B)))
 
   (setq ar-emacs-gptel-backend-vllm
         (gptel-make-openai "vLLM"
