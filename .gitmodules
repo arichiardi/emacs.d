@@ -121,6 +121,7 @@
 [submodule "epkg"]
 	path = lib/epkg
 	url = git@github.com:emacscollective/epkg.git
+	build-step = make lisp
 [submodule "epl"]
 	path = lib/epl
 	url = https://github.com/cask/epl
