@@ -10,6 +10,9 @@
 
 ;;; Code:
 
+(setq ar-emacs-recipes-path
+      (expand-file-name "recipes" ar-emacs-llm-config-dir))
+
 (defun ar-emacs-gptel-load-markdown-directive (file)
   "Load a gptel directive from a markdown FILE.
 Returns a cons of (name . directive) where name is derived from filename
@@ -94,7 +97,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   (gptel-mode . (lambda () (olivetti-mode 1)))
 
   :custom
-  ((gptel-default-mode 'org-mode)
+  ((gptel-default-mode 'markdown-mode)
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
@@ -147,7 +150,14 @@ Returns a list of cons cells (name . directive) for each .md file."
                      :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
                      :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
                                              :presence_penalty 2.0 :repetition_penalty 1.0
-                                             :chat_template_kwargs (:enable_thinking :json-false))))))
+                                             :chat_template_kwargs (:enable_thinking :json-false)))
+                    (Qwen3.5-27B
+                     :description "Qwen3.5 represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
+                     :capabilities (media json)
+                     :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
+                     :request-params (:temperature 0.6 :top_p 0.95 :top_k 20 :min_p 0.0
+                                                   :presence_penalty 1.5 :repetition_penalty 1.0
+                                                   :chat_template_kwargs (:enable_thinking :json-false))))))
 
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
@@ -271,15 +281,41 @@ Returns a list of cons cells (name . directive) for each .md file."
                              (string-equal ".envrc" fname)
                              (string-prefix-p ".localrc" fname))))))))
 
-(use-package aider
+(use-package agent-shell
+  :bind (:map agent-shell-mode-map
+              ("RET" . newline)
+              ("C-c C-c" . shell-maker-submit)
+              ("C-c C-q" . agent-shell-interrupt))
+
+  :custom
+  (agent-shell-agent-configs '(mistral-vibe goose))
+  (agent-shell-preferred-agent-config (agent-shell-goose-make-agent-config))
+
   :config
-  ;;
-  ;; Main config taken from ~/.aider.conf.yml
-  ;;
-  ;; or use aider-transient-menu-2cols / aider-transient-menu-1col, for narrow screen
-  (aider-magit-setup-transients) ;; add aider magit function to magit menu
-  ;; auto revert buffer
-  (global-auto-revert-mode 1)
-  (auto-revert-mode 1))
+  ;;;;;;;;;;;;;;;;;;
+  ;; mistral-vibe ;;
+  ;;;;;;;;;;;;;;;;;;
+  (setq ar-emacs-mistral-vibe-home
+        (expand-file-name "vibe" ar-emacs-home-config-dir))
+
+  (setq agent-shell-mistral-vibe-environment
+        (agent-shell-make-environment-variables
+         :inherit-env t
+         "VIBE_HOME" ar-emacs-mistral-vibe-home))
+
+  (setq agent-shell-mistral-authentication
+        (agent-shell-mistral-make-authentication :api-key "<dummy>"))
+
+  ;;;;;;;;;;;
+  ;; goose ;;
+  ;;;;;;;;;;;
+  (setq agent-shell-goose-environment
+        (agent-shell-make-environment-variables
+         :inherit-env t
+         "GOOSE_RECIPE_PATH" ar-emacs-recipes-path))
+
+  (setq agent-shell-goose-authentication
+        (agent-shell-make-goose-authentication :openai-api-key "<dummy>"))
+  )
 
 ;;; llm-conf.el ends here
