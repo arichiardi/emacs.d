@@ -29,7 +29,7 @@
            ("t" . gptel-tools)
            ("m" . gptel-menu)
            ("c" . wingman-fim-inline)
-           ("a" . aider-transient-menu))
+           ("a" . agent-shell))
 
 (bind-keys :prefix-map ar-emacs-clojure-prefix-map
            :prefix-docstring "Prefix key for Clojure."
