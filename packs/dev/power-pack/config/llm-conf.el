@@ -90,8 +90,8 @@ Returns a list of cons cells (name . directive) for each .md file."
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
-              ("C-c C-c" . gptel-abort)
-              ("C-c C-g" . gptel-abort)
+              ("C-c C-c" . gptel-send)
+              ("C-c C-q" . gptel-abort)
               ("C-c C-p" . gptel--preset))
   :hook
   (gptel-mode . (lambda () (olivetti-mode 1)))
@@ -109,14 +109,14 @@ Returns a list of cons cells (name . directive) for each .md file."
   (require 'gptel-integrations)
 
   (progn (message "Running LLM exec-path-from-shell.")
-         (exec-path-from-shell-copy-envs '("EMACS_SEARXNG_HOST"
-                                           "EMACS_SEARXNG_PORT"
-                                           "EMACS_GPTEL_VLLM_HOST"
+         (exec-path-from-shell-copy-envs '("EMACS_GPTEL_VLLM_HOST"
                                            "EMACS_GPTEL_VLLM_PORT"
                                            "EMACS_GPTEL_LLAMA_HOST"
                                            "EMACS_GPTEL_LLAMA_PORT"
                                            "EMACS_GPTEL_IKLLAMA_HOST"
-                                           "EMACS_GPTEL_IKLLAMA_PORT")))
+                                           "EMACS_GPTEL_IKLLAMA_PORT"
+                                           "LOCAL_SEARXNG_HOST"
+                                           "LOCAL_SEARXNG_PORT")))
 
   (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
@@ -240,8 +240,8 @@ Returns a list of cons cells (name . directive) for each .md file."
                                "podman"
                                :args ("run" "-i" "--rm" "--network=host" "-e" "SEARXNG_URL"
                                       "isokoliuk/mcp-searxng:latest")
-                               :env (:SEARXNG_URL ,(concat "http://" (getenv "EMACS_SEARXNG_HOST")
-                                                           ":" (getenv "EMACS_SEARXNG_PORT")))))
+                               :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
+                                                           ":" (getenv "LOCAL_SEARXNG_PORT")))))
            ("sequential-thinking" . (:command
                                      "podman"
                                      :args ("run", "-i", "--rm", "mcp/sequentialthinking")
@@ -312,7 +312,8 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq agent-shell-goose-environment
         (agent-shell-make-environment-variables
          :inherit-env t
-         "GOOSE_RECIPE_PATH" ar-emacs-recipes-path))
+         "GOOSE_RECIPE_PATH" ar-emacs-recipes-path
+         "CONTEXT_FILE_NAMES" "[\".goosehints\", \"AGENTS.md\"]"))
 
   (setq agent-shell-goose-authentication
         (agent-shell-make-goose-authentication :openai-api-key "<dummy>"))
