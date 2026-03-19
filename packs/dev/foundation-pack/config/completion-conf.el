@@ -223,6 +223,7 @@
 ;;;;;;;;;;;;
 
 (use-package embark
+  :functions embark-prefix-help-command
   :bind
   (("C-." . embark-act)         ;; pick some comfortable binding
    ("C-;" . embark-dwim)        ;; good alternative: M-.
