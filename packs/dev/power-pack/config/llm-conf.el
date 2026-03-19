@@ -290,6 +290,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   :custom
   (agent-shell-agent-configs '(mistral-vibe goose))
   (agent-shell-preferred-agent-config (agent-shell-goose-make-agent-config))
+  (agent-shell-session-strategy 'new)
 
   :config
   ;;;;;;;;;;;;;;;;;;
@@ -316,7 +317,6 @@ Returns a list of cons cells (name . directive) for each .md file."
          "CONTEXT_FILE_NAMES" "[\".goosehints\", \"AGENTS.md\"]"))
 
   (setq agent-shell-goose-authentication
-        (agent-shell-make-goose-authentication :openai-api-key "<dummy>"))
-  )
+        (agent-shell-make-goose-authentication :openai-api-key "<dummy>")))
 
 ;;; llm-conf.el ends here
