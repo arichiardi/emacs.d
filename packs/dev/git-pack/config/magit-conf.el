@@ -33,7 +33,6 @@
   (setq magit-view-git-manual-method 'woman)
 
   :custom
-  (magit-section-visibility-indicator '("..." . t))
   (magit-diff-refine-hunk t)
   (magit-prefer-remote-upstream t "Favor remote branches when reading upstreams.")
   ;; https://emacs.stackexchange.com/questions/54787/magit-set-upstream-to-origin-master-automatically

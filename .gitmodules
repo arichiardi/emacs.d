@@ -262,6 +262,7 @@
 [submodule "magit"]
 	path = lib/magit
 	url = git@github.com:magit/magit.git
+	build-step = make lisp
 [submodule "marginalia"]
 	path = lib/marginalia
 	url = https://github.com/minad/marginalia
