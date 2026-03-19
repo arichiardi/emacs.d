@@ -528,12 +528,6 @@ projectile, if available), or in the current directory otherwise."
         (consult-git-grep dir region)
       (consult-ripgrep))))
 
-(defun ar-emacs-projectile-run-eat ()
-  "Start `eat' in the project root."
-  (interactive)
-  (projectile-with-default-dir (projectile-acquire-root)
-    (eat)))
-
 (defun ar-emacs-select-sqlite-database ()
   "Interactively select and set a SQLite database file for `sql-mode'."
   (interactive)
