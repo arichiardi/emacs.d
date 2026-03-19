@@ -42,6 +42,7 @@
   ;; https://github.com/magit/magit/issues/1953
   (magit-display-buffer-function #'magit-display-buffer-fullframe-status-v1)
   (magit-format-file-function #'magit-format-file-nerd-icons)
+  (magit-read-worktree-offsite-directory (expand-file-name "worktrees" ar-emacs-projects-dir))
 
   :config
   (magit-add-section-hook 'magit-status-sections-hook
