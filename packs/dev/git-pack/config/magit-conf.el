@@ -74,6 +74,7 @@
   :custom (forge-database-file (expand-file-name "forge-database.sqlite" live-etc-dir)))
 
 (use-package gptel-forge-prs
+  :functions gptel-forge-prs-install
   :after forge
   :config
   (gptel-forge-prs-install))
