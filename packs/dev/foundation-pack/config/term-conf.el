@@ -115,6 +115,13 @@ eshell windows easier."
 
 (use-package eat
   :load-path (lambda () (eat-load-path))
+  :hook ((eat-mode . (lambda ()
+                       (setq-local scroll-down-aggressively 0.8))))
+  :bind (:map eat-mode-map
+         ("C-v" . eat-yank))
+  :custom
+  (eat-kill-buffer-on-exit t "kill buffer on exit")
+  (eat-line-input-history-isearch 'dwim)
 
   :config
   ;; For `eat-eshell-mode'.
