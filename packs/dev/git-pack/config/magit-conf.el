@@ -26,8 +26,7 @@
           ("C-x g" . magit-dired-log)))
   :hook
   ((magit-log-edit-mode . (lambda ()
-                            (auto-fill-mode 1)))
-   (magit-status-sections . magit-insert-worktrees))
+                            (auto-fill-mode 1))))
 
   :init
   (setq magit-view-git-manual-method 'woman)
@@ -45,6 +44,10 @@
   (magit-format-file-function #'magit-format-file-nerd-icons)
 
   :config
+  (magit-add-section-hook 'magit-status-sections-hook
+                          'magit-insert-worktrees
+                          nil t)
+
   (setq magit-read-worktree-directory-function #'magit-read-worktree-directory-sibling))
 
 (with-eval-after-load 'info
