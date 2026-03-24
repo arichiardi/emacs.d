@@ -10,8 +10,13 @@
 
 ;;; Code:
 
-(setq ar-emacs-recipes-path
-      (expand-file-name "recipes" ar-emacs-llm-config-dir))
+(use-package ar-emacs
+  :defines (ar-emacs-projects-dir
+            ar-emacs-home-config-dir
+            ar-emacs-emacs-config-dir
+            ar-emacs-llm-config-dir
+            ar-emacs-llm-recipes-dir
+            ar-emacs-llm-prompts-dir))
 
 (defun ar-emacs-gptel-load-markdown-directive (file)
   "Load a gptel directive from a markdown FILE.
@@ -117,8 +122,6 @@ Returns a list of cons cells (name . directive) for each .md file."
                                            "EMACS_GPTEL_IKLLAMA_PORT"
                                            "LOCAL_SEARXNG_HOST"
                                            "LOCAL_SEARXNG_PORT")))
-
-  (setq ar-emacs-llm-prompts-dir (expand-file-name "llm/prompts" user-emacs-directory))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -313,7 +316,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq agent-shell-goose-environment
         (agent-shell-make-environment-variables
          :inherit-env t
-         "GOOSE_RECIPE_PATH" ar-emacs-recipes-path
+         "GOOSE_RECIPE_PATH" ar-emacs-llm-recipes-dir
          "CONTEXT_FILE_NAMES" "[\".goosehints\", \"AGENTS.md\"]"))
 
   (setq agent-shell-goose-authentication
