@@ -5,7 +5,7 @@
 
 ;;; Code:
 
-(defvar live-magit-dir (expand-file-name "magit" borg-drone-directory))
+(defvar live-magit-dir (expand-file-name "magit" borg-drones-directory))
 (defvar live-magit-lisp-dir (expand-file-name "lisp" live-magit-dir))
 (defvar live-magit-documentation-dir (expand-file-name "Documentation" live-magit-dir))
 ;; (defvar live-magit-autoloads (concat live-magit-lisp-dir "/magit-autoloads.el"))
