@@ -1,4 +1,4 @@
-;;; init.el --- user-init-file                    -*- lexical-binding: t -*-
+;;; init.el --- Emacs init -*- lexical-binding: t; no-byte-compile:t -*-
 
 ;;; Commentary:
 ;;
@@ -167,7 +167,6 @@
 (make-directory live-custom-dir t)
 (make-directory live-pscratch-dir t)
 
-;; Borg early birds
 (progn
   (defvar before-user-init-time (current-time)
     "Value of `current-time' when Emacs begins loading `user-init-file'.")
@@ -178,18 +177,11 @@
 
   (setq user-init-file (or load-file-name buffer-file-name))
   (setq user-emacs-directory (file-name-directory user-init-file))
-  (setq package-enable-at-startup nil)
   (setq inhibit-startup-buffer-menu t)
   (setq inhibit-startup-screen t)
-  (setq load-prefer-newer t)
   (scroll-bar-mode 0)
   (tool-bar-mode 0)
   (menu-bar-mode 0))
-
-(progn
-  (add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
-  (require 'borg)
-  (borg-initialize))
 
 (use-package auto-compile
   :demand t
