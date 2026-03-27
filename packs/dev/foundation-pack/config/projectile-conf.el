@@ -1,4 +1,4 @@
-;;; projectile-conf.el --- Projectile Config
+;;; projectile-conf.el --- Projectile Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

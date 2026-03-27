@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;handy util fns
 
 (defun insert-date ()

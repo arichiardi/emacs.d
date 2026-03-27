@@ -1,4 +1,4 @@
-;;; win-switch-conf.el --- Win-switch config
+;;; win-switch-conf.el --- Win-switch config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;
 ;; Configure the magit package

@@ -1,4 +1,4 @@
-;;; cosmetic.el --- Cosmetic
+;;; cosmetic.el --- Cosmetic  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

@@ -1,3 +1,5 @@
+;; -*- lexical-binding: t -*-
+
 (require 'cl)
 
 (defvar live-current-pack-dir nil "The directory of the pack being currently loaded")

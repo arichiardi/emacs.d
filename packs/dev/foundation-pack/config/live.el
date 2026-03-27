@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;http://www.emacswiki.org/emacs/IncrementNumber
 (defun live-increment-number-at-point ()
   (interactive)

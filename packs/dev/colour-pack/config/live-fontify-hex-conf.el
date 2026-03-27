@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (live-add-pack-lib "live-fontify-hex")
 (require 'live-fontify-hex)
 

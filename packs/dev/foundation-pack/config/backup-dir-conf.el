@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (require 'backup-dir)
 (make-variable-buffer-local 'backup-inhibited)
 (setq bkup-backup-directory-info

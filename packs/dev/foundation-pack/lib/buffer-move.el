@@ -1,4 +1,4 @@
-;;; buffer-move.el --- Swap buffers without typing C-x b on each window
+;;; buffer-move.el --- Swap buffers without typing C-x b on each window  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2004  Lucas Bonnet <lukhas@free.fr>
 

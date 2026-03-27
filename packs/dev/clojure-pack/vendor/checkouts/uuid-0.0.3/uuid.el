@@ -1,4 +1,4 @@
-;;; uuid.el --- UUID's for EmacsLisp
+;;; uuid.el --- UUID's for EmacsLisp  -*- lexical-binding: t; -*-
 
 ;; Copyright (C) 2012  Nic Ferrier
 

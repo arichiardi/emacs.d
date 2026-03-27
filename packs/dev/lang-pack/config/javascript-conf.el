@@ -1,4 +1,4 @@
-;;; javascript-conf.el --- JavaScript Config
+;;; javascript-conf.el --- JavaScript Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

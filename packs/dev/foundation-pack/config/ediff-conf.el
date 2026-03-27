@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; From https://www.emacswiki.org/emacs/EdiffMode
 
 (setq ediff-window-setup-function 'ediff-setup-windows-plain)

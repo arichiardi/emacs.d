@@ -1,4 +1,4 @@
-;;; paredit-conf.el --- Paredit config
+;;; paredit-conf.el --- Paredit config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;
 ;; Configure paredit

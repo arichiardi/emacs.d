@@ -1,4 +1,4 @@
-;;; backup-dir.el --- allow backup files to live in some other directory(s).
+;;; backup-dir.el --- allow backup files to live in some other directory(s).  -*- lexical-binding: t; -*-
 
 ;;;   Author: Greg Klanderman <greg.klanderman@alum.mit.edu>
 ;;;  Version: 2.9

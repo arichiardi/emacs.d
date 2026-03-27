@@ -1,4 +1,4 @@
-;;; init.el --- Clojure Pack
+;;; init.el --- Clojure Pack  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

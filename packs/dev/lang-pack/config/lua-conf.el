@@ -1,4 +1,4 @@
-;;; lua-conf.el --- Lua Config
+;;; lua-conf.el --- Lua Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

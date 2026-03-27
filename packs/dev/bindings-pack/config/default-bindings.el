@@ -1,4 +1,4 @@
-;;; default-bindings.el --- Default Emacs Live bindings
+;;; default-bindings.el --- Default Emacs Live bindings  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
