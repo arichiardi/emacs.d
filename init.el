@@ -9,6 +9,8 @@
 
 ;;; Code:
 
+(setq live-version "3.0.0-29.4")
+
 (defvar live-ascii-art-logo ";;
 ;;                       @@@@@@@@@@@@@@@
 ;;                  @@@@@@@@@@((/((/@@@@@@@@@@
@@ -141,8 +143,6 @@
   ;; when provided.
   (setq live-root-dir (if (boundp 'live-root-dir)
                           (file-name-as-directory live-root-dir)
-                        (if (file-exists-p (expand-file-name "manifest.el" user-emacs-directory))
-                            user-emacs-directory)
                         (file-name-directory (or
                                               load-file-name
                                               buffer-file-name))))
@@ -215,8 +215,6 @@
                                       before-user-init-time))))
 
 ;; Emacs live
-
-(load-file (concat live-root-dir "manifest.el"))
 
 (load-file (concat live-lib-dir "live-core.el"))
 
