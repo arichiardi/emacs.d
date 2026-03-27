@@ -1,4 +1,4 @@
-;;; early-init.el --- The early initialization. -*- lexical-binding: t; -*-
+;;; early-init.el --- Emacs early initialization -*- lexical-binding:t; no-byte-compile:t -*-
 
 ;;; Commentary:
 
@@ -45,5 +45,14 @@
 
 ;; https://github.com/d12frosted/homebrew-emacs-plus?tab=readme-ov-file#emacs-29-1
 (add-to-list 'default-frame-alist '(undecorated . t))
+
+;; https://docs.emacsmirror.org/borg/Bootstrapping-from-scratch.html
+(setq load-prefer-newer t)
+
+(add-to-list 'load-path (expand-file-name "lib/borg" user-emacs-directory))
+(require 'borg)
+(borg-initialize)
+
+(setq package-enable-at-startup nil)
 
 ;;; early-init.el ends here
