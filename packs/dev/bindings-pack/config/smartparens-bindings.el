@@ -1,4 +1,4 @@
-;;; smartparens-bindings.el --- Smartparens bindings
+;;; smartparens-bindings.el --- Smartparens bindings  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;; Rebind Smartparens

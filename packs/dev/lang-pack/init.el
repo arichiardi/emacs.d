@@ -1,4 +1,4 @@
-;;; init.el --- Language Pack
+;;; init.el --- Language Pack  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

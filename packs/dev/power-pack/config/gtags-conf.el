@@ -1,4 +1,4 @@
-;;; gtags-conf.el --- Treemacs Config
+;;; gtags-conf.el --- Treemacs Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

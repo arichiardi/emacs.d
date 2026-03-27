@@ -1,4 +1,4 @@
-;;; terraform-conf.el --- Terraform Config
+;;; terraform-conf.el --- Terraform Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

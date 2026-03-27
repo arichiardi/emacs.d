@@ -1,4 +1,4 @@
-;;; go-conf.el --- Go Config
+;;; go-conf.el --- Go Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

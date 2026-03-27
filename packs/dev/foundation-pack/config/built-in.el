@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;use file path to ensure buffer name uniqueness
 (require 'uniquify)
 (setq uniquify-buffer-name-style 'forward)

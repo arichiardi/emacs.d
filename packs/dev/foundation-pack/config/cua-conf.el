@@ -1,4 +1,4 @@
-;;; cua-conf.el --- Cosmetic
+;;; cua-conf.el --- Cua Configuration  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

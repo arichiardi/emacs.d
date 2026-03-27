@@ -1,4 +1,4 @@
-;;; spelling-conf.el --- Plantuml Config
+;;; spelling-conf.el --- Plantuml Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

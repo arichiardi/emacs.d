@@ -1,4 +1,4 @@
-;;; lively.el --- interactively updating text
+;;; lively.el --- interactively updating text  -*- lexical-binding: t; -*-
 ;;; Copyright 2009 Luke Gorrie <luke@bup.co.nz>
 ;;;
 ;;;

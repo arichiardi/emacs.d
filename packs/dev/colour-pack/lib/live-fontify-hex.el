@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;;extracted from:
 ;;https://groups.google.com/forum/?fromgroups=#!topic/gnu.emacs.help/EQTSiulnbAo
 

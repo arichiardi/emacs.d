@@ -1,4 +1,4 @@
-;;; sql-conf.el --- SQL Config
+;;; sql-conf.el --- SQL Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

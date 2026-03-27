@@ -1,4 +1,4 @@
-;;; magit-conf.el --- Magit config
+;;; magit-conf.el --- Magit config  -*- lexical-binding: t; -*-
 ;;; Commentary:
 ;;
 ;; Configure the magit package

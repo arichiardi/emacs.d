@@ -1,4 +1,4 @@
-;;; mouse-conf.el --- Completion Config
+;;; mouse-conf.el --- Completion Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 
