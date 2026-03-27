@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 ;; monkypatch basic-save-buffer to make saving buffers with no
 ;; associated file name more intuitive.
 (defun live-mp-new-basic-save-buffer ()

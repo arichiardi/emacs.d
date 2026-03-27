@@ -1,4 +1,4 @@
-;;; typescript-conf.el --- Java Config
+;;; typescript-conf.el --- Java Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

@@ -1,4 +1,4 @@
-;;; lsp-conf.el --- LSP Config
+;;; lsp-conf.el --- LSP Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

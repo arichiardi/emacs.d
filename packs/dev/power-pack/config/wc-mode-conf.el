@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (live-add-pack-lib "wc-mode")
 (require 'wc-mode)
 

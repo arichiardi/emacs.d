@@ -1,4 +1,4 @@
-;;; eval-in-repl-conf.el --- EIR Config
+;;; eval-in-repl-conf.el --- EIR Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

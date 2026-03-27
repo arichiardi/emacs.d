@@ -1,4 +1,4 @@
-;;; term-conf.el --- Term Configuration
+;;; term-conf.el --- Term Configuration  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

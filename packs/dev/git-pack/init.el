@@ -1,4 +1,4 @@
-;;; init.el --- Git Pack
+;;; init.el --- Git Pack  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

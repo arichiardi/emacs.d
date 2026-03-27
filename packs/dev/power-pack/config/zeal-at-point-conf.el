@@ -1,4 +1,4 @@
-;;; zeal-at-point-conf.el --- zeal-at-point Config
+;;; zeal-at-point-conf.el --- zeal-at-point Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

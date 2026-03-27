@@ -1,4 +1,4 @@
-;;; treemacs-conf.el --- Treemacs Config
+;;; treemacs-conf.el --- Treemacs Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

@@ -1,4 +1,4 @@
-;;; init.el --- Colour Pack
+;;; init.el --- Colour Pack  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 

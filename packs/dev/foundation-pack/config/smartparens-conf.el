@@ -1,4 +1,4 @@
-;;; smartparens-conf.el --- Smartparens Config
+;;; smartparens-conf.el --- Smartparens Config  -*- lexical-binding: t; -*-
 
 ;;; Commentary:
 ;;

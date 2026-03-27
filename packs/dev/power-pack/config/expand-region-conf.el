@@ -1,3 +1,4 @@
+;; -*- lexical-binding: t; -*-
 (live-add-pack-lib "expand-region")
 
 (use-package expand-region

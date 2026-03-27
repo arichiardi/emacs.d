@@ -1,4 +1,4 @@
-;;; rcirc-conf.el -- The rcirc configuration
+;;; rcirc-conf.el -- The rcirc configuration  -*- lexical-binding: t; -*-
 ;;
 ;; Author: Andrea Richiardi
 
