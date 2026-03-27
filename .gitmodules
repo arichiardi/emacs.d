@@ -56,9 +56,6 @@
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
-[submodule "company-lsp"]
-	path = lib/company-lsp
-	url = git@github.com:tigersoldier/company-lsp.git
 [submodule "company-lua"]
 	path = lib/company-lua
 	url = git@github.com:ptrv/company-lua.git
