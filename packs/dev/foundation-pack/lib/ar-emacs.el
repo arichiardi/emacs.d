@@ -1,4 +1,5 @@
 ;;; ar-emacs.el --- Some useful functions -*- lexical-binding: t; -*-
+;;
 ;;; Commentary:
 ;;
 ;; Some useful functions
@@ -6,6 +7,7 @@
 ;;; Code:
 
 (require 'exec-path-from-shell)
+(require 'eat)
 
 (setq ar-emacs-projects-dir (expand-file-name "git" (exec-path-from-shell-getenv "HOME")))
 
@@ -544,6 +546,31 @@ projectile, if available), or in the current directory otherwise."
          (abs-db-file (expand-file-name db-file)))
     (sql-product 'sqlite)
     (sql-database abs-db-file)))
+
+(defun ar-emacs-start-eat-goose (&optional new-process)
+  "Interactively start the Goose agent server.
+
+Prompts to select a recipe file from `ar-emacs-llm-recipes-dir`.  The
+selected file path is configured as the command for
+`agent-shell-goose-acp-command` before invoking
+`agent-shell-goose-start-agent`."
+  (interactive "P")
+  (unless (file-directory-p ar-emacs-llm-recipes-dir)
+    (error "Recipes directory does not exist: %s" ar-emacs-llm-recipes-dir))
+
+  ;; (expand-file-name "clojure-coder.yaml" ar-emacs-llm-recipes-dir)
+  (let* ((recipe-file (read-file-name "Select recipe: "
+                                      ar-emacs-llm-recipes-dir
+                                      nil t))
+         (project (projectile-acquire-root))
+         (buffer-name (projectile-generate-process-name "eat-goose" new-process project))
+         (buffer (get-buffer-create buffer-name)))
+    (unless (require 'eat nil 'noerror)
+      (error "[ar-emacs] Package 'eat' is not available"))
+    (with-current-buffer buffer
+      (eat-mode)
+      (eat-exec buffer "eat-goose-clojure" "goose" nil (list "run" "--recipe" recipe-file "--interactive")))
+    (pop-to-buffer buffer)))
 
 (provide 'ar-emacs)
 
