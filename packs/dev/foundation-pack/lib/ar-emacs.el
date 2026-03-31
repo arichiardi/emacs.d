@@ -561,7 +561,8 @@ selected file path is configured as the command for
   ;; (expand-file-name "clojure-coder.yaml" ar-emacs-llm-recipes-dir)
   (let* ((recipe-file (read-file-name "Select recipe: "
                                       ar-emacs-llm-recipes-dir
-                                      nil t))
+                                      (expand-file-name "clojure-coder.yaml" ar-emacs-llm-recipes-dir)
+                                      t))
          (project (projectile-acquire-root))
          (buffer-name (projectile-generate-process-name "eat-goose" new-process project))
          (buffer (get-buffer-create buffer-name)))
