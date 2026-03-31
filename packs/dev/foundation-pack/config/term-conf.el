@@ -115,17 +115,26 @@ eshell windows easier."
 
 (use-package eat
   :load-path (lambda () (eat-load-path))
+  :bind
+  (:map eat-mode-map
+        ("C-v" . eat-yank)
+        ("s-v". eat-yank)
+        ("C-y" . kill-whole-line))
+  (:map eat-semi-char-mode-map
+        ("C-v" . eat-yank)
+        ("s-v". eat-yank)
+        ("C-y" . kill-whole-line))
+  (:map eat-char-mode-map
+        ("C-v" . eat-yank)
+        ("s-v". eat-yank)
+        ("C-y" . kill-whole-line))
+
   :hook ((eat-mode . (lambda ()
                        (setq-local scroll-down-aggressively 0.8))))
-  :bind (:map eat-mode-map
-         ("C-v" . eat-yank))
   :custom
   (eat-kill-buffer-on-exit t "kill buffer on exit")
   (eat-line-input-history-isearch 'dwim)
-
-  :config
-  ;; For `eat-eshell-mode'.
-  (add-hook 'eshell-load-hook #'eat-eshell-mode))
+  (eat-enable-yank-to-terminal t "I want to be able to paste from Emacs to terminal."))
 
 
 ;;; term-conf.el ends here
