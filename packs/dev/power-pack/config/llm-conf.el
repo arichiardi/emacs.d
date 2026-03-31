@@ -171,27 +171,41 @@ Returns a list of cons cells (name . directive) for each .md file."
   (gptel-make-preset 'coder
     :description "A preset optimized for coding tasks"
     :track-media t
-    :system (alist-get 'expert-developer gptel-directives)
+    :system (alist-get 'developer gptel-directives)
     :pre (lambda () (gptel-mcp-connect
                      (list "sequential-thinking" "searxng-local" "fetch"
-                           "url-opener" "time" "filesystem-git"))))
+                           "url-opener" "time" "shell-in-projects"))))
 
-  (gptel-make-preset 'emacsconfigurator
+  (gptel-make-preset 'clojure-coder
+    :description "A preset optimized for coding tasks"
+    :track-media t
+    :system (alist-get 'clojure-coder gptel-directives)
+    :pre (lambda () (gptel-mcp-connect
+                     (list "sequential-thinking" "searxng-local" "fetch"
+                           "url-opener" "time" "shell-in-projects"))))
+
+  (gptel-make-preset 'elisper
     :description "A preset optimized for modifying my emacs config"
-    :system (alist-get 'emacs-configurator gptel-directives)
+    :system (alist-get 'elisp-expert gptel-directives)
     :tools '(:append ("filesystem-emacs" "git-emacs"))
     :pre (lambda () (gptel-mcp-connect
                      (list "filesystem-emacs" "git-emacs"))))
 
-  (gptel-make-preset 'gitassistant
+  (gptel-make-preset 'git
+    :description "A preset to assist with git operation against my projects"
+    :system (alist-get 'developer gptel-directives)
+    :post (lambda ()
+            (gptel-mcp-connect
+             (list "github" "sequential-thinking" "shell-in-projects"))))
+
+  (gptel-make-preset 'git-commit-writer
     :description "A preset to assist with git commit messages, PRs and so on"
-    :model 'claude-sonnet-4
-    :system (alist-get 'git-assistant gptel-directives))
+    :system (alist-get 'git-commit-writer gptel-directives))
 
   (gptel-make-preset 'ocr
     :description "A preset to assist with OCR and binary to text extraction"
     :track-media t
-    :system (alist-get 'nanonets-ocr gptel-directives))
+    :system (alist-get 'ocr gptel-directives))
 
   ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
   (setf (alist-get 'org-mode gptel-prompt-prefix-alist) "@user\n")
@@ -209,12 +223,15 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq mcp-hub-servers
         (append
          mcp-hub-servers
-         `(("filesystem-git" . (:command
-                                "podman"
-                                :args ("run" "-i" "--rm" "--network=host"
-                                       "--mount" ,(concat "type=bind,src=" ar-emacs-projects-dir ",dst=/projects")
-                                       "mcp/filesystem"
-                                       "/projects")))
+         `(("shell-in-projects" . (:command
+                                   "uvx"
+                                   :args ("cli-mcp-server")
+                                   :env (:ALLOWED_DIR ,ar-emacs-projects-dir
+                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,date,echo,git,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt"
+                                                      :ALLOWED_FLAGS    "all"
+                                                      :MAX_COMMAND_LENGTH "2048"
+                                                      :COMMAND_TIMEOUT    60
+                                                      :ALLOW_SHELL_OPERATORS "false")))
            ("filesystem-emacs" . (:command
                                   "podman"
                                   :args ("run" "-i" "--rm" "--network=host"
