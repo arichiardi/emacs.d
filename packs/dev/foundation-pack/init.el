@@ -119,7 +119,8 @@
                   (message "Variables %s" exec-path-from-shell-variables)
                   (exec-path-from-shell-initialize))))
 
-(use-package string-edit)
+(use-package string-edit
+  :commands (string-edit-at-point))
 
 (use-package simpleclip
   :commands (simpleclip-get-contents simpleclip-set-contents))
