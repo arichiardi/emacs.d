@@ -178,10 +178,7 @@
   (setq user-init-file (or load-file-name buffer-file-name))
   (setq user-emacs-directory (file-name-directory user-init-file))
   (setq inhibit-startup-buffer-menu t)
-  (setq inhibit-startup-screen t)
-  (scroll-bar-mode 0)
-  (tool-bar-mode 0)
-  (menu-bar-mode 0))
+  (setq inhibit-startup-screen t))
 
 (use-package auto-compile
   :demand t
