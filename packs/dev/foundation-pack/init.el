@@ -73,6 +73,18 @@
   :config
   (setq transient-history-file (expand-file-name (expand-file-name "history.el" "transient")
                                                  live-tmp-dir)))
+
+(use-package ws-butler
+  :diminish
+  :commands (ws-butler-mode)
+  :hook
+  (prog-mode . ws-butler-mode)
+  :config
+  (setq ws-butler-trim-predicate
+        (lambda (beg end)
+          (not (eq 'font-lock-string-face
+                   (get-text-property end 'face))))))
+
 (use-package editorconfig
   :hook
   (editorconfig-after-apply-functions . (lambda (_) (setq web-mode-block-padding 0)))
