@@ -20,8 +20,7 @@
   ((js2-mode . company-mode)
    (js2-mode . smartparens-strict-mode)
    (js2-mode . subword-mode)
-   (js2-mode . eldoc-mode)
-   (js2-mode . prettier-mode)))
+   (js2-mode . eldoc-mode)))
 
 (defun ar-emacs--configure-js-comint ()
   "JavaScript comint configuration hook."

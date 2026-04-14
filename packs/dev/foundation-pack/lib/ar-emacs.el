@@ -487,7 +487,7 @@ Returns whatever the action returns."
 
     (add-hook 'prog-mode-hook
               (lambda ()
-              (put 'prettier-js-command 'safe-local-variable #'ar-emacs--safe-project-dir-p)))"
+              (put 'xyz-command 'safe-local-variable #'ar-emacs--safe-project-dir-p)))"
   (seq-some
    (lambda (safe-dir)
      (string-match-p (regexp-quote safe-dir) (file-name-directory buffer-file-name)))

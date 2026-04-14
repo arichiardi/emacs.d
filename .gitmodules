@@ -388,9 +388,6 @@
 [submodule "posframe"]
 	path = lib/posframe
 	url = https://github.com/tumashu/posframe
-[submodule "prettier"]
-	path = lib/prettier
-	url = https://github.com/jscheid/prettier.el
 [submodule "prettier-js"]
 	path = lib/prettier-js
 	url = git@github.com:prettier/prettier-emacs.git

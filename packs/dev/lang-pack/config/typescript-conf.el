@@ -52,7 +52,6 @@ Put this in .dir-locals.el:
   (typescript-mode . tide-setup)
   (typescript-mode . tide-hl-identifier-mode)
   (typescript-mode . ar-emacs--setup-tsx-company-backends)
-  (typescript-mode . prettier-mode)
   ;; Does not inherit from prog-mode so we include hl-todo-mode here
   (typescript-mode . hl-todo-mode)
   :custom
@@ -83,8 +82,5 @@ If nothing is selected - open the whole current buffer."
                  (list (point-min) (point-max))))
   (browse-url (concat "http://www.typescriptlang.org/Playground#src="
                       (url-hexify-string (buffer-substring-no-properties start end)))))
-
-(use-package prettier
-  :custom (prettier-inline-errors-flag t "Show overlay for errors"))
 
 ;;; typescript-conf.el ends here
