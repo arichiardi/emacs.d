@@ -448,7 +448,7 @@ current buffer and makes the right choice."
   (interactive (list (register-read-with-preview "Eval register: ")))
   (cider--pprint-eval-form (get-register register)))
 
-(defvar ar--emacs-gitidentities-dir "~/.gitidentities/")
+(defvar ar--emacs-gitidentities-dir "~/.config/git/identities/")
 (defvar ar--emacs-gitidentities-default "a.richiardi.work")
 
 (defun ar--emacs--not-dotdirp (name)
