@@ -51,9 +51,9 @@ This latter method strictly depends on how you launch your X session (verify the
 ### Build assimilated modules
 
 > [!WARNING]  
-> This list will likely be outdated over time as it depends on the assimilated modules.
+> This will compile all the libraries, following all the specified `build-step` in `.gitmodules`, as per [Borg's official documentation](https://docs.emacsmirror.org/borg/Variables.html#index-submodule_002eDRONE_002ebuild_002dstep).
 
-`make build/multiple-cursors build/olivetti build/embark build/consult build/marginalia build/magit build/vertico build/flycheck build/hl-todo`
+`make build`
 
 # From Emacs Live
 
@@ -98,7 +98,7 @@ simply use `live-add-packs`:
 
     (live-add-packs '(~/.live-packs/yourname-pack))
 
-Packs are expected to reside in `~/.emacs.d/packs/` unless you specify
+Packs are expected to reside in the emacs `packs/` sub-dir unless you specify
 them with absolute paths in which case the absolute path with be
 honoured.
 
