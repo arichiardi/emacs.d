@@ -30,7 +30,14 @@ This will force the checkout of the submodules at the SHA stored in this parent 
 
 ### Fonts
 
-Either use the following `$HOME/.Xresources`
+Copy the following to `/usr/share/emacs/site-lisp/default.el` (see [here](https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html) for more details) or a custom pack:
+
+```
+(live-set-frame-font "JetBrainsMono")
+(live-set-frame-darwin-font 12)
+```
+
+Alternatively you can use `$HOME/.Xresources`:
 
 ```
 !! Emacs - https://www.gnu.org/software/emacs/manual/html_node/emacs/X-Resources.html
@@ -39,12 +46,7 @@ Emacs.toolBar:     0
 Emacs.font:        JetBrainsMono Nerd Font Mono-12
 ```
 
-Or call the following functions in `init.el` or a custom pack:
-
-```
-(live-set-frame-font "JetBrainsMono")
-(live-set-frame-darwin-font 12)
-```
+This latter method strictly depends on how you launch your X session (verify the variables are there with `xrdb -query | grep -i Emacs`).
 
 ### Build assimilated modules
 
