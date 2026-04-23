@@ -106,10 +106,11 @@ Returns a list of cons cells (name . directive) for each .md file."
    (gptel-window-select t "Select the window after creation")
    (gptel-window-side 'right "Display on the right side")
    ;; https://github.com/karthink/gptel?tab=readme-ov-file#extra-org-mode-conveniences
-   (gptel-org-branching-context t)
-   (gptel-expert-commands t))
+   (gptel-org-branching-context t))
 
   :config
+  (setq gptel-expert-commands t)
+
   ;; for mcp.el tools
   (require 'gptel-integrations)
 
@@ -131,7 +132,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-ikllama-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B GLM-4.6V Qwen3.5-27B)))
+          :models '(gpt-oss-120B GLM-4.6V Qwen3.X-27B)))
 
   (setq ar-emacs-gptel-backend-llamacpp
         (gptel-make-openai "llama.cpp"
@@ -139,7 +140,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-llamacpp-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B glm-4.6V Qwen3-VL-32B Qwen3.5-27B)))
+          :models '(gpt-oss-120B Qwen3-VL-32B Qwen3.X-27B)))
 
   (setq ar-emacs-gptel-backend-vllm
         (gptel-make-openai "vLLM"
@@ -147,20 +148,15 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-vllm-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '((Qwen3-VL-32B
-                     :description "Meet Qwen3-VL — the most powerful vision-language model in the Qwen series to date."
+          :models '((Qwen3.X-27B
+                     :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
                      :capabilities (media json)
                      :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                     :request-params (:top_p 0.8 :top_k 20 :temperature 1.0 :greedy :json-false
-                                             :presence_penalty 2.0 :repetition_penalty 1.0
-                                             :chat_template_kwargs (:enable_thinking :json-false)))
-                    (Qwen3.5-27B
-                     :description "Qwen3.5 represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
-                     :capabilities (media json)
-                     :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                     :request-params (:temperature 0.6 :top_p 0.95 :top_k 20 :min_p 0.0
-                                                   :presence_penalty 1.5 :repetition_penalty 1.0
-                                                   :chat_template_kwargs (:enable_thinking :json-false))))))
+                     ;; NOTE: moved to presets
+                     ;; :request-params (:temperature 1.0 :top_p 0.95 :top_k 20 :min_p 0.0
+                     ;;                  :presence_penalty 0.0 :repetition_penalty 1.0
+                     ;;                  :chat_template_kwargs (:enable_thinking :json-false))
+                     ))))
 
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
@@ -168,39 +164,63 @@ Returns a list of cons cells (name . directive) for each .md file."
           `((default . nil)
             ,@markdown-directives)))
 
-  (gptel-make-preset 'coder
+  (gptel-make-preset 'developer
     :description "A preset optimized for coding tasks"
     :track-media t
     :system (alist-get 'developer gptel-directives)
+    :request-params '(:temperature
+                      0.6
+                      :top_p 0.95
+                      :top_k 20
+                      :min_p 0.0
+                      :presence_penalty 0.0 :repetition_penalty 1.0
+                      :chat_template_kwargs (:enable_thinking t :preserve_thinking t))
+    :tools '(:append ("show_security_rules" "run_command"
+                      "get_current_time" "convert_time"
+                      "searxng_web_search" "web_url_read"))
     :pre (lambda () (gptel-mcp-connect
                      (list "sequential-thinking" "searxng-local" "fetch"
                            "url-opener" "time" "shell-in-projects"))))
+
+  (gptel-make-preset 'one-shot
+    :description "A preset optimized for coding tasks that are one shot (like a simple rewrite)."
+    :request-params '(:temperature
+                      0.7
+                      :top_p 0.95
+                      :top_k 20
+                      :min_p 0.0
+                      :presence_penalty 1.5 :repetition_penalty 1.0
+                      :chat_template_kwargs (:enable_thinking :json-false))
+    :system (alist-get 'developer gptel-directives))
 
   (gptel-make-preset 'clojure-coder
-    :description "A preset optimized for coding tasks"
-    :track-media t
-    :system (alist-get 'clojure-coder gptel-directives)
-    :pre (lambda () (gptel-mcp-connect
-                     (list "sequential-thinking" "searxng-local" "fetch"
-                           "url-opener" "time" "shell-in-projects"))))
+    :description "A preset optimized for clojure coding tasks."
+    :parents ["developer"]
+    :system (alist-get 'clojure-coder gptel-directives))
 
   (gptel-make-preset 'elisper
-    :description "A preset optimized for modifying my emacs config"
+    :description "A preset optimized for modifying my emacs config."
     :system (alist-get 'elisp-expert gptel-directives)
-    :tools '(:append ("filesystem-emacs" "git-emacs"))
     :pre (lambda () (gptel-mcp-connect
                      (list "filesystem-emacs" "git-emacs"))))
 
   (gptel-make-preset 'git
-    :description "A preset to assist with git operation against my projects"
+    :description "A preset to assist with git operation against my projects."
     :system (alist-get 'developer gptel-directives)
     :post (lambda ()
             (gptel-mcp-connect
              (list "github" "sequential-thinking" "shell-in-projects"))))
 
   (gptel-make-preset 'git-commit-writer
-    :description "A preset to assist with git commit messages, PRs and so on"
-    :system (alist-get 'git-commit-writer gptel-directives))
+    :description "A preset to assist with git commit messages, PRs and so on."
+    :system (alist-get 'git-commit-writer gptel-directives)
+    :request-params '(:temperature
+                      0.7
+                      :top_p 0.95
+                      :top_k 20
+                      :min_p 0.0
+                      :presence_penalty 1.5 :repetition_penalty 1.0
+                      :chat_template_kwargs (:enable_thinking :json-false)))
 
   (gptel-make-preset 'ocr
     :description "A preset to assist with OCR and binary to text extraction"
