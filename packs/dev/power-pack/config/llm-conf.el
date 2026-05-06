@@ -95,6 +95,8 @@ Returns a list of cons cells (name . directive) for each .md file."
 (use-package gptel
   :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
   :bind (:map gptel-mode-map
+              ("<escape>". gptel-abort)
+              ("C-g"     . gptel-abort)
               ("C-c C-c" . gptel-send)
               ("C-c C-q" . gptel-abort)
               ("C-c C-p" . gptel--preset))
@@ -175,12 +177,9 @@ Returns a list of cons cells (name . directive) for each .md file."
                       :min_p 0.0
                       :presence_penalty 0.0 :repetition_penalty 1.0
                       :chat_template_kwargs (:enable_thinking t :preserve_thinking t))
-    :tools '(:append ("show_security_rules" "run_command"
-                      "get_current_time" "convert_time"
-                      "searxng_web_search" "web_url_read"))
     :pre (lambda () (gptel-mcp-connect
                      (list "sequential-thinking" "searxng-local" "fetch"
-                           "url-opener" "time" "shell-in-projects"))))
+                           "url-opener" "time" "shell-in-projects" "shell-in-config"))))
 
   (gptel-make-preset 'one-shot
     :description "A preset optimized for coding tasks that are one shot (like a simple rewrite)."
@@ -247,10 +246,19 @@ Returns a list of cons cells (name . directive) for each .md file."
                                    "uvx"
                                    :args ("cli-mcp-server")
                                    :env (:ALLOWED_DIR ,ar-emacs-projects-dir
-                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,date,echo,git,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt"
+                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,mkdir,date,echo,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt"
                                                       :ALLOWED_FLAGS    "all"
                                                       :MAX_COMMAND_LENGTH "2048"
                                                       :COMMAND_TIMEOUT    60
+                                                      :ALLOW_SHELL_OPERATORS "true")))
+           ("shell-in-config" . (:command
+                                   "uvx"
+                                   :args ("cli-mcp-server")
+                                   :env (:ALLOWED_DIR ,ar-emacs-home-config-dir
+                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,wc,date,echo,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-kondo,cljfmt"
+                                                      :ALLOWED_FLAGS    "-l,-a,--help,--version"
+                                                      :MAX_COMMAND_LENGTH "2048"
+                                                      :COMMAND_TIMEOUT  5
                                                       :ALLOW_SHELL_OPERATORS "false")))
            ("filesystem-emacs" . (:command
                                   "podman"
@@ -282,44 +290,12 @@ Returns a list of cons cells (name . directive) for each .md file."
                                       "isokoliuk/mcp-searxng:latest")
                                :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
                                                            ":" (getenv "LOCAL_SEARXNG_PORT")))))
+           ("searxNcrawl-local" . (:url ,(or (getenv "MCP_SEARCH_URL")
+                                             (concat "http://" (getenv "LOCAL_SERVER_HOST") ":59555/mcp"))))
            ("sequential-thinking" . (:command
                                      "podman"
                                      :args ("run", "-i", "--rm", "mcp/sequentialthinking")
                                      :env (:DISABLE_THOUGHT_LOGGING true)))))))
-
-;;;;;;;;;;;;;
-;; Wingman ;;
-;;;;;;;;;;;;;
-
-(use-package wingman
-  :bind (:map wingman-mode-prefix-map
-         ("TAB" . wingman-fim-inline)
-         :map wingman-mode-completion-transient-map
-         ("TAB" . wingman-accept-full)
-         ("S-TAB" . wingman-accept-line)
-         ("M-S-TAB" . wingman-accept-word))
-
-  :custom
-  (wingman-auto-fim nil)
-  (wingman-log-level 4)
-  (wingman-ring-n-chunks 16)
-  (wingman-llama-endpoint (concat "http://" (ar-emacs-gptel-llamacpp-endpoint) "/infill"))
-
-  ;; assumes use of Modus Themes; substitute with preferred color scheme
-  ;; (set-face-attribute 'wingman-overlay-face nil
-                      ;; :foreground  (modus-themes-get-color-value 'red-warmer)
-                      ;; :background  (modus-themes-get-color-value 'bg-inactive))
-
-  ;; don't provide completions in files that typically contain secrets
-  (add-to-list 'wingman-disable-predicates
-               (lambda ()
-                 (or (derived-mode-p 'envrc-file-mode)
-                     (derived-mode-p 'direnv-envrc-mode)
-                     (when buffer-file-name
-                       (let ((fname (file-name-nondirectory buffer-file-name)))
-                         (or (string-equal ".env" fname)
-                             (string-equal ".envrc" fname)
-                             (string-prefix-p ".localrc" fname))))))))
 
 (use-package agent-shell
   :bind (:map agent-shell-mode-map
@@ -333,19 +309,6 @@ Returns a list of cons cells (name . directive) for each .md file."
   (agent-shell-session-strategy 'new)
 
   :config
-  ;;;;;;;;;;;;;;;;;;
-  ;; mistral-vibe ;;
-  ;;;;;;;;;;;;;;;;;;
-  (setq ar-emacs-mistral-vibe-home
-        (expand-file-name "vibe" ar-emacs-home-config-dir))
-
-  (setq agent-shell-mistral-vibe-environment
-        (agent-shell-make-environment-variables
-         :inherit-env t
-         "VIBE_HOME" ar-emacs-mistral-vibe-home))
-
-  (setq agent-shell-mistral-authentication
-        (agent-shell-mistral-make-authentication :api-key "<dummy>"))
 
   ;;;;;;;;;;;
   ;; goose ;;
