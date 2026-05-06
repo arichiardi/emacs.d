@@ -67,16 +67,6 @@
 (setq select-enable-clipboard t)
 (setq select-enable-primary t)
 
-;;remove all trailing whitespace and trailing blank lines before
-;;saving the file
-(defvar live-ignore-whitespace-modes '(markdown-mode))
-(defun live-cleanup-whitespace ()
-  (if (not (member major-mode live-ignore-whitespace-modes))
-      (let ((whitespace-style '(trailing empty)) )
-        (whitespace-cleanup))))
-
-(add-hook 'before-save-hook 'live-cleanup-whitespace)
-
 ;; savehist keeps track of some history
 (setq savehist-additional-variables
       ;; search entries
