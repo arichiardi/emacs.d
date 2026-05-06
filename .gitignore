@@ -38,3 +38,6 @@ etc/*
 /bookmarks
 /projects
 ielm-history.eld
+agent/
+.cache
+tree-sitter/*
