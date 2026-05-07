@@ -9,6 +9,8 @@
 (require 'exec-path-from-shell)
 (require 'eat)
 
+(setq ar-emacs-home-tmp-dir (expand-file-name "tmp" (exec-path-from-shell-getenv "HOME")))
+
 (setq ar-emacs-projects-dir (expand-file-name "git" (exec-path-from-shell-getenv "HOME")))
 
 (setq ar-emacs-home-config-dir (or (exec-path-from-shell-getenv "XDG_CONFIG_HOME")
@@ -19,6 +21,8 @@
 (setq ar-emacs-llm-config-dir (expand-file-name "llm" ar-emacs-home-config-dir))
 (setq ar-emacs-llm-recipes-dir (expand-file-name "recipes" ar-emacs-llm-config-dir))
 (setq ar-emacs-llm-prompts-dir (expand-file-name "prompts" ar-emacs-llm-config-dir))
+
+(setq ar-emacs-llm-skills-dir (expand-file-name ".agents/skills" (exec-path-from-shell-getenv "HOME")))
 
 ;; From: http://stackoverflow.com/questions/20041904/eclipse-like-line-commenting-in-emacs#answer-20064658
 (defun ar-emacs-comment-or-uncomment-region-or-line ()
@@ -572,6 +576,20 @@ selected file path is configured as the command for
       (eat-mode)
       (eat-exec buffer "eat-goose-clojure" "goose" nil (list "run" "--recipe" recipe-file "--interactive")))
     (pop-to-buffer buffer)))
+
+(defun ar-emacs-mcp-tool-names (mcp-names)
+      "Return a list of tool NAME strings for all tools in MCP-NAMES."
+      (require 'mcp)
+      (let (result)
+        (dolist (name mcp-names)
+          (when-let* ((connection (gethash name mcp-server-connections))
+                      ((mcp--server-running-p name))
+                      ((slot-boundp connection '-tools))
+                      (tools (mcp--tools connection)))
+            (dolist (tool (if (vectorp tools) (append tools nil) tools))
+              (when-let* ((tool-name (plist-get tool :name)))
+                (push tool-name result)))))
+        (nreverse result)))
 
 (provide 'ar-emacs)
 

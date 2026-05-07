@@ -13,10 +13,12 @@
 (use-package ar-emacs
   :defines (ar-emacs-projects-dir
             ar-emacs-home-config-dir
+            ar-emacs-home-tmp-dir
             ar-emacs-emacs-config-dir
             ar-emacs-llm-config-dir
             ar-emacs-llm-recipes-dir
-            ar-emacs-llm-prompts-dir))
+            ar-emacs-llm-prompts-dir
+            ar-emacs-llm-skills-dir))
 
 (defun ar-emacs-gptel-load-markdown-directive (file)
   "Load a gptel directive from a markdown FILE.
@@ -166,6 +168,10 @@ Returns a list of cons cells (name . directive) for each .md file."
           `((default . nil)
             ,@markdown-directives)))
 
+  (defvar ar-emacs-developer-mcps
+    '("sequential-thinking" "searxNcrawl-local" "fetch" "time"
+      "workspace-filesystem" "shell-in-projects" "shell-in-config"))
+
   (gptel-make-preset 'developer
     :description "A preset optimized for coding tasks"
     :track-media t
@@ -177,9 +183,8 @@ Returns a list of cons cells (name . directive) for each .md file."
                       :min_p 0.0
                       :presence_penalty 0.0 :repetition_penalty 1.0
                       :chat_template_kwargs (:enable_thinking t :preserve_thinking t))
-    :pre (lambda () (gptel-mcp-connect
-                     (list "sequential-thinking" "searxng-local" "fetch"
-                           "url-opener" "time" "shell-in-projects" "shell-in-config"))))
+    :pre   (lambda () (gptel-mcp-connect ar-emacs-developer-mcps t)i)
+    :tools '(:eval (ar-emacs-mcp-tool-names ar-emacs-developer-mcps)))
 
   (gptel-make-preset 'one-shot
     :description "A preset optimized for coding tasks that are one shot (like a simple rewrite)."
@@ -194,7 +199,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 
   (gptel-make-preset 'clojure-coder
     :description "A preset optimized for clojure coding tasks."
-    :parents ["developer"]
+    :parents 'developer
     :system (alist-get 'clojure-coder gptel-directives))
 
   (gptel-make-preset 'elisper
@@ -246,7 +251,7 @@ Returns a list of cons cells (name . directive) for each .md file."
                                    "uvx"
                                    :args ("cli-mcp-server")
                                    :env (:ALLOWED_DIR ,ar-emacs-projects-dir
-                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,mkdir,date,echo,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt"
+                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,mkdir,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt,psql"
                                                       :ALLOWED_FLAGS    "all"
                                                       :MAX_COMMAND_LENGTH "2048"
                                                       :COMMAND_TIMEOUT    60
@@ -255,17 +260,17 @@ Returns a list of cons cells (name . directive) for each .md file."
                                    "uvx"
                                    :args ("cli-mcp-server")
                                    :env (:ALLOWED_DIR ,ar-emacs-home-config-dir
-                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,wc,date,echo,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-kondo,cljfmt"
+                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,wc,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-kondo,cljfmt,psql"
                                                       :ALLOWED_FLAGS    "-l,-a,--help,--version"
                                                       :MAX_COMMAND_LENGTH "2048"
                                                       :COMMAND_TIMEOUT  5
                                                       :ALLOW_SHELL_OPERATORS "false")))
-           ("filesystem-emacs" . (:command
-                                  "podman"
-                                  :args ("run" "-i" "--rm" "--network=host"
-                                         "--mount" ,(concat "type=bind,src=" ar-emacs-emacs-config-dir ",dst=/projects")
-                                         "mcp/filesystem"
-                                         "/projects")))
+           ("workspace-filesystem" . (:command "npx"
+                                               :args ("-y" "@modelcontextprotocol/server-filesystem")
+                                               :roots ((:uri ,(concat "file://" ar-emacs-projects-dir) :name "Projects")
+                                                       (:uri ,(concat "file://" ar-emacs-home-tmp-dir) :name "Home Tmp")
+                                                       (:uri ,(concat "file://" ar-emacs-emacs-config-dir) :name "Emacs Config")
+                                                       (:uri ,(concat "file://" ar-emacs-llm-skills-dir) :name "Skills"))))
            ("git-emacs" . (:command
                            "uvx"
                            :args ("mcp-server-git"
@@ -274,9 +279,6 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("fetch" . (:command
                        "podman"
                        :args ("run", "-i", "--rm", "mcp/fetch")))
-           ("duckduckgo" . (:command
-                            "uvx"
-                            :args ("duckduckgo-mcp-server")))
            ("url-opener" . (:command
                             "npx"
                             :args ("@world9/url-opener")))
@@ -290,8 +292,9 @@ Returns a list of cons cells (name . directive) for each .md file."
                                       "isokoliuk/mcp-searxng:latest")
                                :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
                                                            ":" (getenv "LOCAL_SEARXNG_PORT")))))
-           ("searxNcrawl-local" . (:url ,(or (getenv "MCP_SEARCH_URL")
-                                             (concat "http://" (getenv "LOCAL_SERVER_HOST") ":59555/mcp"))))
+           ("searxNcrawl-local" . (:url
+                                   ,(getenv "MCP_SEARCH_URL")
+                                   :timeout 120))
            ("sequential-thinking" . (:command
                                      "podman"
                                      :args ("run", "-i", "--rm", "mcp/sequentialthinking")
