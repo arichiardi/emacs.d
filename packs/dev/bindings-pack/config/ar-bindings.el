@@ -28,7 +28,6 @@
            ("s" . gptel-send)
            ("t" . gptel-tools)
            ("m" . gptel-menu)
-           ("c" . wingman-fim-inline)
            ("a" . agent-shell))
 
 (bind-keys :prefix-map ar-emacs-clojure-prefix-map
