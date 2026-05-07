@@ -31,4 +31,8 @@
   "Returns true if the char at point is whitespace"
   (string-match "[ \n\t]" (buffer-substring (point) (+ 1 (point)))))
 
+(use-package ielm
+  :bind (:map ielm-map
+              ("C-c C-c" . ielm-return)))
+
 ;;; elisp-conf.el ends here
