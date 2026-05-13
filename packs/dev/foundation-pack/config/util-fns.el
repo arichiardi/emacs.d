@@ -1,5 +1,10 @@
-;; -*- lexical-binding: t; -*-
-;;handy util fns
+;;; util-fns.el --- Utils  -*- lexical-binding: t; -*-
+
+;;; Commentary:
+;;
+;; Utility functions originally coming from Emacs Live.
+;;
+;;; Code:
 
 (defun insert-date ()
   "Insert a time-stamp according to locale's date and time format."
@@ -80,3 +85,5 @@
     (let* ((result (buffer-substring-no-properties begin (point))))
       (delete-region begin (point))
       result)))
+
+;;; util-fns.el ends here
