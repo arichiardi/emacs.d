@@ -43,4 +43,9 @@
    ((eq system-type 'darwin)
     (live-set-frame-font font-string))))
 
+;; Golden-ratio frame sizing on Wayland sessions only.
+(when (string-equal "wayland" (getenv "XDG_SESSION_TYPE"))
+  (add-hook 'after-make-frame-functions #'live-resize-to-golden)
+  (run-at-time 0.2 nil #'live-resize-to-golden (selected-frame)))
+
 ;;; cosmetic.el ends here

@@ -138,8 +138,4 @@ Uses FRAME if supplied, otherwise the selected frame."
     (message "live-resize-to-golden: %d×%d cells" w h)
     (set-frame-size frame w h)))
 
-(when (string-equal "wayland" (getenv "XDG_SESSION_TYPE"))
-  (add-hook 'after-make-frame-functions #'live-resize-to-golden)
-  (run-at-time 0.2 nil #'live-resize-to-golden (selected-frame)))
-
 ;;; util-fns.el ends here
