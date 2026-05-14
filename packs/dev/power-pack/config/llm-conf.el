@@ -126,7 +126,9 @@ Returns a list of cons cells (name . directive) for each .md file."
                                            "EMACS_GPTEL_IKLLAMA_HOST"
                                            "EMACS_GPTEL_IKLLAMA_PORT"
                                            "LOCAL_SEARXNG_HOST"
-                                           "LOCAL_SEARXNG_PORT")))
+                                           "LOCAL_SEARXNG_PORT"
+                                           "MCP_POSTGRES_URL"
+                                           "MCP_SEARCH_URL")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
