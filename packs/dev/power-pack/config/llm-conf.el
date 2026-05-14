@@ -238,6 +238,7 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setf (alist-get 'org-mode gptel-response-prefix-alist) "@assistant\n"))
 
 (use-package mcp
+  :defines (mcp-hub-servers)
   :custom
   (mcp-log-level 'info)
 
@@ -281,13 +282,9 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("fetch" . (:command
                        "podman"
                        :args ("run", "-i", "--rm", "mcp/fetch")))
-           ("url-opener" . (:command
-                            "npx"
-                            :args ("@world9/url-opener")))
-
-           ("time" . (:command
-                      "uvx"
-                      :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))
+           ("postgres-mcp" . (:url
+                              ,(getenv "MCP_POSTGRES_URL")
+                              :timeout 120))
            ("searxng-local" . (:command
                                "podman"
                                :args ("run" "-i" "--rm" "--network=host" "-e" "SEARXNG_URL"
@@ -300,7 +297,13 @@ Returns a list of cons cells (name . directive) for each .md file."
            ("sequential-thinking" . (:command
                                      "podman"
                                      :args ("run", "-i", "--rm", "mcp/sequentialthinking")
-                                     :env (:DISABLE_THOUGHT_LOGGING true)))))))
+                                     :env (:DISABLE_THOUGHT_LOGGING true)))
+           ("time" . (:command
+                      "uvx"
+                      :args ("mcp-server-time" "--local-timezone=Canada/Mountain")))
+           ("url-opener" . (:command
+                            "npx"
+                            :args ("@world9/url-opener")))))))
 
 (use-package agent-shell
   :bind (:map agent-shell-mode-map
