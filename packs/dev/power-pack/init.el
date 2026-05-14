@@ -27,7 +27,7 @@
   (git-gutter:added-sign "+ ")
   (git-gutter:deleted-sign "- ")
   (git-gutter:unchanged-sign "  ")
-  (git-gutter:disabled-modes '(org-mode org-roam-db-autosync-mode org-roam-mode)))
+  (git-gutter:disabled-modes '(agent-shell-ui-mode eat-mode org-mode org-roam-db-autosync-mode org-roam-mode)))
 
 (global-git-gutter-mode +1)
 
