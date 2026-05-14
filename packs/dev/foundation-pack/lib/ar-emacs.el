@@ -22,7 +22,9 @@
 (setq ar-emacs-llm-recipes-dir (expand-file-name "recipes" ar-emacs-llm-config-dir))
 (setq ar-emacs-llm-prompts-dir (expand-file-name "prompts" ar-emacs-llm-config-dir))
 
-(setq ar-emacs-llm-skills-dir (expand-file-name ".agents/skills" (exec-path-from-shell-getenv "HOME")))
+(setq ar-emacs-llm-skills-dir (thread-last (exec-path-from-shell-getenv "HOME")
+                                           (expand-file-name ".agents")
+                                           (expand-file-name "skills")))
 
 ;; From: http://stackoverflow.com/questions/20041904/eclipse-like-line-commenting-in-emacs#answer-20064658
 (defun ar-emacs-comment-or-uncomment-region-or-line ()
