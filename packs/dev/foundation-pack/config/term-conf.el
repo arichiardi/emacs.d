@@ -136,5 +136,11 @@ eshell windows easier."
   (eat-line-input-history-isearch 'dwim)
   (eat-enable-yank-to-terminal t "I want to be able to paste from Emacs to terminal."))
 
+(eval-and-compile
+  (defun ghostel-load-path ()
+    (borg-load-path "ghostel")))
+
+(use-package ghostel
+  :load-path (lambda () (ghostel-load-path)))
 
 ;;; term-conf.el ends here

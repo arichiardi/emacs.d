@@ -158,6 +158,9 @@
 [submodule "ggtags"]
 	path = lib/ggtags
 	url = git@github.com:leoliu/ggtags.git
+[submodule "ghostel"]
+	path = lib/ghostel
+	url = https://github.com/dakra/ghostel
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
