@@ -34,6 +34,14 @@ Copy the following to `/usr/share/emacs/site-lisp/site-start.el` (see [here](htt
 
 ```
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font Mono-12"))
+
+(set-fontset-font "fontset-default"
+                  'emoji
+                  (font-spec :family "Noto Color Emoji"))
+
+(set-fontset-font "fontset-default"
+                  'symbol
+                  (font-spec :family "Noto Color Emoji"))
 ```
 
 Alternatively you can use `$HOME/.Xresources`:
