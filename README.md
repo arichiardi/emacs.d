@@ -30,11 +30,10 @@ This will force the checkout of the submodules at the SHA stored in this parent 
 
 ### Fonts
 
-Copy the following to `/usr/share/emacs/site-lisp/default.el` (see [here](https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html) for more details) or a custom pack:
+Copy the following to `/usr/share/emacs/site-lisp/site-start.el` (see [here](https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html) for more details) or a custom pack:
 
 ```
-(live-set-frame-font "JetBrainsMono")
-(live-set-frame-darwin-font 12)
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font Mono-12"))
 ```
 
 Alternatively you can use `$HOME/.Xresources`:
