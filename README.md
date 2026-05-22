@@ -38,11 +38,21 @@ Copy the following to `/usr/share/emacs/site-lisp/site-start.el` (see [here](htt
 (set-fontset-font "fontset-default"
                   'emoji
                   (font-spec :family "Noto Color Emoji"))
-
-(set-fontset-font "fontset-default"
-                  'symbol
-                  (font-spec :family "Noto Color Emoji"))
 ```
+
+<details>
+<summary>Why only <code>emoji</code> and not <code>symbol</code>?</summary>
+
+**`'emoji`** covers the Unicode Emoji blocks (U+1F600–U+1F64F, U+1F300–U+1F5FF, etc.) — pictographic characters like 😀🎉🔥.
+
+Emacs has a variable `use-default-font-for-symbols` that defaults to `t`. When enabled, Emacs uses the **default font** for all symbol characters instead of looking up a separate symbol fontset. Since our default font is JetBrainsMono Nerd Font — which includes extensive symbol coverage (arrows, box-drawing, math symbols, currency signs, etc.) — we don't need a separate `'symbol` entry.
+
+We only set `'emoji` because emoji fonts are a special case: they're color bitmap fonts that your main monospace font simply won't include. Without this explicit mapping, emojis would render as tofu (□).
+
+Note: if you ever set `(setq use-default-font-for-symbols nil)`, you'd want to add back a `'symbol` fontset entry (e.g. using Symbola or Noto Sans Symbols). Be aware there's a risk of **overreach** — an emoji font covering `'symbol` can steal rendering of Greek letters, mathematical operators, etc. from your main font.
+
+See [Emacs Stack Exchange](https://emacs.stackexchange.com/questions/62049) and the [GNU Emacs manual on modifying fontsets](https://www.gnu.org/software/emacs/manual/html_node/emacs/Modifying-Fontsets.html) for more details.
+</details>
 
 Alternatively you can use `$HOME/.Xresources`:
 
