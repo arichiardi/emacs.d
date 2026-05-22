@@ -299,6 +299,24 @@ are re-thrown."
         (kill-buffer buffer)
         (message "File '%s' successfully removed" filename)))))
 
+(defun ar-emacs-buffer-file-name ()
+  "Displays the full file name of the current buffer."
+  (interactive)
+  (let ((name (buffer-name))
+        (filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (message "Buffer '%s' is not visiting a file!" name)
+      (message "Full path: %s" filename))))
+
+(defun ar-emacs-buffer-file-name-to-clipboard ()
+  "Copies the full file name of the current buffer to the clipboard."
+  (interactive)
+  (let ((filename (buffer-file-name)))
+    (if (not (and filename (file-exists-p filename)))
+        (message "Buffer is not visiting a file!")
+      (kill-new filename)
+      (message "File path copied to clipboard: %s" filename))))
+
 (defun ar-emacs-paredit-kill-parent-sexp (&optional arg)
   (interactive)
   (paredit-backward-up)
