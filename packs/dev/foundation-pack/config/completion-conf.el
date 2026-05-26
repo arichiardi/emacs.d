@@ -45,6 +45,8 @@
 ;;;;;;;;;;;;;
 
 (use-package consult
+  :ensure-system-package rg
+
   ;; Replace bindings. Lazily loaded by `use-package'.
   :bind (;; C-c bindings in `mode-specific-map'
          ;; ("C-c M-x" . consult-mode-command)
