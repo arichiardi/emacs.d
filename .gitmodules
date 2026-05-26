@@ -68,7 +68,7 @@
 [submodule "compat"]
 	path = lib/compat
 	url = git@github.com:emacsmirror/compat.git
-	build-step = make
+	build-step = make compile
 [submodule "cond-let"]
 	path = lib/cond-let
 	url = git@github.com:tarsius/cond-let.git

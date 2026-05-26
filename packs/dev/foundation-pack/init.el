@@ -1,8 +1,12 @@
 ;;; init.el --- Foundation Pack -*- lexical-binding: t; -*-
 
+
 ;;; Commentary:
 
 ;;; Code:
+
+;; Compat
+(require 'compat)
 
 ;; GnuPG Pinentry
 ;; https://www.gnu.org/software/emacs/manual/html_node/epa/GnuPG-Pinentry.html
