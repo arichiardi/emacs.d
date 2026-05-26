@@ -35,9 +35,6 @@
   :hook ((sh-mode . company-mode)
          (sh-mode . rainbow-delimiters-mode)))
 
-(require 'smooth-scrolling)
-(require 'buffer-move)
-
 (live-add-pack-lib "s")
 (require 's)
 (live-add-pack-lib "epl")
