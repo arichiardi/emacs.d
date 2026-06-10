@@ -128,9 +128,20 @@ Returns a list of cons cells (name . directive) for each .md file."
                                            "LOCAL_SEARXNG_HOST"
                                            "LOCAL_SEARXNG_PORT"
                                            "MCP_POSTGRES_URL"
-                                           "MCP_SEARCH_URL")))
+                                           "MCP_SEARCH_URL"
+                                           "MCP_TEXTWEB_URL")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
+
+  (setq gptel--qwen-family-models
+        '((Qwen3.X-27B
+           :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
+           :capabilities (media json)
+           :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))
+          (Qwen3.X-MoE
+           :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
+           :capabilities (media json)
+           :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))))
 
   (setq ar-emacs-gptel-backend-ikllama
         (gptel-make-openai "ik_llama"
@@ -138,7 +149,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-ikllama-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B GLM-4.6V Qwen3.X-27B)))
+          :models gptel--qwen-family-models))
 
   (setq ar-emacs-gptel-backend-llamacpp
         (gptel-make-openai "llama.cpp"
@@ -146,7 +157,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-llamacpp-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '(gpt-oss-120B Qwen3-VL-32B Qwen3.X-27B)))
+          :models gptel--qwen-family-models))
 
   (setq ar-emacs-gptel-backend-vllm
         (gptel-make-openai "vLLM"
@@ -154,15 +165,7 @@ Returns a list of cons cells (name . directive) for each .md file."
           :host (ar-emacs-gptel-vllm-endpoint)
           :header '(("Content-Type" . "application/json"))
           :stream t
-          :models '((Qwen3.X-27B
-                     :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
-                     :capabilities (media json)
-                     :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp")
-                     ;; NOTE: moved to presets
-                     ;; :request-params (:temperature 1.0 :top_p 0.95 :top_k 20 :min_p 0.0
-                     ;;                  :presence_penalty 0.0 :repetition_penalty 1.0
-                     ;;                  :chat_template_kwargs (:enable_thinking :json-false))
-                     ))))
+          :models gptel--qwen-family-models))
 
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
@@ -291,12 +294,15 @@ Returns a list of cons cells (name . directive) for each .md file."
                                       "isokoliuk/mcp-searxng:latest")
                                :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
                                                            ":" (getenv "LOCAL_SEARXNG_PORT")))))
-           ("searxNcrawl-local" . (:url
-                                   ,(getenv "MCP_SEARCH_URL")
-                                   :timeout 120))
+           ("searxNcrawl-mcp" . (:url
+                                 ,(getenv "MCP_SEARCH_URL")
+                                 :timeout 120))
+           ("textweb-mcp" . (:url
+                             ,(getenv "MCP_TEXTWEB_URL")
+                             :timeout 120))
            ("sequential-thinking" . (:command
-                                     "podman"
-                                     :args ("run", "-i", "--rm", "mcp/sequentialthinking")
+                                     "npx"
+                                     :args ("-y", "@modelcontextprotocol/server-sequential-thinking")
                                      :env (:DISABLE_THOUGHT_LOGGING true)))
            ("time" . (:command
                       "uvx"
