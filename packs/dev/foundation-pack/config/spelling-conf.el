@@ -6,7 +6,7 @@
 
 (use-package flyspell
   :custom
-  (ispell-local-dictionary "en_US")
+  (ispell-local-dictionary "en_CA")
   (ispell-program-name "hunspell")
   (ispell-extra-args '("--sug-mode=ultra"))
   (ispell-list-command "--list")
