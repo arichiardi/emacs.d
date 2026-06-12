@@ -10,6 +10,7 @@
 (require 'recentf)
 (setq recentf-save-file (concat live-tmp-dir "recentf")
       recentf-max-saved-items 200)
+(add-to-list 'recentf-exclude "\\.gpg\\'")
 (recentf-mode t)
 
 ;;When you visit a file, point goes to the last place where it was
