@@ -123,21 +123,7 @@ This can be 0 for immediate, or a floating point value.")
 
   :config
   (setq org-id-locations-file (expand-file-name ".org-id-locations" live-etc-dir))
-  (setq ar-emacs--work-org-file (concat org-directory "/agenda/work.org.gpg"))
-  (setq ar-emacs--notes-org-file (concat org-directory "/agenda/notes.org.gpg"))
-  (setq ar-emacs--personal-org-file (concat org-directory "/agenda/personal.org.gpg"))
 
-  ;; http://orgmode.org/worg/org-configs/org-customization-guide.html
-  ;; https://github.com/robertutterback/config/blob/master/emacs/org-mode.org
-  ;; http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner/
-
-  (setq org-default-notes-file ar-emacs--notes-org-file)
-  (setq org-archive-location (concat org-directory "/archive/archive.org.gpg" "::datetree/")) ;; Filename::heading
-  (setq org-agenda-files (list ar-emacs--notes-org-file
-                               ar-emacs--work-org-file
-                               ar-emacs--personal-org-file))
-
-  (setq org-agenda-include-diary t)
   (setq org-reverse-note-order t)
   ;; Links
   (setq org-return-follows-link t)
@@ -207,75 +193,6 @@ This can be 0 for immediate, or a floating point value.")
                 ("STARTED" ("WAITING") ("CANCELLED") ("HOLD") ("NEXT"))
                 ("DONE" ("WAITING") ("CANCELLED") ("HOLD"))))))
 
-(use-package org-capture
-  :config
-  (setq ar-emacs--org-capture-todo (string-join
-                                    (list "* TODO %^{Brief Description} %^g"
-                                          ":LOGBOOK:"
-                                          ":ADDED: %U"
-                                          ":END:"
-                                          "%?")
-                                    "\n"))
-
-  (setq org-capture-templates
-        `(("a" "Article/video to read/watch"
-           entry
-           (file "")
-           "* %U\n%?\n" :clock-resume t)
-
-          ("t" "Todo"
-           entry
-           (file "")
-           ,ar-emacs--org-capture-todo
-           :clock-resume t)
-
-          ("e" "Email"
-           entry
-           (file "")
-           "* TODO %^{Title}\n Source: %u, %c\n\n  %i" :clock-resume t)
-
-          ("n" "Note, snippet, word or fact"
-           entry
-           (file "")
-           ,(string-join
-             (list "* %? :note:"
-                   "%A"
-                   ":LOGBOOK:"
-                   "ADDED: %U"
-                   ":END:"
-                   "%?")
-             "\n") :clock-resume t)
-
-          ("w" "Work Templates")
-
-          ("wt" "Work Todo"
-           entry
-           (file ,ar-emacs--work-org-file)
-           ,ar-emacs--org-capture-todo
-           :clock-resume t)
-
-          ("wr" "Review Note"
-           entry
-           (file ,ar-emacs--work-org-file)
-           ,(string-join
-             (list "* %^{Brief Description} :review:%^g:"
-                   ":LOGBOOK:"
-                   "ADDED: %U"
-                   ":END:"
-                   "%?")
-             "\n") :clock-resume t)
-
-          ("wm" "Meeting/Call"
-           entry
-           (file ,ar-emacs--work-org-file)
-           "* %^{Name} :meeting:\n%?\n" :clock-resume t)
-
-          ("wr" "Respond to"
-           entry
-           (file "")
-           "* NEXT Respond to %:from on %:subject\nSCHEDULED: %t\n%U\n%a\n" :clock-resume t)
-          )))
-
 (use-package org-clock
   :init
   (setq org-clock-persist-file (concat live-current-pack-dir "org-clock-save.el"))
@@ -295,34 +212,12 @@ This can be 0 for immediate, or a floating point value.")
 
 (use-package org-agenda
   :config
+  (setq org-agenda-include-diary t)
   (setq org-agenda-skip-scheduled-if-done t)
   (setq org-agenda-skip-deadline-if-done t)
   (setq org-agenda-ndays 7)
   (setq org-deadline-warning-days 14)
   (setq org-agenda-show-all-dates t)
-  (setq org-agenda-start-on-weekday 1)
-
-  (setq org-agenda-custom-commands
-        `(("d" todo "DONE|CANCELLED" nil)
-          ("w" todo "WAITING" nil)
-          ("P" agenda "Today's Priorities"
-           ((org-agenda-skip-function
-             (lambda nil
-               (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]")))
-            (org-agenda-ndays 1)
-            (org-agenda-overriding-header "Today's Priority #A tasks: ")))
-          ("c" "Weekly Commit Tickets"
-           ((agenda "" ((org-agenda-files (list ,(concat org-directory "/agenda/tickets.org.gpg")))
-                        (org-agenda-span 'week)
-                        (org-agenda-start-on-weekday 1)
-                        (org-agenda-overriding-header "Worked on tickets: ")
-                        (org-agenda-time-grid nil)))))
-          ("u" alltodo ""
-           ((org-agenda-skip-function
-             (lambda nil
-               (org-agenda-skip-entry-if (quote scheduled) (quote deadline)
-                                         (quote regexp) "\n]+>")))
-            (org-agenda-overriding-header "Unscheduled TODO entries: ")))
-          ("A" agenda "" ((org-agenda-ndays 21))))))
+  (setq org-agenda-start-on-weekday 1))
 
 ;;; org-mode-conf.el ends here
