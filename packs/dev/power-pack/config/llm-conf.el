@@ -103,7 +103,9 @@ Returns a list of cons cells (name . directive) for each .md file."
               ("C-c C-q" . gptel-abort)
               ("C-c C-p" . gptel--preset))
   :hook
-  (gptel-mode . (lambda () (olivetti-mode 1)))
+  (gptel-mode . (lambda ()
+                  (olivetti-mode 1)
+                  (company-mode-on)))
 
   :custom
   ((gptel-default-mode 'markdown-mode)
@@ -119,12 +121,13 @@ Returns a list of cons cells (name . directive) for each .md file."
   (require 'gptel-integrations)
 
   (progn (message "Running LLM exec-path-from-shell.")
-         (exec-path-from-shell-copy-envs '("EMACS_GPTEL_VLLM_HOST"
-                                           "EMACS_GPTEL_VLLM_PORT"
+         (exec-path-from-shell-copy-envs '("EMACS_GPTEL_IKLLAMA_HOST"
+                                           "EMACS_GPTEL_IKLLAMA_PORT"
                                            "EMACS_GPTEL_LLAMA_HOST"
                                            "EMACS_GPTEL_LLAMA_PORT"
-                                           "EMACS_GPTEL_IKLLAMA_HOST"
-                                           "EMACS_GPTEL_IKLLAMA_PORT"
+                                           "EMACS_GPTEL_VLLM_HOST"
+                                           "EMACS_GPTEL_VLLM_PORT"
+                                           "LOCAL_LLM_HOST"
                                            "LOCAL_SEARXNG_HOST"
                                            "LOCAL_SEARXNG_PORT"
                                            "MCP_POSTGRES_URL"
@@ -224,12 +227,12 @@ Returns a list of cons cells (name . directive) for each .md file."
     :description "A preset to assist with git commit messages, PRs and so on."
     :system (alist-get 'git-commit-writer gptel-directives)
     :request-params '(:temperature
-                      0.7
+                      1.0
                       :top_p 0.95
                       :top_k 20
                       :min_p 0.0
                       :presence_penalty 1.5 :repetition_penalty 1.0
-                      :chat_template_kwargs (:enable_thinking :json-false)))
+                      :chat_template_kwargs (:enable_thinking t)))
 
   (gptel-make-preset 'ocr
     :description "A preset to assist with OCR and binary to text extraction"
