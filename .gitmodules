@@ -149,9 +149,6 @@
 [submodule "flycheck-plantuml"]
 	path = lib/flycheck-plantuml
 	url = git@github.com:alexmurray/flycheck-plantuml.git
-[submodule "flycheck-posframe"]
-	path = lib/flycheck-posframe
-	url = https://github.com/alexmurray/flycheck-posframe
 [submodule "forge"]
 	path = lib/forge
 	url = https://github.com/magit/forge
