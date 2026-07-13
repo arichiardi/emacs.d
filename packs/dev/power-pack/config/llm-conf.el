@@ -64,6 +64,10 @@ Returns a list of cons cells (name . directive) for each .md file."
            "Do NOT use markdown backticks (```) to format your response. If you use LaTex notation, enclose math in \\( and \\), or \\[ and \\] delimiters.")
      "\n")))
 
+(defun ar-emacs-gptel-alba-endpoint ()
+  "Compute the host:port pointing to the ollama server."
+  (getenv "LOCAL_ALBA_HOST"))
+
 (defun ar-emacs-gptel-llamacpp-endpoint ()
   "Compute the host:port pointing to the llama.cpp server."
   (concat (or (getenv "EMACS_GPTEL_LLAMACPP_HOST") "localhost")
@@ -127,6 +131,9 @@ Returns a list of cons cells (name . directive) for each .md file."
                                            "EMACS_GPTEL_LLAMA_PORT"
                                            "EMACS_GPTEL_VLLM_HOST"
                                            "EMACS_GPTEL_VLLM_PORT"
+                                           "LOCAL_ALBA_HOST"
+                                           "LOCAL_ALBA_URL"
+                                           "LOCAL_ALBA_TOKEN"
                                            "LOCAL_LLM_HOST"
                                            "LOCAL_SEARXNG_HOST"
                                            "LOCAL_SEARXNG_PORT"
@@ -145,6 +152,14 @@ Returns a list of cons cells (name . directive) for each .md file."
            :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
            :capabilities (media json)
            :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))))
+
+  (setq ar-emacs-gptel-backend-alba
+        (gptel-make-openai "alba"
+          :protocol "https"
+          :host (ar-emacs-gptel-alba-endpoint)
+          :header `(("Authentication" . ,(concat "Bearer " (exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN"))))
+          :stream t
+          :models gptel--qwen-family-models))
 
   (setq ar-emacs-gptel-backend-ikllama
         (gptel-make-openai "ik_llama"
