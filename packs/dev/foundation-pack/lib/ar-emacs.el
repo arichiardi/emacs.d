@@ -7,7 +7,6 @@
 ;;; Code:
 
 (require 'exec-path-from-shell)
-(require 'eat)
 
 (setq ar-emacs-home-tmp-dir (expand-file-name "tmp" (exec-path-from-shell-getenv "HOME")))
 

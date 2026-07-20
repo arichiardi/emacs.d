@@ -158,6 +158,7 @@
 [submodule "ghostel"]
 	path = lib/ghostel
 	url = https://github.com/dakra/ghostel
+    build-step = make byte-compile
 [submodule "ghub"]
 	path = lib/ghub
 	url = git@github.com:magit/ghub.git
