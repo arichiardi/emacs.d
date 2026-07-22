@@ -156,9 +156,9 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq ar-emacs-gptel-backend-alba
         (gptel-make-openai "alba"
           :protocol "https"
-          :host (getenv "LOCAL_ALBA_HOST")
+          :host (exec-path-from-shell-getenv "LOCAL_ALBA_HOST")
           :endpoint "/api/v1/chat/completions"
-          :key (getenv "LOCAL_ALBA_TOKEN")
+          :key (exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
           :stream t
           :models gptel--qwen-family-models))
 
