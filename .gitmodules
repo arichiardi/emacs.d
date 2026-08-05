@@ -53,6 +53,7 @@
 [submodule "closql"]
 	path = lib/closql
 	url = git@github.com:magit/closql.git
+	build-step = make redo
 [submodule "company"]
 	path = lib/company
 	url = git@github.com:company-mode/company-mode.git
@@ -108,7 +109,7 @@
 [submodule "emacsql"]
 	path = lib/emacsql
 	url = git@github.com:magit/emacsql.git
-	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/emacsql:" make
+	build-step = EMACSLOADPATH="$HOME/.config/emacs/lib/emacsql:" make redo
 [submodule "embark"]
 	path = lib/embark
 	url = https://github.com/oantolin/embark
