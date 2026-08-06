@@ -513,3 +513,6 @@
 [submodule "zprint"]
 	path = lib/zprint
 	url = https://github.com/DogLooksGood/zprint.el.git
+[submodule "md-mode"]
+	path = lib/md-mode
+	url = git@github.com:yibie/md-mode.git
