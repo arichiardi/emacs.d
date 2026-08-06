@@ -271,6 +271,9 @@
 [submodule "mcp"]
 	path = lib/mcp
 	url = git@github.com:lizqwerscott/mcp.el.git
+[submodule "md-mode"]
+	path = lib/md-mode
+	url = git@github.com:yibie/md-mode.git
 [submodule "merlin"]
 	path = lib/merlin
 	url = git@github.com:emacsmirror/merlin.git

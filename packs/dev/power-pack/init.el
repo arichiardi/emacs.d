@@ -44,15 +44,21 @@
   :custom
   (synosaurus-backend 'synosaurus-backend-wordnet "Set the wordnet backend."))
 
-(use-package markdown-mode
-  :mode "\\.md\\'"
+(use-package md-mode
+  :mode ("\\.md\\'" . md-mode)
+  :bind (:map md-mode-map
+         ("C-c m v" . md-mode-toggle-markup)
+         ("C-c m t" . md-mode-toggle-toc)
+         ("C-c m j" . md-mode-goto-heading)
+         ("C-c m b" . md-mode-cycle-block)
+         ("C-c m |" . md-mode-table))
   :custom
-  (markdown-command '("pandoc" "--from=markdown" "--to=html5") "Compile markdown with pandoc, it seems to render GFM better.")
-  (markdown-open-command "code" "Fallback mode opens externally with vscode."))
+  (md-mode-toc-side 'right)
+  (md-mode-toc-width 36))
 
 (use-package text-mode
- :preface (provide 'text-mode)
- :mode "\\.adoc$")
+  :preface (provide 'text-mode)
+  :mode "\\.adoc$")
 
 (use-package know-your-http-well
   :defer t
