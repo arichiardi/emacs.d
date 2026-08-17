@@ -570,43 +570,101 @@ projectile, if available), or in the current directory otherwise."
     (sql-product 'sqlite)
     (sql-database abs-db-file)))
 
-(defun ar-emacs-start-eat-pi (&optional new-process)
-     "Interactively start the Pi agent server with a selected skill.
+(defun ar-emacs--pi-sessions-dir (project-dir)
+  "Return the pi sessions directory for PROJECT-DIR, or nil if absent.
+Pi encodes the project path by replacing path separators with dashes."
+  (let* ((pi-base (expand-file-name (or (getenv "PI_CODING_AGENT_SESSION_DIR")
+                                        "~/.pi/agent/sessions")))
+         (encoded (replace-regexp-in-string "/" "-" (directory-file-name project-dir)))
+         (sessions-dir (expand-file-name encoded pi-base)))
+    (when (file-directory-p sessions-dir)
+      sessions-dir)))
 
-   Accepts the following arguments:
+(defun ar-emacs--pi-first-sentence (text)
+  "Return the first sentence of TEXT, truncated to 120 chars."
+  (let* ((s (replace-regexp-in-string "[\n\r]+" " " (string-trim text)))
+         (end (or (string-match "[.!?]\\s-" s)
+                  (string-match "[.!?]$" s)))
+         (snippet (if end (substring s 0 (1+ end)) s)))
+    (substring snippet 0 (min 120 (length snippet)))))
 
-   NEW-PROCESS
-     If non-nil, start a new process even if one is already running.
-     This corresponds to a prefix argument (e.g., `C-u`).
+(defun ar-emacs--pi-read-session (project-dir)
+  "Prompt the user to select a previous pi session for PROJECT-DIR.
+Returns the absolute path to the chosen .jsonl file, or nil if none exist.
 
-   Prompts to select a skill directory from `ar-emacs-llm-skills-dir`.
-   The selected directory path is passed to the `pi` command via the
-   `--skill` argument using `eat-exec`, along with its SKILL.md file."
-     (interactive "P")
-     (unless (file-directory-p ar-emacs-llm-skills-dir)
-       (error "Skills directory does not exist: %s" ar-emacs-llm-skills-dir))
+The label is the first sentence of the first user message, mirroring
+pi\'s own session-list display."
+  (let* ((sessions-dir (ar-emacs--pi-sessions-dir project-dir))
+         (files (when sessions-dir
+                  (directory-files sessions-dir t "\\.jsonl\\'")))
+         (choices
+          (delq nil
+                (mapcar
+                 (lambda (path)
+                   (condition-case nil
+                       (with-temp-buffer
+                         (insert-file-contents path nil 0 4096)
+                         (goto-char (point-min))
+                         ;; Line 1: session header.
+                         (let ((header (json-parse-string
+                                        (buffer-substring-no-properties
+                                         (line-beginning-position)
+                                         (line-end-position))
+                                        :object-type 'plist)))
+                           (when (equal (plist-get header :type) "session")
+                             ;; Line 2: first message entry (the initial user prompt).
+                             (forward-line 1)
+                             (let* ((entry   (condition-case nil
+                                                 (json-parse-string
+                                                  (buffer-substring-no-properties
+                                                   (line-beginning-position)
+                                                   (line-end-position))
+                                                  :object-type 'plist)
+                                               (error nil)))
+                                    (msg     (and entry (plist-get entry :message)))
+                                    (content (and msg (plist-get msg :content)))
+                                    (text    (cond
+                                              ((stringp content) content)
+                                              ((vectorp content)
+                                               (plist-get (aref content 0) :text))
+                                              (t nil)))
+                                    (label   (if (and text (stringp text))
+                                                 (ar-emacs--pi-first-sentence text)
+                                               "(no messages)")))
+                               (cons label path)))))
+                     (error nil)))
+                 ;; Sort newest first by mtime.
+                 (sort files
+                       (lambda (a b)
+                         (time-less-p
+                          (file-attribute-modification-time (file-attributes b))
+                          (file-attribute-modification-time (file-attributes a)))))))))
+    (when choices
+      (let* ((display (completing-read "Resume pi session: "
+                                       (mapcar #'car choices) nil t))
+             (entry (assoc display choices)))
+        (cdr entry)))))
 
-     (let* ((skill-names (directory-files ar-emacs-llm-skills-dir))
-            (skill-dirs (cl-remove-if-not (lambda (name)
-                                            (file-directory-p (expand-file-name
- name ar-emacs-llm-skills-dir)))
-                                          skill-names))
-            (skill-name (completing-read "Select skill: " skill-dirs nil t))
-            (skill-path (file-name-as-directory (expand-file-name skill-name
- ar-emacs-llm-skills-dir)))
-            (skill-md (concat skill-path "SKILL.md"))
-            (project (projectile-acquire-root))
-            (buffer-name (projectile-generate-process-name "eat-pi" new-process
- project))
-            (buffer (get-buffer-create buffer-name)))
+(defun ar-emacs-start-pi (&optional resume)
+  "Start a pi session in a ghostel terminal for the current directory.
 
-       (unless (require 'eat nil 'noerror)
-         (error "[ar-emacs] Package 'eat' is not available"))
-       (with-current-buffer buffer
-         (eat-mode)
-         (eat-exec buffer "eat-pi-skill" "pi" nil (list "--skill" skill-path
- skill-md)))
-       (pop-to-buffer buffer)))
+With a prefix argument (RESUME non-nil), prompt to select a previous
+session from the pi session history for the current directory.
+Without a prefix argument, starts a fresh pi session."
+  (interactive "P")
+  (unless (require 'ghostel nil 'noerror)
+    (error "[ar-emacs] Package 'ghostel' is not available"))
+  (let* ((dir (file-name-as-directory default-directory))
+         (session-file (when resume
+                         (ar-emacs--pi-read-session dir)))
+         (args (when session-file
+                 (list "--session" session-file)))
+         (buf-name (generate-new-buffer-name "*pi*"))
+         (buffer (get-buffer-create buf-name)))
+    (with-current-buffer buffer
+      (setq default-directory dir))
+    (ghostel-exec buffer "pi" args)
+    (pop-to-buffer buffer)))
 
 (defun ar-emacs-mcp-tool-names (mcp-names)
   "Return a list of tool NAME strings for all tools in MCP-NAMES."
