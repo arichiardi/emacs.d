@@ -572,13 +572,23 @@ projectile, if available), or in the current directory otherwise."
 
 (defun ar-emacs--pi-sessions-dir (project-dir)
   "Return the pi sessions directory for PROJECT-DIR, or nil if absent.
-Pi encodes the project path by replacing path separators with dashes."
+Pi encodes a project's cwd into a directory name by removing a single
+leading path separator, replacing /, \ and : with dashes, then
+wrapping the result in `--' on both sides.  This mirrors the encoding
+pi uses in SessionManager.getDefaultSessionDirPath so that session
+lookup finds exactly the files pi wrote."
   (let* ((pi-base (expand-file-name (or (getenv "PI_CODING_AGENT_SESSION_DIR")
                                         "~/.pi/agent/sessions")))
-         (encoded (replace-regexp-in-string "/" "-" (directory-file-name project-dir)))
-         (sessions-dir (expand-file-name encoded pi-base)))
+         ;; `directory-file-name' strips a trailing slash.
+         (path (directory-file-name project-dir))
+         ;; Drop one leading separator, then map / \ and : to -, then
+         ;; wrap in --...--, exactly as pi does.
+         (path (replace-regexp-in-string "\\`[/\\\\]" "" path))
+         (encoded (replace-regexp-in-string "[/\\\\:]" "-" path))
+         (sessions-dir (expand-file-name (format "--%s--" encoded) pi-base)))
     (when (file-directory-p sessions-dir)
       sessions-dir)))
+
 
 (defun ar-emacs--pi-first-sentence (text)
   "Return the first sentence of TEXT, truncated to 120 chars."
@@ -603,7 +613,7 @@ pi\'s own session-list display."
                  (lambda (path)
                    (condition-case nil
                        (with-temp-buffer
-                         (insert-file-contents path nil 0 4096)
+                         (insert-file-contents path)
                          (goto-char (point-min))
                          ;; Line 1: session header.
                          (let ((header (json-parse-string
@@ -612,25 +622,32 @@ pi\'s own session-list display."
                                          (line-end-position))
                                         :object-type 'plist)))
                            (when (equal (plist-get header :type) "session")
-                             ;; Line 2: first message entry (the initial user prompt).
-                             (forward-line 1)
-                             (let* ((entry   (condition-case nil
-                                                 (json-parse-string
-                                                  (buffer-substring-no-properties
-                                                   (line-beginning-position)
-                                                   (line-end-position))
-                                                  :object-type 'plist)
-                                               (error nil)))
-                                    (msg     (and entry (plist-get entry :message)))
-                                    (content (and msg (plist-get msg :content)))
-                                    (text    (cond
-                                              ((stringp content) content)
-                                              ((vectorp content)
-                                               (plist-get (aref content 0) :text))
-                                              (t nil)))
-                                    (label   (if (and text (stringp text))
-                                                 (ar-emacs--pi-first-sentence text)
-                                               "(no messages)")))
+                             ;; pi emits `model_change' and possibly a
+                             ;; `thinking_level_change' event after the
+                             ;; header, before the first user message, so do
+                             ;; NOT assume line 2 is a message: scan forward
+                             ;; to the first entry whose `:type' is "message".
+                             (let ((label "(no messages)"))
+                               (while (and (equal label "(no messages)")
+                                           (zerop (forward-line 1)))
+                                 (let* ((line (buffer-substring-no-properties
+                                               (line-beginning-position)
+                                               (line-end-position)))
+                                        (entry (condition-case nil
+                                                 (json-parse-string line :object-type 'plist)
+                                               (error nil))))
+                                   (when (and entry
+                                              (equal (plist-get entry :type) "message"))
+                                     (let* ((msg (plist-get entry :message))
+                                            (content (and msg (plist-get msg :content)))
+                                            (text (cond
+                                                   ((stringp content) content)
+                                                   ((vectorp content)
+                                                    (plist-get (aref content 0) :text))
+                                                   (t nil))))
+                                       (setq label (if (and text (stringp text))
+                                                       (ar-emacs--pi-first-sentence text)
+                                                     "(no messages)"))))))
                                (cons label path)))))
                      (error nil)))
                  ;; Sort newest first by mtime.
