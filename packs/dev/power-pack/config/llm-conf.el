@@ -64,28 +64,6 @@ Returns a list of cons cells (name . directive) for each .md file."
            "Do NOT use markdown backticks (```) to format your response. If you use LaTex notation, enclose math in \\( and \\), or \\[ and \\] delimiters.")
      "\n")))
 
-(defun ar-emacs-gptel-alba-endpoint ()
-  "Compute the host:port pointing to the ollama server."
-  (getenv "LOCAL_ALBA_HOST"))
-
-(defun ar-emacs-gptel-llamacpp-endpoint ()
-  "Compute the host:port pointing to the llama.cpp server."
-  (concat (or (getenv "EMACS_GPTEL_LLAMACPP_HOST") "localhost")
-          ":"
-          (or (getenv "EMACS_GPTEL_LLAMACPP_PORT") "10434")))
-
-(defun ar-emacs-gptel-ikllama-endpoint ()
-  "Compute the host:port pointing to the ollama server."
-  (concat (or (getenv "EMACS_GPTEL_IKLLAMA_HOST") "localhost")
-          ":"
-          (or (getenv "EMACS_GPTEL_IKLLAMA_PORT") "11434")))
-
-(defun ar-emacs-gptel-vllm-endpoint ()
-  "Compute the host:port pointing to the vllm server."
-  (concat (or (getenv "EMACS_GPTEL_VLLM_HOST") "localhost")
-          ":"
-          (or (getenv "EMACS_GPTEL_VLLM_PORT") "12434")))
-
 (defun ar-emacs--gptel-add-project-summary ()
   "Call gptel-add-file on PROJECT_SUMMARY.md if it is present in the project root."
   (let ((file-path (expand-file-name "PROJECT_SUMMARY.md" (projectile-project-root))))
@@ -98,8 +76,25 @@ Returns a list of cons cells (name . directive) for each .md file."
     (when (file-exists-p file-path)
       (gptel-add-file file-path))))
 
+(defun ar-emacs-gptel-image-model (model &optional description)
+  "Return a gptel model spec for a multimodal model.
+MODEL is the model name. DESCRIPTION is optional."
+  (append (list model)
+          (if description (list :description description) nil)
+          (list :capabilities '(media json)
+                :mime-types '("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))))
+
+(defun ar-emacs-gptel-video-model (model &optional description)
+  "Return a gptel model spec for a model with video and image capabilities.
+MODEL is the model name. DESCRIPTION is optional."
+  (append (list model)
+          (if description (list :description description) nil)
+          (list :capabilities '(media json)
+                :mime-types '("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp" 
+                              "video/mp4" "video/webm" "video/ogg" "video/quicktime"))))
+
 (use-package gptel
-  :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset)
+  :commands (gptel gptel-menu gptel-rewrite gptel-send gptel-tools gptel-make-preset gptel-api-key-from-auth-source)
   :bind (:map gptel-mode-map
               ("<escape>". gptel-abort)
               ("C-g"     . gptel-abort)
@@ -144,14 +139,8 @@ Returns a list of cons cells (name . directive) for each .md file."
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
   (setq gptel--qwen-family-models
-        '((Qwen3.X-27B
-           :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
-           :capabilities (media json)
-           :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))
-          (Qwen3.X-MoE
-           :description "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency."
-           :capabilities (media json)
-           :mime-types ("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))))
+        `(,(ar-emacs-gptel-image-model 'Qwen3.6-27B-MTP "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
+          ,(ar-emacs-gptel-image-model 'Qwen3.6-35B-A3B-MTP "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")))
 
   (setq ar-emacs-gptel-backend-alba
         (gptel-make-openai "alba"
@@ -162,29 +151,20 @@ Returns a list of cons cells (name . directive) for each .md file."
           :stream t
           :models gptel--qwen-family-models))
 
-  (setq ar-emacs-gptel-backend-ikllama
-        (gptel-make-openai "ik_llama"
-          :protocol "http"
-          :host (ar-emacs-gptel-ikllama-endpoint)
-          :header '(("Content-Type" . "application/json"))
+  (setq ar-emacs-gptel-backend-openrouter
+        (gptel-make-openai "openrouter"
+          :protocol "https"
+          :host "openrouter.ai"
+          :endpoint "/api/v1/chat/completions"
           :stream t
-          :models gptel--qwen-family-models))
-
-  (setq ar-emacs-gptel-backend-llamacpp
-        (gptel-make-openai "llama.cpp"
-          :protocol "http"
-          :host (ar-emacs-gptel-llamacpp-endpoint)
-          :header '(("Content-Type" . "application/json"))
-          :stream t
-          :models gptel--qwen-family-models))
-
-  (setq ar-emacs-gptel-backend-vllm
-        (gptel-make-openai "vLLM"
-          :protocol "http"
-          :host (ar-emacs-gptel-vllm-endpoint)
-          :header '(("Content-Type" . "application/json"))
-          :stream t
-          :models gptel--qwen-family-models))
+          :key 'gptel-api-key-from-auth-source
+          :models `(,(ar-emacs-gptel-image-model 'google/gemma-4-26b-a4b-it)
+                    ,(ar-emacs-gptel-image-model 'google/gemma-4-31b-it)
+                    ,(ar-emacs-gptel-video-model 'qwen/qwen3.5-122b-a10b)
+                    ,(ar-emacs-gptel-image-model 'qwen/qwen3.6-27b "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
+                    ,(ar-emacs-gptel-image-model 'qwen/qwen3.8-27b "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
+                    poolside/laguna-s-2.1:free
+                    poolside/laguna-xs-2.1:free)))
 
   ;; Directives can be either local or loaded from files
   (setq gptel-directives
