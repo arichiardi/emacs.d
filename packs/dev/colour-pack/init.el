@@ -20,7 +20,17 @@
 
 (add-hook 'enable-theme-functions #'ar-emacs--run-theme-hooks)
 
+(defun ar-emacs--lambda-theme-customizations ()
+  "Apply customizations after lambda theme loads."
+  (custom-set-faces
+   '(cider-debug-code-overlay-face
+     ((t (:background lambda-mild
+                      :foreground lambda-ultralight))))))
+
 (use-package lambda-themes
+  :hook
+  (lambda-themes-after-load-theme . #'ar-emacs--lambda-theme-customizations)
+
   :config
   (setopt lambda-themes-set-theme 'dark-faded)
   (setopt lambda-themes-set-italic-comments nil)

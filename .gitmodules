@@ -238,8 +238,6 @@
 [submodule "lambda-themes"]
 	path = lib/lambda-themes
 	url = git@github.com:Lambda-Emacs/lambda-themes.git
-[submodule "lib/modus-vivendi-theme"]
-	url = git@github.com:emacsmirror/modus-themes.git
 [submodule "lib/tide"]
 	path = lib/tide
 	url = git@github.com:ananthakumaran/tide.git
@@ -286,9 +284,6 @@
 [submodule "mmm-mode"]
 	path = lib/mmm-mode
 	url = git@github.com:purcell/mmm-mode.git
-[submodule "modus-themes"]
-	path = lib/modus-themes
-	url = git@gitlab.com:protesilaos/modus-themes.git
 [submodule "multiple-cursors"]
 	path = lib/multiple-cursors
 	url = git@github.com:magnars/multiple-cursors.el.git
