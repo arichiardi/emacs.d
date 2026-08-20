@@ -154,10 +154,16 @@
 
 (use-package multiple-cursors
   :bind
-  ("C-S-c C-S-c" . mc/edit-lines))
+  (("C-S-c C-S-c" . mc/edit-lines)
+
+   :map mc/keymap
+   ("C-s" . phi-search)
+   ("C-r" . phi-search-backward)
+   ("C-w" . kill-region)))
 
 (use-package phi-search
   :defer t
+  :commands (phi-search phi-search-backward)
 
   :config
   (setq phi-search-limit           10000)
@@ -166,11 +172,6 @@
   :bind
   (("C-s" . phi-search)
    ("C-r" . phi-search-backward)
-
-   :map mc/keymap
-   ("C-s" . phi-search)
-   ("C-r" . phi-search-backward)
-   ("C-w" . kill-region)
 
    :map phi-search-default-map
    ("<prior>" . phi-search-again-or-previous)
