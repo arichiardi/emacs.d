@@ -270,7 +270,7 @@ MODEL is the model name. DESCRIPTION is optional."
                                          :COMMAND_TIMEOUT  5
                                          :ALLOW_SHELL_OPERATORS "false")))
            ("workspace-filesystem" . (:command "npx"
-                                               :args ("-y" "@modelcontextprotocol/server-filesystem")
+                                               :args ("-y" "--package" "zod@^4" "--package" "@modelcontextprotocol/server-filesystem" "mcp-server-filesystem")
                                                :roots ((:uri ,(concat "file://" ar-emacs-projects-dir) :name "Projects")
                                                        (:uri ,(concat "file://" ar-emacs-home-tmp-dir) :name "Home Tmp")
                                                        (:uri ,(concat "file://" ar-emacs-emacs-config-dir) :name "Emacs Config")
