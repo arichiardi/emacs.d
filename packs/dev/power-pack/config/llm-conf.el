@@ -248,28 +248,27 @@ MODEL is the model name. DESCRIPTION is optional."
   (setq mcp-hub-servers '())
 
   :config
-
   (setq mcp-hub-servers
         (append
          mcp-hub-servers
          `(("shell-in-projects" . (:command
                                    "uvx"
-                                   :args ("cli-mcp-server")
+                                   :args ("--with" "mcp<2.0" "cli-mcp-server")
                                    :env (:ALLOWED_DIR ,ar-emacs-projects-dir
-                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,mkdir,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt,psql"
-                                                      :ALLOWED_FLAGS    "all"
-                                                      :MAX_COMMAND_LENGTH "2048"
-                                                      :COMMAND_TIMEOUT    60
-                                                      :ALLOW_SHELL_OPERATORS "true")))
+                                         :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,sed,tr,wc,mkdir,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-nrepl-eval,clj-paren-repair,clj-kondo,cljfmt,psql"
+                                         :ALLOWED_FLAGS    "all"
+                                         :MAX_COMMAND_LENGTH "2048"
+                                         :COMMAND_TIMEOUT    60
+                                         :ALLOW_SHELL_OPERATORS "true")))
            ("shell-in-config" . (:command
                                    "uvx"
-                                   :args ("cli-mcp-server")
+                                   :args ("--with" "mcp<2.0" "cli-mcp-server")
                                    :env (:ALLOWED_DIR ,ar-emacs-home-config-dir
-                                                      :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,wc,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-kondo,cljfmt,psql"
-                                                      :ALLOWED_FLAGS    "-l,-a,--help,--version"
-                                                      :MAX_COMMAND_LENGTH "2048"
-                                                      :COMMAND_TIMEOUT  5
-                                                      :ALLOW_SHELL_OPERATORS "false")))
+                                         :ALLOWED_COMMANDS "ls,find,tree,cat,pwd,tail,head,wc,date,echo,timeout,ssh,git,gpg,gh,hub,ag,rg,make,clojure,clj-kondo,cljfmt,psql"
+                                         :ALLOWED_FLAGS    "-l,-a,--help,--version"
+                                         :MAX_COMMAND_LENGTH "2048"
+                                         :COMMAND_TIMEOUT  5
+                                         :ALLOW_SHELL_OPERATORS "false")))
            ("workspace-filesystem" . (:command "npx"
                                                :args ("-y" "@modelcontextprotocol/server-filesystem")
                                                :roots ((:uri ,(concat "file://" ar-emacs-projects-dir) :name "Projects")
