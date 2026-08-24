@@ -100,7 +100,7 @@ MODEL is the model name. DESCRIPTION is optional."
               ("C-g"     . gptel-abort)
               ("C-c C-c" . gptel-send)
               ("C-c C-q" . gptel-abort)
-              ("C-c C-p" . gptel--preset))
+              ("C-c C-p" . gptel-preset))
   :hook
   (gptel-mode . (lambda ()
                   (olivetti-mode 1)
