@@ -166,4 +166,7 @@
 
 (use-package avy-flycheck)
 
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
 ;;; init.el ends here
