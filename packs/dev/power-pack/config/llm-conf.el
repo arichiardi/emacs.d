@@ -81,7 +81,7 @@ Returns a list of cons cells (name . directive) for each .md file."
 MODEL is the model name. DESCRIPTION is optional."
   (append (list model)
           (if description (list :description description) nil)
-          (list :capabilities '(media json)
+          (list :capabilities '(media json tool-use)
                 :mime-types '("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp"))))
 
 (defun ar-emacs-gptel-video-model (model &optional description)
@@ -89,7 +89,7 @@ MODEL is the model name. DESCRIPTION is optional."
 MODEL is the model name. DESCRIPTION is optional."
   (append (list model)
           (if description (list :description description) nil)
-          (list :capabilities '(media json)
+          (list :capabilities '(media json tool-use)
                 :mime-types '("application/pdf" "image/jpeg" "image/png" "image/gif" "image/webp" 
                               "video/mp4" "video/webm" "video/ogg" "video/quicktime"))))
 
@@ -139,8 +139,9 @@ MODEL is the model name. DESCRIPTION is optional."
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
   (setq gptel--qwen-family-models
-        `(,(ar-emacs-gptel-image-model 'Qwen3.6-27B-MTP "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
-          ,(ar-emacs-gptel-image-model 'Qwen3.6-35B-A3B-MTP "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")))
+        `(,(ar-emacs-gptel-image-model 'qwen3.6-27B "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
+          ,(ar-emacs-gptel-image-model 'qwen3.6-MoE "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
+          , (ar-emacs-gptel-image-model 'qwen3.8-27B "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")))
 
   (setq ar-emacs-gptel-backend-alba
         (gptel-make-openai "alba"
@@ -173,8 +174,11 @@ MODEL is the model name. DESCRIPTION is optional."
             ,@markdown-directives)))
 
   (defvar ar-emacs-developer-mcps
-    '("sequential-thinking" "searxNcrawl-local" "fetch" "time"
+    '("sequential-thinking" "searxNcrawl-mcp" "fetch" "time"
       "workspace-filesystem" "shell-in-projects" "shell-in-config"))
+
+  (defvar ar-emacs-searcher-mcps
+    '("searxNcrawl-mcp" "fetch" "time"))
 
   (gptel-make-preset 'developer
     :description "A preset optimized for coding tasks"
@@ -187,7 +191,7 @@ MODEL is the model name. DESCRIPTION is optional."
                       :min_p 0.0
                       :presence_penalty 0.0 :repetition_penalty 1.0
                       :chat_template_kwargs (:enable_thinking t :preserve_thinking t))
-    :pre   (lambda () (gptel-mcp-connect ar-emacs-developer-mcps t)i)
+    :pre   (lambda () (gptel-mcp-connect ar-emacs-developer-mcps t))
     :tools '(:eval (ar-emacs-mcp-tool-names ar-emacs-developer-mcps)))
 
   (gptel-make-preset 'one-shot
@@ -222,6 +226,19 @@ MODEL is the model name. DESCRIPTION is optional."
   (gptel-make-preset 'git-commit-writer
     :description "A preset to assist with git commit messages, PRs and so on."
     :system (alist-get 'git-commit-writer gptel-directives)
+    :request-params '(:temperature
+                      1.0
+                      :top_p 0.95
+                      :top_k 20
+                      :min_p 0.0
+                      :presence_penalty 1.5 :repetition_penalty 1.0
+                      :chat_template_kwargs (:enable_thinking t)))
+
+  (gptel-make-preset 'searcher
+    :description "A preset to assist with web searches."
+    :system (alist-get 'searcher gptel-directives)
+    :pre   (lambda () (gptel-mcp-connect ar-emacs-searcher-mcps 'sync))
+    :tools '(:eval (ar-emacs-mcp-tool-names ar-emacs-searcher-mcps))
     :request-params '(:temperature
                       1.0
                       :top_p 0.95
@@ -292,11 +309,11 @@ MODEL is the model name. DESCRIPTION is optional."
                                       "isokoliuk/mcp-searxng:latest")
                                :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
                                                            ":" (getenv "LOCAL_SEARXNG_PORT")))))
-           ("searxNcrawl-mcp" . (:url
-                                 ,(getenv "MCP_SEARCH_URL")
+           ("searxNcrawl-mcp" . (:url ,(getenv "MCP_SEARCH_URL")
+                                 :token ,(exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
                                  :timeout 120))
-           ("textweb-mcp" . (:url
-                             ,(getenv "MCP_TEXTWEB_URL")
+           ("textweb-mcp" . (:url ,(getenv "MCP_TEXTWEB_URL")
+                              :token ,(exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
                              :timeout 120))
            ("sequential-thinking" . (:command
                                      "npx"
