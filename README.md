@@ -28,17 +28,35 @@ git submodule update --recursive --checkout --force
 
 This will force the checkout of the submodules at the SHA stored in this parent repository.
 
-### Fonts
+### Site Start
 
-Copy the following to `/usr/share/emacs/site-lisp/site-start.el` (see [here](https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html) for more details) or a custom pack:
+`site-start.el` is the system-level init file Emacs loads before `early-init.el` (Emacs 29–30) or after it (Emacs 31+). We use it for settings that belong to the **machine**, not to every Emacs instance — things like font choices and window decorations that vary per desktop environment. See [the GNU manual](https://www.gnu.org/software/emacs/manual/html_node/emacs/Init-File.html) for more details.
 
-```
+Copy the following to `/usr/share/emacs/site-lisp/site-start.el` (requires `sudo`) or place it in a custom pack:
+
+<details>
+<summary><code>site-start.el</code></summary>
+
+```elisp
+(require 'cl-lib)
+
 (add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font Mono-12"))
+
+;; Restore WM decorations on Linux (early-init defaults to undecorated for macOS).
+(when (eq system-type 'gnu/linux)
+  (setq default-frame-alist
+        (append (cl-remove-if (lambda (x) (eq (car x) 'undecorated))
+                              default-frame-alist)
+                '((undecorated . nil))))
+
+  (dolist (frame (frame-list))
+    (modify-frame-parameters frame '((undecorated . nil)))))
 
 (set-fontset-font "fontset-default"
                   'emoji
                   (font-spec :family "Noto Color Emoji"))
 ```
+</details>
 
 <details>
 <summary>Why only <code>emoji</code> and not <code>symbol</code>?</summary>
