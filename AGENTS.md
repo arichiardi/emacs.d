@@ -50,7 +50,8 @@ Remember that Emacs Lisp code should be:
   - Contains various versions of packs (dev and stable for now)
 
 - `$HOME/.config/emacs/packs/stable`
-  - Never modify this directory
+  - This is not the dir you want to fix - **Never** modify this directory
+  - This dir is updated by running ./packs/update-live-packs
 
 - `$HOME/.config/emacs/packs/dev`
   - This is the directory that contains code that can be modified
