@@ -1,6 +1,5 @@
 ;;; init.el --- Foundation Pack -*- lexical-binding: t; -*-
 
-
 ;;; Commentary:
 
 ;;; Code:
@@ -183,5 +182,35 @@
 (use-package phi-replace
   :bind
   ("M-%" . phi-replace-query))
+
+(use-package tsv-mode
+  :custom
+  ;; Maximum character width for any column before it truncates.
+  (tsv-mode-max-column-width 80)
+  ;; Control whether the interactive status HUD updates at the window base.
+  (tsv-mode-enable-hud t)
+
+  :bind (:map tsv-mode-map
+              ("/" . tsv-mode-set-filter)
+              ("1" . tsv-mode-set-filter)
+              ("c" . tsv-mode-clear-filter))
+
+  :config
+  ;; Global search history preservation variable
+  (setq tsv-mode-search-history nil))
+
+(use-package csv-mode
+  :hook (csv-mode . csv-guess-set-separator)
+  :custom
+  (csv-separators '("," ";" "\t" "|" " ")))
+
+(setq ar-emacs--rainbow-csv-max-file-size (* 10 1024 1024)) ;; 10MB
+
+(defun ar-emacs--rainbow-csv-mode-maybe ()
+  (when (< (buffer-size) ar-emacs--rainbow-csv-max-file-size)
+    (run-with-timer 0.1 nil #'rainbow-csv-mode)))
+
+(use-package rainbow-csv
+  :hook (csv-mode . ar-emacs--rainbow-csv-mode-maybe))
 
 ;;; init.el ends here

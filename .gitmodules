@@ -88,6 +88,10 @@
 [submodule "copy-as-format"]
 	path = lib/copy-as-format
 	url = git@github.com:sshaw/copy-as-format.git
+[submodule "csv-mode"]
+	path = lib/csv-mode
+	url = https://https.git.savannah.gnu.org/git/elpa/gnu.git
+	branch = externals/csv-mode
 [submodule "dash"]
 	path = lib/dash
 	url = git@github.com:magnars/dash.el.git
@@ -403,6 +407,9 @@
 [submodule "queue"]
 	path = lib/queue
 	url = git@github.com:emacsmirror/queue.git
+[submodule "rainbow-csv"]
+	path = lib/rainbow-csv
+	url = git@github.com:emacs-vs/rainbow-csv.git
 [submodule "rainbow-delimiters"]
 	path = lib/rainbow-delimiters
 	url = git@github.com:Fanael/rainbow-delimiters.git
