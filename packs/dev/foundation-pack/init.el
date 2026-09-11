@@ -207,10 +207,31 @@
 (setq ar-emacs--rainbow-csv-max-file-size (* 10 1024 1024)) ;; 10MB
 
 (defun ar-emacs--rainbow-csv-mode-maybe ()
+  "Enable `rainbow-csv-mode' for buffers smaller than
+`ar-emacs--rainbow-csv-max-file-size'.
+
+Deferred: enabling while the mode hook is still running is too early, the
+font-lock keywords get reset right afterwards."
   (when (< (buffer-size) ar-emacs--rainbow-csv-max-file-size)
-    (run-with-timer 0.1 nil #'rainbow-csv-mode)))
+    (let ((buf (current-buffer)))
+      (run-with-timer 0.1 nil
+                      (lambda ()
+                        (with-current-buffer buf
+                          (rainbow-csv-mode)))))))
+
+(defun ar-emacs--rainbow-csv-quotes-advice (fn &rest args)
+  "Call FN with `csv-field-quotes' guaranteed non-nil.
+
+`tsv-mode' sets `csv-field-quotes' to nil (TSV has no quoting), but
+`rainbow-csv-highlight' turns that into an empty character class `[]',
+which signals an invalid-regexp error.  Bind a usable value instead."
+  (let ((csv-field-quotes (or csv-field-quotes '("\""))))
+    (apply fn args)))
 
 (use-package rainbow-csv
-  :hook (csv-mode . ar-emacs--rainbow-csv-mode-maybe))
+  :hook (csv-mode . ar-emacs--rainbow-csv-mode-maybe)
+  :config
+  (advice-add 'rainbow-csv-highlight
+              :around #'ar-emacs--rainbow-csv-quotes-advice))
 
 ;;; init.el ends here
