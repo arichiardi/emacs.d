@@ -134,7 +134,8 @@ MODEL is the model name. DESCRIPTION is optional."
                                            "LOCAL_SEARXNG_PORT"
                                            "MCP_POSTGRES_URL"
                                            "MCP_SEARCH_URL"
-                                           "MCP_TEXTWEB_URL")))
+                                           "MCP_TEXTWEB_URL"
+                                           "MCP_API_TOKEN")))
 
   (setq gptel-rewrite-directives-hook #'ar-emacs-gptel-rewrite-directives-hook)
 
@@ -143,14 +144,16 @@ MODEL is the model name. DESCRIPTION is optional."
           ,(ar-emacs-gptel-image-model 'qwen3.6-MoE "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")
           , (ar-emacs-gptel-image-model 'qwen3.8-27B "Qwen3.X represents a significant leap forward, integrating breakthroughs in multimodal learning, architectural efficiency, reinforcement learning scale, and global accessibility to empower developers and enterprises with unprecedented capability and efficiency.")))
 
-  (setq ar-emacs-gptel-backend-alba
-        (gptel-make-openai "alba"
-          :protocol "https"
-          :host (exec-path-from-shell-getenv "LOCAL_ALBA_HOST")
-          :endpoint "/api/v1/chat/completions"
-          :key (exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
-          :stream t
-          :models gptel--qwen-family-models))
+  (when-let ((llama-host (exec-path-from-shell-getenv "EMACS_GPTEL_LLAMA_HOST"))
+             (llama-port (exec-path-from-shell-getenv "EMACS_GPTEL_LLAMA_PORT")))
+    (setq ar-emacs-gptel-backend-alba
+          (gptel-make-openai "alba"
+            :protocol "http"
+            :host llama-host
+            :port (string-to-number llama-port)
+            :endpoint "/v1/chat/completions"
+            :stream t
+            :models gptel--qwen-family-models)))
 
   (setq ar-emacs-gptel-backend-openrouter
         (gptel-make-openai "openrouter"
@@ -310,10 +313,10 @@ MODEL is the model name. DESCRIPTION is optional."
                                :env (:SEARXNG_URL ,(concat "http://" (getenv "LOCAL_SEARXNG_HOST")
                                                            ":" (getenv "LOCAL_SEARXNG_PORT")))))
            ("searxNcrawl-mcp" . (:url ,(getenv "MCP_SEARCH_URL")
-                                 :token ,(exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
+                                 :token ,(getenv "MCP_API_TOKEN")
                                  :timeout 120))
            ("textweb-mcp" . (:url ,(getenv "MCP_TEXTWEB_URL")
-                              :token ,(exec-path-from-shell-getenv "LOCAL_ALBA_TOKEN")
+                              :token ,(getenv "MCP_API_TOKEN")
                              :timeout 120))
            ("sequential-thinking" . (:command
                                      "npx"
