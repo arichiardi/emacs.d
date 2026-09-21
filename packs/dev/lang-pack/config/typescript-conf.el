@@ -5,7 +5,6 @@
 ;;; Code:
 
 (live-add-pack-lib "smartparens")
-(live-add-pack-lib "tide")
 (live-add-pack-lib "typescript.el")
 
 ;; Largely inspired by https://pastebin.com/hmezXa2e
@@ -14,7 +13,7 @@
   "Set up the company-backends for tsx files."
   (make-local-variable 'company-backends)
   (setq company-backends
-        '((company-tide company-files :with company-yasnippet :with company-dabbrev-code)
+        '((company-files :with company-yasnippet :with company-dabbrev-code)
           (company-dabbrev-code company-dabbrev))))
 
 (defun ar-emacs--tsserver-from-node-modules ()
@@ -49,28 +48,16 @@ Put this in .dir-locals.el:
   (typescript-mode . smartparens-strict-mode)
   (typescript-mode . subword-mode)
   (typescript-mode . eldoc-mode)
-  (typescript-mode . tide-setup)
-  (typescript-mode . tide-hl-identifier-mode)
   (typescript-mode . ar-emacs--setup-tsx-company-backends)
   ;; Does not inherit from prog-mode so we include hl-todo-mode here
   (typescript-mode . hl-todo-mode)
   :custom
-  (tide-sync-request-timeout 3 "Seems like two seconds is too little sometimes")
   (typescript-indent-level 2)
   (flycheck-check-syntax-automatically '(save mode-enabled))
   :config
   (flycheck-add-mode 'typescript-tslint 'web-mode)
   (flycheck-add-mode 'typescript-tslint 'typescript-mode)
-  ;; typescript-mode/:config: typescript-tide is not a valid syntax checker
-  ;; (flycheck-admd-next-checker 'typescript-tide '(t . typescript-tslint) 'append)
   )
-
-(use-package tide
-  :init
-  (setq tide-tsserver-logs-folder (expand-file-name "tsserver" live-tmp-dir))
-  (setq tide-tsserver-process-environment (format "TSS_LOG=-level verbose -file %s" tide-tsserver-logs-folder))
-  :custom
-  (tide-save-buffer-after-code-edit nil))
 
 ;; From Spacemacs
 (defun ts-open-region-in-playground (start end)

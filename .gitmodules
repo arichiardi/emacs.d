@@ -458,9 +458,6 @@
 [submodule "terraform-mode"]
 	path = lib/terraform-mode
 	url = https://github.com/hcl-emacs/terraform-mode
-[submodule "tide"]
-	path = lib/tide
-	url = git@github.com:ananthakumaran/tide.git
 [submodule "transient"]
 	path = lib/transient
 	url = git@github.com:magit/transient.git
