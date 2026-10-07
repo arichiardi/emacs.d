@@ -7,12 +7,6 @@
 ;; Compat
 (require 'compat)
 
-;; GnuPG Pinentry
-;; https://www.gnu.org/software/emacs/manual/html_node/epa/GnuPG-Pinentry.html
-(use-package epg
-  :config
-  (setopt epg-pinentry-mode 'loopback))
-
 (setq ispell-local-dictionary "en_US-w-accents")
 
 (setq make-backup-files nil) ;; stop creating backup~ files
@@ -44,6 +38,7 @@
 (live-add-pack-lib "ar-emacs")
 (require 'ar-emacs)
 
+(live-load-config-file "gpg-conf.el")
 (live-load-config-file "backup-dir-conf.el")
 (live-load-config-file "util-fns.el")
 (live-load-config-file "built-in.el")
@@ -90,7 +85,7 @@
   :config
   (editorconfig-mode 1))
 
-(setq live-exec-path-default-variables '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "PATH" "MANPATH" "XDG_SESSION_TYPE"))
+(setq live-exec-path-default-variables '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "PATH" "MANPATH" "XDG_SESSION_TYPE" "PINENTRY_USER_DATA"))
 (setq live-exec-path-asdf-variables    '("ASDF_DIR" "ASDF_DATA_DIR"))
 
 (setq-default exec-path-from-shell-variables '())
