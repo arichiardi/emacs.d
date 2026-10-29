@@ -85,7 +85,7 @@
   :config
   (editorconfig-mode 1))
 
-(setq live-exec-path-default-variables '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "PATH" "MANPATH" "XDG_SESSION_TYPE" "PINENTRY_USER_DATA"))
+(setq live-exec-path-default-variables '("SSH_AUTH_SOCK" "SSH_AGENT_PID" "GPG_AGENT_INFO" "LANG" "LC_CTYPE" "PATH" "MANPATH" "XDG_SESSION_TYPE"))
 (setq live-exec-path-asdf-variables    '("ASDF_DIR" "ASDF_DATA_DIR"))
 
 (setq-default exec-path-from-shell-variables '())

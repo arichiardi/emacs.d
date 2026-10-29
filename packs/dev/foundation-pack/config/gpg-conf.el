@@ -2,13 +2,9 @@
 
 ;;; Commentary:
 
-;; Routes gpg-agent passphrase prompts to the Emacs minibuffer.
-;; `pinentry-dispatch` (see the ar-settings repo) reads the
-;; `PINENTRY_USER_DATA` hint from the environment of the process that
-;; calls gpg. The default ("emacs") is set here. Exporting the variable
-;; from the shell overrides it, because `exec-path-from-shell` copies it
-;; after this file is loaded.
+;; `PINENTRY_USER_DATA' is deliberately not set here: it routes prompts
+;; to pinentry-emacs, which requires a pinentry.el server.
 
-(setenv "PINENTRY_USER_DATA" "emacs")
+(setopt epg-pinentry-mode 'loopback)
 
 ;;; gpg-conf.el ends here
